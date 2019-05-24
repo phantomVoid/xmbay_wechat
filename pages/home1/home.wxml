@@ -1,0 +1,319 @@
+<wxs module="util" src="../../utils/util.wxs" />
+<import src="../../components/navBar/navBar.wxml" />
+<view class='warp' hidden='{{!finish}}' style='{{model.phone=="iPhone X"?"padding-bottom:140rpx;":""}}'>
+  <view class='blur-wrap'>
+    <swiper class='blur-image' circular current="{{current_banner}}" autoplay="{{isCurrent_banner}}">
+      <block wx:for="{{banner}}" wx:key="{{item}}">
+        <swiper-item catchtouchmove='none'>
+          <image src='{{item.file}}'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <image class='blur-bg' src='{{util.HTTP}}mobile/small/image/sy-syhd.png'></image>
+    <!--头布局  -->
+    <view class='wrap-head'>
+      <view>
+        <view class='location' hover-class='hover-class' hover-stay-time='400' bindtap='onLocation' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}'>
+          <text>{{location}}</text>
+          <image src='{{util.HTTP}}mobile/small/image/sy-xl-2.png'></image>
+        </view>
+        <view class='operation' wx:elif='{{util.isShops==1&&configSwitch.version_info.one_more==1}}'>
+          <view hover-class='hover-class' hover-stay-time='400' bindtap='onScan' style='margin:0 18rpx 0 0;'>
+            <image src='{{util.HTTP}}mobile/small/image/sy-sys.png'></image>
+            <view>扫一扫</view>
+          </view>
+        </view>
+        <view class='wrap-search' hover-class='hover-class' hover-stay-time='400' bindtap='onSearch'>
+          <image src='{{util.HTTP}}mobile/small/image/xq-gd-ss.png'></image>
+          <!-- <input disabled='false' type='text' placeholder='{{util.isShops==1&&configSwitch.version_info.one_more==0?"搜索商品":"搜索商品/店铺"}}' placeholder-style='color:white'></input> -->
+          <input disabled='false' type='text' placeholder='搜索商品/品牌' placeholder-style='color:white'></input>
+        </view>
+        <view class='operation'>
+          <view hover-class='hover-class' hover-stay-time='400' bindtap='onScan' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}'>
+            <image src='{{util.HTTP}}mobile/small/image/sy-sys.png'></image>
+            <view>扫一扫</view>
+          </view>
+          <view hover-class='hover-class' hover-stay-time='400' bindtap='onPayCode'>
+            <image src='{{util.HTTP}}mobile/small/image/sy-ewm.png'></image>
+            <view>付款码</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--头布局  -->
+    <view class="wrap-head black {{black_title?'black-anim':''}}">
+      <view>
+        <view class='location' hover-class='hover-class' hover-stay-time='400' bindtap='onLocation' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}'>
+          <text>{{location}}</text>
+          <image src='{{util.HTTP}}mobile/small/image/sy-xl-1.png'></image>
+        </view>
+        <view class='operation' wx:elif='{{util.isShops==1&&configSwitch.version_info.one_more==0}}'>
+          <view hover-class='hover-class' hover-stay-time='400' bindtap='onScan' style='margin:0 18rpx 0 0;'>
+            <image src='{{util.HTTP}}mobile/small/image/sy-sys-2.png'></image>
+            <view>扫一扫</view>
+          </view>
+        </view>
+        <view class='wrap-search' hover-class='hover-class' hover-stay-time='400' bindtap='onSearch'>
+          <image src='{{util.HTTP}}mobile/small/image/ssk-ss.png'></image>
+          <!-- <input disabled='false' type='text' placeholder='{{util.isShops==1&&configSwitch.version_info.one_more==0?"搜索商品":"搜索商品/店铺"}}'></input> -->
+          <input disabled='false' type='text' placeholder='搜索商品/品牌'></input>
+        </view>
+        <view class='operation'>
+          <view hover-class='hover-class' hover-stay-time='400' bindtap='onScan' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}'>
+            <image src='{{util.HTTP}}mobile/small/image/sy-sys-2.png'></image>
+            <view>扫一扫</view>
+          </view>
+          <view hover-class='hover-class' hover-stay-time='400' bindtap='onPayCode'>
+            <image src='{{util.HTTP}}mobile/small/image/sy-ewm-2.png'></image>
+            <view>付款码</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!--轮播图  -->
+    <swiper class='banner' indicator-dots autoplay="{{isBanner}}" circular previous-margin="80rpx" next-margin="80rpx" indicator-color="#d2d2d2" indicator-active-color="#9ea3a9" bindchange='bannerChange'>
+      <block wx:for="{{banner}}" wx:key="{{item}}">
+        <swiper-item>
+          <view class="file-con {{current_banner==index?'scale':''}}" style='background:url({{util.HTTP}}mobile/small/image/p_img_index_572x300.png) no-repeat center;background-size:100% 100%;'>
+            <image src='{{item.file}}' hover-class='hover-class' hover-stay-time='400' bindtap='onAdv' data-item='{{item}}'></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!--广告  -->
+  <image class='ad' src='{{theme.file}}' hover-class='hover-class' hover-stay-time='400' bindtap='onAdv' data-item='{{theme}}' wx:if='{{theme!=null && theme.file!="" && theme.file!=undefined}}'></image>
+
+  <!--导航热点  -->
+  <view class='nav-hot'>
+    <!--导航  -->
+    <view class='navigation' style='{{!isNavMore&&nav.length>5?"height:304rpx;":""}}'>
+      <view hover-class='hover-class' hover-stay-time='400' bindtap='onNavigation' data-item='{{item}}' wx:for='{{nav}}' wx:key="{{item}}">
+        <view class='icon'>
+          <image src='{{item.img!=""?item.img:util.HTTP+"mobile/small/image/placeholder_goods_img_0.png"}}'></image>
+        </view>
+        <text>{{item.title}}</text>
+      </view>
+    </view>
+    <view class='navMore' hover-class='hover-class' hover-stay-time='400' bindtap='navMore' wx:if='{{nav.length>10}}'>
+      <image src='{{!isNavMore?util.HTTP+"mobile/small/image/index-xl1.png":util.HTTP+"mobile/small/image/index-xl0.png"}}'></image>
+    </view>
+
+    <!-- 热点 -->
+    <view class='hot-spot' style='{{nav.length<=10?"margin-top: 20rpx;":""}}'>
+      <image src='{{util.HTTP}}mobile/small/image/sy-sctt.png?{{Math_random}}' hover-class='hover-class' hover-stay-time='400' bindtap='onHotSpot'></image>
+      <swiper autoplay='{{isHot_list}}' interval="3000" duration="500" vertical circular>
+        <block wx:for="{{hot_list}}" wx:key="{{item}}">
+          <swiper-item>
+            <view class='hot-content' hover-class='hover-class' hover-stay-time='400' bindtap='onContent' data-id='{{item.article_id}}'>
+              <view>
+                <text class='border-cur hot-title' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>热门</text>
+                <text class='hot-detail'>{{item.title}}</text>
+              </view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+
+  <view class='flash-sale' wx:if='{{limit.list.length != 0 && configSwitch.show_switch.is_limit==1}}'>
+    <view class='view'>
+      <view class='flash-head' hover-class='hover-class' hover-stay-time='400' bindtap='onFlashSale'>
+        <view style='{{util.diy_imgbox(152)}}'>
+          <image lazy-load src='{{util.HTTP}}mobile/small/image/sy-xsqg.png' style='{{util.diy_imgcolor(diy_color.z_color,152,30,1)}}'></image>
+        </view>
+        <view class='flash-time-con' style='{{util.diy_color("","",diy_color.z_color)}}'>
+          <text class='flash-time bg' style='{{util.diy_color("",diy_color.z_color,"")}}'>{{util.cutFirst(limit.time.interval_name)}}点场</text>
+          <text class='flash-count' style='{{util.diy_color(diy_color.z_color,"","")}}'>{{hour}}:{{min}}:{{sec}}</text>
+        </view>
+        <view class='next'>
+          <text>更多抢购</text>
+          <view class='icon font_family icon-next' style='{{util.diy_color("",diy_color.z_color,"")}}'></view>
+        </view>
+      </view>
+      <scroll-view class='flash-list' scroll-x>
+        <view class='flash-good' wx:for="{{limit.list}}" hover-class='hover-class' hover-stay-time='400' bindtap='onGood' data-id='{{item.goods_id}}' wx:key="{{item}}">
+          <view class='flash-img' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
+            <image class='flash-img' src='{{item.file}}' lazy-load></image>
+          </view>
+          <view class='flash-price-bg'>
+            <text class='flash-unit'>￥</text>
+            <text class='flash-price'>{{item.time_limit_price}}</text>
+          </view>
+          <view class='flash-original'>￥{{item.shop_price}}</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!--广告组  -->
+  <swiper class='ad-list' circular previous-margin="30rpx" next-margin="30rpx" wx:if='{{adv_list.length!=0}}'>
+    <block wx:for="{{adv_list}}" wx:key="{{item}}">
+      <swiper-item>
+        <image src='{{item.file}}' lazy-load hover-class='hover-class' hover-stay-time='400' bindtap='onAdv' data-item='{{item}}'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!--好物推荐  -->
+  <view class='good-recommend' wx:if='{{popularity.length!=0||class_list.length!=0}}'>
+    <view class='recommend-head' hover-class='hover-class' hover-stay-time='400' bindtap='onRecommend' wx:if='{{configSwitch.show_switch.is_goods_recommend==1&&popularity.length!=0}}'>
+      <view class='recommend'>
+        <view style='{{util.diy_imgbox(29)}}'>
+          <image lazy-load src='{{util.HTTP}}mobile/small/image/hwtj01.png' style='{{util.diy_imgcolor(diy_color.z_color,29,31,1)}}'></image>
+        </view>
+        <view class='title' style='{{util.diy_color(diy_color.z_color,"","")}}'>好物推荐</view>
+        <!-- <image src='{{util.HTTP}}mobile/small/image/sy-hwtj.png'></image> -->
+      </view>
+      <view class='recommend-more next'>
+        <text>更多推荐</text>
+        <view class='icon font_family icon-next' style='{{util.diy_color("",diy_color.z_color,"")}}'></view>
+      </view>
+    </view>
+    <view class='good-recommend-list'>
+      <view class='item' wx:for='{{popularity}}' wx:key='{{index}}' data-id='{{item.goods_id}}' bindtap='onGood'>
+        <view class='goods-img' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
+          <image src='{{item.file}}'></image>
+        </view>
+        <view class='goods-con'>
+          <view class='goods-name'>{{item.goods_name}}</view>
+          <view class='tip'>
+            <text class='tip-zy' wx:if='{{item.shop==0}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>自营</text>
+          </view>
+          <view class='goods-price'>
+            <block wx:if='{{item.is_bargain==1}}'>
+              <view class='price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+                <text class='unit'>￥</text>
+                <text class='integer'>{{item.cut_price}}</text>
+              </view>
+            </block>
+            <block wx:elif='{{item.is_group==1}}'>
+              <view class='price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+                <text class='unit'>￥</text>
+                <text class='integer'>{{item.group_price}}</text>
+              </view>
+            </block>
+            <block wx:elif='{{item.is_limit==1}}'>
+              <view class='price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+                <text class='unit'>￥</text>
+                <text class='integer'>{{item.time_limit_price}}</text>
+              </view>
+            </block>
+            <block wx:else>
+              <view class='price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+                <text class='unit'>￥</text>
+                <text class='integer'>{{item.shop_price}}</text>
+              </view>
+            </block>
+            <view class='shop-num'>{{item.sales_volume}}人已购买</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <view class='popularity' wx:if='{{configSwitch.show_switch.is_goods_recommend==1&&popularity.length!=0}}'>
+      <image src='{{util.HTTP}}mobile/small/pic1.jpg'></image>
+      <view class='popularity-name'>{{popularity_info.goods_name}}</view>
+      <view class='popularity-name' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}'>“{{popularity_info.store_name}}”</view>
+
+      <swiper class='pop-swiper' bindchange='popularityChange' indicator-dots circular indicator-color="#d2d2d2" indicator-active-color="#9ea3a9" next-margin="150rpx" previous-margin="150rpx">
+        <block wx:for="{{popularity}}" wx:key="{{item}}">
+          <swiper-item>
+            <image lazy-load hover-class='hover-class' hover-stay-time='400' bindtap='onGood' data-id='{{item.goods_id}}' class="{{current_popularity == index?'scale':''}}" src='{{item.file}}'></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view> -->
+
+    <!-- <view class='popularity'>
+      <image src='{{util.HTTP}}mobile/small/pic1.jpg'></image>
+      <view class='popularity-name'>{{popularity_info.goods_name}}</view>
+      <view class='popularity-name'>“{{popularity_info.store.store_name}}”</view>
+      <banner_swiper popularity='{{popularity}}'></banner_swiper>
+    </view> -->
+    <view class='recommend-con'>
+      <view class='recommend-list' wx:for="{{class_list}}" wx:if='{{configSwitch.show_switch.is_classify_recommend==1&&item.goods_list.length != 0}}' wx:key="{{item}}">
+        <view>
+          <view class='classify' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:130rpx 130rpx;'>
+            <image class='classify' lazy-load src='{{item.adv.file}}' hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-item='{{item}}' data-adv='1'></image>
+          </view>
+          <scroll-view scroll-x>
+            <view class='recommend-list'>
+              <view class='recommend-good' wx:for="{{item.goods_list}}" hover-class='hover-class' hover-stay-time='400' bindtap='onGood' data-id='{{item.goods_id}}' wx:key="{{item}}">
+                <!-- <image lazy-load src='{{item.file}}'></image> -->
+                <view class='file-con' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
+                  <image lazy-load src='{{item.file}}'></image>
+                </view>
+                <block wx:if='{{item.is_bargain==1}}'>
+                  <view class='recommend-price'>
+                    <text class='unit'>￥</text>
+                    <text class='integer'>{{util.integer(item.cut_price)}}</text>
+                    <text class='decimals'>.{{util.decimals(item.cut_price)}}</text>
+                  </view>
+                </block>
+                <block wx:elif='{{item.is_group==1}}'>
+                  <view class='recommend-price'>
+                    <text class='unit'>￥</text>
+                    <text class='integer'>{{util.integer(item.group_price)}}</text>
+                    <text class='decimals'>.{{util.decimals(item.group_price)}}</text>
+                  </view>
+                </block>
+                <block wx:elif='{{item.is_limit==1}}'>
+                  <view class='recommend-price'>
+                    <text class='unit'>￥</text>
+                    <text class='integer'>{{util.integer(item.time_limit_price)}}</text>
+                    <text class='decimals'>.{{util.decimals(item.time_limit_price)}}</text>
+                  </view>
+                </block>
+                <block wx:else>
+                  <view class='recommend-price'>
+                    <text class='unit'>￥</text>
+                    <text class='integer'>{{util.integer(item.shop_price)}}</text>
+                    <text class='decimals'>.{{util.decimals(item.shop_price)}}</text>
+                  </view>
+                </block>
+                <view class='recommend-title'>{{item.goods_name}}</view>
+              </view>
+              <view class='recommend-good' hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-item='{{item}}' wx:if='{{item.goods_list.length >= 6}}'>
+                <image class='recommend-good-more' src='{{util.HTTP}}mobile/small/image/sy-ckgd.png'></image>
+              </view>
+            </view>
+
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--为你推荐  -->
+  <view class='recommend-con recommend-cnxh' wx:if='{{recommend_list.length!=0}}'>
+    <view class='recommend-for'>
+      <image src='{{util.HTTP}}mobile/small/image/sy-wntj.png'></image>
+    </view>
+    <!--列表  -->
+    <good_list id="good_list" bind:addCart="addCart" list="{{recommend_list}}" discount="{{discount}}" />
+
+  </view>
+  <!-- copyright -->
+  <!-- <view class='copyright'>
+    <view class='company'>{{configSwitch.app_info.business_name}}</view>
+    <view class='credentials' hover-class='hover-class' hover-stay-time='400' bindtap='credentials'>证照信息</view>
+  </view> -->
+
+  <!--返回顶部  -->
+
+  <go_top id="go_top" hover-class='hover-class' hover-stay-time='400' bindtap='onBackTop' />
+  <cart id="cart" />
+
+  <!--新人专享  -->
+  <view class='exclusive' catchtouchmove='none' wx:if='{{popup_adv_status.popup_adv_status == 1&&configSwitch.show_switch.is_coupon==1}}'>
+    <image class='exclusive-logo' src='{{util.HTTP}}mobile/small/image/sy-xrlb-lb.png' hover-class='hover-class' hover-stay-time='400' bindtap='onNewGift'></image>
+    <image class='exclusive-cancel' src='{{util.HTTP}}mobile/small/image/sy-xrlb-gb.png' hover-class='hover-class' hover-stay-time='400' bindtap='closeExclusive'></image>
+  </view>
+
+</view>
+
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color,model:model}}" />

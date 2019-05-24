@@ -1,0 +1,158 @@
+<wxs module="util" src="../../utils/util.wxs" />
+<import src="../../components/navBar/navBar.wxml" />
+<!-- <view class='trans' hidden='{{!edit_state}}' bindtouchstart='onTouch'></view> -->
+<view class='warp1' hidden='{{!discount}}' bindtouchstart='onTouch' style='{{model.phone=="iPhone X"?"height:calc(100vh - 132rpx);":""}}'>
+  <!--返回顶部  -->
+  <go_top id="go_top" hover-class='hover-class' hover-stay-time='400' bindtap='onBackTop' />
+  <scroll-view class='scroll-view' scroll-y bindscroll="scroll" scroll-with-animation scroll-top="{{scroll_top}}" style='{{model.phone=="iPhone X"?"height:calc(100vh - 236rpx);":""}}'>
+    <view>
+      <view class='login' hover-class='hover-class' hover-stay-time='400' bindtap='login' wx:if='{{!is_login}}'>
+        <view>登录</view>
+        <view>登录后同步本端购物车中的商品</view>
+      </view>
+      <view class='cart-empty' hidden="{{cart_list.length != 0}}">
+        <image src='{{util.HTTP}}mobile/small/image/gwc-sl-gwck.png'></image>
+        <view>
+          <view hover-class='hover-class' hover-stay-time='400' bindtap='onHome'>去逛逛商城</view>
+        </view>
+      </view>
+      <view class='cart'>
+        <view wx:for="{{cart_list}}" wx:for-index="shop_index" wx:key='{{shop_index}}'>
+          <!--店铺名  -->
+          <view class='shop' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}'>
+            <view class='select' hover-class='hover-class' hover-stay-time='400' bindtap='onSelectShop' data-index='{{shop_index}}'>
+              <view class='font_family imager {{item.select?"icon-syt-gx1":"icon-syt-gx"}}' style='{{item.select?util.diy_color(diy_color.z_color,"",""):""}}'></view>
+            </view>
+            <view class='shop-name' hover-class='hover-class' hover-stay-time='400' bindtap='onShop' data-id='{{item.store_id}}' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}'>
+              <image class='shop-icon' src='{{util.HTTP}}mobile/small/image/xq-jrdp.png'></image>
+              <view>{{item.store_name}}</view>
+              <image class='next' src='{{util.HTTP}}mobile/small/image/xq-gd.png'></image>
+            </view>
+            <view class='coupon' hover-class='hover-class' hover-stay-time='400' bindtap='onCoupon' data-item="{{item}}" wx:if='{{item.coupon_status==1&&configSwitch.show_switch.is_coupon==1}}'>优惠券</view>
+          </view>
+
+          <!-- <view class='discount' hidden>
+            <image src='/image/xq-mj.png'></image>
+            <view class='discount-info'>购满2件,总价可打8折</view>
+            <view class='go-discount cur' hover-class='hover-class' hover-stay-time='400' bindtap='goOnItems'>去凑单 ></view>
+          </view> -->
+
+          <view class='good' wx:for="{{item.list}}">
+            <view class='good-board' style="{{item.edit?'':'display:none'}}">
+              <view class='collect' wx:if="{{item.collect_status == null}}" catchtap='collect' data-goodid='{{item.goods_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}'>
+                <text>移入收藏</text>
+              </view>
+              <view class='collect' wx:else>
+                <text>已收藏</text>
+              </view>
+              <view class='edit' catchtap='onEdit' data-goodid='{{item.goods_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}' style='{{util.diy_color(diy_color.text_color,diy_color.c_color,"")}}'>
+                <text>编辑</text>
+              </view>
+              <view class='del' catchtap='onDelGood' data-cartid='{{item.cart_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}' style='{{util.diy_color("",diy_color.z_color,"")}}'>
+                <text>删除</text>
+              </view>
+            </view>
+            <view class='select' hover-class='hover-class' hover-stay-time='400' bindtap='onSelectGood' data-shopdex='{{shop_index}}' data-gooddex='{{index}}'>
+              <view class='font_family imager {{item.select?"icon-syt-gx1":"icon-syt-gx"}}' style='{{item.select?util.diy_color(diy_color.z_color,"",""):""}}'></view>
+            </view>
+            <view class='good-wrap' bindlongtap='onEditGood' data-id='{{item.cart_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}'>
+              <view class='good-info' hover-class='hover-class' hover-stay-time='400' bindtap='onGood' data-id='{{item.goods_id}}'>
+                <view class='good-avatar' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
+                  <image class='file' src='{{item.file}}'></image>
+                </view>
+                <view class='good-con'>
+                  <view class='good-name'>{{item.goods_name}}</view>
+                  <view class='good-attr' hover-class='hover-class' hover-stay-time='400' catchtap='onEdit' data-goodid='{{item.goods_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}' wx:if='{{item.attr != ""}}'>
+                    <view class='attr'>{{item.inventory != null?item.attr:''}}</view>
+                    <view class='font_family imager icon-sy-xl'></view>
+                  </view>
+                  <view class='good-operation' wx:if="{{item.inventory != null}}">
+                    <view class='price' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>
+                      <text class='unit'>￥</text>
+                      <text class='integer'>{{util.integer(item.price)}}</text>
+                      <text class='decimals'>.{{util.decimals(item.price)}}</text>
+                    </view>
+                    <view class='good-num'>
+                      <image src='{{util.HTTP}}mobile/small/image/tc-jh.png' catchtap='onMinusNumber' data-id='{{item.cart_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}'></image>
+                      <view>{{item.number}}</view>
+                      <image src='{{util.HTTP}}mobile/small/image/tc-jiahao.png' catchtap='onAddNumber' data-id='{{item.cart_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}'></image>
+                    </view>
+                  </view>
+                  <view class='rechoose' wx:else>
+                    <view>请重新选择商品规格</view>
+                    <view class='border-cur' catchtap='onEdit' data-goodid='{{item.goods_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}'>重选</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 失效宝贝 -->
+        <view class='lose-efficacy' hidden='{{lost_count == 0}}'>
+          <view class='lose-efficacy-head'>
+            <view>失效宝贝{{lost_count}}件</view>
+            <view class='cur' hover-class='hover-class' hover-stay-time='400' bindtap='clearLostGoods'>清空失效宝贝</view>
+          </view>
+          <view class='good' wx:for="{{lost_list}}">
+            <view class='select'>
+              <view>失效</view>
+            </view>
+            <view class='good-wrap'>
+              <view class='good-info'>
+                <image class='good-avatar' src='{{item.file}}'></image>
+                <view>
+                  <view class='good-name'>{{item.goods_name}}</view>
+                  <view class='good-lose-efficacy'>宝贝已不能购买,请联系商家</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!--为你推荐  -->
+      <view class='guess-like' hidden='{{recommend_list.length == 0 || !recommend_list}}'>
+        <view class='head'>
+          <view style='{{util.diy_imgbox(42)}}'>
+            <image lazy-load src='{{util.HTTP}}mobile/small/image/gwc-wntj-z.png' style='{{util.diy_imgcolor(diy_color.z_color,40,10,-4)}}'></image>
+          </view>
+          <text>为你推荐</text>
+          <view style='{{util.diy_imgbox(42)}}'>
+            <image lazy-load src='{{util.HTTP}}mobile/small/image/gwc-wntj-y.png' style='{{util.diy_imgcolor(diy_color.z_color,40,10,-4)}}'></image>
+          </view>
+        </view>
+        <!--列表 -->
+        <good_list bind:addCart="addCart" list="{{recommend_list}}" discount="{{discount}}" />
+      </view>
+    </view>
+  </scroll-view>
+  <view class='footer' wx:if='{{cart_list.length!=0}}'>
+    <view class='footer-wrap'>
+      <view class='select' hover-class='hover-class' hover-stay-time='400' bindtap='onSelectAll'>
+        <view class='font_family imager {{select_all?"icon-syt-gx1":"icon-syt-gx"}}' style='{{select_all?util.diy_color(diy_color.z_color,"",""):""}}'></view>
+        <view>全选</view>
+      </view>
+
+      <view class='total-price'>
+        <view class='total'>
+          <view>
+            <text>合计:</text>
+            <text style='{{util.diy_color(diy_color.z_color,"","")}}'>￥{{cart_info.total}}</text>
+          </view>
+        </view>
+        <!-- <view class='onsale'>
+          总额￥300 立减￥40
+        </view> -->
+      </view>
+    </view>
+    <view class='account bg' hover-class='hover-class' hover-stay-time='400' bindtap='settleAccount' style='{{util.diy_color("",diy_color.z_color,"")}}'>去结算({{cart_info.count}})</view>
+  </view>
+</view>
+<!-- 领取优惠券 -->
+<receive_coupon id="receive_coupon" />
+<!-- 编辑属性 -->
+<cart_change id="change_attr" bind:confirmChange="confirmChange" />
+<view class='buy'>
+  <buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+</view>
+<template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color,model:model}}" />

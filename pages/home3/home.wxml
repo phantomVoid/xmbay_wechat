@@ -1,0 +1,346 @@
+<wxs module="util" src="../../utils/util.wxs" />
+<import src="../../components/navBar/navBar.wxml" />
+<view class='wrap' hidden='{{!finish}}'>
+  <view class='blur-wrap'>
+    <!-- <image src='{{current_banner_img}}'></image> -->
+    <swiper class='blur-image' circular current="{{current_banner}}" autoplay="{{isCurrent_banner}}">
+      <block wx:for="{{banner}}" wx:key='{{index}}'>
+        <swiper-item catchtouchmove='none'>
+          <image src='{{item.file}}'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <image class='blur-bg' src='{{util.HTTP}}mobile/small/image/sy-syhd.png'></image>
+    <!--头布局  -->
+    <view class='wrap-head'>
+      <view>
+        <view class='operation'>
+          <view bindtap='onScan'>
+            <image src='{{util.HTTP}}{{"mobile/small/image/sy-sys.png"}}'></image>
+            <view>扫一扫</view>
+          </view>
+          <!-- <view bindtap='onPayCode'>
+            <image src='{{util.HTTP}}{{"mobile/small/image/sy-ewm.png"}}'></image>
+            <view>付款码</view>
+          </view> -->
+        </view>
+        <!-- <view class='location' bindtap='onLocation'>
+          <text>{{location}}</text>
+          <image src='{{util.HTTP}}{{"mobile/small/image/sy-xl-2.png"}}'></image>
+        </view> -->
+        <view class='wrap-search' bindtap='onSearch'>
+          <image src='{{util.HTTP}}mobile/small/image/xq-gd-ss.png'></image>
+          <input disabled='false' type='text' placeholder='搜索商品/品牌' placeholder-style='color:white'></input>
+        </view>
+        <view class='operation'>
+          <!-- <view bindtap='onScan'>
+            <image src='{{util.HTTP}}{{"mobile/small/image/sy-sys.png"}}'></image>
+            <view>扫一扫</view>
+          </view> -->
+          <view bindtap='onPayCode'>
+            <image src='{{util.HTTP}}mobile/small/image/sy-ewm.png'></image>
+            <view>付款码</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--头布局  -->
+    <view class="wrap-head black {{black_title?'black-anim':''}}">
+      <view>
+        <view class='operation'>
+          <view bindtap='onScan'>
+            <image src='{{util.HTTP}}mobile/small/image/sy-sys-2.png'></image>
+            <view>扫一扫</view>
+          </view>
+        </view>
+        <!-- <view class='location' bindtap='onLocation'>
+          <text>{{location}}</text>
+          <image src='{{util.HTTP}}{{"mobile/small/image/sy-xl-1.png"}}'></image>
+        </view> -->
+        <view class='wrap-search' bindtap='onSearch'>
+          <image src='{{util.HTTP}}mobile/small/image/ssk-ss.png'></image>
+          <input disabled='false' type='text' placeholder='搜索商品/品牌'></input>
+        </view>
+        <view class='operation'>
+          <!-- <view bindtap='onScan'>
+            <image src='{{util.HTTP}}{{"mobile/small/image/sy-sys-2.png"}}'></image>
+            <view>扫一扫</view>
+          </view> -->
+          <view bindtap='onPayCode'>
+            <image src='{{util.HTTP}}mobile/small/image/sy-ewm-2.png'></image>
+            <view>付款码</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!--轮播图  -->
+    <swiper class='banner' indicator-dots autoplay="{{isBanner}}" circular previous-margin="80rpx" next-margin="80rpx" indicator-color="#d2d2d2" indicator-active-color="{{diy_color.z_color}}" bindchange='bannerChange'>
+      <block wx:for="{{banner}}" wx:key='{{index}}'>
+        <swiper-item>
+          <image src='{{item.file}}' class="{{current_banner==index?'scale':''}}" bindtap='onAdv' data-item='{{item}}'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!--广告  -->
+  <image class='ad' src='{{theme.file}}' bindtap='onAdv' data-item='{{theme}}' wx:if='{{theme!=null && theme.file!="" && theme.file!=undefined}}'></image>
+
+  <!--导航热点  -->
+  <view class='nav-hot'>
+    <!-- 导航 
+    <view class='navigation'>
+      <view bindtap='onNavigation' data-item='{{item}}' wx:for='{{nav}}' wx:key='{{index}}'>
+        <image src='{{item.img}}'></image>
+        <text>{{item.title}}</text>
+      </view>
+    </view> -->
+    <!--导航  -->
+    <view class='navigation' style='{{!isNavMore&&nav.length>5?"height:304rpx;":""}}'>
+      <view hover-class='hover-class' hover-stay-time='400' bindtap='onNavigation' data-item='{{item}}' wx:for='{{nav}}' wx:key="{{item}}">
+        <view class='icon'>
+          <image src='{{item.img!=""?item.img:util.HTTP+"mobile/small/image/placeholder_goods_img_0.png"}}'></image>
+        </view>
+        <text>{{item.title}}</text>
+      </view>
+    </view>
+    <view class='navMore' hover-class='hover-class' hover-stay-time='400' bindtap='navMore' wx:if='{{nav.length>10}}'>
+      <image src='{{!isNavMore?util.HTTP+"mobile/small/image/index-xl1.png":util.HTTP+"mobile/small/image/index-xl0.png"}}'></image>
+    </view>
+
+    <!-- 热点 -->
+    <view class='hot-spot' wx:if='{{hot_list.length!=0}}'>
+      <view class='icon' style='{{util.diy_imgbox(62)}}'>
+        <image src='{{util.HTTP}}mobile/small/image/dd/sy-sctt.png' bindtap='onHotSpot' style='{{util.diy_imgcolor(diy_color.z_color,62,72)}}'></image>
+      </view>
+      <swiper autoplay='{{isHot_list}}' interval="3000" duration="500" vertical circular display-multiple-items="2">
+        <block wx:for="{{hot_list}}" wx:key='{{index}}'>
+          <swiper-item>
+            <view class='hot-content' bindtap='onContent' data-id='{{item.article_id}}'>
+              <view>
+                <text class='border-cur hot-title' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>热门</text>
+                <text class='hot-detail'>{{item.title}}</text>
+              </view>
+            </view>
+          </swiper-item>
+          <block wx:if='{{hot_list.length==1}}'>
+            <swiper-item></swiper-item>
+          </block>
+        </block>
+      </swiper>
+    </view>
+  </view>
+
+  <view class='flash-sale' hidden='{{limit.list.length == 0}}'>
+    <view>
+      <view class='flash-head' bindtap='onFlashSale'>
+        <!-- <image src='{{util.HTTP}}mobile/small/image/dd/sy-xsqg.png'></image>
+        <text class='xsqg'>限时抢购</text> -->
+        <view style='{{util.diy_imgbox(120)}}float:left;'>
+          <image lazy-load src='{{util.HTTP}}mobile/small/image/dd/sy-xsqg.png' style='{{util.diy_imgcolor(diy_color.z_color,120,35)}}'></image>
+        </view>
+        <view>
+          <text class='flash-time'>{{util.cutFirst(limit.time.interval_name)}}点场</text>
+          <text class='f-time' style='{{util.diy_color("#fff",diy_color.z_color,"")}}'>{{hour}}</text>
+          <text>:</text>
+          <text class='f-time' style='{{util.diy_color("#fff",diy_color.z_color,"")}}'>{{min}}</text>
+          <text>:</text>
+          <text class='f-time' style='{{util.diy_color("#fff",diy_color.z_color,"")}}'>{{sec}}</text>
+        </view>
+        <view class='next' bindtap='next'>
+          <text>更多</text>
+          <image src='{{util.HTTP}}mobile/small/image/dd/right.png'></image>
+        </view>
+      </view>
+      <scroll-view class='flash-list' scroll-x>
+        <view class='flash-good' wx:for="{{limit.list}}" wx:key='{{index}}' bindtap='onGood' data-id='{{item.goods_id}}'>
+          <image class='flash-img' src='{{item.file}}' lazy-load></image>
+          <view class='name'>{{item.goods_name}}</view>
+          <view class='flash-original'>￥{{item.shop_price}}</view>
+          <view class='flash-price-bg' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+            <text class='flash-unit'>￥</text>
+            <text class='flash-price'>{{item.time_limit_price}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!--广告组  -->
+  <view class='advertising'>
+    <swiper class='ad-list' circular bindchange='advertising'>
+      <block wx:for="{{adv_list}}" wx:key='{{index}}'>
+        <swiper-item>
+          <image src='{{item.file}}' lazy-load bindtap='onAdv' data-item='{{item}}'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='p-banner-c'>
+      <view class='circle'>
+        <view wx:for='{{adv_list}}' wx:key='{{index}}' style='{{advertising_index==index?util.diy_color("",diy_color.z_color,diy_color.z_color):util.diy_color("","",f_color)}}{{advertising_index==index?diy_color.z_color:""}}'></view>
+      </view>
+    </view>
+  </view>
+
+
+  <!--好物推荐  -->
+  <view class='good-recommend' hidden='{{popularity.length==0}}'>
+    <view class='recommend-head' bindtap='onRecommend'>
+      <view class='recommend-for'>
+        <view class='recommend-title' style='{{util.diy_color(diy_color.z_color,"","")}}'>好物推荐</view>
+        <text class='recommend-tip'>精选好物推荐</text>
+        <!-- <image src='{{util.HTTP}}mobile/small/image/sy-hwtj.png'></image> -->
+      </view>
+      <view class='recommend-more'>
+        <text>更多</text>
+        <image src='{{util.HTTP}}mobile/small/image/dd/right.png'></image>
+      </view>
+    </view>
+    <view class='popularity'>
+      <view class='p-banner' bindtouchstart='popularity_start' bindtouchmove='popularity_move' bindtouchend='popularity_end' bindtap='onGood' data-id='{{popularity[popularity_index].goods_id}}'>
+        <view class='imgwarp' style='transform: translateX(-{{popularity_index*popularity_space}}rpx);'>
+          <image src='{{item.file}}' wx:for='{{popularity}}' wx:key='{{index}}' style='left:{{popularity_space*index}}rpx;z-index:{{10-index}};transform: scale({{1-(index-popularity_index)*0.2}});{{index-popularity_index>2||index-popularity_index<0?"opacity:0":""}}'></image>
+        </view>
+      </view>
+      <view class='p-banner-warp'>
+        <view class='goods_name'>{{popularity[popularity_index].goods_name}}</view>
+        <view class='goods_tip' style='{{util.diy_color(diy_color.z_color,"","")}}'>"{{popularity[popularity_index].title}}"</view>
+      </view>
+      <view class='p-banner-c'>
+        <view class='circle'>
+          <view wx:for='{{popularity}}' wx:key='{{index}}' style='{{popularity_index==index?util.diy_color("",diy_color.z_color,diy_color.z_color):util.diy_color("","",f_color)}}{{popularity_index==index?diy_color.z_color:""}}'></view>
+        </view>
+        <view class='xl'>销量 {{popularity[popularity_index].sales_volume}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='good-recommend'>
+    <view class='recommend-head' bindtap='onRecommend'>
+      <view class='recommend-for'>
+        <view class='recommend-title' style='{{util.diy_color(diy_color.z_color,"","")}}'>专辑推荐</view>
+        <text class='recommend-tip'>精选好货推荐</text>
+        <!-- <image src='{{util.HTTP}}{{"mobile/small/image/sy-hwtj.png"}}'></image> -->
+      </view>
+      <!-- <view class='recommend-more'>
+        <text>更多</text>
+        <image src='{{util.HTTP}}{{"mobile/small/image/dd/right.png"}}'></image>
+      </view> -->
+    </view>
+    <view class='recommend-list' wx:for="{{class_list}}" wx:key='{{index}}'>
+      <view hidden='{{item.goods_list.length == 0}}'>
+        <image lazy-load src='{{item.adv.file}}' data-item='{{item}}' bindtap='onClassify'></image>
+        <scroll-view scroll-x>
+          <view class='recommend-good' wx:for="{{item.goods_list}}" wx:key='{{index}}' bindtap='onGood' data-id='{{item.goods_id}}'>
+            <image lazy-load src='{{item.file}}'></image>
+            <view class='recommend-title'>{{item.goods_name}}</view>
+            <view class='recommend-price'>
+              <text class='unit'>￥</text>
+              <text class='integer'>{{util.integer(item.shop_price)}}</text>
+              <text class='decimals'>.{{util.decimals(item.shop_price)}}</text>
+            </view>
+          </view>
+          <view class='recommend-good' bindtap='onClassify' data-id='{{item.goods_classify_id}}' style="{{item.goods_list.length <= 6?'display:none':''}}">
+            <image class='recommend-good-more' src='{{util.HTTP}}mobile/small/image/sy-ckgd.png'></image>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+
+  <!--为你推荐  -->
+  <view style='{{model.phone=="iPhone X"||model.phone=="iPhone"?"padding-bottom:50rpx;":""}}'>
+    <view class='recommend-for'>
+      <view class='recommend-title' style='{{util.diy_color(diy_color.z_color,"","")}}padding-left:20rpx;'>猜你喜欢</view>
+      <text class='recommend-tip'>为你挑选好物</text>
+      <!-- <image src='{{util.HTTP}}{{"mobile/small/image/sy-wntj.png"}}'></image> -->
+    </view>
+    <!--列表  -->
+    <!-- <view class='good_list'>
+      <good_list id="good_list" bind:addCart="addCart" list="{{recommend_list}}" discount="{{discount}}" />
+    </view> -->
+    <view class='goods-list'>
+      <view class='goods-item' wx:for='{{recommend_list}}' wx:key='{{index}}' bindtap='onGood' data-id='{{item.goods_id}}' hover-class='hover-class' hover-stay-time='300'>
+        <view class='goods-img'>
+          <image src='{{item.file}}'></image>
+        </view>
+        <view class='goods-name'>{{item.goods_name}}</view>
+        <view class='goods-tip'>
+          <!-- <text class='zy' wx:if='{{item.shop==0}}' style='{{util.diy_color("",diy_color.z_color,"")}}'>自营</text> -->
+          <text class='pt' wx:if='{{item.is_group==1}}' style='{{util.diy_color("#fff",diy_color.z_color,diy_color.z_color)}}'>{{item.group_num}}人拼</text>
+          <block wx:if='{{item.is_group==1}}'>
+            <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+              <text class='unit'>￥</text>
+              <text class='integer price'>{{util.integer(item.group_price)}}</text>
+              <text class='decimals'>.{{util.decimals(item.group_price)}}</text>
+            </view>
+          </block>
+          <block wx:elif='{{item.is_bargain==1}}'>
+            <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+              <text class='unit'>低价￥</text>
+              <text class='integer price'>{{util.integer(item.cut_price)}}</text>
+              <text class='decimals'>.{{util.decimals(item.cut_price)}}</text>
+            </view>
+          </block>
+
+          <block wx:if='{{item.is_limit==1}}'>
+            <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+              <text class='unit'>￥</text>
+              <text class='integer price'>{{util.integer(item.time_limit_price)}}</text>
+              <text class='decimals'>.{{util.decimals(item.time_limit_price)}}</text>
+            </view>
+          </block>
+        </view>
+        <block wx:if='{{item.is_limit==1}}'>
+          <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+            <text class='shop_price'>￥{{item.shop_price}}</text>
+          </view>
+        </block>
+        <block wx:elif='{{item.is_group==1}}'>
+          <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+            <text class='shop_price'>￥{{item.shop_price}}</text>
+          </view>
+        </block>
+        <block wx:elif='{{item.is_bargain==1}}'>
+          <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+            <text class='shop_price'>原价￥{{item.shop_price}}</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+            <text class='unit'>￥</text>
+            <text class='integer price'>{{util.integer(item.shop_price)}}</text>
+            <text class='decimals'>.{{util.decimals(item.shop_price)}}</text>
+          </view>
+        </block>
+        <view class='add-cart font_family icon-pt' style='{{util.diy_color(diy_color.z_color,"","")}}' wx:if="{{item.is_group==1}}"></view>
+        <view class='add-cart font_family icon-kj' style='{{util.diy_color(diy_color.z_color,"","")}}' wx:elif="{{item.is_bargain==1}}"></view>
+        <view class='add-cart font_family icon-xs' style='{{util.diy_color(diy_color.z_color,"","")}}' wx:elif="{{item.is_limit==1}}"></view>
+        <view class='add-cart font_family icon-guc' style='{{util.diy_color(diy_color.z_color,"","")}}' data-item='{{item}}' wx:else catchtap='addCart'></view>
+      </view>
+    </view>
+
+  </view>
+  <!-- copyright -->
+  <!-- <view class='copyright'> -->
+  <!-- <image src='/image/copyright.png'></image> -->
+  <!-- <view class='company'>资海科技集团</view>
+    <view class='credentials' bindtap='credentials'>证照信息</view> -->
+  <!-- </view> -->
+
+  <!--返回顶部  -->
+
+  <go_top id="go_top" bindtap='onBackTop' />
+  <cart id="cart" />
+
+  <!--新人专享  -->
+  <view class='exclusive' catchtouchmove='none' wx:if='{{popup_adv_status == 1&&configSwitch.show_switch.is_coupon==1}}'>
+    <image class='exclusive-logo' src='{{util.HTTP}}mobile/small/image/sy-xrlb-lb.png' hover-class='hover-class' hover-stay-time='400' bindtap='onNewGift'></image>
+    <image class='exclusive-cancel' src='{{util.HTTP}}mobile/small/image/sy-xrlb-gb.png' hover-class='hover-class' hover-stay-time='400' bindtap='closeExclusive'></image>
+  </view>
+</view>
+
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+<!-- <buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" /> -->
+<!-- <template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color}}" /> -->
+<template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color,model:model}}" />

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "go_top": "/components/go_top/go_top",
+    "cart":"/components/cart/cart",
+    "buy": "/components/buy/buy"
+  }
+}
