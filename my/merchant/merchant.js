@@ -151,8 +151,6 @@ Page({
    * 创建店铺
    */
   createShop(e) {
-    console.log(e)
-    return
     if (this.data.name == '') {
       wx.showToast({
         title: '请输入店铺名称',

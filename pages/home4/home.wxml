@@ -52,10 +52,19 @@
     }
     return percent.toFixed(0)
   }
+  /**
+   * 限时抢购场次
+   * 
+   */
+  var limitTimeName = function(value) {
+    var array = value.split(":")
+    return array[0]
+  }
   module.exports = {
     limitPercent: limitPercent,
     limitTime: limitTime,
-    navScroll: navScroll
+    navScroll: navScroll,
+    limitTimeName: limitTimeName
   }
 </wxs>
 <view class='wrap'>
@@ -152,7 +161,7 @@
           <text>:</text>
           <view class='t' style='{{util.diy_color(diy_color.z_color,"","")}}'>{{wxs_common.limitTime(limitTime,'s')}}</view>
         </view>
-        <view class='limit-site'>{{dataInfo.limit.time.interval_name}}点场</view>
+        <view class='limit-site'>{{wxs_common.limitTimeName(dataInfo.limit.time.interval_name)}}点场</view>
         <view class='more-con' bindtap='onLimit' hover-class='hover-class' hover-stay-time='300'>
           <text>更多</text>
           <image class='more' src='{{util.HTTP}}mobile/small/image/shop_common/25.png'></image>
@@ -161,7 +170,7 @@
       </view>
       <view class='limit-goods'>
         <view class='goods-con'>
-          <view class='item' wx:for='{{dataInfo.limit.list}}' wx:key='{{index}}'>
+          <view class='item' wx:for='{{dataInfo.limit.list}}' wx:key='{{index}}' bindtap='onGood' data-id='{{item.goods_id}}' hover-class='hover-class' hover-stay-time='300'>
             <view class='goods-name'>{{item.goods_name}}</view>
             <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
               <text>￥</text>
