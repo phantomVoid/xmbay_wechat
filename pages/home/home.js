@@ -27,6 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.getSystemInfo()
     let obj = null
     wx.hideTabBar()
     //代言id
@@ -122,7 +123,6 @@ Page({
   onPullDownRefresh: function() {
     this.location()
   },
-
   /**
    * 页面滑动
    */
@@ -148,10 +148,17 @@ Page({
   onShareAppMessage: function() {
 
   },
-
+  /**
+   * 获取系统信息
+   */
+  getSystemInfo() {
+    this.setData({
+      model: app.globalData.model
+    })
+  },
   /**
    * 获取数据
-   * pattern 0老多首页 1新多店首页
+   * pattern
    */
   getData() {
     http.post(app.globalData.index, {
@@ -250,7 +257,7 @@ Page({
    */
   countDown() {
     clearInterval(this.data.count_down)
-    this.data.limitTime = this.data.dataInfo.limit[0].count_down
+    this.data.limitTime = this.data.dataInfo.limit.time.count_down
     this.count_callback()
     this.data.count_down = setInterval(() => {
       this.data.limitTime--;
@@ -507,11 +514,11 @@ Page({
    */
   index_curLimitList() {
     http.post(app.globalData.index_curLimitList, {
-      type: 1
+      type: 2
     }).then(res => {
       this.setData({
         'dataInfo.limit': res.result, //限时抢购
-        limitTime: res.result[0].count_down //倒计时时间
+        limitTime: res.result.time.count_down //倒计时时间
       })
     })
   },
@@ -521,6 +528,15 @@ Page({
   onGood(e) {
     wx.navigateTo({
       url: '/nearby_shops/good_detail/good_detail?goods_id=' + e.currentTarget.dataset.id,
+    })
+  },
+
+  /**
+   * 好物推荐
+   */
+  onRecommend() {
+    wx.navigateTo({
+      url: '../recommend/recommend',
     })
   },
 
@@ -618,7 +634,5 @@ Page({
       'dataInfo.set.popup_adv_status': 0
     })
   },
-
-
 
 })
