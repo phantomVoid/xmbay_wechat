@@ -9,8 +9,8 @@
         <view class='filtrate-item'>
           <view class='filtrate-title'>通用筛选</view>
           <view class='filtrate-content'>
-            <view hover-class='hover-class' hover-stay-time='400' bindtap='onCityWide' class="{{city_wide?'cur':''}}" style='{{city_wide?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}'>同城配送</view>
-            <view hover-class='hover-class' hover-stay-time='400' bindtap='onStore' class="{{store?'cur':''}}" style='{{store?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}'>门店自提</view>
+            <view hover-class='hover-class' hover-stay-time='400' bindtap='onCityWide' class="{{city_wide?'cur':''}}" style='{{city_wide?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}' wx:if='{{configSwitch.show_switch.is_city==1}}'>同城配送</view>
+            <view hover-class='hover-class' hover-stay-time='400' bindtap='onStore' class="{{store?'cur':''}}" style='{{store?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}' wx:if='{{configSwitch.show_switch.is_shop==1}}'>门店自提</view>
             <view hover-class='hover-class' hover-stay-time='400' bindtap='onExemption' class="{{exemption?'cur':''}}" style='{{exemption?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}'>包邮</view>
             <view hover-class='hover-class' hover-stay-time='400' bindtap='onPlatform' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}' class="{{platform?'cur':''}}" style='{{platform?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}'>平台自营</view>
             <view hover-class='hover-class' hover-stay-time='400' bindtap='onIndividual' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}' class="{{individual?'cur':''}}" style='{{individual?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}'>个人店铺</view>

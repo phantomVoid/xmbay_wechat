@@ -17,8 +17,8 @@
         <view class='filtrate-item'>
           <view class='filtrate-title'>特色服务</view>
           <view class='filtrate-content'>
-            <view hover-class='hover-class' hover-stay-time='400' bindtap='_onCity' class="{{city?'cur':''}}" style='{{city?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}'>同城配送</view>
-            <view hover-class='hover-class' hover-stay-time='400' bindtap='_onPickup' class="{{pickup?'cur':''}}" style='{{pickup?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}'>门店自提</view>
+            <view hover-class='hover-class' hover-stay-time='400' bindtap='_onCity' class="{{city?'cur':''}}" style='{{city?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}' wx:if='{{configSwitch.show_switch.is_city==1}}'>同城配送</view>
+            <view hover-class='hover-class' hover-stay-time='400' bindtap='_onPickup' class="{{pickup?'cur':''}}" style='{{pickup?util.diy_color(diy_color.z_color,diy_color.f_color,diy_color.z_color):""}}' wx:if='{{configSwitch.show_switch.is_shop==1}}'>门店自提</view>
           </view>
         </view>
         <view class='block'></view>
