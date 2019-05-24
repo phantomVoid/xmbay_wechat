@@ -27,7 +27,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getSystemInfo()
     let obj = null
     wx.hideTabBar()
     //代言id
@@ -123,6 +122,7 @@ Page({
   onPullDownRefresh: function() {
     this.location()
   },
+
   /**
    * 页面滑动
    */
@@ -148,17 +148,10 @@ Page({
   onShareAppMessage: function() {
 
   },
-  /**
-   * 获取系统信息
-   */
-  getSystemInfo() {
-    this.setData({
-      model: app.globalData.model
-    })
-  },
+
   /**
    * 获取数据
-   * pattern
+   * pattern 0老多首页 1新多店首页
    */
   getData() {
     http.post(app.globalData.index, {
@@ -257,7 +250,7 @@ Page({
    */
   countDown() {
     clearInterval(this.data.count_down)
-    this.data.limitTime = this.data.dataInfo.limit.time.count_down
+    this.data.limitTime = this.data.dataInfo.limit[0].count_down
     this.count_callback()
     this.data.count_down = setInterval(() => {
       this.data.limitTime--;
@@ -625,5 +618,7 @@ Page({
       'dataInfo.set.popup_adv_status': 0
     })
   },
+
+
 
 })
