@@ -282,12 +282,16 @@
           <view class='price-left'>红包</view>
           <view class='price-right'>￥{{info.subtotal_share_platform_packet_price}}</view>
         </view> -->
-        <view wx:if='{{info.order_type == 3}}'>
+        <view wx:elif='{{info.order_type == 2}}'>
+          <view class='price-left'>拼团</view>
+          <view class='price-right'>-￥{{info.active_price}}</view>
+        </view>
+        <view wx:elif='{{info.order_type == 3}}'>
           <view class='price-left'>砍价</view>
           <view class='price-right'>-￥{{info.active_price}}</view>
         </view>
-        <view wx:if='{{info.order_type == 2}}'>
-          <view class='price-left'>拼团</view>
+        <view wx:elif='{{info.order_type == 4}}'>
+          <view class='price-left'>限时抢购</view>
           <view class='price-right'>-￥{{info.active_price}}</view>
         </view>
       </view>

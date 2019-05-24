@@ -176,10 +176,13 @@
 .banner image {
   width: 100%;
   height: 90%;
-  transform: scaleX(0.9) scaleY(0.8);
+  transform: scaleX(0.95) scaleY(0.8);
   transition: all 0.3s ease;
   border-radius: 10rpx;
-  box-shadow: 0 0 10px 2rpx rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+.banner swiper-item{
+  overflow: unset;
 }
 
 .banner .scale {

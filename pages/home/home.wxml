@@ -241,13 +241,6 @@
           </view>
         </view>
       </scroll-view>
-      <!-- <swiper class='adv-swiper' next-margin='206rpx'>
-          <swiper-item wx:for='{{dataInfo.adv_list}}' wx:key='{{index}}'>
-            <view class='adv-file'>
-              <image src='{{item.file}}'></image>
-            </view>
-          </swiper-item>
-        </swiper> -->
     </view>
     <view class='limit-con' wx:if='{{dataInfo.limit.length!=0}}'>
       <view class='limit-tit-con'>

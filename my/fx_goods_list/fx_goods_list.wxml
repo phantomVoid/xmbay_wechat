@@ -47,7 +47,7 @@
   </view>
 </view>
 
-<view class='no-order' hidden="{{good_list.length != 0 || loading}}">
+<view class='no-order' hidden="{{good_list.length != 0||distribution_type==1 || loading}}">
   <view>
     <image src='{{util.HTTP}}mobile/small/image/zwsp.png'></image>
     <view class='no-order-head'>暂无相关商品</view>
@@ -73,8 +73,8 @@
   <view class='dyx'>
     <image class='dy-icon' src='{{util.HTTP}}mobile/small/image/fx/dy_image01.png'></image>
     <view class='content' style='background: url({{util.HTTP}}mobile/small/image/fx/dy_image02.png) repeat-y;background-size:100%;'>
-      <scroll-view class='good-scroll' scroll-y bindscrolltolower="loadMore" bindscroll="scroll" scroll-top="{{scroll_top}}" hidden='{{good_list.length == 0 && !loading}}' scroll-with-animation>
-        <view class='goods-con'>
+      <scroll-view class='good-scroll' scroll-y bindscrolltolower="loadMore" bindscroll="scroll" scroll-top="{{scroll_top}}" scroll-with-animation>
+        <view class='goods-con' wx:if="{{good_list.length != 0}}">
           <view class='item' wx:for='{{good_list}}' wx:key='{{index}}' bindtap='onGoods' hover-class='hover-class' hover-stay-time='400' data-id='{{item.goods_id}}'>
             <view class='goods-file'>
               <image src='{{item.file}}'></image>
@@ -95,16 +95,22 @@
             </view>
           </view>
         </view>
+        <block wx:else>
+          <view class='p-con'>
+            <image class='p-img' src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg01.png'></image>
+            <view class='p-text'>暂无商品</view>
+          </view>
+        </block>
       </scroll-view>
     </view>
     <image class='dy-icon-bottom' src='{{util.HTTP}}mobile/small/image/fx/dy_image03.png'></image>
   </view>
 </block>
 <!--筛选  -->
-<filtrate isShow="{{filtrate_board}}" bind:onFiltrateReset="onFiltrateReset" bind:onFiltrateConfirm="onFiltrateConfirm"></filtrate>
+<!-- <filtrate isShow="{{filtrate_board}}" bind:onFiltrateReset="onFiltrateReset" bind:onFiltrateConfirm="onFiltrateConfirm"></filtrate> -->
 
 <!--综合选择列表  -->
-<view class='board classify-board' hidden="{{!classify_board}}" hover-class='hover-class' hover-stay-time='400' bindtap='closeTrans'>
+<!-- <view class='board classify-board' hidden="{{!classify_board}}" hover-class='hover-class' hover-stay-time='400' bindtap='closeTrans'>
   <view hover-class='hover-class' hover-stay-time='400' bindtap='onCompreRank'>
     <view class="left {{compre_type==1?'cur':''}}" style="{{compre_type==1?util.diy_color(diy_color.z_color,'',''):''}}">综合排序</view>
     <view class='right' style='{{util.diy_imgbox(28)}}'>
@@ -123,6 +129,6 @@
       <image class='right' hidden='{{compre_type!=3}}' src='{{util.HTTP}}mobile/small/image/arx.png' style='{{compre_type==3?util.diy_imgcolor(diy_color.z_color,28,20):""}}transform:translate(-14px,-10px)'></image>
     </view>
   </view>
-</view>
+</view> -->
 
 <buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />

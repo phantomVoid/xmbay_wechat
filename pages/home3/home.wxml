@@ -75,7 +75,7 @@
     </view>
 
     <!--轮播图  -->
-    <swiper class='banner' indicator-dots autoplay="{{isBanner}}" circular previous-margin="80rpx" next-margin="80rpx" indicator-color="#d2d2d2" indicator-active-color="{{diy_color.z_color}}" bindchange='bannerChange'>
+    <swiper class='banner' indicator-dots autoplay="{{isBanner}}" circular previous-margin="30rpx" next-margin="30rpx" indicator-color="#d2d2d2" indicator-active-color="{{diy_color.z_color}}" bindchange='bannerChange'>
       <block wx:for="{{banner}}" wx:key='{{index}}'>
         <swiper-item>
           <image src='{{item.file}}' class="{{current_banner==index?'scale':''}}" bindtap='onAdv' data-item='{{item}}'></image>
