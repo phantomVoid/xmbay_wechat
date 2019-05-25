@@ -58,7 +58,9 @@ let get = (url, data = {}, hidden) => {
           clearLoginState()
         } else if (res.data.code == -201) {
           clearLoginState()
-        } else {
+        } else if (res.data.code == -202) {
+          return
+        }  else {
           fail(res.data)
           app.showToast(res.data.message, () => {
             // wx.hideLoading()
@@ -115,7 +117,9 @@ let postList = (url, data = {}) => {
           clearLoginState()
         } else if (res.data.code == -201) {
           clearLoginState()
-        } else {
+        } else if (res.data.code == -202) {
+          return
+        }  else {
           app.showToast(res.data.message)
         }
 
@@ -179,7 +183,9 @@ let post = (url, data = {}, hidden) => {
           clearLoginState()
         } else if (res.data.code == -201) {
           clearLoginState()
-        } else {
+        } else if (res.data.code == -202) {
+          return
+        }  else {
           fail(res.data)
           app.showToast(res.data.message, () => {
             wx.hideLoading()
@@ -239,6 +245,8 @@ let encPost = (url, data = {}, hidden) => {
           clearLoginState()
         } else if (res.data.code == -201) {
           clearLoginState()
+        } else if (res.data.code == -202) {
+          return
         } else {
           fail(res.data)
           wx.showToast({
