@@ -39,7 +39,7 @@
 
           <view class='good' wx:for="{{item.list}}">
             <view class='good-board' style="{{item.edit?'':'display:none'}}">
-              <view class='collect' wx:if="{{item.collect_status == null}}" catchtap='collect' data-goodid='{{item.goods_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}'>
+              <view class='collect' wx:if="{{item.collect_status == 0}}" catchtap='collect' data-goodid='{{item.goods_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}'>
                 <text>移入收藏</text>
               </view>
               <view class='collect' wx:else>

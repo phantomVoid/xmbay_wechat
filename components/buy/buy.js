@@ -333,9 +333,15 @@ Component({
             return
           }
         }
+        //拼团上限
         if (this.data.info.is_group == 1 && this.data.group_buy && this.data.info.get_group_goods_num > this.data.info.buy_cum_limit && this.data.info.buy_cum_limit > 0) {
           app.showToast('该拼团商品已达到购买上限')
           return
+        } else {
+          if (this.data.info.is_group == 1 && this.data.group_buy && this.data.num > this.data.info.buy_cum_limit - this.data.info.get_group_goods_num) {
+            app.showToast('该拼团商品已达到购买上限')
+            return
+          }
         }
         if (this.data.attr_array.length != this.data.info.attr.length) {
           app.showToast('请选择商品属性')

@@ -51,7 +51,7 @@
             <text class='title'>运费</text>
             <text class='freight'>{{express_freight_price}}元</text>
             <text class='freight_tip' wx:if='{{data.express_post_list[0].discount_postage_rules==1}}'>满{{data.express_post_list[0].postage}}元{{data.express_post_list[0].discount=='0.00'?'包邮':'邮费'+data.express_post_list[0].discount+'元'}}</text>
-            <text class='freight_tip' wx:elif='{{data.express_post_list[0].discount_postage_rules==2}}'>满{{util.integer(data.city_post_list[0].postage)}}件{{data.express_post_list[0].discount=='0.00'?'包邮':'邮费'+data.express_post_list[0].discount+'元'}}</text>
+            <text class='freight_tip' wx:elif='{{data.express_post_list[0].discount_postage_rules==2}}'>满{{util.integer(data.express_post_list[0].postage)}}件{{data.express_post_list[0].discount=='0.00'?'包邮':'邮费'+data.express_post_list[0].discount+'元'}}</text>
             <text class='freight_tip' wx:elif='{{data.express_post_list[0].discount_postage_rules==3}}'>满{{data.express_post_list[0].postage}}公斤{{data.express_post_list[0].discount=='0.00'?'包邮':'邮费'+data.express_post_list[0].discount+'元'}}</text>
           </view>
         </view>

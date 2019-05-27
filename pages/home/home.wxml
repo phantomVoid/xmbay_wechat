@@ -85,20 +85,20 @@
 </wxs>
 <view class='wrap'>
   <view class='header' style='{{util.diy_color("",diy_color.z_color,"")}}'>
-    <view class='nav-con' style='{{wxs_common.headerAnimation(scrollTop)}}'>
+    <view class='nav-con {{scrollTop>20?"on":""}}' style='{{wxs_common.headerAnimation(scrollTop)}}'>
       <view class='h-btn-con'>
         <view class='item' bindtap='onScan' hover-class='hover-class' hover-stay-time='300'>
-          <image src='{{util.HTTP}}mobile/small/image/shop_common/5.png'></image>
+          <image src='{{util.HTTP}}{{scrollTop>20?"mobile/small/image/home-dd-01/home-sm-01.png":"mobile/small/image/shop_common/5.png"}}'></image>
           <text>扫一扫</text>
         </view>
       </view>
       <view class='h-search-con' bindtap='onSearch' hover-class='hover-class' hover-stay-time='300'>
-        <image src='{{util.HTTP}}mobile/small/image/shop_common/4.png'></image>
+        <image src='{{util.HTTP}}{{scrollTop>20?"mobile/small/image/home-dd-01/home-ss-01.png":"mobile/small/image/shop_common/4.png"}}'></image>
         <text>搜索商品/品牌</text>
       </view>
       <view class='h-btn-con'>
         <view class='item' bindtap='onPayCode' hover-class='hover-class' hover-stay-time='300'>
-          <image src='{{util.HTTP}}mobile/small/image/shop_common/6.png'></image>
+          <image src='{{util.HTTP}}{{scrollTop>20?"mobile/small/image/home-dd-01/home-fkm-01.png":"mobile/small/image/shop_common/6.png"}}'></image>
           <text>付款码</text>
         </view>
       </view>

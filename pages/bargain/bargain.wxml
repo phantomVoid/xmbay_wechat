@@ -31,7 +31,7 @@
         </view>
       </view>
       <view>
-        <view class='bargain-spread' wx:if="{{info.state != 2 && info.status == 1 && !is_Cutout}}">
+        <view class='bargain-spread' wx:if="{{(info.state != 2 && info.status == 1 && !is_Cutout)||info.status == 3}}">
           <text>已砍</text>
           <text style='{{util.diy_color("#f23030","","")}}'>{{util.toFixed(info.original_price-info.present_price)}}</text>
           <text>元,还差</text>

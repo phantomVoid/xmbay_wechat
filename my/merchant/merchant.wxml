@@ -43,7 +43,7 @@
 </view>
 <view class='tips'>
   <text>创建店铺代表您同意</text>
-  <text class='cur' hover-class='hover-class' hover-stay-time='400' bindtap='onWeb' data-id='2' style='{{util.diy_color(diy_color.z_color,"","")}}'>《店铺服务协议》</text>
+  <text class='cur' hover-class='hover-class' hover-stay-time='400' bindtap='onWeb' data-id='2' style='{{util.diy_color(diy_color.z_color,"","")}}'>《店铺入驻协议》</text>
 </view>
 
 <view class='service-phone' hover-class='hover-class' hover-stay-time='400' bindtap='callPhone'>

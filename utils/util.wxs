@@ -8,7 +8,7 @@ var util = {
    * 测试域名
    */
   HTTP: 'https://ishoptest.zihaiwangluo.com/',
-  // HTTP: 'https://ishop-preview.zihaiwangluo.com/',
+  HTTP: 'https://ishop-preview.zihaiwangluo.com/',
   // HTTP: 'http://fapiao.zihaiwangluo.com/',
   // HTTP: 'http://vers.zihaiwangluo.com/',
   // HTTP: 'https://ddmb.zihaiwangluo.com/',
@@ -22,7 +22,7 @@ var util = {
   /**
    * 手机号加密
    */
-  phoneEnc: function(phone) {
+  phoneEnc: function (phone) {
     if (phone) {
       var array = phone.split('')
       array[3] = '*'
@@ -35,7 +35,7 @@ var util = {
   /**
    * 整数
    */
-  integer: function(value) {
+  integer: function (value) {
     value = Number(value).toFixed(2).toString()
     if (value) {
       var array = value.split(".")
@@ -45,7 +45,7 @@ var util = {
   /**
    * 小数
    */
-  decimals: function(value) {
+  decimals: function (value) {
     value = Number(value).toFixed(2).toString()
     if (value) {
       var array = value.split(".")
@@ -55,7 +55,7 @@ var util = {
   /**
    * 百分比1
    */
-  percent: function(total, residue) {
+  percent: function (total, residue) {
     var total = parseFloat(total)
     var residue = parseFloat(residue)
     var per = null
@@ -69,7 +69,7 @@ var util = {
   /**
    * 百分比2
    */
-  oPercent: function(total, residue) {
+  oPercent: function (total, residue) {
     if (total) {
       var per = (residue / total).toFixed(2) * 100
       if (per > 100) {
@@ -81,7 +81,7 @@ var util = {
   /**
    * vip价格
    */
-  vip_price: function(price, discount) {
+  vip_price: function (price, discount) {
     if (price) {
       return parseFloat(price * discount * 0.01).toFixed(2)
     }
@@ -89,7 +89,7 @@ var util = {
   /**
    * 保留小数
    */
-  toFixed: function(num) {
+  toFixed: function (num) {
     if (num) {
       if (num != 0) {
         return num.toFixed(2)
@@ -101,7 +101,7 @@ var util = {
   /**
    * 截取字符串第一个字符
    */
-  cutFirst: function(s) {
+  cutFirst: function (s) {
     if (s) {
       return s.split(':')[0]
     }
@@ -110,7 +110,7 @@ var util = {
   /**
    * 截取字符串第一个字符
    */
-  cutDate: function(s) {
+  cutDate: function (s) {
     if (s) {
       return s.split(' ')[0]
     }
@@ -118,19 +118,19 @@ var util = {
   /**
    * 积分省钱
    */
-  cal: function(integral, radio) {
+  cal: function (integral, radio) {
     return Number(integral * Number(radio)).toFixed(2)
   },
   /**
    * 每日最多
    */
-  add: function(a, b) {
+  add: function (a, b) {
     return parseInt(a) * parseInt(b)
   },
   /**
    * 图片换色盒子
    */
-  diy_imgbox: function(w) {
+  diy_imgbox: function (w) {
     var box = 'display: block;' +
       'width: ' + w + 'rpx!important;' +
       'overflow: hidden;';
@@ -139,7 +139,7 @@ var util = {
   /**
    * 图片换色
    */
-  diy_imgcolor: function(color, w, h, y) {
+  diy_imgcolor: function (color, w, h, y) {
     var y = y || 0
     var style = 'position: relative;' +
       'transform: translate(-' + w + 'rpx,' + y + 'px);' +
@@ -152,7 +152,7 @@ var util = {
   /**
    * 换色
    */
-  diy_color: function(color, bg, border, opacity) {
+  diy_color: function (color, bg, border, opacity) {
     var diy = ''
     if (color) {
       diy += 'color:' + color + ' !important;'
@@ -172,7 +172,7 @@ var util = {
   /**
    * 客服时间
    */
-  service_time: function(TIME) {
+  service_time: function (TIME) {
     // 消息时间
     var time = getDate(parseInt(TIME));
     var y = time.getFullYear();
@@ -194,7 +194,7 @@ var util = {
       return hh + ':' + mm
     }
   },
-  servicelist_time: function(TIME) {
+  servicelist_time: function (TIME) {
     // 消息时间
     var time = getDate(parseInt(TIME));
     var y = time.getFullYear();

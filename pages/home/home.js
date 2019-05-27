@@ -376,7 +376,7 @@ Page({
         case 'invit': //邀请有礼
           if (app.login()) {
             wx.navigateTo({
-              url: `/pages/invitation/invitation?token=${this.data.encrypt}`,
+              url: `/pages/invitation/invitation?token=${this.data.dataInfo.parameter}`,
             })
           }
           break;

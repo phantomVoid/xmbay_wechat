@@ -18,6 +18,7 @@ Page({
     if (options.token) {
       token = options.token
     }
+    console.log(token)
     // 分享二维码
     if (options.scene) {
       let obj = http.scene(options.scene)
