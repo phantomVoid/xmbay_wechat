@@ -60,16 +60,32 @@
     var array = value.split(":")
     return array[0]
   }
+  /**
+   * 头部滚动动画
+   * e 距离顶部数量
+   */
+  var headerAnimation = function(event = 0) {
+    var bg
+    if (event <= 100) {
+      bg = 'background-color:rgba(255,255,255, ' + Math.max(0, (event) / 100) + ');'
+    } else if (event <= 10) {
+      bg = 'background-color:rgba(255,255,255,0);'
+    } else if (event > 100) {
+      bg = 'background-color:rgba(255,255,255,1);'
+    }
+    return bg
+  }
   module.exports = {
     limitPercent: limitPercent,
     limitTime: limitTime,
     navScroll: navScroll,
-    limitTimeName: limitTimeName
+    limitTimeName: limitTimeName,
+    headerAnimation: headerAnimation
   }
 </wxs>
 <view class='wrap'>
-  <view class='header' style='padding-top:{{model.topHeight}}px;{{util.diy_color("",diy_color.z_color,"")}}'>
-    <view class='nav-con' style='padding-top:{{model.topHeight+10}}px;'>
+  <view class='header' style='{{util.diy_color("",diy_color.z_color,"")}}'>
+    <view class='nav-con' style='{{wxs_common.headerAnimation(scrollTop)}}'>
       <view class='h-btn-con'>
         <view class='item' bindtap='onScan' hover-class='hover-class' hover-stay-time='300'>
           <image src='{{util.HTTP}}mobile/small/image/shop_common/5.png'></image>
@@ -106,7 +122,7 @@
     </view>
   </view>
   <view class='section-con' style='{{model.phone=="iPhone X"||model.phone=="iPhone"?"padding-bottom:150rpx;":""}}'>
-    <view class='theme-con'>
+    <view class='theme-con' hover-class='hover-class' hover-stay-time='300' bindtap='onAdv' data-item='{{dataInfo.theme}}'>
       <image src='{{dataInfo.theme.file}}'></image>
     </view>
     <view class='nav-con'>

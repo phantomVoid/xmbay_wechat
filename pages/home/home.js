@@ -127,6 +127,7 @@ Page({
    * 页面滑动
    */
   onPageScroll(e) {
+    this.nav()
     //返回顶部
     if (e.scrollTop > 100) {
       this.selectComponent("#go_top").rise()
@@ -348,6 +349,7 @@ Page({
         })
         break;
       case 2: //店铺
+        return
         wx.navigateTo({
           url: '/nearby_shops/shop_detail/shop_detail?store_id=' + item.content,
           success: () => {
@@ -634,5 +636,14 @@ Page({
       'dataInfo.set.popup_adv_status': 0
     })
   },
+  nav(){
+    const query = wx.createSelectorQuery()
+    query.selectViewport().scrollOffset((res)=> {
+      this.setData({
+        scrollTop: res.scrollTop
+      })
+    })
+    query.exec()
+  }
 
 })

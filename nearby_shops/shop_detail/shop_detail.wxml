@@ -40,7 +40,7 @@
   <!--热门分类  -->
   <view class='board' hidden='{{!classify_board}}' hover-class='hover-class' hover-stay-time='400' bindtap='closeClassify'>
     <view class='hot-classify-list'>
-      <view catchtap='onSearch' wx:for="{{hot_classify}}" data-id='{{item.store_goods_classify_id}}'>{{item.title}}</view>
+      <view catchtap='onSearch' wx:for="{{hot_classify}}" wx:key='{{index}}' data-id='{{item.store_goods_classify_id}}'>{{item.title}}</view>
     </view>
   </view>
 
@@ -98,7 +98,7 @@
     <view class='coupon-center' wx:if='{{store_index.coupon.length != 0&&configSwitch.show_switch.is_coupon==1}}'>
       <image src='{{util.HTTP}}mobile/small/image/dp-yhqbj.png'></image>
       <view class='coupon-list'>
-        <view wx:for="{{store_index.coupon}}" hover-class='hover-class' hover-stay-time='400' bindtap='receiveCoupon' data-id='{{item.coupon_id}}'>
+        <view wx:for="{{store_index.coupon}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='receiveCoupon' data-id='{{item.coupon_id}}'>
           <image src='{{util.HTTP}}mobile/small/image/dp-yhq.png'></image>
           <view class='price'>{{util.integer(item.actual_price)}}</view>
           <view class='tips'>满{{util.integer(item.full_subtraction_price)}}元使用</view>
@@ -153,14 +153,14 @@
 
     <view class='plan-b' style="{{fixed?'margin-top:120rpx;':''}}" wx:elif="{{store_head.goods_style == 1}}">
       <scroll-view bindscroll="bLeftScroll" scroll-y="{{fixed || b_left_scroll}}" class="plan-b-left">
-        <view class='classify-con' wx:for="{{classify}}" style='{{item.select?util.diy_color("","#fff",""):""}}'>
+        <view class='classify-con' wx:for="{{classify}}" wx:key='{{index}}' style='{{item.select?util.diy_color("","#fff",""):""}}'>
           <view class="plan-b-title" data-item='{{item}}' hover-class='hover-class' hover-stay-time='400' bindtap='onStoreClassify' style='{{item.select?util.diy_color(diy_color.z_color,"",""):""}}'>
             <view class='f-title'>
               <text style='{{item.select?util.diy_color("","",diy_color.z_color):""}}'>{{item.title}}</text>
             </view>
             <view class='{{item.subset.length!=0?"font_family icon-sy-xl":""}} btn' style='{{item.select?"transform:rotate(180deg);":""}}'></view>
           </view>
-          <view class="plan-b-second-title" hidden='{{!item.select}}' wx:for="{{item.subset}}" wx:for-item="second" hover-class='hover-class' hover-stay-time='400' bindtap='onSecondClassify' data-id='{{second.store_goods_classify_id}}'>
+          <view class="plan-b-second-title" hidden='{{!item.select}}' wx:for="{{item.subset}}" wx:key='{{index}}' wx:for-item="second" hover-class='hover-class' hover-stay-time='400' bindtap='onSecondClassify' data-id='{{second.store_goods_classify_id}}'>
             <view style='{{second_classify == second.store_goods_classify_id?util.diy_color(diy_color.z_color,"",""):""}}'>{{second.title}}</view>
           </view>
         </view>
@@ -245,7 +245,7 @@
 
   <!--新品  -->
   <view class='new-good' style="{{fixed?'margin-top:100rpx;':''}}" hidden='{{!new_view}}'>
-    <view wx:for="{{new_list}}">
+    <view wx:for="{{new_list}}" wx:key='{{index}}'>
       <view class='new-good-head'>
         <image src='{{util.HTTP}}mobile/small/image/dp-sysx.png'></image>
         <text>{{item.date}}本店上新</text>
@@ -270,12 +270,12 @@
       </view>
     </view>
     <view class='dynamic-list' hidden="{{article_list.length == 0}}">
-      <view wx:for="{{article_list}}" hover-class='hover-class' hover-stay-time='400' bindtap='onArticleDetail' data-id='{{item.article_id}}'>
+      <view wx:for="{{article_list}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onArticleDetail' data-id='{{item.article_id}}'>
         <view class='dynamic-date'>{{item.date_time}}</view>
         <view class='dynamic-label'>#{{item.title}}#</view>
         <image class='dynamic-pic' src='{{item.file}}' wx:if="{{item.multiple_file.length == 0||item.multiple_file.length == 1}}"></image>
         <view class='dynamic-pic-list' wx:else>
-          <image wx:for="{{item.multiple_file}}" src='{{item}}'></image>
+          <image wx:for="{{item.multiple_file}}" wx:key='{{index}}' src='{{item}}'></image>
         </view>
         <!-- <view class='dynamic-tips'>
               <view>
