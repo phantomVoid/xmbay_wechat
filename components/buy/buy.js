@@ -467,12 +467,20 @@ Component({
           attr: this.data.attr_detail,
           goods_attr: this.data.info.attr.length != 0 ? this.data.attr : '',
         }).then(res => {
+          this.triggerEvent('cartCalculate', {
+            cart_id: 'aaaa',
+            item: 'dataset'
+          })
           event.emit('refreshCart')
           event.emit('refreshCartNumber')
+          let obj = {
+            goods_id:this.data.info.goods_id,
+            number: this.data.num
+          }
+          event.emit('shopAddCart', obj)
           this.setData({
             isShow: false
           })
-          event.emit('shopAddCart')
           app.showSuccessToast(res.message)
           this.resetAll()
         })

@@ -104,13 +104,15 @@ Page({
       this.getStoreHead()
     })
 
-    event.on('shopAddCart', this, goods_id => {
-      if (goods_id) {
-        this.data.goods_id = goods_id
+    event.on('shopAddCart', this, data => {
+      console.log(data)
+      if (data) {
+        this.data.goods_id = data.goods_id
       }
+      console.log(this.data.goods_id)
       for (let i = 0, len = this.data.all_list.length; i < len; i++) {
         if (this.data.all_list[i].goods_id == this.data.goods_id) {
-          this.data.all_list[i].cart_number++
+          this.data.all_list[i].cart_number = data.number
         }
       }
       this.setData({
@@ -967,6 +969,9 @@ Page({
       info: e.detail,
     })
     this.selectComponent("#buy_board").show()
+  },
+  buyCallback(e){
+    console.log(e)
   },
   /**
    * 客服

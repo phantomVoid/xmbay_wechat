@@ -302,4 +302,4 @@
 
 <shop_cart id="cart-list" list="{{cart_list}}" bind:calculate="cartCalculate" bind:cart_delete="event_cart_delete" />
 
-<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" bind:buyCallback='buyCallback' type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />

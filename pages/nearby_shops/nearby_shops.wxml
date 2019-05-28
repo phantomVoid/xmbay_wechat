@@ -16,7 +16,7 @@
         </view>
       </view>
       <swiper circular class='back-banner' current="{{current_banner}}" autoplay='{{isCurrent_banner}}'>
-        <block wx:for="{{banner}}">
+        <block wx:for="{{banner}}" wx:key='{{index}}'>
           <swiper-item catchtouchmove='true'>
             <!-- <view class='banner-pic' style='background:url({{util.HTTP}}mobile/small/image/p_img_shops_480x480.png) no-repeat center;background-size:100% 100%;'> -->
             <image src='{{item.good_image}}'></image>
@@ -35,7 +35,7 @@
         </view>
         <!--轮播图  -->
         <swiper class='banner' autoplay='{{isBanner}}' circular previous-margin="150rpx" next-margin="150rpx" bindchange='bannerChange'>
-          <block wx:for="{{banner}}">
+          <block wx:for="{{banner}}" wx:key='{{index}}'>
             <swiper-item>
               <view class="banner-item {{current_banner == index?'':'scale'}}" hover-class='hover-class' hover-stay-time='400' bindtap='goShop' data-id='{{item.store_id}}'>
                 <view class='banner-pic' style='background:url({{util.HTTP}}mobile/small/image/p_img_shops_480x480.png) no-repeat center;background-size:100% 100%;'>
@@ -78,7 +78,7 @@
     </view>
   </view>
   <view class='shop-list'>
-    <view wx:for="{{nearby_list}}">
+    <view wx:for="{{nearby_list}}" wx:key='{{index}}'>
       <view class='shop-head' hover-class='hover-class' hover-stay-time='400' bindtap='goShop' data-id='{{item.store_id}}'>
         <view class='shop-logo' style='background:url({{util.HTTP}}mobile/small/image/p_img_shops_180x180-2.png) no-repeat center;background-size:100% 100%;'>
           <image src='{{item.logo}}'></image>
@@ -94,7 +94,7 @@
         <view class='go-shop cur' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>进店</view>
       </view>
       <view class='shop-pic' wx:if='{{item.shop_goods.length!=0}}'>
-        <view wx:for="{{item.shop_goods}}" hover-class='hover-class' hover-stay-time='400' bindtap='onGood' data-id='{{item.goods_id}}' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
+        <view wx:for="{{item.shop_goods}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onGood' data-id='{{item.goods_id}}' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
           <image src='{{item.file}}'></image>
           <block wx:if='{{item.is_bargain==1}}'>
             <text>￥{{item.cut_price}}</text>
@@ -130,7 +130,7 @@
   </view>
   <view class='all-board' catchtouchmove='true' hidden='{{!classify_board}}' hover-class='hover-class' hover-stay-time='400' bindtap='closeClassify'>
     <scroll-view scroll-y class='board-first'>
-      <view class='board-classify' wx:for="{{classify_condition}}" catchtap='selectClassify' data-item='{{item}}'>
+      <view class='board-classify' wx:for="{{classify_condition}}" wx:key='{{index}}' catchtap='selectClassify' data-item='{{item}}'>
         <view style="{{item.title == classify?util.diy_color(diy_color.z_color,'',''):''}}">{{item.title}}</view>
         <view class='select font_family icon-arx' style="{{util.diy_color(diy_color.z_color,'','')}}" wx:if='{{item.title == classify}}'></view>
       </view>
