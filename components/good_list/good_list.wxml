@@ -4,7 +4,7 @@
   <view wx:for="{{list}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onGoods' data-id='{{item.goods_id}}'>
     <view class='pic-wrap' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
       <image class='pic' lazy-load src='{{item.file}}'></image>
-      <image class='dy' wx:if='{{item.is_distributor==1}}' src='{{util.HTTP}}mobile/small/image/fx/fx_dybqzd.png'></image>
+      <image class='dy' wx:if='{{item.is_distributor==1}}' src='{{util.HTTP}}mobile/small/image/fx/fx_dybq.png'></image>
       <image class='dy' wx:elif='{{item.is_distribution==1}}' src='{{util.HTTP}}mobile/small/image/fx/fx_dybq.png'></image>
       <view class='sale-num'>销量 {{item.sales_volume}}</view>
       <view class='rank' hidden='{{!rank}}'>

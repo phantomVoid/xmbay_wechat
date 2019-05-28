@@ -7,7 +7,7 @@
 <view class='content-bg'>
   <image src='{{util.HTTP}}mobile/small/image/sj.png'></image>
   <text>+86V</text>
-  <input placeholder='请输入手机号' maxlength='11' type='number' bindinput='phoneInput'></input>
+  <input placeholder='请输入手机号' maxlength='11' type='number' bindinput='phoneInput' value='{{phone}}'></input>
 </view>
 
 <view class='content-bg'>

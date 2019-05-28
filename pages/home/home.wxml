@@ -179,13 +179,14 @@
             <view class='file' wx:for='{{dataInfo.new_list}}' wx:key='{{index}}' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
               <image src='{{item.file}}' catchtap='onGood' data-id='{{item.goods_id}}' hover-class='hover-class' hover-stay-time='300'></image>
             </view>
+            <view class='file' wx:if='{{dataInfo.new_list.length==1}}'></view>
           </block>
           <block wx:else>
             <view class='file'>
               <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg02.png'></image>
             </view>
             <view class='file'>
-              <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg02.png'></image>
+              <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg03.png'></image>
             </view>
           </block>
         </view>
@@ -200,13 +201,14 @@
             <view class='file' wx:for='{{dataInfo.big_list}}' wx:key='{{index}}' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
               <image src='{{item.file}}' catchtap='onGood' data-id='{{item.goods_id}}' hover-class='hover-class' hover-stay-time='300'></image>
             </view>
+            <view class='file' wx:if='{{dataInfo.big_list.length==1}}'></view>
           </block>
           <block wx:else>
             <view class='file'>
               <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg02.png'></image>
             </view>
             <view class='file'>
-              <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg02.png'></image>
+              <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg03.png'></image>
             </view>
           </block>
         </view>
@@ -216,21 +218,22 @@
           <view class='tit'>今日爆款</view>
         </view>
         <view class='tip'>大家都在买的爆款好物</view>
-        <block wx:if='{{dataInfo.word_list.length!=0}}'>
-          <view class='file-con'>
+        <view class='file-con'>
+          <block wx:if='{{dataInfo.word_list.length!=0}}'>
             <view class='file' wx:for='{{dataInfo.word_list}}' wx:key='{{index}}' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
               <image src='{{item.file}}' catchtap='onGood' data-id='{{item.goods_id}}' hover-class='hover-class' hover-stay-time='300'></image>
             </view>
-          </view>
-        </block>
-        <block wx:else>
-          <view class='file'>
-            <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg02.png'></image>
-          </view>
-          <view class='file'>
-            <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg02.png'></image>
-          </view>
-        </block>
+            <view class='file' wx:if='{{dataInfo.word_list.length==1}}'></view>
+          </block>
+          <block wx:else>
+            <view class='file'>
+              <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg02.png'></image>
+            </view>
+            <view class='file'>
+              <image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg03.png'></image>
+            </view>
+          </block>
+        </view>
       </view>
     </view>
     <view class='adv-con'>

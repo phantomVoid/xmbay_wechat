@@ -16,7 +16,9 @@
       </view>
       <view class='user-con'>
         <view class='user-info'>
-          <image class='user-img' hover-class='hover-class' hover-stay-time='400' bindtap='onInfo' src="{{info.userInfo.avatar?info.userInfo.avatar:util.HTTP + 'mobile/small/image/placeholder_member.png'}}"></image>
+          <view class='user-img'  class='user-img' hover-class='hover-class' hover-stay-time='400' bindtap='onInfo' style='background:url({{util.HTTP}}mobile/small/image/placeholder_member.png) no-repeat center;background-size:100% 100%;'>
+            <image src="{{info.userInfo.avatar}}" wx:if='{{info.userInfo.avatar}}'></image>
+          </view>
           <view class='user-details'>
             <view class='user-nickname {{!login_status?"no-login":""}}' hover-class='hover-class' hover-stay-time='400' bindtap='login_status'>{{login_status?info.userInfo.nickname:'登录/注册'}}</view>
             <image class='rank' hover-class='hover-class' hover-stay-time='400' bindtap='onMember' src='{{info.userInfo.rank_img}}' wx:if='{{login_status}}'></image>
@@ -89,4 +91,4 @@
         <view class='credentials' hover-class='hover-class' hover-stay-time='400' bindtap='credentials'>证照信息</view> -->
       </view>
     </view>
-<template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color,model:model}}" />
+    <template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color,model:model}}" />

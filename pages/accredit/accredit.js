@@ -113,7 +113,8 @@ Page({
           code: res.code,
           encryptedData: e.detail.encryptedData,
           iv: e.detail.iv,
-          member_id: ''
+          member_id: '',
+          dev_type: 3
         }).then(res => {
           wx.hideLoading()
           //绑定代言关系
@@ -163,6 +164,7 @@ Page({
             isSubmit: true
           })
         })
+        
       }
     })
   },
