@@ -467,10 +467,6 @@ Component({
           attr: this.data.attr_detail,
           goods_attr: this.data.info.attr.length != 0 ? this.data.attr : '',
         }).then(res => {
-          this.triggerEvent('cartCalculate', {
-            cart_id: 'aaaa',
-            item: 'dataset'
-          })
           event.emit('refreshCart')
           event.emit('refreshCartNumber')
           let obj = {
