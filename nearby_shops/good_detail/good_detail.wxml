@@ -93,7 +93,7 @@
             </view>
             <view class='bargin-price'>
               <view class='bargain-origin' style='{{util.diy_color("#fff","","")}}'>￥{{info.shop_price}}</view>
-              <view class='bargain-person'>已抢{{info.limit_number}}件</view>
+              <view class='bargain-person'>已抢{{info.limit_sales_volume}}件</view>
             </view>
           </view>
           <view class='bargain-time' style='{{util.diy_color("",diy_color.f_color,"")}}'>
