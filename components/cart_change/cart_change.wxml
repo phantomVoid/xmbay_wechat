@@ -16,12 +16,12 @@
     <view class='good-size'>{{attr}}</view>
     <view class='good-property'>
       <view>
-        <view wx:for="{{info.attrs}}" wx:for-index="idx">
+        <view wx:for="{{info.attrs}}" wx:for-index="idx" wx:key='{{idx}}'>
           <view class='property-title'>
             {{item.attr_name}}
           </view>
           <view class='property-option'>
-            <view wx:for="{{item.goods_attr}}" hover-class='hover-class' hover-stay-time='400' bindtap='_onAttr' data-idx='{{idx}}' data-item='{{item}}' class="{{attr_array[idx] == item.attr_value?'cur-option':''}}" style='{{attr_array[idx] == item.attr_value?util.diy_color("",diy_color.z_color,""):""}}'>{{item.attr_value}}</view>
+            <view wx:for="{{item.goods_attr}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='_onAttr' data-idx='{{idx}}' data-item='{{item}}' class="{{attr_array[idx] == item.attr_value?'cur-option':''}}" style='{{attr_array[idx] == item.attr_value?util.diy_color("",diy_color.z_color,""):""}}'>{{item.attr_value}}</view>
           </view>
         </view>
       </view>

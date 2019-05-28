@@ -394,6 +394,7 @@
 }
 
 .section-con .limit-con .limit-goods .item .goods-name {
+  width: 60%;
   font-size: 30rpx;
   color: #666;
   overflow: hidden;

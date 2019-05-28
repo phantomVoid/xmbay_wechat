@@ -37,7 +37,7 @@
             <view class='go-discount cur' hover-class='hover-class' hover-stay-time='400' bindtap='goOnItems'>去凑单 ></view>
           </view> -->
 
-          <view class='good' wx:for="{{item.list}}">
+          <view class='good' wx:for="{{item.list}}" wx:key='{{index}}'>
             <view class='good-board' style="{{item.edit?'':'display:none'}}">
               <view class='collect' wx:if="{{item.collect_status == 0}}" catchtap='collect' data-goodid='{{item.goods_id}}' data-shopdex='{{shop_index}}' data-gooddex='{{index}}'>
                 <text>移入收藏</text>
@@ -94,7 +94,7 @@
             <view>失效宝贝{{lost_count}}件</view>
             <view class='cur' hover-class='hover-class' hover-stay-time='400' bindtap='clearLostGoods'>清空失效宝贝</view>
           </view>
-          <view class='good' wx:for="{{lost_list}}">
+          <view class='good' wx:for="{{lost_list}}" wx:key='{{index}}'>
             <view class='select'>
               <view>失效</view>
             </view>

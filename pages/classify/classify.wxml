@@ -17,7 +17,7 @@
   <view class='classify' wx:if='{{level != 0}}'>
     <!--左侧分类  -->
     <view class='left-classify'>
-      <view wx:for='{{first_classify}}' class="{{parent_id==item.goods_classify_id?'':''}}" hover-class='hover-class' hover-stay-time='400' bindtap='onFiristClassify' data-item='{{item}}' style='{{parent_id==item.goods_classify_id?util.diy_color(diy_color.z_color,"#fff",diy_color.z_color):""}}'>{{item.title}}</view>
+      <view wx:for='{{first_classify}}' wx:key='{{index}}' class="{{parent_id==item.goods_classify_id?'':''}}" hover-class='hover-class' hover-stay-time='400' bindtap='onFiristClassify' data-item='{{item}}' style='{{parent_id==item.goods_classify_id?util.diy_color(diy_color.z_color,"#fff",diy_color.z_color):""}}'>{{item.title}}</view>
     </view>
 
     <!--右侧分类  -->
@@ -27,7 +27,7 @@
         <image class='ad' src="{{adv_info.file}}" hover-class='hover-class' hover-stay-time='400' bindtap='onAdv'></image>
       </view>
       <view class='ad-title bg' hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-id='{{parent_id}}' style='{{util.diy_color("",diy_color.z_color,"")}}'>进入{{classify_title}}频道></view>
-      <view class='classify-specific' wx:for="{{sub_classify}}" wx:key="*this">
+      <view class='classify-specific' wx:for="{{sub_classify}}" wx:key='{{index}}'>
         <view class='classify-second' hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-id='{{item.goods_classify_id}}'>
           <view class='line' />
           <text class='title'>{{item.title}}</text>
@@ -35,7 +35,7 @@
           <view class='font_family next icon-gd-'></view>
         </view>
         <view class='classify-detail'>
-          <view wx:for="{{item.subset}}" wx:key="*this" hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-id='{{item.goods_classify_id}}'>
+          <view wx:for="{{item.subset}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-id='{{item.goods_classify_id}}'>
             <!-- <image class='classify-icon' src='{{item.web_file}}'></image> -->
             <view class='classify-icon' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:100% 100%;'>
             <image src='{{item.web_file}}'></image>
@@ -51,7 +51,7 @@
           <view class='line' />
         </view>
         <view class='classify-detail'>
-          <view wx:for="{{brand_list}}" hover-class='hover-class' hover-stay-time='400' bindtap='onBandClassify' data-id='{{item.brand_id}}'>
+          <view wx:for="{{brand_list}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onBandClassify' data-id='{{item.brand_id}}'>
             <!-- <image class='classify-icon' src='{{item.brand_logo}}'></image> -->
             <view class='classify-icon' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:100% 100%;'>
             <image src='{{item.brand_logo}}'></image>
@@ -71,7 +71,7 @@
       <view class='ad-title bg' style='{{util.diy_color("",diy_color.z_color,"")}}' hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-id='{{parent_id}}'>进入{{classify_title}}频道></view>
       <view class='classify-specific second-classify'>
         <view class='classify-detail'>
-          <view wx:for="{{sub_classify}}" wx:key="*this" hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-id='{{item.goods_classify_id}}'>
+          <view wx:for="{{sub_classify}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-id='{{item.goods_classify_id}}'>
             <view class='classify-icon' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:100% 100%;'>
               <image src='{{item.web_file}}'></image>
             </view>
@@ -87,7 +87,7 @@
           <!-- <view class='font_family next icon-gd-'></view> -->
         </view>
         <view class='classify-detail'>
-          <view wx:for="{{brand_list}}" wx:key="*this" hover-class='hover-class' hover-stay-time='400' bindtap='onBandClassify' data-id='{{item.brand_id}}'>
+          <view wx:for="{{brand_list}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onBandClassify' data-id='{{item.brand_id}}'>
             <view class='classify-icon' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:100% 100%;'>
               <image src='{{item.brand_logo}}'></image>
             </view>
@@ -101,7 +101,7 @@
   <!--一级分类  -->
   <view class='one-level' wx:elif='{{level == 0}}'>
     <scroll-view class='scroll-view' scroll-y>
-      <view class='view' wx:for="{{first_classify}}" wx:key="*this" hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-id='{{item.goods_classify_id}}'>
+      <view class='view' wx:for="{{first_classify}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onClassify' data-id='{{item.goods_classify_id}}'>
         <text>{{item.title}}</text>
         <view style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:100% 100%;'>
           <!-- <image src='{{item.brand_logo}}'></image> -->

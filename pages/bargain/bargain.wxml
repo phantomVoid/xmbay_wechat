@@ -87,8 +87,8 @@
         <view class='cur bargain-cut' style='{{util.diy_color("#f23030","","")}}'>我也要参加砍价活动</view>
       </view>
 
-      <view class='bargain-time' wx:if="{{info.status == 1}}">还剩{{info.day}}:{{info.hour}}:{{info.min}}:{{info.sec}}结束,快让好友帮忙砍价吧~</view>
-      <view class='bargain-time' wx:elif="{{info.status == 2}}"></view>
+      <view class='bargain-time' wx:if="{{info.status == 1&&!is_Cutout}}">还剩{{info.day}}:{{info.hour}}:{{info.min}}:{{info.sec}}结束,快让好友帮忙砍价吧~</view>
+      <view class='bargain-time' wx:elif="{{info.status == 1&&is_Cutout}}">还剩{{info.day}}:{{info.hour}}:{{info.min}}:{{info.sec}}结束,快付款吧~</view>
       <view class='bargain-time' wx:elif='{{info.status == 3}}'>未在活动时间内完成,砍价已过期</view>
     </view>
 
