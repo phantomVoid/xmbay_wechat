@@ -281,7 +281,7 @@ Component({
         app.showToast('该拼团商品已达到购买上限')
         return
       } else {
-        if (this.data.info.is_group == 1 && this.data.group_buy && this.data.num > this.data.info.buy_cum_limit - this.data.info.get_group_goods_num) {
+        if (this.data.info.is_group == 1 && this.data.group_buy && this.data.num >= this.data.info.buy_cum_limit - this.data.info.get_group_goods_num && this.data.info.buy_cum_limit > 0) {
           app.showToast('该拼团商品已达到购买上限')
           return
         }
@@ -292,8 +292,13 @@ Component({
        * limit_purchase: 限时购买限制数量 等于0是无购买限制
        * limit_purchase_used: 已购买数量
        */
-      if (this.data.info.is_limit == 1 && (this.data.info.limit_purchase != 0 || this.data.info.limit_number == 0)) {
-        if (this.data.num >= (this.data.info.limit_purchase - this.data.info.limit_purchase_used)) {
+      if (this.data.info.is_limit == 1 && this.data.info.limit_purchase != 0) {
+        if (this.data.num >= (this.data.info.limit_purchase - this.data.info.limit_purchase_used) && (this.data.info.limit_purchase - this.data.info.limit_purchase_used>0)|| this.data.num >= this.data.info.limit_number || this.data.num >= this.data.info.limit_number) {
+          app.showToast('抢购已达到上限')
+          return
+        }
+      } else if (this.data.info.is_limit == 1 && this.data.info.limit_purchase == 0) {
+        if (this.data.num >= this.data.info.limit_number) {
           app.showToast('抢购已达到上限')
           return
         }
@@ -327,8 +332,13 @@ Component({
          * limit_purchase: 限时购买限制数量 等于0是无购买限制
          * limit_purchase_used: 已购买数量
          */
-        if (this.data.info.is_limit == 1 && (this.data.info.limit_purchase != 0 || this.data.info.limit_number == 0)) {
-          if (this.data.num >= (this.data.info.limit_purchase - this.data.info.limit_purchase_used)) {
+        if (this.data.info.is_limit == 1 && this.data.info.limit_purchase != 0) {
+          if (this.data.num > (this.data.info.limit_purchase - this.data.info.limit_purchase_used) && (this.data.info.limit_purchase - this.data.info.limit_purchase_used > 0) || this.data.num > this.data.info.limit_number || this.data.num > this.data.info.limit_number) {
+            app.showToast('抢购已达到上限')
+            return
+          }
+        } else if (this.data.info.is_limit == 1 && this.data.info.limit_purchase == 0) {
+          if (this.data.num > this.data.info.limit_number) {
             app.showToast('抢购已达到上限')
             return
           }
@@ -338,7 +348,7 @@ Component({
           app.showToast('该拼团商品已达到购买上限')
           return
         } else {
-          if (this.data.info.is_group == 1 && this.data.group_buy && this.data.num > this.data.info.buy_cum_limit - this.data.info.get_group_goods_num) {
+          if (this.data.info.is_group == 1 && this.data.group_buy && this.data.num > this.data.info.buy_cum_limit - this.data.info.get_group_goods_num && this.data.info.buy_cum_limit > 0) {
             app.showToast('该拼团商品已达到购买上限')
             return
           }
@@ -470,7 +480,7 @@ Component({
           event.emit('refreshCart')
           event.emit('refreshCartNumber')
           let obj = {
-            goods_id:this.data.info.goods_id,
+            goods_id: this.data.info.goods_id,
             number: this.data.num
           }
           event.emit('shopAddCart', obj)
