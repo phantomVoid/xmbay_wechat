@@ -275,19 +275,19 @@ Page({
     this.data.oRun = setTimeout(() => {
       this.rolling()
     }, this.data.speed)
-    this.data.runs_now++
-      this.data.active_index++
-      if (this.data.active_index >= 8) {
-        this.setData({
-          active_index: 0
-        })
-      } else {
-        this.setData({
-          active_index: this.data.active_index
-        })
-      }
+    this.data.runs_now++;
+    this.data.active_index++;
+    if (this.data.active_index >= 8) {
+      this.setData({
+        active_index: 0
+      })
+    } else {
+      this.setData({
+        active_index: this.data.active_index
+      })
+    }
 
-    let count_num = this.data.CYCLE_NUM * 10 + this.data.win_id - this.data.last_index
+    let count_num = this.data.CYCLE_NUM * 8 + this.data.win_id - this.data.last_index
 
     //加速
     if (this.data.runs_now <= (count_num / 3) * 1) {
@@ -298,7 +298,6 @@ Page({
     }
     //抽奖结束
     else if (this.data.runs_now >= count_num) {
-
       this.setData({
         last_index: this.data.win_id,
         roll_flag: true
