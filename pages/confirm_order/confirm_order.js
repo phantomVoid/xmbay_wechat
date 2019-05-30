@@ -72,8 +72,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    console.log(app.globalData.addressSelect.member_address_id)
-    console.log(this.data.address.member_address_id)
     if (!this.data.first && (app.globalData.addressSelect.member_address_id == null || this.data.address.member_address_id != app.globalData.addressSelect.member_address_id)) {
       this.setData({
         address: {}
