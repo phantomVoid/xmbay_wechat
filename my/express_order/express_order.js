@@ -460,17 +460,20 @@ Page({
         list.push(item.order_goods_list[i])
       }
     }
-    if (this.data.list[this.data.index].has_refund == 1) {
-      app.showModal('', '评价会取消您的退款申请,确定继续吗?', () => {
-        wx.navigateTo({
-          url: '/pages/comment/comment?info=' + JSON.stringify(list),
-        })
-      })
-    } else {
-      wx.navigateTo({
-        url: '/pages/comment/comment?info=' + JSON.stringify(list),
-      })
-    }
+    wx.navigateTo({
+      url: '/pages/comment/comment?info=' + JSON.stringify(list),
+    })
+    // if (this.data.list[this.data.index].has_refund == 1) {
+    //   app.showModal('', '评价会取消您的退款申请,确定继续吗?', () => {
+    //     wx.navigateTo({
+    //       url: '/pages/comment/comment?info=' + JSON.stringify(list),
+    //     })
+    //   })
+    // } else {
+    //   wx.navigateTo({
+    //     url: '/pages/comment/comment?info=' + JSON.stringify(list),
+    //   })
+    // }
 
   },
 

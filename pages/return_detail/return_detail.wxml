@@ -43,7 +43,7 @@
           <view class='logistics-tip'>如果商家拒绝,您可以修改申请后再次发起,商家会重新处理</view>
         </view>
         <view class='logistics-operation'>
-          <view hover-class='hover-class' hover-stay-time='400' bindtap='onRevocation'>撤销申请</view>
+          <view hover-class='hover-class' hover-stay-time='400' bindtap='showModal' data-confirmType='0'>撤销申请</view>
           <view class='cur border-cur' hover-class='hover-class' hover-stay-time='400' bindtap='changeApply' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>修改申请</view>
         </view>
       </view>
@@ -94,7 +94,7 @@
       <view class='refuse-title'>失败原因</view>
       <view class='refuse-reason'>{{info.refuse_reason}}</view>
     </view>
-    <view class='change-apply border-cur' hover-class='hover-class' hover-stay-time='400' bindtap='changeApply' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>修改申请</view>
+    <view class='change-apply border-cur' hover-class='hover-class' hover-stay-time='400' bindtap='amend' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>修改申请</view>
   </view>
 </view>
 <view class='footer'>
@@ -111,3 +111,4 @@
     <view>咨询平台</view>
   </view> -->
 </view>
+<modal title="{{modal_confirm[showModal].title}}" content="{{modal_confirm[showModal].content}}" tip="{{modal_confirm[showModal].tip}}" id="modal" bind:confirm="{{modal_confirm[showModal].callback}}" />

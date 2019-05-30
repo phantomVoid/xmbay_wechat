@@ -1,17 +1,17 @@
 <wxs module="util" src="../../utils/util.wxs" />
 <view class='good-wrap'>
-  <image src='{{info.file}}'></image>
+  <image src='{{dataInfo.info.file}}'></image>
   <view>
-    <view class='good-name'>{{info.goods_name}}</view>
-    <view class='good-attr'>{{info.attr}}</view>
+    <view class='good-name'>{{dataInfo.info.goods_name}}</view>
+    <view class='good-attr'>{{dataInfo.info.attr}}</view>
   </view>
 </view>
 
-<view class='state' wx:if='{{(order_type.distribution_type!=2&&(info.status==5.1)&&type==2)||(order_type.distribution_type!=2&&info.status==2.1&&type==1)}}'>
+<view class='state' wx:if='{{dataInfo.status==2&&dataInfo.type==1&&dataInfo.distribution_type!=2}}'>
   <view class='state-head'>货物状态:</view>
   <view class='state-content'>
-    <view hover-class='hover-class' hover-stay-time='400' bindtap='onNotReceive' style='{{state==1?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}'>未收到货</view>
-    <view hover-class='hover-class' hover-stay-time='400' bindtap='onReceived' style='{{state==2?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}'>已收到货</view>
+    <view hover-class='hover-class' hover-stay-time='400' bindtap='onNotReceive' style='{{dataInfo.state==1?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}'>未收到货</view>
+    <view hover-class='hover-class' hover-stay-time='400' bindtap='onReceived' style='{{dataInfo.state==2?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}'>已收到货</view>
   </view>
 </view>
 
@@ -26,7 +26,10 @@
   <input type='digit' placeholder='请输入退款金额' bindinput='priceInput' style='{{util.diy_color(diy_color.z_color,"","")}}'></input>
 </view>
 
-<view class='tip'>最多￥{{info.subtotal_price}},含快递费{{info.sub_freight_price}}</view>
+<view class='tip'>
+  <text>最多￥{{dataInfo.info.subtotal_price}}</text>
+  <text wx:if='{{dataInfo.status != 2 && dataInfo.status != 3}}'>,含运费{{dataInfo.info.sub_freight_price}}元</text>
+</view>
 
 <view class='upload-wrap'>
   <view class='head'>上传凭证</view>

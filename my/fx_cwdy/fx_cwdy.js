@@ -79,7 +79,7 @@ Page({
    * 代言专区
    */
   goDyzq() {
-    let page = getCurrentPages()
+    const page = getCurrentPages()
     for (let i = 0, len = page.length; i < len; i++) {
       if (page[i].route == 'my/fx_goods_list/fx_goods_list') {
         console.log(i)

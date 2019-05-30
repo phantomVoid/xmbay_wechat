@@ -217,7 +217,7 @@ Page({
    */
   refundDetail(e) {
     wx.navigateTo({
-      url: '/pages/return_detail/return_detail?id=' + e.currentTarget.dataset.id,
+      url: `/pages/return_detail/return_detail?id=${e.currentTarget.dataset.id}&status=${this.data.info.status}`,
     })
   },
 
@@ -226,13 +226,14 @@ Page({
    */
   onRefund(e) {
     let item = e.currentTarget.dataset.item
-    item.file = encodeURIComponent(item.file)
+    item['file'] = encodeURIComponent(item.file)
     let obj = {
-      distribution_type: this.data.info.distribution_type,
-      pay_type: this.data.info.pay_type,
+      info: item,
+      distribution_type: this.data.info.distribution_type, //配送方式 1同城速递 2预约自提 3快递邮寄
+      status: this.data.info.status // 订单状态 0待付款 1待配送 2配送中 3已完成 4已关闭 5退款中
     }
     wx.navigateTo({
-      url: `/my/service_type/service_type?info=${JSON.stringify(item)}&order_type=${JSON.stringify(obj)}`,
+      url: `/my/service_type/service_type?dataInfo=${JSON.stringify(obj)}`,
     })
   },
 
@@ -297,17 +298,20 @@ Page({
         list.push(this.data.info.order_goods_details[i])
       }
     }
-    if (this.data.info.has_refund == 1) {
-      app.showModal('', '评论会取消您的退款申请,确定继续吗?', () => {
-        wx.navigateTo({
-          url: `/pages/comment/comment?info=${JSON.stringify(list)}`,
-        })
-      })
-    } else {
-      wx.navigateTo({
-        url: `/pages/comment/comment?info=${JSON.stringify(list)}`,
-      })
-    }
+    wx.navigateTo({
+      url: `/pages/comment/comment?info=${JSON.stringify(list)}`,
+    })
+    // if (this.data.info.has_refund == 1) {
+    //   app.showModal('', '评论会取消您的退款申请,确定继续吗?', () => {
+    //     wx.navigateTo({
+    //       url: `/pages/comment/comment?info=${JSON.stringify(list)}`,
+    //     })
+    //   })
+    // } else {
+    //   wx.navigateTo({
+    //     url: `/pages/comment/comment?info=${JSON.stringify(list)}`,
+    //   })
+    // }
   },
 
   /**

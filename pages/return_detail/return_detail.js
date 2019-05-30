@@ -9,7 +9,14 @@ Page({
   data: {
     id: '',
     info: {},
-    count_down: {}
+    count_down: {},
+    status: null,
+    modal_confirm: [{
+      title: '提示',
+      content: '您将撤销本次申请，如果问题未解决',
+      tip: '您可以再次发起。确定继续吗？',
+      callback: 'onRevocation'
+    }]
   },
 
   /**
@@ -19,7 +26,8 @@ Page({
     this.setData({
       diy_color: app.globalData.diy_color,
       configSwitch: app.globalData.configSwitch,
-      id: options.id
+      id: options.id,
+      status: options.status
     })
   },
 
@@ -123,31 +131,42 @@ Page({
 
   /**
    * 修改申请
+   * status 店铺订单状态 0待付款 1待配送 2配送中 3已完成 4已关闭 5退款中
+   * state 是否收到货 1未收到货 2已收到货
+   * type: 退款类型 1退款 2退货退款
    */
   changeApply() {
-    this.data.info.status = this.data.info.order_goods_status
-    let info = {}
-    let obj = {
-      distribution_type: this.data.info.distribution_type,
-      pay_type: this.data.info.pay_type,
-    }
-    // wx.navigateTo({
-    //   url: `/my/service_type/service_type?info=${JSON.stringify(item)}&order_type=${JSON.stringify(obj)}`,
-    // })
-    for (let i in this.data.info) {
-      info[i] = this.data.info[i]
-    }
-    info.file = encodeURIComponent(info.file)
-    if (this.data.info.status == 5.2 || this.data.info.status == 5.3 || this.data.info.status == 5.4 || this.data.info.status == 5.6) {
-      wx.navigateTo({
-        // url: '/my/apply_refund/apply_refund?info=' + JSON.stringify(info) + '&return=1',
-        url: `/my/apply_refund/apply_refund?info=${JSON.stringify(this.data.info)}&type=2`
-      })
+    let dataInfo = {}
+    dataInfo.info = this.data.info
+    dataInfo.status = this.data.status
+    dataInfo.distribution_type = this.data.info.distribution_type
+    //是否收到货 1未收到货 2已收到货
+    dataInfo.state = 1
+    //退款类型 1退款 2退货退款
+    if (this.data.info.order_goods_status == 5.2 || this.data.info.order_goods_status == 5.3 || this.data.info.order_goods_status == 5.4 || this.data.info.order_goods_status == 5.6) {
+      dataInfo.type = 2
     } else {
-      wx.navigateTo({
-        url: `/my/apply_refund/apply_refund?info=${JSON.stringify(info)}`,
-      })
+      dataInfo.type = 1
     }
+    dataInfo.info.file = encodeURIComponent(dataInfo.info.file)
+    wx.navigateTo({
+      url: `/my/apply_refund/apply_refund?dataInfo=${JSON.stringify(dataInfo)}`
+    })
+    dataInfo.info.file = decodeURIComponent(dataInfo.info.file)
+  },
+  amend(){
+    let dataInfo = {}
+    dataInfo.info = this.data.info
+    dataInfo.info.file = encodeURIComponent(dataInfo.info.file)
+    let obj = {
+      info: this.data.info,
+      distribution_type: this.data.info.distribution_type, //配送方式 1同城速递 2预约自提 3快递邮寄
+      status: this.data.status // 订单状态 0待付款 1待配送 2配送中 3已完成 4已关闭 5退款中
+    }
+    wx.navigateTo({
+      url: `/my/service_type/service_type?dataInfo=${JSON.stringify(obj)}`,
+    })
+    dataInfo.info.file = decodeURIComponent(dataInfo.info.file)
   },
 
   /**
@@ -188,6 +207,13 @@ Page({
     wx.navigateTo({
       url: '/my/service/service?service_info=' + JSON.stringify(service_info),
     })
+  },
+  showModal(e) {
+    console.log(e.currentTarget.dataset)
+    this.setData({
+      showModal: e.currentTarget.dataset.confirmtype
+    })
+    this.selectComponent("#modal").showModal(e.currentTarget.dataset)
   },
 
 })

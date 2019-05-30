@@ -9,45 +9,26 @@ Page({
   data: {
     pic_list: [],
     file_name: '',
-    state: 1, //1 未收到货 2已收到货
-    type: 1, //退款类型 1退款 2退货退款
     //退款原因
     reason: '',
     //退款金额
-    price: ''
+    price: '',
+    dataInfo: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.data.dataInfo = JSON.parse(options.dataInfo)
+    this.data.dataInfo.info.file = decodeURIComponent(this.data.dataInfo.info.file)
+    if (this.data.dataInfo.status == 2 || this.data.dataInfo.status == 3) {
+      this.data.dataInfo.info.subtotal_price = this.data.dataInfo.info.subtotal_price - this.data.dataInfo.info.sub_freight_price
+    }
     this.setData({
       diy_color: app.globalData.diy_color,
-      type: options.type ? options.type : this.data.type,
-      state: options.state ? options.state : this.data.state,
-      order_type: options.order_type ? JSON.parse(options.order_type) : undefined
+      dataInfo: this.data.dataInfo
     })
-    this.data.info = JSON.parse(options.info)
-    this.data.info.file = decodeURIComponent(this.data.info.file)
-    if (this.data.info.status != 0) {
-      this.data.info['total'] = parseFloat((this.data.info.subtotal_price * this.data.info.quantity) + parseFloat(this.data.info.sub_freight_price) - parseFloat(this.data.info.sub_share_platform_coupon_price) - parseFloat(this.data.info.sub_share_shop_coupon_price) - parseFloat(this.data.info.subtotal_share_platform_packet_price)).toFixed(2)
-      this.data.info['total'] = (Number(this.data.info['total']) + Number(this.data.info.sum_alter_goods_price)).toFixed(2)
-    } else {
-      this.data.info['total'] = parseFloat(parseFloat(this.data.info.subtotal_price * this.data.info.quantity) - parseFloat(this.data.info.sub_share_platform_coupon_price) - parseFloat(this.data.info.sub_share_shop_coupon_price) - parseFloat(this.data.info.subtotal_share_platform_packet_price)).toFixed(2)
-      this.data.info['total'] = (Number(this.data.info['total']) + Number(this.data.info.sum_alter_goods_price)).toFixed(2)
-    }
-
-    // if (options.type) {
-    //   this.data.type = options.type
-    // }
-    this.setData({
-      info: this.data.info,
-
-      // order_type: JSON.parse(options.order_type)
-      // type: this.data.type,
-      // state: 2
-    })
-
   },
 
   /**
@@ -97,7 +78,7 @@ Page({
    */
   onNotReceive() {
     this.setData({
-      state: 1
+      'dataInfo.state': 1
     })
   },
 
@@ -106,7 +87,7 @@ Page({
    */
   onReceived() {
     this.setData({
-      state: 2
+      'dataInfo.state': 2
     })
   },
 
@@ -164,8 +145,8 @@ Page({
       app.showToast('请输入退款金额')
       return
     }
-    if (parseFloat(this.data.price).toFixed(2) > parseFloat(this.data.info.total)) {
-      app.showToast(`最多可退款金额为${this.data.info.total}元`)
+    if (parseFloat(this.data.price).toFixed(2) > parseFloat(this.data.dataInfo.info.subtotal_price)) {
+      app.showToast(`最多可退款金额为${this.data.dataInfo.info.subtotal_price}元`)
       return
     }
 
@@ -197,19 +178,29 @@ Page({
         }
       })
     } else {
-      wx.hideLoading()
       http.post(app.globalData.refundAndReturn, {
-        order_goods_id: this.data.info.order_goods_id,
-        type: this.data.type,
-        refund_amount: this.data.price,
+        order_goods_id: this.data.dataInfo.info.order_goods_id,
+        type: this.data.dataInfo.type,
+        refund_amount: this.data.dataInfo.info.subtotal_price,
         reason: this.data.reason,
-        is_get_goods: this.data.state,
+        is_get_goods: this.data.dataInfo.state,
         multiple_file: this.data.file_name
       }).then(res => {
+        wx.hideLoading()
         app.showSuccessToast('提交成功', () => {
-          wx.navigateBack()
           event.emit('refreshOrderDetail')
           event.emit('refreshReturnDetail')
+          const page = getCurrentPages()
+          for (let i = 0, len = page.length; i < len; i++) {
+            if (page[i].route == 'my/order_detail/order_detail') {
+              console.log(i)
+              wx.navigateBack({
+                delta: page.length - i - 1
+              })
+              return
+              break;
+            }
+          }   
         })
       })
     }
