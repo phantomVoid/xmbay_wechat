@@ -60,7 +60,7 @@ let get = (url, data = {}, hidden) => {
           clearLoginState()
         } else if (res.data.code == -202) {
           return
-        }  else {
+        } else {
           fail(res.data)
           app.showToast(res.data.message, () => {
             // wx.hideLoading()
@@ -119,7 +119,7 @@ let postList = (url, data = {}) => {
           clearLoginState()
         } else if (res.data.code == -202) {
           return
-        }  else {
+        } else {
           app.showToast(res.data.message)
         }
 
@@ -185,7 +185,7 @@ let post = (url, data = {}, hidden) => {
           clearLoginState()
         } else if (res.data.code == -202) {
           return
-        }  else {
+        } else {
           fail(res.data)
           app.showToast(res.data.message, () => {
             wx.hideLoading()
@@ -318,9 +318,14 @@ let clearLoginState = () => {
   app.globalData.distribution = {}
   wx.closeSocket()
   clearTimeout(app.app_socketHeartTime)
+  if (app.globalData.PAST_LOGIN) {
+    return
+  }
   wx.navigateTo({
     url: '/pages/accredit/accredit'
   })
+  app.globalData.PAST_LOGIN = true
+  return
 };
 
 

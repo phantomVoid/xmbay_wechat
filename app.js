@@ -3,7 +3,7 @@ var HTTP = 'https://ishop.zihaiwangluo.com/'
 
 // 测试域名
 var HTTP = 'https://ishoptest.zihaiwangluo.com/'
-var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
+// var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
 // var HTTP = 'http://vers.zihaiwangluo.com/'
 // var HTTP = 'https://ddmb.zihaiwangluo.com/'
 
@@ -541,6 +541,7 @@ App({
     //定位信息
     lat: 0,
     lng: 0,
+    PAST_LOGIN:false,
     address: null,
     addressSelect: {
       member_address_id: null

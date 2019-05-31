@@ -129,6 +129,7 @@ Page({
           app.globalData.phone = res.member.phone == null ? '' : res.member.phone
           app.globalData.openid = res.openid
           app.globalData.unionId = res.unionId
+          app.globalData.PAST_LOGIN = false
           wx.setStorageSync('member_info', res.member)
           app.showSuccessToast('登录成功', () => {
             if (app.globalData.phone == '') {
@@ -164,7 +165,7 @@ Page({
             isSubmit: true
           })
         })
-        
+
       }
     })
   },
