@@ -46,6 +46,7 @@ Page({
   onLoad: function(options) {
     console.log(options)
     console.log(options.scene)
+    app.globalData.nav_type = 'only_0'
     wx.hideTabBar()
     // 分享按钮上级id
     // if (options.id) {

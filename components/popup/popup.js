@@ -49,7 +49,9 @@ Component({
     address_province: '',
     address_city: '',
     address_area: '',
-    address_street: ''
+    address_street: '',
+    isHistory: true, //是否隐藏历史
+    adjust_position:false
   },
   ready() {
     this.setData({
@@ -126,7 +128,6 @@ Component({
      * 显示
      */
     show(data, idx, store_id, i_typa = 0, address = '') {
-      console.log(address)
       let obj = null
 
       if (data != undefined && data.is_invoice == 1) {
@@ -164,7 +165,7 @@ Component({
       }
       this.setData(obj)
       this.showAnimation()
-      this.invoice_explain_type()
+      this.getRiseHistory()
     },
 
     /**
@@ -185,37 +186,6 @@ Component({
           }]
         })
       }
-    },
-    /**
-     * 发票可开具类型
-     */
-    invoice_explain_type() {
-      return
-      if (this.data.invoice.is_added_value_tax == 1) {
-        let obj = {
-          name: '增值税专用发票',
-          type: '2'
-        }
-        this.data.invoice_con.push(obj)
-        this.setData({
-          invoice_con: this.data.invoice_con
-        })
-      }
-      // http.post(app.globalData.invoice_explain_type, {
-      //   store_id: this.data.store_id
-      // }).then(res => {
-      //   let invoice_type = null
-      //   for (let i = 0, len = res.result.length; i < len; i++) {
-      //     this.data.invoice_con[i].status = res.result[i]
-      //     if (res.result[i] == 1 && invoice_type != 1) {
-      //       invoice_type = i
-      //     }
-      //   }
-      //   this.setData({
-      //     invoice_con: this.data.invoice_con,
-      //     invoice_type: invoice_type
-      //   })
-      // })
     },
 
     /**
@@ -435,7 +405,6 @@ Component({
         address_street: this.data.invoice_type == 1 ? this.data.address_street : '', //街道
         address_details: this.data.invoice_type == 1 ? this.data.address_details : '', //详细地址
       }
-      // console.log(data)
       this.close()
 
       if (this.data.i_typa == 0) {
@@ -487,6 +456,73 @@ Component({
       })
       this.close()
       this.triggerEvent("confirmWay", data)
+    },
+    /**
+     * 显示历史记录
+     */
+    historyShow() {
+      this.setData({
+        isHistory: false
+      })
+    },
+    /**
+     * 隐藏历史记录
+     */
+    historyClose(){
+      setTimeout(()=>{
+        this.setData({
+          isHistory: true
+        })
+      },300)
+    },
+    /**
+     * 历史提交数据
+     */
+    getRiseHistory() {
+      http.post(app.globalData.distribution_getRiseHistory, {}).then(res => {
+        this.setData({
+          riseHistory: res.data
+        })
+      })
+    },
+    /**
+     * 选择历史数据
+     */
+    onHistory(e) {
+      console.log(e.currentTarget.dataset.item)
+      let data = e.currentTarget.dataset
+      let obj = {}
+      if (data.type == 'personal') { //普通个人发票
+        obj = {
+          rise_name: data.item.rise_name
+        }
+      } else if (data.type == 'company') { //普通公司发票
+        obj = {
+          company: data.item.rise_name,
+          taxer_number:data.item.taxer_number
+        }
+      } else if (data.type == 'tax') { //增值发票
+        obj = {
+          company: data.item.rise_name,
+          taxer_number: data.item.taxer_number,
+          account: data.item.account,
+          bank: data.item.bank,
+          address: data.item.address,
+          phone: data.item.phone
+        }
+      }
+      obj.isHistory = true
+      this.setData(obj)
+      return
+      // let data = {
+      //   rise_name: this.data.rise == 1 ? this.data.rise_name : '', //发票抬头内容[单位名称]
+      //   company: this.data.rise == 2 ? this.data.company : '', //发票抬头内容[单位名称]
+      //   taxer_number: this.data.rise == 2 ? this.data.taxer_number : '', //纳税人识别号[针对公司]
+      //   address: this.data.rise == 2 ? this.data.address : '', //注册地址
+      //   phone: this.data.rise == 2 ? this.data.phone : '', //注册电话
+      //   bank: this.data.rise == 2 ? this.data.bank : '', //开户银行
+      //   account: this.data.rise == 2 ? this.data.account : '', //开户账户
+      // }
     }
   }
 })

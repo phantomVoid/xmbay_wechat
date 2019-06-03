@@ -115,14 +115,14 @@
       </view>
       <view class='banner-indicator-con'>
         <view class='indicator-con'>
-          <view style='{{banner_swiper_idx==index?util.diy_color("",diy_color.z_color,""):""}}' wx:for='{{dataInfo.banner}}' wx:key='{{index}}'></view>
+          <view style='{{banner_swiper_idx==index?util.diy_color("",diy_color.z_color,"#fff"):""}}' wx:for='{{dataInfo.banner}}' wx:key='{{index}}'></view>
         </view>
       </view>
       <image class='banner-bg' src='{{util.HTTP}}mobile/small/image/shop_common/1.png'></image>
     </view>
   </view>
   <view class='section-con' style='{{model.phone=="iPhone X"||model.phone=="iPhone"?"padding-bottom:150rpx;":""}}'>
-    <view class='theme-con' hover-class='hover-class' hover-stay-time='300' bindtap='onAdv' data-item='{{dataInfo.theme}}'>
+    <view class='theme-con' hover-class='hover-class' hover-stay-time='300' bindtap='onAdv' data-item='{{dataInfo.theme}}' wx:if='{{dataInfo.theme.file}}'>
       <image src='{{dataInfo.theme.file}}'></image>
     </view>
     <view class='nav-con'>
@@ -154,7 +154,7 @@
         </view>
       </block>
     </view>
-    <view class='headline-con'>
+    <view class='headline-con' wx:if='{{dataInfo.hot_list.length!=0}}'>
       <image class='headline-img' src='{{util.HTTP}}mobile/small/image/shop_common/20.png' bindtap='onHotSpot' hover-class='hover-class' hover-stay-time='300'></image>
       <view class='headline-wrap'>
         <swiper class='headline-swiper' autoplay='{{isHotAutoplay}}' interval='3000' circular vertical>
@@ -167,7 +167,7 @@
         </swiper>
       </view>
     </view>
-    <view class='limit-con'>
+    <view class='limit-con' wx:if='{{dataInfo.limit.list.length!=0}}'>
       <view class='limit-con-tit' style='{{util.diy_color("",diy_color.z_color,"")}}' hover-class='hover-class' hover-stay-time='300' bindtap='onLimit'>
         <image class='limit-tit-icon' src='{{util.HTTP}}mobile/small/image/shop_common/23.png'></image>
         <view class='limit-newTime'>
@@ -200,7 +200,7 @@
 
       </view>
     </view>
-    <view class='popularity-con'>
+    <view class='popularity-con' wx:if='{{dataInfo.popularity.length!=0}}'>
       <view class='section-title'>
         <view class='tit'>好物 · 推荐</view>
         <view class='tip'>RECOMMEND GOOD THINGS</view>
@@ -239,7 +239,7 @@
         <view class='tip'>RECOMMENDED ALBUM</view>
       </view>
       <view class='class-con'>
-        <view class='class-item' wx:for='{{dataInfo.class_list}}' wx:key='{{index}}'>
+        <view class='class-item' wx:for='{{dataInfo.class_list}}' wx:key='{{index}}' wx:if='{{dataInfo.class_list[index].goods_list.length!=0}}'>
           <view class='adv' bindtap='onClassify' data-item='{{item}}' hover-class='hover-class' hover-stay-time='300'>
             <image src='{{item.adv.file}}'></image>
           </view>

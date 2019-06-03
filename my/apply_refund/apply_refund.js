@@ -22,7 +22,7 @@ Page({
   onLoad: function(options) {
     this.data.dataInfo = JSON.parse(options.dataInfo)
     this.data.dataInfo.info.file = decodeURIComponent(this.data.dataInfo.info.file)
-    if (this.data.dataInfo.status == 2 || this.data.dataInfo.status == 3) {
+    if (this.data.dataInfo.status == 2 || this.data.dataInfo.status == 3 || this.data.dataInfo.status == 4) {
       this.data.dataInfo.info.subtotal_price = this.data.dataInfo.info.subtotal_price - this.data.dataInfo.info.sub_freight_price
     }
     this.setData({
@@ -200,7 +200,7 @@ Page({
               return
               break;
             }
-          }   
+          }
         })
       })
     }

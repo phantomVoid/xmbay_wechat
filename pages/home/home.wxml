@@ -322,7 +322,7 @@
         </block>
         <block wx:else>
           <image class='p-img' src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg01.png'></image>
-          <view class='p-text'>暂无活动</view>
+          <view class='p-text'>暂无商品</view>
         </block>
       </view>
     </view>

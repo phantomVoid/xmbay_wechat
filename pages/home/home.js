@@ -28,6 +28,7 @@ Page({
    */
   onLoad: function(options) {
     let obj = null
+    app.globalData.nav_type = 'more_1'
     wx.hideTabBar()
     //代言id
     if (options.sup_id) {
@@ -60,6 +61,7 @@ Page({
     app.app_DIY(() => {
       this.location()
     })
+
   },
 
   /**
@@ -409,20 +411,6 @@ Page({
           }
           break;
         case 'distribution': //代言
-          // http.post(app.globalData.distribution_share_info, {
-          //   distribution_id: 0
-          // }).then(res => {
-          //   if (res.data.cur == null) {
-          //     wx.navigateTo({
-          //       url: '/my/fx_cwdy/fx_cwdy',
-          //     })
-          //   } else {
-          //     wx.navigateTo({
-          //       url: '/my/fx_goods_list/fx_goods_list',
-          //     })
-          //   }
-          // })
-
           http.post(app.globalData.distribution_jumpSign, {}).then(res => {
             wx.navigateTo({
               url: res.data.path
@@ -617,8 +605,5 @@ Page({
     this.setData({
       'dataInfo.set.popup_adv_status': 0
     })
-  },
-
-
-
+  }
 })

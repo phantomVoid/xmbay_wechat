@@ -195,17 +195,20 @@ Component({
      */
     _onAttr(e) {
       let idx = e.currentTarget.dataset.idx,
-        item = e.currentTarget.dataset.item
-      this.data.attr_array[idx] = item.attr_value
+        item = e.currentTarget.dataset.item;
+      this.data.attr_array[idx] = {
+        value: item.attr_value,
+        id: item.goods_attr_id
+      }
       this.data.attr = ''
       for (let i = 0, len = this.data.attr_array.length; i < len; i++) {
-        if (this.data.attr_array[i]) {
-          this.data.attr += this.data.attr_array[i] + ','
+        if (this.data.attr_array[i].value) {
+          this.data.attr += this.data.attr_array[i].value + ','
         }
       }
       let attr_detail = ''
       for (let i = 0, len = this.data.attr_array.length; i < len; i++) {
-        attr_detail += this.data.info.attr[i].attr_name + ':' + this.data.attr_array[i] + ' '
+        attr_detail += this.data.info.attr[i].attr_name + ':' + this.data.attr_array[i].value + ' '
       }
       this.setData({
         attr_array: this.data.attr_array,
@@ -215,6 +218,8 @@ Component({
       if (this.data.attr.split(',').length == this.data.info.attr.length) {
         this._getGoodPrice()
       }
+      console.log(this.data.attr_array)
+      console.log(this.data.attr)
     },
 
     /**

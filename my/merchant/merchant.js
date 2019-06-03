@@ -218,7 +218,7 @@ Page({
         micro_form_id: e.detail.formId,
       }).then(res => {
         app.globalData.in_state = 1
-        app.showSuccessToast(res.msee, () => {
+        app.showSuccessToast(res.message, () => {
           wx.navigateBack()
         })
       })

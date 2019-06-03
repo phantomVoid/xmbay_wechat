@@ -113,9 +113,27 @@
 }
 
 .banner-con .banner-indicator-con {
+  position: absolute;
+  left: 0;
+  bottom: 15rpx;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .banner-con .indicator-con {
+  display: inline-flex;
+}
+.banner-con .indicator-con view{
+  width: 25rpx;
+  height: 12rpx;
+  border-radius: 50px;
+  margin: 0 10rpx;
+  background-color: #fff;
+  border: 1rpx solid transparent;
+  box-shadow: 0 0 10rpx 0 rgba(155, 155, 155, 0.1);
+  overflow: hidden;
 }
 
 .banner-con .banner-bg {

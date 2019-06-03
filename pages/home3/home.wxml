@@ -216,7 +216,7 @@
     </view>
   </view>
   <view class='good-recommend'>
-    <view class='recommend-head' bindtap='onRecommend'>
+    <view class='recommend-head'>
       <view class='recommend-for'>
         <view class='recommend-title' style='{{util.diy_color(diy_color.z_color,"","")}}'>专辑推荐</view>
         <text class='recommend-tip'>精选好货推荐</text>

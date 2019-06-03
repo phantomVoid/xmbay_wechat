@@ -541,7 +541,7 @@ App({
     //定位信息
     lat: 0,
     lng: 0,
-    PAST_LOGIN:false,
+    PAST_LOGIN: false,
     address: null,
     addressSelect: {
       member_address_id: null
@@ -985,6 +985,7 @@ App({
     distribution_jumpSign: HTTP + 'v2.0/share/jumpSign',
     //
     distribution_vipTurnDist: HTTP + 'v2.0/distribution_become/vipTurnDist',
+    distribution_getRiseHistory: HTTP + 'v2.0/invoice_explain/getRiseHistory',
     //201客服上传图片
     service_uploadFile: HTTP + 'v2.0/customer/uploadFile',
     //202客服历史消息

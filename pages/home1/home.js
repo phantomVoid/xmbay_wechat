@@ -41,6 +41,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    app.globalData.nav_type = 'more_0'
     // this.test()
     console.log(options)
     console.log(options.scene)
@@ -428,6 +429,7 @@ Page({
           finish: true
         })
       })
+      
       if (this.data.configSwitch.show_switch.is_limit == 1) {
         clearInterval(this.data.count_down)
         this.countDown()

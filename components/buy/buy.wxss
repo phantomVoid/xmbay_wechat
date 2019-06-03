@@ -1,39 +1,30 @@
 @import "/utils/iconfont.wxss";
 .trans {
-  background: rgb(0, 0, 0);
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 103;
   width: 100%;
   height: 100%;
-  z-index: 103;
+  background: rgb(0, 0, 0);
 }
 
 .board {
-  background: rgba(0, 0, 0, 0);
-  width: 100%;
-  height: 100%;
   position: fixed;
   bottom: -100%;
   left: 0;
   z-index: 104;
-}
-
-.cur {
-  color: #f23030 !important;
-}
-
-.cur-option {
-  color: white;
-  background: #f23030 !important;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
 }
 
 .buy-bg {
-  width: 100%;
   position: absolute;
   left: 0;
   bottom: 0;
   z-index: 102;
+  width: 100%;
   background: white;
 }
 
@@ -54,7 +45,6 @@
 .good-info {
   display: flex;
   align-items:center;
-  /* width: 50%; */
   padding-left: 240rpx;
   padding-top: 30rpx;
 }
@@ -63,7 +53,6 @@
   height: 30rpx;
   overflow: hidden;
   display: inline-flex;
-  /* display: inline-block; */
   margin-right: 10rpx;
   border-radius: 6rpx;
   border: 2rpx solid transparent;
@@ -72,16 +61,12 @@
 .good-info .collage .icon {
   transform: translate(-2rpx,-5rpx);
   font-size: 35rpx;
-  /* width: 28rpx;
-  height: 30rpx;
-  float: left; */
 }
 
 .good-info .collage .group_num {
   font-size: 22rpx;
   line-height: 30rpx;
   padding: 0 6rpx;
-  /* float: left; */
 }
 .good-info .price{
   display: flex;
@@ -106,9 +91,9 @@
 }
 
 .good-size {
+  font-size: 26rpx;
   margin-top: 10rpx;
   margin-left: 240rpx;
-  font-size: 26rpx;
   color: #444;
 }
 
@@ -122,11 +107,11 @@
 }
 
 .good-property {
-  font-size: 30rpx;
   width: 92%;
-  margin: 50rpx auto 0;
   min-height: 400rpx;
   max-height: 400rpx;
+  font-size: 30rpx;
+  margin: 50rpx auto 0;
 }
 
 .good-property > view {
@@ -171,9 +156,9 @@
 }
 
 .buy-num .right {
-  overflow: hidden;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .buy-num .right > image {
@@ -182,8 +167,8 @@
 }
 
 .buy-num .right .num {
-  font-size: 30rpx;
   width: 70rpx;
+  font-size: 30rpx;
   text-align: center;
   margin: 0 30rpx;
 }

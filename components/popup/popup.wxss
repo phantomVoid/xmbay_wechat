@@ -49,7 +49,7 @@
 }
 
 .scrolly {
-  height: 850rpx;
+  height: 900rpx;
   white-space: nowrap;
   margin-top: 40rpx;
 }
@@ -124,7 +124,30 @@
 .scrolly .section {
   padding: 0 20rpx 20rpx;
 }
-
+.scrolly .row{
+  position: relative;
+  width: 100%;
+}
+.scrolly .row .rise-history-con{
+  position: absolute;
+  left: 0;
+  top: 81rpx;
+  z-index: 20;
+  width: 100%;
+  height: 400rpx;
+  background-color: #fff;
+  border: 1px solid #f6f6f6;
+}
+.scrolly .row .rise-history-con scroll-view{
+  height: 100%;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+.scrolly .row .rise-history-con scroll-view view{
+  font-size: 30rpx;
+  padding: 10rpx 0;
+  color: #666;
+}
 .scrolly .row .title {
   font-size: 28rpx;
   margin: 25rpx 0;
