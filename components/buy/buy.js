@@ -298,7 +298,7 @@ Component({
        * limit_purchase_used: 已购买数量
        */
       if (this.data.info.is_limit == 1 && this.data.info.limit_purchase != 0) {
-        if (this.data.num >= (this.data.info.limit_purchase - this.data.info.limit_purchase_used) && (this.data.info.limit_purchase - this.data.info.limit_purchase_used>0)|| this.data.num >= this.data.info.limit_number || this.data.num >= this.data.info.limit_number) {
+        if (this.data.num >= ((this.data.info.limit_purchase - this.data.info.limit_purchase_used) || (this.data.info.limit_purchase - this.data.info.limit_purchase_used>0))|| this.data.num >= this.data.info.limit_number || this.data.num >= this.data.info.limit_number) {
           app.showToast('抢购已达到上限')
           return
         }
@@ -338,7 +338,7 @@ Component({
          * limit_purchase_used: 已购买数量
          */
         if (this.data.info.is_limit == 1 && this.data.info.limit_purchase != 0) {
-          if (this.data.num > (this.data.info.limit_purchase - this.data.info.limit_purchase_used) && (this.data.info.limit_purchase - this.data.info.limit_purchase_used > 0) || this.data.num > this.data.info.limit_number || this.data.num > this.data.info.limit_number) {
+          if (this.data.num > ((this.data.info.limit_purchase - this.data.info.limit_purchase_used) || (this.data.info.limit_purchase - this.data.info.limit_purchase_used > 0)) || this.data.num > this.data.info.limit_number || this.data.num > this.data.info.limit_number) {
             app.showToast('抢购已达到上限')
             return
           }
