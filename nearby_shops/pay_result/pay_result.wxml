@@ -24,3 +24,4 @@
     <good_list bind:addCart="addCart" list="{{recommend_list}}" discount="{{discount}}" />
   </view>
 </view>
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>

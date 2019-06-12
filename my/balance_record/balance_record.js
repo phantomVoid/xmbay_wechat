@@ -11,7 +11,7 @@ Page({
       status: null
     }, {
       title: '充值',
-      status: "0"
+      status: "0,1"
     }, {
       title: '消费',
       status: "2"

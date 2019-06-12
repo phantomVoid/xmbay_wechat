@@ -29,7 +29,7 @@
     <view class='plan-b-tabbar-right bg' hover-class='hover-class' hover-stay-time='400' bindtap='settleDown' style='{{util.diy_color("",diy_color.z_color,"")}}'>去结算</view>
   </view>
   <!--购物车  -->
-  <cart style="{{store_head.goods_style == 1 && all_view?'display:none':''}}" />
+  <cart diy_color='{{diy_color}}' style="{{store_head.goods_style == 1 && all_view?'display:none':''}}" />
   <!-- <button hover-class='none' open-type='contact' hidden='{{store_head.goods_style != 1 || !all_view}}'>
     <image src='{{util.HTTP}}mobile/small/image/fl-kf.png' class='customer-service'></image>
   </button> -->
@@ -101,7 +101,12 @@
         <view wx:for="{{store_index.coupon}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='receiveCoupon' data-id='{{item.coupon_id}}'>
           <image src='{{util.HTTP}}mobile/small/image/dp-yhq.png'></image>
           <view class='price'>{{util.integer(item.actual_price)}}</view>
-          <view class='tips'>满{{util.integer(item.full_subtraction_price)}}元使用</view>
+          <block wx:if='{{item.full_subtraction_price!=0}}'>
+            <view class='tips'>满{{util.integer(item.full_subtraction_price)}}元使用</view>
+          </block>
+          <block wx:elif='{{item.full_subtraction_price==0}}'>
+            <view class='tips'>无门槛</view>
+          </block>
         </view>
       </view>
     </view>
@@ -302,4 +307,4 @@
 
 <shop_cart id="cart-list" list="{{cart_list}}" bind:calculate="cartCalculate" bind:cart_delete="event_cart_delete" />
 
-<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" bind:buyCallback='buyCallback' type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" bind:buyCallback='buyCallback' type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}' />

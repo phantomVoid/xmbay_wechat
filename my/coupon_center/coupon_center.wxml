@@ -25,7 +25,12 @@
                 <view class='coupon-title'>{{item.title}}</view>
                 <view class='coupon-price cur' style='{{util.diy_color(diy_color.z_color,"","")}}'>
                   <text class='favourable-price'>￥{{item.actual_price}}</text>
-                  <text class='off-price' style='{{util.diy_color("",diy_color.f_color_2,"")}}'>满{{item.full_subtraction_price}}可用</text>
+                  <block wx:if='{{item.full_subtraction_price!=0}}'>
+                    <text class='off-price' style='{{util.diy_color("",diy_color.f_color_2,"")}}'>满{{item.full_subtraction_price}}可用</text>
+                  </block>
+                  <block wx:elif='{{item.full_subtraction_price==0}}'>
+                    <text class='off-price' style='{{util.diy_color("",diy_color.f_color_2,"")}}'>无门槛</text>
+                  </block>
                 </view>
               </view>
             </view>
@@ -58,7 +63,12 @@
               <image wx:for="{{item.goods_list}}" wx:key='{{index}}' src='{{item.file!=""?item.file:util.HTTP+"mobile/small/image/coupon_01.png"}}'></image>
             </view>
             <view class='tips'>
-              <text style='{{util.diy_color(diy_color.z_color,"","")}}'>满{{item.full_subtraction_price}}减{{item.actual_price}} </text>
+              <block wx:if='{{item.full_subtraction_price!=0}}'>
+                <text style='{{util.diy_color(diy_color.z_color,"","")}}'>满{{item.full_subtraction_price}}减{{item.actual_price}} </text>
+              </block>
+              <block wx:elif='{{item.full_subtraction_price==0}}'>
+                <text style='{{util.diy_color(diy_color.z_color,"","")}}'>无门槛</text>
+              </block>
               <text>{{item.title}}</text>
             </view>
           </view>
@@ -79,7 +89,12 @@
                 <view class='coupon-title'>{{item.title}}</view>
                 <view class='coupon-price gray'>
                   <text class='favourable-price'>￥{{item.actual_price}}</text>
-                  <text class='off-price'>满{{item.full_subtraction_price}}可用</text>
+                  <block wx:if='{{item.full_subtraction_price!=0}}'>
+                    <text class='off-price'>满{{item.full_subtraction_price}}可用</text>
+                  </block>
+                  <block wx:elif='{{item.full_subtraction_price==0}}'>
+                    <text class='off-price'>无门槛</text>
+                  </block>
                 </view>
               </view>
             </view>
@@ -101,7 +116,12 @@
                 <view class='coupon-title'>{{item.title}}</view>
                 <view class='coupon-price cur' style='{{util.diy_color(diy_color.z_color,"","")}}'>
                   <text class='favourable-price'>￥{{item.actual_price}}</text>
-                  <text class='off-price' style='{{util.diy_color("",diy_color.f_color_2,"")}}'>满{{item.full_subtraction_price}}可用</text>
+                  <block wx:if='{{item.full_subtraction_price!=0}}'>
+                    <text class='off-price' style='{{util.diy_color("",diy_color.f_color_2,"")}}'>满{{item.full_subtraction_price}}可用</text>
+                  </block>
+                  <block wx:elif='{{item.full_subtraction_price==0}}'>
+                    <text class='off-price' style='{{util.diy_color("",diy_color.f_color_2,"")}}'>无门槛</text>
+                  </block>
                 </view>
               </view>
             </view>

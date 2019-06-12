@@ -25,12 +25,12 @@
         <image src='{{util.HTTP}}mobile/small/image/xq-gd.png'></image>
       </view>
 
-      <view class='order-detail' wx:for="{{list}}">
+      <view class='order-detail' wx:for="{{list}}" wx:key='{{index}}'>
         <view class='shop' wx:if='{{util.isShops==0}}'>
           <image src='{{item.logo}}'></image>
           <text>{{item.store_name}}</text>
         </view>
-        <view class='good-detail' wx:for="{{item.list}}">
+        <view class='good-detail' wx:for="{{item.list}}" wx:key='{{index}}'>
           <view class='good-info'>
             <image src='{{item.file}}'></image>
             <view>
@@ -49,7 +49,7 @@
         </view>
 
         <view class='detail-operation'>
-          <view hidden='{{item.freight == null}}'>
+          <view wx:if='{{item.freight != null&&(item.freight.express_freight_sup != 0||item.freight.city_freight_sup != 0||item.freight.take_freight_sup != 0)}}'>
             <view class='delivery-method'>
               <view class='no-bottom'>
                 <view class='left'>配送方式</view>
@@ -99,9 +99,7 @@
               <text class='cur' style='{{util.diy_color(diy_color.z_color,"","")}}'>￥{{util.toFixed(item.total_price)}}</text>
             </view>
           </view>
-
         </view>
-
       </view>
 
       <view class='detail-operation' hover-class='hover-class' hover-stay-time='400' bindtap='chooseCoupon' wx:if='{{configSwitch.show_switch.is_coupon==1}}'>
@@ -173,18 +171,21 @@
   </scroll-view>
 
   <view class='footer'>
-    <view class='bg submit' hover-class='hover-class' hover-stay-time='400' bindtap='confirmOrder' style='{{util.diy_color("",diy_color.z_color,"")}}'>提交订单</view>
-    <view>
-      <text class='content'>合计:</text>
-      <text class='price cur' style='{{util.diy_color(diy_color.z_color,"","")}}'>￥{{util.toFixed(total)}}</text>
-    </view>
+    <!-- <view class='bg submit' hover-class='hover-class' hover-stay-time='400' bindtap='confirmOrder' style='{{util.diy_color("",diy_color.z_color,"")}}'>提交订单</view> -->
+    <form report-submit='true' bindsubmit='formId'>
+      <button class='bg submit' hover-class='hover-class' hover-stay-time='400' formType="submit" bindtap='confirmOrder' style='{{util.diy_color("",diy_color.z_color,"")}}'>提交订单</button>
+      <view>
+        <text class='content'>合计:</text>
+        <text class='price cur' style='{{util.diy_color(diy_color.z_color,"","")}}'>￥{{util.toFixed(total)}}</text>
+      </view>
+    </form>
   </view>
   <!-- 优惠价 -->
   <confirm_coupon id="choose_coupon" coupon="{{coupon}}" bind:confirm="confirmCoupon" />
   <!-- 选择红包 -->
   <confirm_packet id="choose_packet" packet="{{redpacket}}" bind:confirm="choosepacket" />
   <!-- 发票 -->
-  <popup id="popup" bind:confirmWay="popup_invoice" invoice='{{list[popupIdx].invoice}}'/>
+  <popup id="popup" bind:confirmWay="popup_invoice" invoice='{{list[popupIdx].invoice}}' />
 
 </view>
 

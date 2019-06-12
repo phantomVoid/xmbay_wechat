@@ -108,7 +108,7 @@ Page({
         return
       }
       wx.navigateTo({
-        url: '/my/integral_confirm/integral_confirm?id=' + this.data.id,
+        url: `/my/integral_confirm/integral_confirm?id=${this.data.id}`,
       })
     }
   },

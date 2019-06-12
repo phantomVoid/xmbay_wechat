@@ -185,6 +185,9 @@ Page({
           goods_info: res.result,
           discount: res.discount == null ? 100 : res.discount,
         })
+        http.post(app.globalData.applet_my_saveFormId, {
+          micro_form_id: this.data.formId
+        }).then(res => { })
         let obj = {
           order_type:2
         }
@@ -233,4 +236,7 @@ Page({
     }
     this.selectComponent("#buy_board").blendent(obj)
   },
+  formId(e) {
+    this.data.formId = e.detail.formId
+  }
 })

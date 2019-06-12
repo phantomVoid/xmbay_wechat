@@ -50,21 +50,21 @@ Page({
     event.on('refreshOrderDetail', this, () => {
       this.getDetail()
     })
-    this.getDetail()
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getDetail()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearInterval(this.data.count_down)
   },
 
   /**
@@ -431,5 +431,17 @@ Page({
       showModal: e.currentTarget.dataset.confirmtype
     })
     this.selectComponent("#modal").showModal(e.currentTarget.dataset)
+  },
+  /**
+   * 导航
+   */
+  onNavigation() {
+    wx.openLocation({
+      latitude: parseFloat(this.data.info.store_list.lat),
+      longitude: parseFloat(this.data.info.store_list.lng),
+      scale: 18,
+      name: this.data.info.store_list.store_name,
+      address: this.data.info.address_province + this.data.info.address_city + this.data.info.address_area + this.data.info.address_street + this.data.info.address_details,
+    })
   },
 })

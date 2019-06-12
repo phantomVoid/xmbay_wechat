@@ -36,6 +36,13 @@
     </view>
     <view class='money' style='{{util.diy_color(diy_color.z_color,"","")}}'>+{{item.price}}</view>
   </view>
+  <view wx:if="{{item.type == '佣金转入'}}">
+    <view>
+      <view class='title'>佣金转入</view>
+      <view class='time'>{{item.create_time}}</view>
+    </view>
+    <view class='money'>+{{item.price}}</view>
+  </view>
   <view wx:if="{{item.type == '消费'}}">
     <view>
       <view class='title'>消费</view>

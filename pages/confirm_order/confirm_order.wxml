@@ -200,11 +200,14 @@
 </scroll-view>
 
 <view class='footer'>
-  <view class='bg submit' hover-class='hover-class' hover-stay-time='400' bindtap='submit' style='{{util.diy_color("",diy_color.z_color,"")}}'>提交订单</view>
-  <view>
-    <text class='content'>合计:</text>
-    <text class='price cur' style='{{util.diy_color(diy_color.z_color,"","")}}'>￥{{info.total}}</text>
-  </view>
+  <form report-submit='true' bindsubmit='formId'>
+    <button class='bg submit' hover-class='hover-class' hover-stay-time='400' formType="submit" bindtap='submit' style='{{util.diy_color("",diy_color.z_color,"")}}'>提交订单</button>
+    <!-- <view class='bg submit' hover-class='hover-class' hover-stay-time='400' bindtap='submit' style='{{util.diy_color("",diy_color.z_color,"")}}'>提交订单</view> -->
+    <view>
+      <text class='content'>合计:</text>
+      <text class='price cur' style='{{util.diy_color(diy_color.z_color,"","")}}'>￥{{info.total}}</text>
+    </view>
+  </form>
 </view>
 
 <!-- 输入数量 -->
@@ -213,7 +216,7 @@
 <!-- 支付方式 -->
 <pay_way id="pay_way" bind:confirmWay="confirmWay" />
 <!-- 发票 -->
-<popup id="popup" bind:confirmWay="popup_invoice"  invoice='{{invoice}}' />
+<popup id="popup" bind:confirmWay="popup_invoice" invoice='{{invoice}}' />
 
 <!-- 选择优惠券 -->
 <confirm_coupon id="choose_coupon" coupon="{{coupon}}" bind:confirm="confirmCoupon" />

@@ -1,5 +1,6 @@
 // components/bargainModal/bargainModal.js
 const app = getApp()
+const http = require('../../utils/http.js')
 Component({
   /**
    * 组件的属性列表
@@ -35,6 +36,12 @@ Component({
       this.setData({
         show: false
       })
+      http.post(app.globalData.applet_my_saveFormId, {
+        micro_form_id: this.data.formId
+      }).then(res => { })
+    },
+    formId(e) {
+      this.data.formId = e.detail.formId
     }
   }
 })

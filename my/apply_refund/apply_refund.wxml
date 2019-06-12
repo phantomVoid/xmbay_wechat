@@ -44,4 +44,7 @@
   </view>
 </view>
 
-<view class='bg' hover-class='hover-class' hover-stay-time='400' bindtap='submit' style='{{util.diy_color("",diy_color.z_color,"")}}'>提交</view>
+<!-- <view class='bg' hover-class='hover-class' hover-stay-time='400' bindtap='submit' style='{{util.diy_color("",diy_color.z_color,"")}}'>提交</view> -->
+<form report-submit='true' bindsubmit='formId'>
+  <button class='bg' hover-class='hover-class' hover-stay-time='400' formType="submit" bindtap='submit' style='{{util.diy_color("",diy_color.z_color,"")}}'>提交</button>
+</form>

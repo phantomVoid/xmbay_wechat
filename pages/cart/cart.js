@@ -8,28 +8,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    //是否是编辑状态
-    edit_state: false,
-    is_login: true,
-    //购物车列表
-    cart_list: [],
-    //失效宝贝
-    lost_list: [],
-    //失效商品数量
-    lost_count: 0,
-    //购物车信息
-    cart_info: {
-      //选中购物车总价
-      total: '0.00',
-      //选中购物车总数量
-      count: 0,
+    is_edit_state: false, //是否是编辑状态 true 编辑 false未编辑
+    is_login: true, //是否登录 true 已登陆 false未登录
+    cart_list: [], //购物车列表
+    lost_list: [], //失效宝贝
+    lost_count: 0, //失效商品数量
+    cart_info: { //购物车信息
+      total: '0.00', //选中购物车总价
+      count: 0, //选中购物车总数量
+      totalNum: 0 //合计数量
     },
-    //全选状态
-    select_all: false,
-    //当前店铺索引
-    shop_index: '',
-    //当前商品索引
-    good_index: ''
+    select_all: false, //全选状态
+    shop_index: '', //当前店铺索引
+    good_index: '', //当前商品索引
+    address: ''
   },
 
   /**
@@ -108,11 +100,9 @@ Page({
   /**
    * 页面滑动
    */
-  scroll(e) {
-
-    if (e.detail.scrollTop == 0) {
-      wx.startPullDownRefresh()
-    } else if (e.detail.scrollTop > 100) {
+  onPageScroll(e) {
+    //返回顶部
+    if (e.scrollTop > 100) {
       this.selectComponent("#go_top").rise()
     } else {
       this.selectComponent("#go_top").decline()
@@ -123,30 +113,9 @@ Page({
    * 回到顶部
    */
   onBackTop() {
-    this.setData({
-      scroll_top: 0
+    wx.pageScrollTo({
+      scrollTop: 0
     })
-  },
-
-
-  /**
-   * 秒杀
-   */
-  onHome() {
-    wx.switchTab({
-      url: '/pages/home/home',
-    })
-  },
-
-  /**
-   * 关注列表
-   */
-  onAttention() {
-    if (app.login()) {
-      wx.navigateTo({
-        url: '/my/collect_good/collect_good',
-      })
-    }
   },
 
   /**
@@ -156,21 +125,25 @@ Page({
     http.postList(app.globalData.cart_index, {
       store_id: ''
     }).then(res => {
+      let totalNum = 0
+      for (let i = 0, len = res.result.length; i < len; i++) {
+        res.result[i]['select'] = false
+        for (let j = 0, j_len = res.result[i].list.length; j < j_len; j++) {
+          res.result[i].list[j]['select'] = false
+          totalNum++;
+        }
+      }
       this.setData({
         cart_list: res.result,
         lost_count: res.lost_count,
         lost_list: res.lost,
         recommend_list: res.recommend_list,
         discount: res.discount == null ? 100 : res.discount,
-        select_all: false
+        select_all: false,
+        'cart_info.totalNum': totalNum
       })
-      for (let i = 0, len = this.data.cart_list.length; i < len; i++) {
-        this.data.cart_list[i]['select'] = false
-        for (let j = 0, j_len = this.data.cart_list[i].list.length; j < j_len; j++) {
-          this.data.cart_list[i].list[j]['select'] = false
-          this.data.cart_list[i].list[j]['edit'] = false
-        }
-      }
+
+
       this.onCalculate()
     })
   },
@@ -181,7 +154,7 @@ Page({
   onAddNumber(e) {
     let cart_id = e.currentTarget.dataset.id,
       shop_index = e.currentTarget.dataset.shopdex,
-      good_index = e.currentTarget.dataset.gooddex
+      good_index = e.currentTarget.dataset.gooddex;
     http.post(app.globalData.cart_add, {
       cart_id: cart_id,
       number: 1
@@ -293,70 +266,29 @@ Page({
   },
 
   /**
-   * 长按编辑
-   */
-  onEditGood(e) {
-    let shop_index = e.currentTarget.dataset.shopdex,
-      good_index = e.currentTarget.dataset.gooddex
-    this.data.shop_index = e.currentTarget.dataset.shopdex
-    this.data.good_index = e.currentTarget.dataset.gooddex
-    this.data.cart_list[shop_index].list[good_index]['edit'] = true
-    this.setData({
-      cart_list: this.data.cart_list,
-      edit_state: true
-    })
-  },
-
-  /**
-   * 取消长按效果
-   */
-  onTouch() {
-    for (let i = 0, len = this.data.cart_list.length; i < len; i++) {
-      for (let j = 0, j_len = this.data.cart_list[i].list.length; j < j_len; j++) {
-        this.data.cart_list[i].list[j]['edit'] = false
-      }
-    }
-    this.setData({
-      cart_list: this.data.cart_list,
-      edit_state: false
-    })
-  },
-
-  /**
-   * 移入收藏
-   */
-  collect(e) {
-    let goods_id = e.currentTarget.dataset.goodid + '',
-      shop_index = e.currentTarget.dataset.shopdex,
-      good_index = e.currentTarget.dataset.gooddex
-    http.post(app.globalData.cart_collect, {
-      goods_id: goods_id
-    }).then(res => {
-      app.showSuccessToast('收藏成功')
-      this.data.cart_list[shop_index].list[good_index]['edit'] = false
-      this.data.cart_list[shop_index].list[good_index].collect_status = 1
-      this.setData({
-        cart_list: this.data.cart_list
-      })
-    })
-  },
-
-  /**
    * 编辑商品
    */
-  onEdit(e) {
-    console.log(e)
+  onEdit() {
+    if (this.data.is_edit_state) {
+      this.setData({
+        is_edit_state: false
+      })
+    } else {
+      this.setData({
+        is_edit_state: true
+      })
+    }
+  },
+  onRedact(e) {
     let goods_id = e.currentTarget.dataset.goodid,
       shop_index = e.currentTarget.dataset.shopdex,
-      good_index = e.currentTarget.dataset.gooddex
+      good_index = e.currentTarget.dataset.gooddex;
     http.post(app.globalData.cart_attr, {
       goods_id: goods_id
     }).then(res => {
       let good_info = this.data.cart_list[shop_index].list[good_index]
-      good_info['attrs'] = res.result.attr
-      
+      good_info['attrs'] = res.result.attr;
       this.selectComponent("#change_attr").show(good_info)
-      this.data.cart_list[shop_index].list[good_index]['edit'] = false
       this.setData({
         edit_state: false,
         cart_list: this.data.cart_list
@@ -368,8 +300,19 @@ Page({
    * 删除购物车商品
    */
   onDelGood(e) {
-    let cart_id = e.currentTarget.dataset.cartid
-    this.onCartDelete(cart_id)
+    let cart_id = []
+    for (let i = 0, len = this.data.cart_list.length; i < len; i++) {
+      for (let j = 0, j_len = this.data.cart_list[i].list.length; j < j_len; j++) {
+        if (this.data.cart_list[i].list[j].select) {
+          cart_id.push(this.data.cart_list[i].list[j].cart_id)
+        }
+      }
+    }
+    if (cart_id.length == 0) {
+      app.showToast('请选择商品')
+      return
+    }
+    this.onCartDelete(cart_id.join())
   },
 
   /**
@@ -384,11 +327,37 @@ Page({
     for (let i = 0, len = this.data.cart_list.length; i < len; i++) {
       for (let j = 0, j_len = this.data.cart_list[i].list.length; j < j_len; j++) {
         if (this.data.cart_list[i].list[j].cart_id != info.cart_id && this.data.cart_list[i].list[j].goods_id == info.goods_id && this.data.cart_list[i].list[j].goods_attr == info.goods_attr) {
-          this.onCartDelete(info.cart_id)
+          this.onCartDelete(this.data.cart_list[i].list[j].cart_id)
         }
       }
     }
     this.onCalculate()
+  },
+  /**
+   * 移入收藏
+   */
+  collect() {
+    let goods_id = []
+    let cart_id = []
+    for (let i = 0, len = this.data.cart_list.length; i < len; i++) {
+      for (let j = 0, j_len = this.data.cart_list[i].list.length; j < j_len; j++) {
+        if (this.data.cart_list[i].list[j].select) {
+          goods_id.push(this.data.cart_list[i].list[j].goods_id)
+          cart_id.push(this.data.cart_list[i].list[j].cart_id)
+        }
+      }
+    }
+    if (goods_id.length == 0) {
+      app.showToast('请选择商品')
+      return
+    }
+    http.post(app.globalData.cart_collect, {
+      goods_id: goods_id.join(),
+      cart_id: cart_id.join()
+    }).then(res => {
+      app.showSuccessToast('收藏成功')
+      this.getCartList()
+    })
   },
 
   /**
@@ -400,14 +369,7 @@ Page({
     }).then(res => {
       app.showSuccessToast('删除成功')
       event.emit('refreshCartNumber')
-      this.data.cart_list[this.data.shop_index].list.splice(this.data.good_index, 1)
-      if (this.data.cart_list[this.data.shop_index].list.length == 0) {
-        this.data.cart_list.splice(this.data.shop_index, 1)
-      }
-      this.setData({
-        cart_list: this.data.cart_list
-      })
-      this.onCalculate()
+      this.getCartList()
     })
   },
 
@@ -427,13 +389,19 @@ Page({
         }
       }
     }
-    this.data.cart_info = {
-      total: total.toFixed(2),
-      count: num,
-      cart_num: cart_num
-    }
+    this.data.cart_info.total = total.toFixed(2)
+    this.data.cart_info.count = num
+    this.data.cart_info.cart_num = cart_num
     this.setData({
       cart_info: this.data.cart_info
+    })
+  },
+  /**
+   * 去首页
+   */
+  onHome() {
+    wx.switchTab({
+      url: '/pages/home/home',
     })
   },
 
@@ -450,7 +418,7 @@ Page({
    * 商品详情
    */
   onGood(e) {
-    if (!this.data.edit_state) {
+    if (!this.data.is_edit_state) {
       wx.navigateTo({
         url: '/nearby_shops/good_detail/good_detail?goods_id=' + e.currentTarget.dataset.id,
       })
@@ -461,30 +429,20 @@ Page({
    * 去结算
    */
   settleAccount() {
-    let cart_id = ''
+    let cart_id = []
     for (let i = 0, len = this.data.cart_list.length; i < len; i++) {
       for (let j = 0, j_len = this.data.cart_list[i].list.length; j < j_len; j++) {
         if (this.data.cart_list[i].list[j].select) {
-          cart_id += this.data.cart_list[i].list[j].cart_id + ','
+          cart_id.push(this.data.cart_list[i].list[j].cart_id)
         }
       }
     }
-    if (cart_id == '') {
+    if (cart_id.length == 0) {
       app.showToast('请选择结算商品')
       return
     }
-    cart_id = cart_id.substr(0, cart_id.length - 1)
     wx.navigateTo({
-      url: '../cart_confirm_order/cart_confirm_order?cart_id=' + cart_id,
-    })
-  },
-
-  /**
-   * 去凑单
-   */
-  goOnItems() {
-    wx.navigateTo({
-      url: '/pages/add_on_items/add_on_items',
+      url: '/pages/cart_confirm_order/cart_confirm_order?cart_id=' + cart_id.join(),
     })
   },
 
@@ -519,5 +477,5 @@ Page({
       order_type: 1
     }
     this.selectComponent("#buy_board").show(obj)
-  }
+  },
 })

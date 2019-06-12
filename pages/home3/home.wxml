@@ -331,7 +331,7 @@
   <!--返回顶部  -->
 
   <go_top id="go_top" bindtap='onBackTop' />
-  <cart id="cart" />
+  <cart id="cart" diy_color='{{diy_color}}'/>
 
   <!--新人专享  -->
   <view class='exclusive' catchtouchmove='none' wx:if='{{popup_adv_status == 1&&configSwitch.show_switch.is_coupon==1}}'>
@@ -340,7 +340,7 @@
   </view>
 </view>
 
-<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>
 <!-- <buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" /> -->
 <!-- <template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color}}" /> -->
 <template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color,model:model}}" />

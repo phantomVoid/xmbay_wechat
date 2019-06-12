@@ -1,4 +1,7 @@
 @import "/utils/iconfont.wxss";
+button{
+  border-radius: unset;
+}
 .trans {
   position: fixed;
   left: 0;

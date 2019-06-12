@@ -77,10 +77,10 @@
 
 
 <!-- 购物车 -->
-<cart/>
+<cart diy_color='{{diy_color}}'/>
 
 <!-- 弹窗 -->
 <modal id="modal" title="提示" content="您确定取消收藏吗?" bind:confirm="confirmDelete" />
 
 
-<buy catchtap="none" id="buy_board" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+<buy catchtap="none" id="buy_board" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>

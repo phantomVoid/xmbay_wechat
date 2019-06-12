@@ -48,10 +48,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let info = JSON.parse(options.info)
+    info.goods_name = decodeURIComponent(info.goods_name)
+    info.store_name = decodeURIComponent(info.store_name)
     this.setData({
       diy_color: app.globalData.diy_color,
       configSwitch: app.globalData.configSwitch,
-      info: JSON.parse(options.info),
+      info: info,
       first: false,
       good_image: decodeURIComponent(options.good_image)
     })
@@ -130,24 +133,24 @@ Page({
         res.packet[0].select = true
       }
       if (res.freight.length != 0) {
-        if (res.freight[0].express_freight_sup == 1) {
+        if (res.freight[0].express_freight_sup == 1 && res.freight[0].default_express_type == 1) {
           //快递
           this.data.info.delivery_method = 3
           this.data.pay_way = 1
           this.data.freight_price = res.freight[0].express_freight_price
 
-        } else if (res.freight[0].city_freight_sup == 1) {
+        } else if (res.freight[0].city_freight_sup == 1 && res.freight[0].default_express_type == 2) {
           //同城
           this.data.info.delivery_method = 1
           this.data.freight_price = res.freight[0].city_freight_price
-          this.data.pay_way = 2
-        } else if (res.freight[0].take_freight_sup == 1) {
+          this.data.pay_way = 1
+        } else if (res.freight[0].take_freight_sup == 1 && res.freight[0].default_express_type == 3) {
           //预约
           this.data.info.delivery_method = 2
           this.data.freight_price = 0
           this.data.pay_way = 1
         }
-        if (res.freight[0].take_freight_sup == 1) {
+        if (res.freight[0].take_freight_sup == 1 && res.freight[0].default_express_type == 3) {
           this.data.take_id = res.freight[0].take_freight_list[0].take_id
           this.data.take_item = res.freight[0].take_freight_list[0]
           // this.data.pay_way = 2
@@ -231,19 +234,18 @@ Page({
   calcTotal() {
     if (this.data.info.good_type == 1) {
       //普通商品
-      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.shop_price).toFixed(2)
+      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.shop_price) > 0 ? parseFloat(this.data.info.num * this.data.info.shop_price).toFixed(2) : 0.10
       this.data.info['total'] = parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num)
-      console.log(this.data.info['total'])
     } else if (this.data.info.good_type == 2) {
       //团购
-      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.group_price).toFixed(2)
+      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.group_price) > 0 ? parseFloat(this.data.info.num * this.data.info.group_price).toFixed(2) : 0.10
       this.data.info['total'] = parseFloat(this.data.info.subtotal)
     } else if (this.data.info.good_type == 3) {
       //砍价
-      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.cut_price).toFixed(2)
+      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.cut_price) > 0 ? parseFloat(this.data.info.num * this.data.info.cut_price).toFixed(2) : 0.10
       this.data.info['total'] = parseFloat(this.data.info.subtotal)
     } else if (this.data.info.good_type == 4) {
-      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.time_limit_price).toFixed(2)
+      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.time_limit_price) > 0 ? parseFloat(this.data.info.num * this.data.info.time_limit_price).toFixed(2) : 0.10
       this.data.info['total'] = parseFloat(this.data.info.subtotal)
     }
 
@@ -252,7 +254,6 @@ Page({
     this.setData({
       info: this.data.info
     })
-    console.log(this.data.info['total'])
   },
 
   /**
@@ -372,9 +373,14 @@ Page({
    */
   submit() {
     let store_set = [],
-      member_shop_coupon_id = ''
+      member_shop_coupon_id = '';
+    //如果没有地址弹出
     if (this.data.address == null && this.data.info.delivery_method != 2 || this.data.address.name == undefined) {
       this.selectComponent("#modal").showModal()
+      return
+    }
+    if (this.data.freight.express_freight_sup == 0 && this.data.freight.city_freight_sup == 0 && this.data.freight.take_freight_sup == 0 && this.data.freight.city_freight_msg != '') {
+      app.showToast(this.data.freight.city_freight_msg)
       return
     }
     for (let i = 0, len = this.data.coupon.length; i < len; i++) {
@@ -479,6 +485,9 @@ Page({
           url: '../cashier_desk/cashier_desk?order_info=' + JSON.stringify(order_info),
         })
       }
+      http.post(app.globalData.applet_my_saveFormId, {
+        micro_form_id: this.data.formId
+      }).then(res => {})
     })
 
   },
@@ -556,15 +565,7 @@ Page({
    * 发票
    */
   invoice() {
-
     this.selectComponent("#popup").show(this.data.invoice, 0, this.data.store.store_id, 0, this.data.address.member_address_id != undefined ? this.data.address : '')
-    // if (this.data.store.invoice_type != '0,0,0') {
-    // } else {
-    //   wx.showToast({
-    //     title: '该店铺暂无开发票资质',
-    //     icon: 'none'
-    //   })
-    // }
   },
   /**
    * 
@@ -581,6 +582,8 @@ Page({
       'invoice.address_area': this.data.area.area_name,
     })
   },
-
+  formId(e) {
+    this.data.formId = e.detail.formId
+  }
 
 })

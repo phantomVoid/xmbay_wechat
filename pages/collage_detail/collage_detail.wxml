@@ -97,7 +97,12 @@
         </view>
       </view>
     </view>
-    <view class='wanna-collage' wx:if="{{(member_id != info.owner&&info.state == 0&&info.status==1)||(member_id==''&&info.state == 0&&info.status==1)}}" hover-class='hover-class' hover-stay-time='400' bindtap='onOffered' style='{{util.diy_color("",diy_color.z_color,"")}}'>我要参团</view>
+    <!-- <view class='wanna-collage' wx:if="{{(member_id != info.owner&&info.state == 0&&info.status==1)||(member_id==''&&info.state == 0&&info.status==1)}}" hover-class='hover-class' hover-stay-time='400' bindtap='onOffered' style='{{util.diy_color("",diy_color.z_color,"")}}'>我要参团</view> -->
+    <block wx:if="{{(member_id != info.owner&&info.state == 0&&info.status==1)||(member_id==''&&info.state == 0&&info.status==1)}}">
+      <form report-submit='true' bindsubmit='formId'>
+        <button class='wanna-collage' hover-class='hover-class' hover-stay-time='400' formType="submit" bindtap='onOffered' style='{{util.diy_color("",diy_color.z_color,"")}}'>我要参团</button>
+      </form>
+    </block>
     <button open-type='share' class='wanna-collage' wx:if="{{member_id == info.owner && info.status == 1 && info.state!=0}}" style='{{util.diy_color("",diy_color.z_color,"")}}'>邀请好友参团</button>
     <view class='wanna-collage' wx:if="{{member_id == info.owner&&info.status == 3}}" hover-class='hover-class' hover-stay-time='400' bindtap='onAgainCollage' style='{{util.diy_color("",diy_color.z_color,"")}}'>再开一团</view>
     <view class='other-collage' wx:if='{{info.status == 3}}' hover-class='hover-class' hover-stay-time='400' bindtap='onOtherCollage' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>去逛逛其他拼团</view>
@@ -149,4 +154,4 @@
   </view>
 </view>
 <!--立即购买  -->
-<buy isShow="{{buy_board}}" catchtap="none" id="buy_board" bind:closeBuy="closeBuy" order_type="2" type="2" info="{{goods_info}}" discount="{{discount}}" group_buy="{{true}}" group_activity_id="{{info.group_activity_id}}" />
+<buy isShow="{{buy_board}}" catchtap="none" id="buy_board" bind:closeBuy="closeBuy" order_type="2" type="2" info="{{goods_info}}" discount="{{discount}}" group_buy="{{true}}" group_activity_id="{{info.group_activity_id}}" diy_color='{{diy_color}}' />

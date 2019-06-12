@@ -56,7 +56,7 @@
 </view>
 
 <!--购物车  -->
-<cart/>
+<cart diy_color='{{diy_color}}'/>
 
 <!--返回顶部  -->
 <go_top id="go_top" hover-class='hover-class' hover-stay-time='400' bindtap='onBackTop' />
@@ -131,4 +131,4 @@
   </view>
 </view> -->
 
-<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>

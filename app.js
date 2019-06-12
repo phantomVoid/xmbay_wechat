@@ -33,6 +33,7 @@ App({
   },
   onShow() {
     wx.hideTabBar()
+    this.app_leave = false
     this.app_DIY(() => {})
     this.updateManager() // 系统更新
     if (this.globalData.member_id != '' && !this.app_socketType) {
@@ -41,16 +42,18 @@ App({
     }
   },
   onHide() {
-
+    wx.closeSocket()
+    clearTimeout(this.app_socketHeartTime)
+    this.app_leave = true
   },
 
   /**
    * 客服
    */
-  service() {
+  service(callback) {
     this.app_socket = wx.connectSocket({
-      // url: 'wss://echo.websocket.org',
-      url: 'wss://ishop.zihaiwangluo.com/ws',
+      url: 'wss://ishoptest.zihaiwangluo.com/ws',
+      // url: 'wss://ishop.zihaiwangluo.com/ws',
       // url: 'ws://125.211.218.59:60013',
       header: {
         'content-type': 'application/json'
@@ -75,6 +78,9 @@ App({
         success: res => {
           console.log(res)
           this.socketHeart()
+          if (callback) {
+            callback()
+          }
         },
         fail: res => {},
       })
@@ -86,9 +92,7 @@ App({
       this.app_socketType = false
       if (res.code != 10000) {
         clearTimeout(this.app_socketHeartTime)
-        setTimeout(res => {
-          this.service()
-        }, 3000)
+        this.againSocket()
       }
     })
   },
@@ -325,10 +329,13 @@ App({
    * 重连
    */
   againSocket() {
+    if (this.app_leave) {
+      return
+    }
     this.app_socketAgainTime = setTimeout(() => {
       console.log('重连')
       this.service()
-    }, 2000)
+    }, 3000)
   },
 
   // DIY风格
@@ -522,6 +529,7 @@ App({
   app_socketSite: 0,
   app_socketHeartTime: null,
   app_socketAgainTime: null,
+  app_leave: false, //离开程序
   globalData: {
     isShops: 0, //多店，单店开关 多店：0，单店：1
     member_id: '',
@@ -1020,9 +1028,10 @@ App({
     //重开补开发票时修改发票信息
     invoice_edit: HTTP + 'v2.0/invoice/edit',
     //No.9重开补开发票运费为0时更改信息
-    invoice_change_status: HTTP + 'v2.0/invoice/change_status'
+    invoice_change_status: HTTP + 'v2.0/invoice/change_status',
     //---------------------------------------------------------------------------------
-
+    //获取FormId
+    applet_my_saveFormId: HTTP + 'v2.0/applet_my/saveFormId'
     //---------------------------------------------------------------------------------
   }
 })

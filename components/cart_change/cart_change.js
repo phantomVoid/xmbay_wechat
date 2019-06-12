@@ -163,11 +163,11 @@ Component({
         //
         this.data.attr_file_img = res.result.attr_file
         //正常
-        if (res.result.is_vip == 1) {
-          this.data.price = (res.result.attr_shop_price * res.discount * 0.01).toFixed(2)
-        } else {
-          this.data.price = parseFloat(res.result.attr_shop_price).toFixed(2)
-        }
+        // if (res.result.is_vip == 1) {
+        //   this.data.price = (res.result.attr_shop_price * res.discount * 0.01).toFixed(2)
+        // } else {
+        // }
+        this.data.price = parseFloat(res.result.attr_shop_price).toFixed(2)
 
         //库存
         this.data.info.inventory = res.result.attr_goods_number

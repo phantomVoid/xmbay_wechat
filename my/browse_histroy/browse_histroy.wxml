@@ -100,7 +100,7 @@
 </view>
 
 <!--  -->
-<cart/>
+<cart diy_color='{{diy_color}}'/>
 
 
 <!--返回顶部  -->
@@ -109,4 +109,4 @@
 <!--  -->
 <modal id="modal" title="提示" content="您确定删除记录吗?" bind:confirm="confirmDelete" />
 
-<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="{{buy_type}}" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="{{buy_type}}" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>

@@ -214,6 +214,7 @@
 .collage-info .info-member > view .avatar image {
   width: 96rpx;
   height: 96rpx;
+  background-color: #fff;
 }
 
 .collage-info .info-member > view .tip {

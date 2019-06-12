@@ -6,7 +6,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    diy_color:Object
   },
 
   /**
@@ -47,9 +47,9 @@ Component({
    */
   methods: {
     blendent(obj) {
-      this.setData({
-        diy_color: obj.diy_color
-      })
+      // this.setData({
+      //   diy_color: obj.diy_color
+      // })
     },
     getData() {
       if (app.globalData.member_id != '') {

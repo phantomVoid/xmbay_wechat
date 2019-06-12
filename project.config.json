@@ -23,7 +23,7 @@
 		"enhance": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.0",
+	"libVersion": "2.6.6",
 	"appid": "wxc023db5012d5bb0b",
 	"projectname": "ishop2.0",
 	"isGameTourist": false,
@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 22,
 			"list": [
 				{
 					"id": 0,
@@ -197,6 +197,12 @@
 					"name": "设置密码",
 					"pathName": "my/set_pay_psw/set_pay_psw",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "购物车",
+					"pathName": "pages/cart/cart",
 					"scene": null
 				}
 			]

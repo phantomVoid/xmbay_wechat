@@ -294,7 +294,12 @@
                 <view class='left_b' style='{{util.diy_color("",diy_color.z_color,"")}}'>
                   <view class='circle'></view>
                 </view>
-                <text style='{{util.diy_color("",diy_color.z_color,"")}}'>满{{util.integer(item.full_subtraction_price)}}元减{{util.integer(item.actual_price)}}元</text>
+                <block wx:if='{{item.full_subtraction_price!=0}}'>
+                  <text style='{{util.diy_color("",diy_color.z_color,"")}}'>满{{util.integer(item.full_subtraction_price)}}元减{{util.integer(item.actual_price)}}元</text>
+                </block>
+                <block wx:elif='{{item.full_subtraction_price==0}}'>
+                  <text style='{{util.diy_color("",diy_color.z_color,"")}}'>减{{util.integer(item.actual_price)}}元</text>
+                </block>
                 <view class='left_r' style='{{util.diy_color("",diy_color.z_color,"")}}'>
                   <view class='circle'></view>
                 </view>
@@ -581,7 +586,7 @@
   <bargain_rule isShow="{{bargain_rule}}" />
 
   <!--立即购买  -->
-  <buy isShow="{{buy_board}}" catchtap="none" id="buy_board" bind:closeBuy="closeBuy" order_type="{{order_type}}" type="{{buy_type}}" info="{{info}}" discount="{{discount}}" group_buy="{{group_buy}}" />
+  <buy isShow="{{buy_board}}" catchtap="none" id="buy_board" bind:closeBuy="closeBuy" order_type="{{order_type}}" type="{{buy_type}}" info="{{info}}" discount="{{discount}}" group_buy="{{group_buy}}" diy_color='{{diy_color}}' />
 
 
 

@@ -340,10 +340,10 @@
 <!--返回顶部  -->
 <go_top id="go_top" hover-class='hover-class' hover-stay-time='400' bindtap='onBackTop' />
 <!-- 购物车 -->
-<cart id="cart" />
+<cart id="cart" diy_color='{{diy_color}}'/>
 <!--新人专享  -->
-<!-- <view class='exclusive' catchtouchmove='none' wx:if='{{dataInfo.set.popup_adv_status == 1&&configSwitch.show_switch.is_coupon==1}}'>
+<view class='exclusive' catchtouchmove='none' wx:if='{{dataInfo.set.popup_adv_status == 1&&configSwitch.show_switch.is_coupon==1}}'>
   <image class='exclusive-logo' src='{{util.HTTP}}mobile/small/image/sy-xrlb-lb.png' hover-class='hover-class' hover-stay-time='400' bindtap='onNewGift'></image>
   <image class='exclusive-cancel' src='{{util.HTTP}}mobile/small/image/sy-xrlb-gb.png' hover-class='hover-class' hover-stay-time='400' bindtap='closeExclusive'></image>
-</view> -->
-<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+</view>
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>

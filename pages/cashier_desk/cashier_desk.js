@@ -72,8 +72,10 @@ Page({
    */
   commit() {
     http.post(app.globalData.order_getOrderState, {
+      number: this.data.order_info.order_number != '' ? this.data.order_info.order_number : this.data.order_info.order_attach_number,
+      price:this.data.order_info.total_price,
       order_attach_id: this.data.order_info.order_attach_id,
-      type: this.data.order_info.type
+      type: '1'
     }).then(res => {
       if (res.data.status == 0) {
         //余额支付

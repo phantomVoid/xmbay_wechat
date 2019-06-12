@@ -20,7 +20,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    diy_color: app.globalData.diy_color,
     mid: '',
     service_info: {
       TARGET_ID: '', //接收者店铺ID
@@ -79,11 +78,14 @@ Page({
     let service_info = ''
     if (options.service_info) {
       service_info = JSON.parse(options.service_info)
+      service_info.detail.goods_name = decodeURIComponent(service_info.detail.goods_name)
+      service_info.store_title = decodeURIComponent(service_info.store_title)
       if (service_info.detail) {
         service_info.detail.file = decodeURIComponent(service_info.detail.file)
       }
     }
     this.setData({
+      diy_color: app.globalData.diy_color,
       service_info: service_info
     })
     app.app_socketSite = 1
@@ -218,21 +220,23 @@ Page({
     if (app.globalData.member_id == '') {
       return
     }
-    //预聊天消息
-    let data = {
-      "TYPE": "MATCH_CUSTOMER",
-      "DATA": {
-        "TARGET_ID": this.data.service_info.TARGET_ID.toString(),
-        "DIVERSION_ID": this.data.service_info.DIVERSION_ID.toString()
+    app.service(() => {
+      //预聊天消息
+      let data = {
+        "TYPE": "MATCH_CUSTOMER",
+        "DATA": {
+          "TARGET_ID": this.data.service_info.TARGET_ID.toString(),
+          "DIVERSION_ID": this.data.service_info.DIVERSION_ID.toString()
+        }
       }
-    }
-    app.app_socket.send({
-      data: JSON.stringify(data),
-      success: res => {
-        console.log(res)
-        app.socketOnMessage('serviceRoom', this)
-      },
-      fail: res => {},
+      app.app_socket.send({
+        data: JSON.stringify(data),
+        success: res => {
+          console.log(res,'客服进入1')
+          app.socketOnMessage('serviceRoom', this)
+        },
+        fail: res => {},
+      })
     })
   },
 

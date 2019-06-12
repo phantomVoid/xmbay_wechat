@@ -20,6 +20,7 @@ Page({
     address: '',
     create: false,
     phone: '',
+    formId:[]
   },
 
   /**
@@ -151,6 +152,7 @@ Page({
    * 创建店铺
    */
   createShop(e) {
+    this.data.formId.push(e.detail.formId)
     if (this.data.name == '') {
       wx.showToast({
         title: '请输入店铺名称',
@@ -214,10 +216,12 @@ Page({
         area: this.data.area.area_name,
         address: this.data.address,
         phone: this.data.phone,
-        shop: '1',
-        micro_form_id: e.detail.formId,
+        shop: '1'
       }).then(res => {
-        app.globalData.in_state = 1
+        // app.globalData.in_state = 1
+        http.post(app.globalData.applet_my_saveFormId, {
+          micro_form_id: this.data.formId
+        }).then(res => { })
         app.showSuccessToast(res.message, () => {
           wx.navigateBack()
         })
@@ -225,7 +229,7 @@ Page({
     }
   },
   saveFormId1(e){
-    console.log(e)
+    this.data.formId.push(e.detail.formId)
   },
 
   /**

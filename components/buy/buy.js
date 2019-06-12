@@ -21,6 +21,7 @@ Component({
         }
       }
     },
+    diy_color:Object,
     // order_type: null,
     type: String,
     isShow: {
@@ -71,11 +72,6 @@ Component({
         diy_color: app.globalData.diy_color
       })
     }
-    // if (app.globalData.diy_color.z_color != undefined) {
-    //   this.setData({
-    //     diy_color: app.globalData.diy_color
-    //   })
-    // }
   },
 
   /**
@@ -83,9 +79,9 @@ Component({
    */
   methods: {
     blendent(obj) {
-      this.setData({
-        diy_color: obj.diy_color
-      })
+      // this.setData({
+      //   diy_color: obj.diy_color
+      // })
     },
     /**
      * 显示
@@ -395,11 +391,11 @@ Component({
             //店铺id
             store_id: this.data.info.store_id,
             //店铺名称
-            store_name: this.data.info.store_name,
+            store_name: encodeURIComponent(this.data.info.store_name),
             //价格
             shop_price: this.data.info.shop_price,
             //商品名称
-            goods_name: this.data.info.goods_name,
+            goods_name: encodeURIComponent(this.data.info.goods_name),
             //商品规格id
             products_id: this.data.products_id,
             //规格展示
@@ -420,6 +416,9 @@ Component({
           this.setData({
             isShow: false
           })
+          http.post(app.globalData.applet_my_saveFormId, {
+            micro_form_id: this.data.formId
+          }).then(res => { })
           //跳转确认订单页
           wx.navigateTo({
             url: '/pages/confirm_order/confirm_order?info=' + JSON.stringify(obj) + '&good_image=' + encodeURIComponent(this.data.good_image),
@@ -446,10 +445,13 @@ Component({
           attr: this.data.attr_detail,
           goods_attr: this.data.info.attr.length != 0 ? this.data.attr : '',
           products_id: this.data.products_id,
-          price: this.data.info.cut_price,
+          price: this.data.info.cut_price
         }).then(res => {
+          http.post(app.globalData.applet_my_saveFormId, {
+            micro_form_id: this.data.formId
+          }).then(res => {})
           wx.navigateTo({
-            url: '/pages/bargain/bargain?id=' + res.cut_activity_id + '&first=1',
+            url: '/pages/bargain/bargain?id=' + res.cut_activity_id + '&first=1'
           })
         })
       })
@@ -497,5 +499,8 @@ Component({
         })
       })
     },
+    formId(e){
+      this.data.formId = e.detail.formId
+    }
   }
 })

@@ -112,7 +112,7 @@ Page({
         sup_id: app.globalData.sup_id
       })
     }
-    this.location()
+    
   },
 
   /**
@@ -129,13 +129,17 @@ Page({
    */
   onShow: function() {
     this.getDistributionData()
+    this.location()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearInterval(this.data.group_interval)
+    clearInterval(this.data.collage_interval)
+    clearInterval(this.data.bargain_interval)
+    clearInterval(this.data.limit_interval)
   },
 
   /**
@@ -485,7 +489,7 @@ Page({
         // is_bargain: this.data.info.is_bargain,
         // is_group: this.data.info.is_group,
         // is_limit: this.data.info.is_limit,
-        shop_logo: encodeURIComponent(this.data.info.logo),
+        shop_logo: app.globalData.isShops == 0 ? encodeURIComponent(this.data.info.logo) : encodeURIComponent(this.data.configSwitch.app_info.logo),
         group_num: this.data.info.group_num,
         sales_volume: this.data.info.sales_volume,
         limit_number: this.data.info.limit_number ? this.data.info.limit_number : 0,
@@ -502,7 +506,7 @@ Page({
         // is_bargain: this.data.info.is_bargain,
         // is_group: this.data.info.is_group,
         // is_limit: this.data.info.is_limit,
-        shop_logo: encodeURIComponent(this.data.info.logo),
+        shop_logo: app.globalData.isShops == 0 ? encodeURIComponent(this.data.info.logo) : encodeURIComponent(this.data.configSwitch.app_info.logo),
         group_num: this.data.info.group_num,
         sales_volume: this.data.info.sales_volume,
         limit_number: this.data.info.limit_number ? this.data.info.limit_number : 0,
@@ -990,12 +994,12 @@ Page({
     }
     let data = {
       file: encodeURIComponent(this.data.info.file),
-      goods_name: this.data.info.goods_name,
+      goods_name: encodeURIComponent(this.data.info.goods_name),
       goods_id: this.data.goods_id,
       price: price
     }
     let service_info = {
-      store_title: this.data.info.store_name,
+      store_title: encodeURIComponent(this.data.info.store_name),
       form_type: 'goods',
       detail: data,
       TARGET_ID: this.data.info.store_id,

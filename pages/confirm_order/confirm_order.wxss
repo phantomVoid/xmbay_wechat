@@ -1,3 +1,6 @@
+button{
+  border-radius: unset;
+}
 .wrap {
   padding-bottom: 120rpx;
 }
@@ -17,10 +20,10 @@
 }
 
 .address {
-  padding: 4% 10% 4% 4%;
-  width: 86%;
-  background: white;
   position: relative;
+  width: 86%;
+  padding: 4% 10% 4% 4%;
+  background: white;
 }
 
 .address-head {
@@ -383,7 +386,7 @@
   border-top: 2rpx solid #f1f1f1;
 }
 
-.footer > view {
+.footer view {
   float: right;
   font-size: 30rpx;
   line-height: 100rpx;
@@ -391,6 +394,9 @@
 
 .footer .submit {
   width: 248rpx;
+  float: right;
+  font-size: 30rpx;
+  line-height: 100rpx;
   text-align: center;
   margin-left: 30rpx;
   color: white;

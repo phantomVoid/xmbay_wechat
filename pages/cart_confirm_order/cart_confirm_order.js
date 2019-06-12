@@ -111,19 +111,19 @@ Page({
       for (let i = 0, len = res.result.length; i < len; i++) {
         if (res.result[i].freight != null) {
           //配送方式
-          if (res.result[i].freight.express_freight_sup == 1) {
+          if (res.result[i].freight.express_freight_sup == 1 && res.result[i].freight.default_express_type == 1) {
             res.result[i]['delivery_method'] = 'is_express'
             res.result[i]['distribution_type'] = '3'
             res.result[i]['way'] = 1
             //运费
             freight += parseFloat(res.result[i].freight.express_freight_price)
-          } else if (res.result[i].freight.city_freight_sup == 1) {
+          } else if (res.result[i].freight.city_freight_sup == 1 && res.result[i].freight.default_express_type == 2) {
             res.result[i]['delivery_method'] = 'is_city'
             res.result[i]['distribution_type'] = '1'
-            res.result[i]['way'] = 2
+            res.result[i]['way'] = 1
             //运费
             freight += parseFloat(res.result[i].freight.city_freight_price)
-          } else if (res.result[i].freight.take_freight_sup == 1) {
+          } else if (res.result[i].freight.take_freight_sup == 1 && res.result[i].freight.default_express_type == 3) {
             res.result[i]['delivery_method'] = 'is_shop'
             res.result[i]['distribution_type'] = '2'
             res.result[i]['way'] = 1
@@ -131,7 +131,7 @@ Page({
             freight += 0
           }
           //门店自提点
-          if (res.result[i].freight.take_freight_sup == 1) {
+          if (res.result[i].freight.take_freight_sup == 1 && res.result[i].freight.default_express_type == 3) {
             res.result[i]['take_freight'] = res.result[i].freight.take_freight_list[0]
             res.result[i]['take_freight_id'] = res.result[i].freight.take_freight_list[0].take_id
           } else {
@@ -450,13 +450,20 @@ Page({
    * 提交订单
    */
   confirmOrder() {
+    //地址是否为空
     if (this.data.address == null || this.data.address.name == undefined) {
       this.selectComponent("#modal").showModal()
       return
     }
+    
     let member_platform_coupon_id = ''
     for (let i = 0, len = this.data.list.length; i < len; i++) {
       this.data.list[i]['coupon_id'] = ''
+      //配送是否为空
+      if (this.data.list[i].freight.city_freight_msg != '') {
+        app.showToast(this.data.list[i].freight.city_freight_msg)
+        return
+      }
     }
     for (let i = 0, len = this.data.coupon.length; i < len; i++) {
       //店铺优惠券
@@ -569,6 +576,9 @@ Page({
         distribution_id: '',
         type: 1
       }
+      http.post(app.globalData.applet_my_saveFormId, {
+        micro_form_id: this.data.formId
+      }).then(res => { })
       wx.redirectTo({
         url: '../cashier_desk/cashier_desk?order_info=' + JSON.stringify(order_info),
       })
@@ -580,7 +590,7 @@ Page({
    */
   invoice(e) {
     let idx = e.currentTarget.dataset.index,
-      item = e.currentTarget.dataset.item
+      item = e.currentTarget.dataset.item;
     this.setData({
       popupIdx: idx
     })
@@ -625,4 +635,7 @@ Page({
       list: this.data.list
     })
   },
+  formId(e) {
+    this.data.formId = e.detail.formId
+  }
 })

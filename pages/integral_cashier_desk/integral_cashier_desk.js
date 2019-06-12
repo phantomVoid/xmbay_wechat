@@ -73,47 +73,59 @@ Page({
    * 确认付款
    */
   commit() {
-    //余额支付
-    if (this.data.pay_type == 1) {
-      http.post(app.globalData.pay_recharge, {
-        type: '0'
-      }).then(res => {
-        if (res.result.has_pay_password == 1) {
-          this.selectComponent("#enter_psw").show(this.data.data.total_price, this.data.data.order_number)
-        } else {
-          app.showToast('请设置支付密码', (res) => {
-            wx.navigateTo({
-              url: '/my/set_pay_psw/set_pay_psw',
+    http.post(app.globalData.order_getOrderState, {
+      number: this.data.data.order_number != '' ? this.data.data.order_number : this.data.data.order_attach_number,
+      price: this.data.data.total_price,
+      type: '2'
+    }).then(res => {
+      if (res.data.status == 0) {
+        //余额支付
+        if (this.data.pay_type == 1) {
+          http.post(app.globalData.pay_recharge, {
+            type: '0'
+          }).then(res => {
+            if (res.result.has_pay_password == 1) {
+              this.selectComponent("#enter_psw").show(this.data.data.total_price, this.data.data.order_number)
+            } else {
+              app.showToast('请设置支付密码', (res) => {
+                wx.navigateTo({
+                  url: '/my/set_pay_psw/set_pay_psw',
+                })
+              })
+            }
+          })
+        } else if (this.data.pay_type == 2) {
+          http.post(app.globalData.wx_pay, {
+            integral_id: this.data.data.id,
+            out_trade_no: this.data.data.order_number,
+            member_address_id: this.data.data.address.member_address_id,
+            attach: `exchange|2|${app.globalData.member_id}`,
+            total_fee: this.data.data.total_price,
+            open_id: app.globalData.openid,
+            body: '积分',
+          }).then(res => {
+            wx.requestPayment({
+              timeStamp: res.result.timestamp,
+              nonceStr: res.result.nonceStr,
+              package: res.result.package,
+              signType: res.result.signType,
+              paySign: res.result.paySign,
+              success: res => {
+                app.showSuccessToast('充值成功', () => {})
+                setTimeout(() => {
+                  wx.switchTab({
+                    url: '/pages/my/my',
+                  })
+                }, 1000)
+              }
             })
           })
         }
-      })
-    } else if (this.data.pay_type == 2) {
-      http.post(app.globalData.wx_pay, {
-        integral_id: this.data.data.id,
-        out_trade_no: this.data.data.order_number,
-        member_address_id: this.data.data.address.member_address_id,
-        attach: `exchange|2|${app.globalData.member_id}`,
-        total_fee: this.data.data.total_price,
-        open_id: app.globalData.openid,
-        body: '积分',
-      }).then(res => {
-        wx.requestPayment({
-          timeStamp: res.result.timestamp,
-          nonceStr: res.result.nonceStr,
-          package: res.result.package,
-          signType: res.result.signType,
-          paySign: res.result.paySign,
-          success: res => {
-            app.showSuccessToast('充值成功', () => {})
-            setTimeout(() => {
-              wx.switchTab({
-                url: '/pages/my/my',
-              })
-            }, 1000)
-          }
+      } else if (res.data.status == 1) {
+        app.showToast(res.message, () => {
+          wx.navigateBack({})
         })
-      })
-    }
+      }
+    })
   }
 })

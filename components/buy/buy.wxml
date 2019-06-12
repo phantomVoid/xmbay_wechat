@@ -71,11 +71,26 @@
     <view class='operation'>
       <!-- 选择属性 -->
       <view class='add-cart' wx:if='{{type==1}}' hover-class='hover-class' hover-stay-time='400' bindtap='_addCart' style='{{util.diy_color(diy_color.text_color,diy_color.c_color,"")}}'>加入购物车</view>
-      <view class='buy-now bg' wx:if='{{type==1}}' hover-class='hover-class' hover-stay-time='400' bindtap='_buyNow' style='{{util.diy_color("",diy_color.z_color,"")}}'>立即购买</view>
+      <block wx:if='{{type==1}}'>
+        <form report-submit='true' bindsubmit='formId'>
+          <button class='buy-now bg' hover-class='hover-class' hover-stay-time='400' formType="submit" bindtap='_buyNow' style='{{util.diy_color("",diy_color.z_color,"")}}'>确定</button>
+        </form>
+      </block>
+      <!-- <view class='buy-now bg' wx:if='{{type==1}}' hover-class='hover-class' hover-stay-time='400' bindtap='_buyNow' style='{{util.diy_color("",diy_color.z_color,"")}}'>立即购买</view> -->
       <!-- 立即购买 -->
-      <view class='confirm bg' wx:if='{{type==2}}' hover-class='hover-class' hover-stay-time='400' bindtap='_buyNow' style='{{util.diy_color("",diy_color.z_color,"")}}'>确定</view>
+      <block wx:if='{{type==2}}'>
+        <form report-submit='true' bindsubmit='formId'>
+          <button class='confirm bg' hover-class='hover-class' hover-stay-time='400' formType="submit" bindtap='_buyNow' style='{{util.diy_color("",diy_color.z_color,"")}}'>确定</button>
+        </form>
+      </block>
+      <!-- <view class='confirm bg' wx:if='{{type==2}}' hover-class='hover-class' hover-stay-time='400' bindtap='_buyNow' style='{{util.diy_color("",diy_color.z_color,"")}}'>确定</view> -->
       <!-- 加入购物车 -->
-      <view class='confirm bg' wx:if='{{type==3}}' hover-class='hover-class' hover-stay-time='400' bindtap='_addCart' style='{{util.diy_color("",diy_color.z_color,"")}}'>确定</view>
+      <block wx:if='{{type==3}}'>
+        <form report-submit='true' bindsubmit='formId'>
+          <button class='confirm bg' hover-class='hover-class' hover-stay-time='400' formType="submit" bindtap='_addCart' style='{{util.diy_color("",diy_color.z_color,"")}}'>确定</button>
+        </form>
+      </block>
+      <!-- <view class='confirm bg' wx:if='{{type==3}}' hover-class='hover-class' hover-stay-time='400' bindtap='_addCart' style='{{util.diy_color("",diy_color.z_color,"")}}'>确定</view> -->
     </view>
   </view>
 </view>

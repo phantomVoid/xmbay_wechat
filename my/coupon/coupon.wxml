@@ -21,7 +21,12 @@
             <text>￥</text>
             <text>{{item.actual_price}}</text>
           </view>
-          <view class='coupon-used'>满{{item.full_subtraction_price}}元可用</view>
+          <block wx:if='{{item.full_subtraction_price!=0}}'>
+            <view class='coupon-used'>满{{item.full_subtraction_price}}元可用</view>
+          </block>
+          <block wx:elif='{{item.full_subtraction_price==0}}'>
+            <view class='coupon-used'>无门槛</view>
+          </block>
         </view>
       </view>
       <view class='coupon-right'>

@@ -60,7 +60,7 @@ Page({
     // this.setData(obj)
     app.app_DIY(() => {
       this.location()
-    })
+    }, this)
 
   },
 

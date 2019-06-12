@@ -42,7 +42,7 @@
   </view>
 </view>
 <!--购物车  -->
-<cart id="cart" />
+<cart id="cart" diy_color='{{diy_color}}'/>
 <!--返回顶部  -->
 <go_top id="go_top" hover-class='hover-class' hover-stay-time='400' bindtap='onBackTop' />
 <scroll-view scroll-y style='height:calc(100vh - 184rpx);padding-top:184rpx' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top="{{scroll_top}}" hidden='{{good_list.length == 0 && !loading}}' scroll-with-animation>
@@ -68,4 +68,4 @@
   </view>
 </view>
 
-<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" />
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>

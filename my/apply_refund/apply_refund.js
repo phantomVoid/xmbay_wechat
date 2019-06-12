@@ -157,6 +157,9 @@ Page({
       title: '加载中...',
     })
     this.uploadImage(0)
+    http.post(app.globalData.applet_my_saveFormId, {
+      micro_form_id: this.data.formId
+    }).then(res => { })
   },
 
   /**
@@ -207,4 +210,7 @@ Page({
       })
     }
   },
+  formId(e) {
+    this.data.formId = e.detail.formId
+  }
 })

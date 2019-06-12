@@ -4,7 +4,6 @@
 page {
   background: #f6f6f6;
 }
-
 .hover-class {
   pointer-events: none;
 }
@@ -39,6 +38,7 @@ button {
   background-color: transparent;
   padding-left: 0;
   padding-right: 0;
+  border-radius: unset;
 }
 
 button::after {
