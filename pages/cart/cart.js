@@ -143,6 +143,11 @@ Page({
         'cart_info.totalNum': totalNum
       })
 
+      if (this.data.cart_list.length == 0) {
+        this.setData({
+          is_edit_state: false
+        })
+      }
 
       this.onCalculate()
     })
@@ -357,6 +362,11 @@ Page({
     }).then(res => {
       app.showSuccessToast('收藏成功')
       this.getCartList()
+      if (this.data.cart_list.length == 0) {
+        this.setData({
+          is_edit_state: false
+        })
+      }
     })
   },
 

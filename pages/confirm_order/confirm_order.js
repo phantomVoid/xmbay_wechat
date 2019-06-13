@@ -133,24 +133,23 @@ Page({
         res.packet[0].select = true
       }
       if (res.freight.length != 0) {
-        if (res.freight[0].express_freight_sup == 1 && res.freight[0].default_express_type == 1) {
+        if (res.freight[0].express_freight_sup == 1) { // && res.freight[0].default_express_type == 1
           //快递
           this.data.info.delivery_method = 3
           this.data.pay_way = 1
           this.data.freight_price = res.freight[0].express_freight_price
-
-        } else if (res.freight[0].city_freight_sup == 1 && res.freight[0].default_express_type == 2) {
+        } else if (res.freight[0].city_freight_sup == 1) {
           //同城
           this.data.info.delivery_method = 1
           this.data.freight_price = res.freight[0].city_freight_price
           this.data.pay_way = 1
-        } else if (res.freight[0].take_freight_sup == 1 && res.freight[0].default_express_type == 3) {
+        } else if (res.freight[0].take_freight_sup == 1) {
           //预约
           this.data.info.delivery_method = 2
           this.data.freight_price = 0
           this.data.pay_way = 1
         }
-        if (res.freight[0].take_freight_sup == 1 && res.freight[0].default_express_type == 3) {
+        if (res.freight[0].take_freight_sup == 1) {
           this.data.take_id = res.freight[0].take_freight_list[0].take_id
           this.data.take_item = res.freight[0].take_freight_list[0]
           // this.data.pay_way = 2

@@ -111,19 +111,19 @@ Page({
       for (let i = 0, len = res.result.length; i < len; i++) {
         if (res.result[i].freight != null) {
           //配送方式
-          if (res.result[i].freight.express_freight_sup == 1 && res.result[i].freight.default_express_type == 1) {
+          if (res.result[i].freight.express_freight_sup == 1) {// && res.result[i].freight.default_express_type == 1
             res.result[i]['delivery_method'] = 'is_express'
             res.result[i]['distribution_type'] = '3'
             res.result[i]['way'] = 1
             //运费
             freight += parseFloat(res.result[i].freight.express_freight_price)
-          } else if (res.result[i].freight.city_freight_sup == 1 && res.result[i].freight.default_express_type == 2) {
+          } else if (res.result[i].freight.city_freight_sup == 1) {
             res.result[i]['delivery_method'] = 'is_city'
             res.result[i]['distribution_type'] = '1'
             res.result[i]['way'] = 1
             //运费
             freight += parseFloat(res.result[i].freight.city_freight_price)
-          } else if (res.result[i].freight.take_freight_sup == 1 && res.result[i].freight.default_express_type == 3) {
+          } else if (res.result[i].freight.take_freight_sup == 1) {
             res.result[i]['delivery_method'] = 'is_shop'
             res.result[i]['distribution_type'] = '2'
             res.result[i]['way'] = 1
@@ -131,7 +131,7 @@ Page({
             freight += 0
           }
           //门店自提点
-          if (res.result[i].freight.take_freight_sup == 1 && res.result[i].freight.default_express_type == 3) {
+          if (res.result[i].freight.take_freight_sup == 1) {
             res.result[i]['take_freight'] = res.result[i].freight.take_freight_list[0]
             res.result[i]['take_freight_id'] = res.result[i].freight.take_freight_list[0].take_id
           } else {
