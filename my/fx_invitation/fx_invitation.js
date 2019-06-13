@@ -8,6 +8,7 @@ Page({
    */
   data: {
     info: {},
+    random: ''
   },
 
   /**
@@ -40,6 +41,10 @@ Page({
     }
     this.getDistributionData()
     this.getData()
+    let timestamp = new Date().getTime()
+    this.setData({
+      random: `?id=${timestamp}`
+    })
   },
 
   /**
@@ -139,7 +144,7 @@ Page({
    * 我要代言
    */
   goDistribution() {
-    if (app.login()){
+    if (app.login()) {
       if (this.data.info.is_self == 1) {
         wx.navigateTo({
           url: '/my/fx_goods_list/fx_goods_list',
@@ -150,7 +155,7 @@ Page({
         })
       }
     }
-    
+
     // http.post(app.globalData.distribution_jumpSign, {}).then(res => {
     //   wx.redirectTo({
     //     url: res.data.path

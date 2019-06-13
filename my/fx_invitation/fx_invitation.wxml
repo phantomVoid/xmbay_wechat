@@ -1,6 +1,6 @@
 <!--my/fx_invitation/fx_invitation.wxml-->
 <wxs module="util" src="../../utils/util.wxs" />
-<view class='warp' style='background: url({{util.HTTP}}{{info.combination}}) no-repeat;background-size: 100% 100%;'>
+<view class='warp' style='background: url({{util.HTTP}}{{info.combination}}{{random}}) no-repeat;background-size: 100% 100%;'>
   <view class='distribution' wx:if='{{d_scene!=undefined&&distribution.cur==null}}'>
     <view class='left'>
       <image class='user_img' wx:if='{{d_scene.scene=="1"}}' src='{{distribution.dist.avatar}}'></image>

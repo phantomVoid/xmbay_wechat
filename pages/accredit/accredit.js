@@ -79,6 +79,7 @@ Page({
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
+          console.log(e)
           this.login(e)
           this.setData({
             isSubmit: true
@@ -111,6 +112,8 @@ Page({
         let sup_id = app.globalData.sup_id
         http.post(app.globalData.login, {
           code: res.code,
+          nickName: e.detail.userInfo.nickName,
+          avatarUrl: e.detail.userInfo.avatarUrl,
           encryptedData: e.detail.encryptedData,
           iv: e.detail.iv,
           member_id: '',
