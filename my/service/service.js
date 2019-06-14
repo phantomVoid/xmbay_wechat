@@ -78,9 +78,9 @@ Page({
     let service_info = ''
     if (options.service_info) {
       service_info = JSON.parse(options.service_info)
-      service_info.detail.goods_name = decodeURIComponent(service_info.detail.goods_name)
       service_info.store_title = decodeURIComponent(service_info.store_title)
       if (service_info.detail) {
+        service_info.detail.goods_name = decodeURIComponent(service_info.detail.goods_name)
         service_info.detail.file = decodeURIComponent(service_info.detail.file)
       }
     }
@@ -220,7 +220,7 @@ Page({
     if (app.globalData.member_id == '') {
       return
     }
-    app.service(() => {
+    setTimeout(() => {
       //预聊天消息
       let data = {
         "TYPE": "MATCH_CUSTOMER",
@@ -232,12 +232,12 @@ Page({
       app.app_socket.send({
         data: JSON.stringify(data),
         success: res => {
-          console.log(res,'客服进入1')
+          console.log(res)
           app.socketOnMessage('serviceRoom', this)
         },
         fail: res => {},
       })
-    })
+    }, 1000)
   },
 
   /**

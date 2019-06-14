@@ -72,14 +72,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getSystemInfo()
-    if (app.globalData.diy_color['z_color'] != undefined) {
-      this.setData({
-        diy_color: app.globalData.diy_color
-      })
-    } else {
-      app.app_DIY(() => {}, this)
-    }
     //上级代言id
     if (options.sup_id) {
       app.globalData.sup_id = options.sup_id
@@ -112,7 +104,14 @@ Page({
         sup_id: app.globalData.sup_id
       })
     }
-    
+    if (app.globalData.diy_color.z_color != undefined) {
+      this.setData({
+        diy_color: app.globalData.diy_color
+      })
+    } else {
+      app.app_DIY(() => { }, this)
+    }
+    this.getSystemInfo()
   },
 
   /**

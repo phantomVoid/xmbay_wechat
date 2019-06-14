@@ -21,12 +21,12 @@ page {
 }
 
 .border-cur {
-  border: 2rpx solid #f23030 !important;
+  border: 1px solid #f23030 !important;
   color: #f23030 !important;
 }
 
 .cur-bottom {
-  border-bottom: 2rpx solid #f23030 !important;
+  border-bottom: 1px solid #f23030 !important;
   color: #f23030 !important;
 }
 

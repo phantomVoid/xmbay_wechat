@@ -3,7 +3,7 @@ var HTTP = 'https://ishop.zihaiwangluo.com/'
 
 // 测试域名
 var HTTP = 'https://ishoptest.zihaiwangluo.com/'
-// var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
+var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
 // var HTTP = 'http://vers.zihaiwangluo.com/'
 // var HTTP = 'https://ddmb.zihaiwangluo.com/'
 
@@ -45,6 +45,7 @@ App({
     wx.closeSocket()
     clearTimeout(this.app_socketHeartTime)
     this.app_leave = true
+    this.app_socketType = true
   },
 
   /**
@@ -90,9 +91,11 @@ App({
     this.app_socket.onClose(res => {
       console.log(res, '连接断开')
       this.app_socketType = false
-      if (res.code != 10000) {
+      if (res.code != 10000 && !this.app_leave) {
         clearTimeout(this.app_socketHeartTime)
-        this.againSocket()
+        setTimeout(res => {
+          this.service()
+        }, 3000)
       }
     })
   },
@@ -130,6 +133,9 @@ App({
    * 聊天房间
    */
   socket_serviceRoom(resData, _this) {
+    if (_this.data.service_info.TARGET_ID != resData.DATA.FROM_ID) {
+      return
+    }
     let list, writeData
     switch (resData.DATA.MESSAGE_TYPE) {
       case 'TEXT':

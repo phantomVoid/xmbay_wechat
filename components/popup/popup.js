@@ -469,11 +469,14 @@ Component({
      * 隐藏历史记录
      */
     historyClose(){
-      setTimeout(()=>{
-        this.setData({
-          isHistory: true
-        })
-      },300)
+      // setTimeout(()=>{
+      //   this.setData({
+      //     isHistory: true
+      //   })
+      // },300)
+      this.setData({
+        isHistory: true
+      })
     },
     /**
      * 历史提交数据

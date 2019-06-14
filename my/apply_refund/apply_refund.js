@@ -186,7 +186,7 @@ Page({
       http.post(app.globalData.refundAndReturn, {
         order_goods_id: this.data.dataInfo.info.order_goods_id,
         type: this.data.dataInfo.type,
-        refund_amount: this.data.dataInfo.info.subtotal_price,
+        refund_amount: this.data.price,
         reason: this.data.reason,
         is_get_goods: this.data.dataInfo.state,
         multiple_file: this.data.file_name

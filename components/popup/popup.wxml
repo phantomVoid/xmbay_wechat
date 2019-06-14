@@ -9,7 +9,7 @@
     </view>
     <scroll-view scroll-y class='scrolly'>
       <view class='warp'>
-        <view class='section'>
+        <view class='section' hover-class='hover-class' bindtap='historyClose'>
           <view class='row'>
             <view class='title'>发票类型</view>
             <view class='btn-con'>
@@ -26,9 +26,9 @@
           <!-- 个人 -->
           <block wx:if='{{invoice_type==0&&rise==1}}'>
             <view class='row'>
-              <input bindinput='rise_name' cursor-spacing='200' value='{{rise_name}}' placeholder='请填写抬头名称' placeholder-style='color:#b2b8bf' bindfocus='historyShow' bindblur='historyClose'></input>
+              <input bindinput='rise_name' cursor-spacing='200' value='{{rise_name}}' placeholder='请填写抬头名称' placeholder-style='color:#b2b8bf' catchtap='historyShow'></input>
               <view class='rise-history-con' hidden='{{isHistory||riseHistory.personal.length==0}}'>
-                <scroll-view>
+                <scroll-view scroll-y>
                   <view wx:for='{{riseHistory.personal}}' wx:key='{{index}}' bindtap='onHistory' data-type='personal' data-item='{{item}}'>{{item.rise_name}}</view>
                 </scroll-view>
               </view>
@@ -37,14 +37,14 @@
           <!-- 公司 -->
           <block wx:elif='{{invoice_type==1&&rise==2}}'>
             <view class='row'>
-              <input bindinput='company' cursor-spacing='200' value='{{company}}' placeholder='请填写企业名称' placeholder-style='color:#b2b8bf' bindfocus='historyShow' bindblur='historyClose'></input>
+              <input bindinput='company' cursor-spacing='200' value='{{company}}' placeholder='请填写企业名称' placeholder-style='color:#b2b8bf' catchtap='historyShow'></input>
               <input bindinput='taxer_number' value='{{taxer_number}}' placeholder='请填写纳税人识别码' placeholder-style='color:#b2b8bf'></input>
               <input bindinput='address' value='{{address}}' placeholder='请填写注册地址' placeholder-style='color:#b2b8bf'></input>
               <input bindinput='phone' value='{{phone}}' type='number' maxlength='11' placeholder='请填写注册电话' placeholder-style='color:#b2b8bf'></input>
               <input bindinput='bank' value='{{bank}}' placeholder='请填写开户银行' placeholder-style='color:#b2b8bf'></input>
               <input bindinput='account' value='{{account}}' type='number' placeholder='请填写银行账号' placeholder-style='color:#b2b8bf'></input>
               <view class='rise-history-con' hidden='{{isHistory||riseHistory.tax.length==0}}'>
-                <scroll-view>
+                <scroll-view scroll-y>
                   <view wx:for='{{riseHistory.tax}}' wx:key='{{index}}' bindtap='onHistory' data-type='tax' data-item='{{item}}'>{{item.rise_name}}</view>
                 </scroll-view>
               </view>
@@ -52,10 +52,10 @@
           </block>
           <block wx:elif='{{invoice_type==0&&rise==2}}'>
             <view class='row'>
-              <input bindinput='company' cursor-spacing='200' value='{{company}}' placeholder='请填写企业名称' placeholder-style='color:#b2b8bf' bindfocus='historyShow' bindblur='historyClose'></input>
+              <input bindinput='company' cursor-spacing='200' value='{{company}}' placeholder='请填写企业名称' placeholder-style='color:#b2b8bf' catchtap='historyShow'></input>
               <input bindinput='taxer_number' value='{{taxer_number}}' placeholder='请填写纳税人识别码' placeholder-style='color:#b2b8bf'></input>
               <view class='rise-history-con' hidden='{{isHistory||riseHistory.company.length==0}}'>
-                <scroll-view>
+                <scroll-view scroll-y>
                   <view wx:for='{{riseHistory.company}}' wx:key='{{index}}' bindtap='onHistory' data-type='company' data-item='{{item}}'>{{item.rise_name}}</view>
                 </scroll-view>
               </view>

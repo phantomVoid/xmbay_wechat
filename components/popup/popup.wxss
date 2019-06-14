@@ -139,6 +139,7 @@
   border: 1px solid #f6f6f6;
 }
 .scrolly .row .rise-history-con scroll-view{
+  width: 100%;
   height: 100%;
   padding: 10rpx;
   box-sizing: border-box;

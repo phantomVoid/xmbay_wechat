@@ -86,12 +86,12 @@
 .content .name {
   width: 420rpx;
   font-size: 28rpx;
-  height: 76rpx;
+  height: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 4;
 }
 
 .content .number {
