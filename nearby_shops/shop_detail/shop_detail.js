@@ -77,13 +77,7 @@ Page({
         store_id: options.store_id
       })
     }
-    if (app.globalData.diy_color.z_color != undefined) {
-      this.setData({
-        diy_color: app.globalData.diy_color
-      })
-    } else {
-      app.app_DIY(() => { }, this)
-    }
+    app.app_DIY(() => {}, this)
     this.getCartList()
     this.setData({
       configSwitch: app.globalData.configSwitch,
@@ -112,7 +106,7 @@ Page({
       console.log(this.data.goods_id)
       for (let i = 0, len = this.data.all_list.length; i < len; i++) {
         if (this.data.all_list[i].goods_id == this.data.goods_id) {
-          this.data.all_list[i].cart_number = data.number
+          this.data.all_list[i].cart_number += data.number
         }
       }
       this.setData({
@@ -970,7 +964,7 @@ Page({
     })
     this.selectComponent("#buy_board").show()
   },
-  buyCallback(e){
+  buyCallback(e) {
     console.log(e)
   },
   /**

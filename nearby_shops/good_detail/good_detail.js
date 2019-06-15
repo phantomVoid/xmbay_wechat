@@ -104,13 +104,7 @@ Page({
         sup_id: app.globalData.sup_id
       })
     }
-    if (app.globalData.diy_color.z_color != undefined) {
-      this.setData({
-        diy_color: app.globalData.diy_color
-      })
-    } else {
-      app.app_DIY(() => { }, this)
-    }
+    app.app_DIY(() => {}, this)
     this.getSystemInfo()
   },
 

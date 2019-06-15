@@ -188,7 +188,7 @@ Page({
    */
   service() {
     let service_info = {
-      store_title: this.data.info.store_name,
+      store_title: encodeURIComponent(this.data.info.store_name),
       TARGET_ID: this.data.info.store_id,
       DIVERSION_ID: '1005'
     }

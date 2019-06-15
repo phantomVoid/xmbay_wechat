@@ -23,7 +23,8 @@ Component({
   },
   ready() {
     this.setData({
-      diy_color: app.globalData.diy_color
+      diy_color: app.globalData.diy_color,
+      configSwitch: app.globalData.configSwitch
     })
   },
 

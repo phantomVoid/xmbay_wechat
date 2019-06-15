@@ -94,13 +94,13 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 76rpx;
+  padding-left: 30rpx;
   border-top: 1px solid #f0f0f0;
 }
 
 .cart-good .good-detail {
   position: relative;
-  width: 450rpx;
+  width: 500rpx;
   margin-left: 24rpx;
 }
 
