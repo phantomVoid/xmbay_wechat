@@ -76,7 +76,7 @@
       </view>
       <view class='item' bindtap='onPayCode' hover-class='hover-class' hover-stay-time='300'>
         <image src='{{util.HTTP}}mobile/small/image/home-dd-01/home-fkm-01.png'></image>
-        <text>付款码</text>
+        <text>会员码</text>
       </view>
     </view>
   </view>
@@ -238,8 +238,8 @@
     </view>
     <view class='adv-con' wx:if="{{dataInfo.adv_list.length!=0}}">
       <scroll-view class='adv-swiper' scroll-x>
-        <view class='adv-list'>
-          <view class='adv-file' wx:for='{{dataInfo.adv_list}}' wx:key='{{index}}' data-item='{{item}}' bindtap='onAdv' hover-class='hover-class' hover-stay-time='300'>
+        <view class='adv-list' style='{{dataInfo.adv_list.length==1?"width:100%;":""}}'>
+          <view class='adv-file' style='{{dataInfo.adv_list.length==1?"width:100%;":""}}' wx:for='{{dataInfo.adv_list}}' wx:key='{{index}}' data-item='{{item}}' bindtap='onAdv' hover-class='hover-class' hover-stay-time='300'>
             <image src='{{item.file}}'></image>
           </view>
         </view>

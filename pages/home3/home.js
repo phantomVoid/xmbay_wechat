@@ -260,7 +260,7 @@ Page({
   onPayCode() {
     if (app.login()) {
       wx.navigateTo({
-        url: `/my/vip_card/vip_card?&tab=2`
+        url: `/my/vip_card/vip_card?&tab=1`
       })
     }
   },

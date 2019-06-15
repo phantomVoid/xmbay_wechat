@@ -21,7 +21,7 @@
           </view>
           <!-- <view bindtap='onPayCode'>
             <image src='{{util.HTTP}}{{"mobile/small/image/sy-ewm.png"}}'></image>
-            <view>付款码</view>
+            <view>会员码</view>
           </view> -->
         </view>
         <!-- <view class='location' bindtap='onLocation'>
@@ -39,7 +39,7 @@
           </view> -->
           <view bindtap='onPayCode'>
             <image src='{{util.HTTP}}mobile/small/image/sy-ewm.png'></image>
-            <view>付款码</view>
+            <view>会员码</view>
           </view>
         </view>
       </view>
@@ -68,7 +68,7 @@
           </view> -->
           <view bindtap='onPayCode'>
             <image src='{{util.HTTP}}mobile/small/image/sy-ewm-2.png'></image>
-            <view>付款码</view>
+            <view>会员码</view>
           </view>
         </view>
       </view>

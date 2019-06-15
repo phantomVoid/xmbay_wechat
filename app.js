@@ -2,9 +2,9 @@
 var HTTP = 'https://ishop.zihaiwangluo.com/'
 
 // 测试域名
-var HTTP = 'https://ishoptest.zihaiwangluo.com/'
-var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
-// var HTTP = 'http://vers.zihaiwangluo.com/'
+// var HTTP = 'https://ishoptest.zihaiwangluo.com/'
+// var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
+// var HTTP = 'http://testwb.zihaiwangluo.com/'
 // var HTTP = 'https://ddmb.zihaiwangluo.com/'
 
 App({
@@ -53,8 +53,8 @@ App({
    */
   service(callback) {
     this.app_socket = wx.connectSocket({
-      url: 'wss://ishoptest.zihaiwangluo.com/ws',
-      // url: 'wss://ishop.zihaiwangluo.com/ws',
+      // url: 'wss://ishoptest.zihaiwangluo.com/ws',
+      url: 'wss://ishop.zihaiwangluo.com/ws',
       // url: 'ws://125.211.218.59:60013',
       header: {
         'content-type': 'application/json'

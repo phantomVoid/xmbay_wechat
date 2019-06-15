@@ -99,7 +99,7 @@
       <view class='h-btn-con'>
         <view class='item' bindtap='onPayCode' hover-class='hover-class' hover-stay-time='300'>
           <image src='{{util.HTTP}}{{scrollTop>20?"mobile/small/image/home-dd-01/home-fkm-01.png":"mobile/small/image/shop_common/6.png"}}'></image>
-          <text>付款码</text>
+          <text>会员码</text>
         </view>
       </view>
     </view>

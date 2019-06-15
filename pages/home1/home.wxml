@@ -35,7 +35,7 @@
           </view>
           <view hover-class='hover-class' hover-stay-time='400' bindtap='onPayCode'>
             <image src='{{util.HTTP}}mobile/small/image/sy-ewm.png'></image>
-            <view>付款码</view>
+            <view>会员码</view>
           </view>
         </view>
       </view>
@@ -65,7 +65,7 @@
           </view>
           <view hover-class='hover-class' hover-stay-time='400' bindtap='onPayCode'>
             <image src='{{util.HTTP}}mobile/small/image/sy-ewm-2.png'></image>
-            <view>付款码</view>
+            <view>会员码</view>
           </view>
         </view>
       </view>

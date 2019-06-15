@@ -7,7 +7,7 @@ var util = {
   /**
    * 测试域名
    */
-  HTTP: 'https://ishoptest.zihaiwangluo.com/',
+  // HTTP: 'https://ishoptest.zihaiwangluo.com/',
   // HTTP: 'https://ishop-preview.zihaiwangluo.com/',
   // HTTP: 'http://fapiao.zihaiwangluo.com/',
   // HTTP: 'http://vers.zihaiwangluo.com/',

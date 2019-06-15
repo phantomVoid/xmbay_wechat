@@ -89,9 +89,9 @@ Page({
     app.app_DIY(() => {
       this.location()
     })
-
+    let timestamp = new Date().getTime()
     this.setData({
-      Math_random: (Math.random() * (10 + 1)).toFixed(2),
+      Math_random: timestamp,
       model: app.globalData.model
     })
   },
@@ -264,7 +264,7 @@ Page({
   onPayCode() {
     if (app.login()) {
       wx.navigateTo({
-        url: `/my/vip_card/vip_card?&tab=2`
+        url: `/my/vip_card/vip_card?&tab=1`
       })
     }
   },
