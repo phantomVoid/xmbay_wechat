@@ -26,8 +26,12 @@ Page({
    */
   onReady: function() {
     this.getData()
-    event.on('changeIntegralRecord', this, index => {
-      this.data.list[index].status = 2
+    event.on('changeIntegralRecord', this, id => {
+      for (let i = 0, len = this.data.list.length; i < len; i++) {
+        if (this.data.list[i].integral_order_id == id) {
+          this.data.list[i].status = 2
+        }
+      }
       this.setData({
         list: this.data.list
       })

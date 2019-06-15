@@ -32,7 +32,7 @@
     </view>
   </view>
 
-  <view class="pay-code-wrap {{tab == 1?'':'pay-code-anim'}}" catchtap='onPayCode'>
+  <!-- <view class="pay-code-wrap {{tab == 1?'':'pay-code-anim'}}" catchtap='onPayCode'>
     <view>
       <view class='pay-code'>
         <view class='code-head'>付款码</view>
@@ -56,6 +56,6 @@
       </view>
       <view class='set-psw' hover-class='hover-class' hover-stay-time='400' bindtap='setPassword'>设置支付密码,保护交易安全 ></view>
     </view>
-  </view>
+  </view> -->
 
 </view>

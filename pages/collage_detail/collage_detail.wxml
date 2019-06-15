@@ -85,7 +85,7 @@
         <view class='info-member'>
           <view wx:for="{{info.participant}}" wx:key='{{index}}'>
             <view class='avatar' style='background:url({{util.HTTP}}mobile/small/image/placeholder_member.png) no-repeat center;background-size:100% 100%;'>
-              <image src='{{item.avatar}}'></image>
+              <image src='{{item.avatar}}' wx:if='{{item.avatar!=""}}'></image>
             </view>
             <view class='tip' wx:if='{{index == 0}}' style='{{util.diy_color("",diy_color.z_color,"")}}'>团长</view>
           </view>

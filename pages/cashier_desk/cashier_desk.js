@@ -110,6 +110,7 @@ Page({
               signType: res.result.signType,
               paySign: res.result.paySign,
               success: res => {
+                console.log(res)
                 app.showSuccessToast('支付成功', res => {
                   // wx.navigateBack()
                   this.pay_callback()
@@ -126,6 +127,9 @@ Page({
           wx.navigateBack({})
         })
       }
+      http.post(app.globalData.applet_my_saveFormId, {
+        micro_form_id: this.data.formId
+      }).then(res => { })
     })
   },
 
@@ -178,5 +182,9 @@ Page({
         })
         break;
     }
+  },
+
+  formId(e) {
+    this.data.formId = e.detail.formId
   }
 })

@@ -18,6 +18,10 @@
   </view>
 </view>
 
-<view class='submit' hover-class='hover-class' hover-stay-time='400' bindtap='commit' style='{{util.diy_color("",diy_color.z_color,"")}}'>确认付款</view>
+<!-- <view class='submit' hover-class='hover-class' hover-stay-time='400' bindtap='commit' style='{{util.diy_color("",diy_color.z_color,"")}}'>确认付款</view> -->
+
+<form report-submit='true' bindsubmit='formId'>
+  <button class='submit' hover-class='hover-class' hover-stay-time='400' formType="submit" bindtap='commit' style='{{util.diy_color("",diy_color.z_color,"")}}'>确认付款</button>
+</form>
 
 <enter_psw id="enter_psw" />

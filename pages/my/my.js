@@ -335,12 +335,8 @@ Page({
    * 代言等级
    */
   goVicon() {
-    let data = {
-      avatar: this.data.info.userInfo.avatar,
-      nickname: this.data.info.userInfo.nickname
-    }
     wx.navigateTo({
-      url: `/my/fx_grade/fx_grade?data=${encodeURIComponent(JSON.stringify(data))}`
+      url: `/my/fx_grade/fx_grade`
     })
   },
 

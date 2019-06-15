@@ -93,7 +93,7 @@ Page({
         info: this.data.info
       })
       app.showSuccessToast(res.message, () => {
-        event.emit('changeIntegralRecord', this.data.index)
+        event.emit('changeIntegralRecord', this.data.id)
       })
     })
   },

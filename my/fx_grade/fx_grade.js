@@ -18,9 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      data: JSON.parse(decodeURIComponent(options.data))
-    })
+    
   },
 
   /**
@@ -79,6 +77,10 @@ Page({
       distribution_id: app.globalData.distribution.cur.distribution_id
     }).then(res => {
       this.setData({
+        data: {
+          avatar: res.data.avatar,
+          nickname: res.data.nickname
+        },
         levelList: res.data.level,
         info: res.data
       })

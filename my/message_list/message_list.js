@@ -143,56 +143,129 @@ Page({
    */
   onMessage(e) {
     let item = e.currentTarget.dataset.item
+    console.log(item)
     switch (item.jump_state) {
-      case "integral":
+      case "-1": //无跳转
         wx.navigateTo({
-          url: '/my/integral/integral',
+          url: ``,
         })
         break;
-      case "packet":
+      case "0": //订单详情
         wx.navigateTo({
-          url: '/my/red_pocket/red_pocket',
+          url: `/my/order_detail/order_detail?id=${item.attach_id}`,
         })
         break;
-      case "coupon":
+      case "1": //砍价详情
         wx.navigateTo({
-          url: '/my/coupon/coupon',
+          url: `/pages/bargain/bargain?id=${item.attach_id}`,
         })
         break;
-      case "goods":
+      case "2": //拼团详情
         wx.navigateTo({
-          url: '/nearby_shops/good_detail/good_detail?goods_id=' + item.attach_id,
+          url: `/pages/collage_detail/collage_detail?id=${item.attach_id}`,
         })
         break;
-      case "order":
+      case "3": //分销-我的等级
         wx.navigateTo({
-          url: '/my/order_detail/order_detail?id=' + item.attach_id,
+          url: `/my/fx_grade/fx_grade?`,
         })
         break;
-      case "express":
-        if (item.express_type !='order'){
-          return
-        }
+      case "4": //商品详情
         wx.navigateTo({
-          url: '/my/order_detail/order_detail?id=' + item.attach_id,
+          url: `/nearby_shops/good_detail/good_detail?goods_id=${item.attach_id}`,
         })
-        // this.onLogistics(item)
+        break;
+      case "5": //文章详情
+        wx.navigateTo({
+          url: `/pages/info_detail/info_detail?article_id=${item.attach_id}`,
+        })
+        break;
+      case "6": //退款详情
+        wx.navigateTo({
+          url: `/pages/return_detail/return_detail?id=${item.attach_id}`,
+        })
+        break;
+      case "7": //我的粉丝
+        wx.navigateTo({
+          url: `/my/fx_fans_list/fx_fans_list`,
+        })
+        break;
+      case "8": //我的-会员等级
+        wx.navigateTo({
+          url: `/my/member/member`,
+        })
+        break;
+      case "9": //入驻申请页
+        wx.navigateTo({
+          url: `/my/merchant_guide/merchant_guide`,
+        })
+        break;
+      case "10": //抽奖-订单详情
         // wx.navigateTo({
-        //   url: '/my/logistics_detail/logistics_detail?express_value=' + item.express_value + '&express_number=' + item.express_number,
+        //   url: ``,
         // })
         break;
-      case "article":
+      case "11": //积分-订单详情
         wx.navigateTo({
-          url: '/pages/info_detail/info_detail?article_id=' + item.attach_id,
+          url: `/my/integral_order/integral_order?id=${item.attach_id}`,
         })
         break;
-      case "distribution":
-        http.post(app.globalData.distribution_jumpSign, {}).then(res => {
-          wx.navigateTo({
-            url: res.data.path
-          })
+      case "12": //分销-代言规则
+        wx.navigateTo({
+          url: `/my/fx_cwdy/fx_cwdy`,
         })
         break;
     }
+    // switch (item.jump_state) {
+    //   case "integral":
+    //     wx.navigateTo({
+    //       url: '/my/integral/integral',
+    //     })
+    //     break;
+    //   case "packet":
+    //     wx.navigateTo({
+    //       url: '/my/red_pocket/red_pocket',
+    //     })
+    //     break;
+    //   case "coupon":
+    //     wx.navigateTo({
+    //       url: '/my/coupon/coupon',
+    //     })
+    //     break;
+    //   case "goods":
+    //     wx.navigateTo({
+    //       url: '/nearby_shops/good_detail/good_detail?goods_id=' + item.attach_id,
+    //     })
+    //     break;
+    //   case "order":
+    //     wx.navigateTo({
+    //       url: '/my/order_detail/order_detail?id=' + item.attach_id,
+    //     })
+    //     break;
+    //   case "express":
+    //     if (item.express_type !='order'){
+    //       return
+    //     }
+    //     wx.navigateTo({
+    //       url: '/my/order_detail/order_detail?id=' + item.attach_id,
+    //     })
+    //     // this.onLogistics(item)
+    //     // wx.navigateTo({
+    //     //   url: '/my/logistics_detail/logistics_detail?express_value=' + item.express_value + '&express_number=' + item.express_number,
+    //     // })
+    //     break;
+    //   case "article":
+    //     wx.navigateTo({
+    //       url: '/pages/info_detail/info_detail?article_id=' + item.attach_id,
+    //     })
+    //     break;
+    //   case "distribution":
+    //     http.post(app.globalData.distribution_jumpSign, {}).then(res => {
+    //       wx.navigateTo({
+    //         url: res.data.path
+    //       })
+    //     })
+    //     break;
+    // }
   }
 })

@@ -47,7 +47,7 @@
   border-top: 2rpx solid #f5f5f5;
 }
 
-.operation > view {
+.operation .view {
   float: left;
   width: 50%;
   font-size: 30rpx;
@@ -55,7 +55,7 @@
   text-align: center;
 }
 
-.operation > view:first-child {
+.operation .view:first-child {
   background: #f23020;
   color: white;
 }
