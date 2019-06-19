@@ -62,8 +62,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    console.log(app.globalData.addressSelect.member_address_id)
-    console.log(this.data.address.member_address_id)
     if (!this.data.first && (app.globalData.addressSelect.member_address_id == null || this.data.address.member_address_id != app.globalData.addressSelect.member_address_id)) {
       this.setData({
         address: {}
@@ -248,7 +246,6 @@ Page({
     } else if (ways.indexOf(2) > -1) {
       this.data.pay_way = "货到付款"
     }
-    console.log(this.data.list)
     this.setData({
       list: this.data.list,
       pay_way: this.data.pay_way
@@ -417,11 +414,10 @@ Page({
       discount_price = 0;
     for (let i = 0; i < this.data.list.length; i++) {
       for (var j = 0; j < this.data.list[i].list.length; j++) {
-        console.log(this.data.list[i].list[j].discount_price)
         discount_price += parseFloat(this.data.list[i].list[j].discount_price) * parseFloat(this.data.list[i].list[j].number)
       }
-      total += this.data.list[i].total_price
-      origin_total += this.data.list[i].total_price
+      total += Number(this.data.list[i].total_price)
+      origin_total += Number(this.data.list[i].total_price)
       if (this.data.list[i].distribution_type == 1) {
         //同城
         freight += parseFloat(this.data.list[i].freight.city_freight_price)
@@ -539,8 +535,7 @@ Page({
       origin_type: 2
     }).then(res => {
       event.emit('refreshCart')
-      event.emit('clearCart')
-      console.log(this.data.total)
+      // event.emit('clearCart')
       if (this.data.total_order == 0) {
         let item = {
           total_price: res.result.total_price,
@@ -627,7 +622,6 @@ Page({
     })
   },
   createWhether(idx) {
-    console.log(idx)
     this.data.list[idx].invoice.address_province = this.data.province.area_name
     this.data.list[idx].invoice.address_city = this.data.city.area_name
     this.data.list[idx].invoice.address_area = this.data.area.area_name

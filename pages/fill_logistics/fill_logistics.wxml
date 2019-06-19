@@ -1,6 +1,6 @@
 <wxs module="util" src="../../utils/util.wxs" />
 <view class='logistics-wrap'>
-  <view class='logistics-info return-way'>
+  <view class='logistics-info return-way' wx:if='{{distribution_type==2}}'>
     <view>退回方式:</view>
     <view class='return-detail'>
       <view style='{{return_way==1?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}' hover-class='hover-class' hover-stay-time='400' bindtap='onExpress'>快递至商家</view>

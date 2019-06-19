@@ -174,7 +174,7 @@ Page({
    */
   fillLogistics(e) {
     wx.navigateTo({
-      url: '/pages/fill_logistics/fill_logistics?id=' + this.data.info.order_goods_refund_id + '&store_id=' + this.data.info.store_id,
+      url: '/pages/fill_logistics/fill_logistics?id=' + this.data.info.order_goods_refund_id + '&store_id=' + this.data.info.store_id + '&distribution_type=' + this.data.info.distribution_type,
     })
   },
 

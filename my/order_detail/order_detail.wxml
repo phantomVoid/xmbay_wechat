@@ -316,7 +316,7 @@
     <!-- <self_voucher isShow="{{self_voucher}}" id="self_voucher" /> -->
   </scroll-view>
   <view class='logistics'>
-    <view wx:if="{{info.distribution_type==2}}" hover-class='hover-class' hover-stay-time='400' bindtap='onNavigation'>导航</view>
+    <view wx:if="{{info.distribution_type==2&&info.status == 2}}" hover-class='hover-class' hover-stay-time='400' bindtap='onNavigation'>导航</view>
     <view wx:if="{{info.is_invoice == 1}}" data-item='{{info}}' hover-class='hover-class' hover-stay-time='400' bindtap='invoice_anew'>查看发票</view>
     <view wx:if="{{info.status == 0}}" hover-class='hover-class' hover-stay-time='400' bindtap='cancelOrder'>取消订单</view>
     <view wx:if="{{info.status == -1 || info.status == 3 || info.status == 4 || info.status == 6}}" hover-class='hover-class' hover-stay-time='400' bindtap='deleteOrder' data-confirmType='2'>删除订单</view>

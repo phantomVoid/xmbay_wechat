@@ -220,7 +220,7 @@ Page({
       }).then(res => {
         // app.globalData.in_state = 1
         http.post(app.globalData.applet_my_saveFormId, {
-          micro_form_id: this.data.formId
+          micro_form_id: this.data.formId.join()
         }).then(res => { })
         app.showSuccessToast(res.message, () => {
           wx.navigateBack()

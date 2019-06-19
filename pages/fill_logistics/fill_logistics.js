@@ -38,7 +38,8 @@ Page({
     this.setData({
       diy_color: app.globalData.diy_color,
       id: options.id,
-      store_id: options.store_id
+      store_id: options.store_id,
+      distribution_type: options.distribution_type
     })
   },
 

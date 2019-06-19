@@ -93,6 +93,9 @@ Page({
           case 5:
             app.showToast(data.state_msg, () => {})
             break;
+          case 6:
+            app.showToast(data.state_msg, () => { })
+            break;
         }
       })
     }

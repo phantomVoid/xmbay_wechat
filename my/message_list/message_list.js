@@ -143,12 +143,8 @@ Page({
    */
   onMessage(e) {
     let item = e.currentTarget.dataset.item
-    console.log(item)
     switch (item.jump_state) {
       case "-1": //无跳转
-        wx.navigateTo({
-          url: ``,
-        })
         break;
       case "0": //订单详情
         wx.navigateTo({
@@ -215,57 +211,21 @@ Page({
           url: `/my/fx_cwdy/fx_cwdy`,
         })
         break;
+      case "13": //积分首页
+        wx.navigateTo({
+          url: `/my/integral/integral`,
+        })
+        break;
+      case "14": //红包列表
+        wx.navigateTo({
+          url: `/my/red_pocket/red_pocket`,
+        })
+        break;
+      case "15": //优惠券列表
+        wx.navigateTo({
+          url: `/my/coupon/coupon`,
+        })
+        break;
     }
-    // switch (item.jump_state) {
-    //   case "integral":
-    //     wx.navigateTo({
-    //       url: '/my/integral/integral',
-    //     })
-    //     break;
-    //   case "packet":
-    //     wx.navigateTo({
-    //       url: '/my/red_pocket/red_pocket',
-    //     })
-    //     break;
-    //   case "coupon":
-    //     wx.navigateTo({
-    //       url: '/my/coupon/coupon',
-    //     })
-    //     break;
-    //   case "goods":
-    //     wx.navigateTo({
-    //       url: '/nearby_shops/good_detail/good_detail?goods_id=' + item.attach_id,
-    //     })
-    //     break;
-    //   case "order":
-    //     wx.navigateTo({
-    //       url: '/my/order_detail/order_detail?id=' + item.attach_id,
-    //     })
-    //     break;
-    //   case "express":
-    //     if (item.express_type !='order'){
-    //       return
-    //     }
-    //     wx.navigateTo({
-    //       url: '/my/order_detail/order_detail?id=' + item.attach_id,
-    //     })
-    //     // this.onLogistics(item)
-    //     // wx.navigateTo({
-    //     //   url: '/my/logistics_detail/logistics_detail?express_value=' + item.express_value + '&express_number=' + item.express_number,
-    //     // })
-    //     break;
-    //   case "article":
-    //     wx.navigateTo({
-    //       url: '/pages/info_detail/info_detail?article_id=' + item.attach_id,
-    //     })
-    //     break;
-    //   case "distribution":
-    //     http.post(app.globalData.distribution_jumpSign, {}).then(res => {
-    //       wx.navigateTo({
-    //         url: res.data.path
-    //       })
-    //     })
-    //     break;
-    // }
   }
 })

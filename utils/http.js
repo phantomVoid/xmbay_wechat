@@ -44,12 +44,17 @@ let get = (url, data = {}, hidden) => {
       },
       success: res => {
         if (res.data.code == 0) {
-          if (res.header.token == '500') {
+          if (res.header.token == '500' || res.header.Token == '500') {
             clearLoginState()
           }
-          if (res.header.token != '' && res.header.token != undefined) {
-            wx.setStorageSync('token', res.header.token)
-            app.globalData.token = res.header.token
+          if (res.header.token != '' && res.header.Token != '') {
+            if (res.header.Token) {
+              wx.setStorageSync('token', res.header.Token)
+              app.globalData.token = res.header.Token
+            } else {
+              wx.setStorageSync('token', res.header.token)
+              app.globalData.token = res.header.token
+            }
           }
           success(res.data)
           // wx.hideLoading()
@@ -104,12 +109,17 @@ let postList = (url, data = {}) => {
       },
       success: res => {
         if (res.data.code == 0) {
-          if (res.header.token == '500') {
+          if (res.header.token == '500' || res.header.Token == '500') {
             clearLoginState()
           }
-          if (res.header.token != '' && res.header.token != undefined) {
-            wx.setStorageSync('token', res.header.token)
-            app.globalData.token = res.header.token
+          if (res.header.token != '' && res.header.Token != '') {
+            if (res.header.Token) {
+              wx.setStorageSync('token', res.header.Token)
+              app.globalData.token = res.header.Token
+            } else {
+              wx.setStorageSync('token', res.header.token)
+              app.globalData.token = res.header.token
+            }
           }
           success(res.data)
           console.log(res.data)
@@ -169,12 +179,17 @@ let post = (url, data = {}, hidden) => {
       method: 'POST',
       success: res => {
         if (res.data.code == 0) {
-          if (res.header.token == '500') {
+          if (res.header.token == '500' || res.header.Token == '500') {
             clearLoginState()
           }
-          if (res.header.token != '' && res.header.token != undefined) {
-            wx.setStorageSync('token', res.header.token)
-            app.globalData.token = res.header.token
+          if (res.header.token != '' && res.header.Token != '') {
+            if (res.header.Token) {
+              wx.setStorageSync('token', res.header.Token)
+              app.globalData.token = res.header.Token
+            } else {
+              wx.setStorageSync('token', res.header.token)
+              app.globalData.token = res.header.token
+            }
           }
           success(res.data)
           // wx.hideLoading()
@@ -233,12 +248,17 @@ let encPost = (url, data = {}, hidden) => {
       method: 'POST',
       success: res => {
         if (dec(res.data).code == 0) {
-          if (res.header.token == '500') {
+          if (res.header.token == '500' || res.header.Token == '500') {
             clearLoginState()
           }
-          if (res.header.token != '' && res.header.token != undefined) {
-            wx.setStorageSync('token', res.header.token)
-            app.globalData.token = res.header.token
+          if (res.header.token != '' && res.header.Token != '') {
+            if (res.header.Token) {
+              wx.setStorageSync('token', res.header.Token)
+              app.globalData.token = res.header.Token
+            } else {
+              wx.setStorageSync('token', res.header.token)
+              app.globalData.token = res.header.token
+            }
           }
           success(dec(res.data))
         } else if (res.data.code == -200) {

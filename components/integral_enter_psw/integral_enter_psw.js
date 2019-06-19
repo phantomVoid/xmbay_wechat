@@ -150,8 +150,7 @@ Component({
           pay_pass: e.detail.value
         }).then(res => {
           app.showSuccessToast('支付成功', () => {
-            wx.navigateBack()
-            wx.navigateTo({
+            wx.redirectTo({
               url: '/my/integral_record/integral_record',
             })
             event.emit('refreshIntegral')
