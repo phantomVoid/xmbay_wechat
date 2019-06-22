@@ -323,7 +323,7 @@
     <view wx:if="{{(info.status == 1 || info.status == 2 || info.status == 3 || info.status == 4 || info.status == 6) && info.express_value != null && (info.distribution_type==1&&info.dada==1||info.distribution_type!=1)}}" hover-class='hover-class' hover-stay-time='400'
       bindtap='onLogistics'>查看物流</view>
     <view class='border-cur' wx:if="{{info.status == 3}}" hover-class='hover-class' hover-stay-time='400' bindtap='onComment' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>评价</view>
-    <view class='border-cur' wx:if="{{info.distribution_type==2&&info.status == 2}}" hover-class='hover-class' hover-stay-time='400' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' bindtap='showModal' data-confirmType='1'>确认提货</view>
+    <view class='border-cur' wx:if="{{info.distribution_type==2&&info.status == 2&&info.order_goods_details[0].status!=2.2}}" hover-class='hover-class' hover-stay-time='400' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' bindtap='showModal' data-confirmType='1'>确认提货</view>
     <view class='border-cur' wx:if="{{info.distribution_type!=2&&info.status == 2}}" hover-class='hover-class' hover-stay-time='400' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' bindtap='showModal' data-confirmType='0'>确认收货</view>
     <view class='border-cur' wx:if="{{info.status == 0}}" hover-class='hover-class' hover-stay-time='400' bindtap='payOrder' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>付款</view>
   </view>

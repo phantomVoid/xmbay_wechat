@@ -44,7 +44,7 @@
           </view>
         </view>
       </view>
-      <view class='classify-specific' wx:if='{{brand_list.length!= 0}}'>
+      <view class='classify-specific brand' wx:if='{{brand_list.length!= 0}}'>
         <view class='classify-second'>
           <view class='line' />
           <text class='title'>热卖品牌</text>
@@ -53,7 +53,7 @@
         <view class='classify-detail'>
           <view wx:for="{{brand_list}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onBandClassify' data-id='{{item.brand_id}}'>
             <!-- <image class='classify-icon' src='{{item.brand_logo}}'></image> -->
-            <view class='classify-icon' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:100% 100%;'>
+            <view class='classify-icon'>
             <image src='{{item.brand_logo}}'></image>
           </view>
             <!-- <view class='classify-name'>{{item.brand_name}}</view> -->
@@ -79,7 +79,7 @@
           </view>
         </view>
       </view>
-      <view class='classify-specific' hidden='{{brand_list.length== 0}}'>
+      <view class='classify-specific brand' hidden='{{brand_list.length== 0}}'>
         <view class='classify-second'>
           <view class='line' />
           <text class='title'>热卖品牌</text>
@@ -88,7 +88,7 @@
         </view>
         <view class='classify-detail'>
           <view wx:for="{{brand_list}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onBandClassify' data-id='{{item.brand_id}}'>
-            <view class='classify-icon' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:100% 100%;'>
+            <view class='classify-icon'>
               <image src='{{item.brand_logo}}'></image>
             </view>
             <!-- <image class='classify-icon' src='{{item.brand_logo}}'></image> -->

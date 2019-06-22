@@ -1,6 +1,9 @@
 page {
   background: white;
 }
+button[disabled] {
+    color: #fff !important;
+}
 
 .logo {
   width: 194rpx;

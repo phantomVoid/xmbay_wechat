@@ -194,6 +194,17 @@ page {
   width: 100%;
   height: 100%;
 }
+.brand .classify-detail .classify-icon {
+  display: block;
+  width: 100%;
+  height: 75rpx;
+  padding: 8rpx 14rpx;
+  box-sizing: border-box;
+}
+.brand .classify-detail .classify-icon image{
+  width: 100%;
+  height: 100%;
+}
 
 .classify-detail .classify-name {
   font-size: 24rpx;

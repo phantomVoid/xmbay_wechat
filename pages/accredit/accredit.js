@@ -63,26 +63,109 @@ Page({
   },
 
   /**
-   * 获取用户信息
+   * 获取用户信息,授权
    */
   getUserInfo(e) {
-    if (!this.data.isSubmit) {
-      return
-    }
     this.setData({
-      isSubmit: false
+      loading: true,
+      disabled: true
     })
-    wx.showLoading({
-      title: '登录中',
-      mask: true
-    })
+    if (e.detail.encryptedData) {
+      wx.login({
+        success: login_res => {
+          if (login_res.code) {
+            wx.getUserInfo({
+              success: info_res => {
+                this.Login(login_res.code, info_res)
+              }
+            })
+          } else {
+            this.setData({
+              loading: false,
+              disabled: false
+            })
+            wx.showToast({
+              title: '登录失败',
+              icon: 'none'
+            })
+          }
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '授权失败',
+        icon: 'none'
+      })
+      this.setData({
+        loading: false,
+        disabled: false
+      })
+    }
+  },
+  /**
+   * 登录
+   */
+  Login(code, info_res) {
     wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          console.log(e)
-          this.login(e)
-          this.setData({
-            isSubmit: true
+      success: set_res => {
+        if (set_res.authSetting['scope.userInfo']) {
+          let sup_id = app.globalData.sup_id
+          http.post(app.globalData.login, {
+            code: code,
+            nickName: info_res.userInfo.nickName,
+            avatarUrl: info_res.userInfo.avatarUrl,
+            encryptedData: info_res.encryptedData,
+            iv: info_res.iv,
+            member_id: '',
+            dev_type: 3
+          }).then(res => {
+            wx.hideLoading()
+            //绑定代言关系
+            if (sup_id != '') {
+              this.getDistributionData(sup_id)
+            }
+            wx.setStorageSync('member_id', res.member.member_id)
+            wx.setStorageSync('phone', res.member.phone == null ? '' : res.member.phone)
+            wx.setStorageSync('openid', res.openid)
+            wx.setStorageSync('unionId', res.unionId)
+            app.globalData.member_id = res.member.member_id
+            app.globalData.phone = res.member.phone == null ? '' : res.member.phone
+            app.globalData.openid = res.openid
+            app.globalData.unionId = res.unionId
+            app.globalData.PAST_LOGIN = false
+            wx.setStorageSync('member_info', res.member)
+            app.showSuccessToast('登录成功', () => {
+              if (app.globalData.phone == '') {
+                wx.redirectTo({
+                  url: '../bind_phone/bind_phone',
+                })
+              } else {
+                let page = getCurrentPages()
+                let route = page[page.length - 2].route //上一页地址
+                switch (route) {
+                  case 'nearby_shops/good_detail/good_detail': //是否是商品详情
+                    page[page.length - 2].getData()
+                    break;
+                  case 'my/integral_good_detail/integral_good_detail':
+                    page[page.length - 2].getData()
+                    break;
+                }
+
+                wx.navigateBack()
+                wx.nextTick(() => {
+                  event.emit('refreshCart')
+                  event.emit('refreshHome')
+                })
+              }
+            })
+            wx.nextTick(() => {
+              //客服
+              app.service()
+            })
+            this.setData({
+              loading: false,
+              disabled: false
+            })
           })
         } else {
           wx.showToast({
@@ -90,88 +173,14 @@ Page({
             icon: 'none'
           })
           this.setData({
-            isSubmit: true
+            loading: false,
+            disabled: false
           })
         }
       }
     })
   },
 
-  /**
-   * 登录
-   */
-  login(e) {
-    if (e.detail.encryptedData == null) {
-      return
-    }
-    wx.login({
-      success: res => {
-        //邀请人ID
-        // let s_id = wx.getStorageSync('s_id')
-        //邀请人代言ID
-        let sup_id = app.globalData.sup_id
-        http.post(app.globalData.login, {
-          code: res.code,
-          nickName: e.detail.userInfo.nickName,
-          avatarUrl: e.detail.userInfo.avatarUrl,
-          encryptedData: e.detail.encryptedData,
-          iv: e.detail.iv,
-          member_id: '',
-          dev_type: 3
-        }).then(res => {
-          wx.hideLoading()
-          //绑定代言关系
-          if (sup_id != '') {
-            this.getDistributionData(sup_id)
-          }
-          wx.setStorageSync('member_id', res.member.member_id)
-          wx.setStorageSync('phone', res.member.phone == null ? '' : res.member.phone)
-          wx.setStorageSync('openid', res.openid)
-          wx.setStorageSync('unionId', res.unionId)
-          app.globalData.member_id = res.member.member_id
-          app.globalData.phone = res.member.phone == null ? '' : res.member.phone
-          app.globalData.openid = res.openid
-          app.globalData.unionId = res.unionId
-          app.globalData.PAST_LOGIN = false
-          wx.setStorageSync('member_info', res.member)
-          app.showSuccessToast('登录成功', () => {
-            if (app.globalData.phone == '') {
-              wx.redirectTo({
-                url: '../bind_phone/bind_phone',
-              })
-            } else {
-              let page = getCurrentPages()
-              let route = page[page.length - 2].route //上一页地址
-              switch (route) {
-                case 'nearby_shops/good_detail/good_detail': //是否是商品详情
-                  page[page.length - 2].getData()
-                  break;
-                case 'my/integral_good_detail/integral_good_detail':
-                  page[page.length - 2].getData()
-                  break;
-              }
-
-              wx.navigateBack()
-              wx.nextTick(() => {
-                event.emit('refreshCart')
-                event.emit('refreshHome')
-              })
-
-            }
-          })
-          wx.nextTick(() => {
-            //客服
-            app.service()
-          })
-        }).catch(res => {
-          this.setData({
-            isSubmit: true
-          })
-        })
-
-      }
-    })
-  },
   //获取代言信息
   getDistributionData(superior) {
     http.post(app.globalData.distribution_share_info, {
