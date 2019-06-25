@@ -2,7 +2,7 @@
 <wxs module="util" src="../../utils/util.wxs" />
 <view class='container'>
   <view class='navTab'>
-    <view wx:for='{{navTab}}' hover-class='hover-class' hover-stay-time='400' bindtap='navTab' data-index='{{index}}'>
+    <view wx:for='{{navTab}}' wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='navTab' data-index='{{index}}'>
       <text style='{{navIndex == index?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}'>{{item}}</text>
     </view>
   </view>
@@ -30,8 +30,8 @@
     <view class='fansNum' style='{{util.diy_color(diy_color.z_color,"","")}}'>{{total}}位</view>
   </view>
   <view class='list'>
-    <scroll-view scroll-y style='height:100%;' bindscrolltolower="loadMore" bindscroll="scroll" scroll-top="{{scroll_top}}" hidden='{{good_list.length == 0 && !loading}}' scroll-with-animation>
-      <view class='list-item' wx:for='{{list}}' data-item='{{item}}' hover-class='hover-class' hover-stay-time='400' bindtap='goDetails'>
+    <scroll-view scroll-y style='height:100%;' bindscrolltolower="loadmore" hidden='{{good_list.length == 0 && !loading}}' scroll-with-animation>
+      <view class='list-item' wx:for='{{list}}' wx:key='{{index}}' data-item='{{item}}' hover-class='hover-class' hover-stay-time='400' bindtap='goDetails'>
         <view class='left'>
           <view class='user_img'>
             <image src='{{item.avatar}}'></image>

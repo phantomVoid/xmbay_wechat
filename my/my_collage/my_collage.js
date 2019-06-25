@@ -82,7 +82,7 @@ Page({
   getOrderList() {
     http.postList(app.globalData.group_my_index, {
       status: this.data.current_tab,
-      page: 1
+      page: this.data.page
     }).then(res=> {
       if (this.data.page == 1) {
         this.setData({

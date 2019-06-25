@@ -74,6 +74,15 @@ Page({
   onShareAppMessage: function() {
 
   },
+  /**
+   * 加载更多
+   */
+  loadmore() {
+    if (this.data.list.length < this.data.total) {
+      this.data.page++;
+      this.getData()
+    }
+  },
 
   /**
    * 导航切换
@@ -176,7 +185,8 @@ Page({
     http.post(app.globalData.distribution_my_fans, {
       type: this.data.type,
       order: this.data.order,
-      sort: this.data.sort
+      sort: this.data.sort,
+      page: this.data.page
     }).then(res => {
       if (this.data.page == 1) {
         this.setData({

@@ -116,14 +116,10 @@ Page({
    * 联系方式
    */
   contactInput(e) {
-    console.log(e)
     let value = e.detail.value
-    // replace(/[^u4E00-u9FA5]/g, '').
-    // console.log(a.replace(/[^u4E00-u9FA5]/g, '').replace(/ /g, ''))
     this.setData({
-      contact: value.replace(/[^u4E00-u9FA5]/g, '')
+      contact: value.replace(/[^u4E00-u9FA5][^.]/g, '')
     })
-    
   },
 
   /**

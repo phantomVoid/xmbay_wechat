@@ -24,7 +24,7 @@ Page({
     this.data.dataInfo.info.file = decodeURIComponent(this.data.dataInfo.info.file)
     if (this.data.dataInfo.status == 2 || this.data.dataInfo.status == 3 || this.data.dataInfo.status == 4) {
       this.data.dataInfo.info.subtotal_price = parseFloat(this.data.dataInfo.info.subtotal_price - this.data.dataInfo.info.sub_freight_price).toFixed(2)
-    }else{
+    } else {
       this.data.dataInfo.info.subtotal_price = parseFloat(this.data.dataInfo.info.subtotal_price).toFixed(2)
     }
     this.setData({
@@ -147,6 +147,10 @@ Page({
       app.showToast('请输入退款金额')
       return
     }
+    if (parseFloat(this.data.price) <= 0) {
+      app.showToast('请输入正确退款金额')
+      return
+    }
     if (parseFloat(this.data.price).toFixed(2) > parseFloat(this.data.dataInfo.info.subtotal_price)) {
       app.showToast(`最多可退款金额为${this.data.dataInfo.info.subtotal_price}元`)
       return
@@ -159,7 +163,7 @@ Page({
     this.uploadImage(0)
     http.post(app.globalData.applet_my_saveFormId, {
       micro_form_id: this.data.formId
-    }).then(res => { })
+    }).then(res => {})
   },
 
   /**
@@ -188,7 +192,7 @@ Page({
         type: this.data.dataInfo.type,
         refund_amount: this.data.price,
         reason: this.data.reason,
-        is_get_goods: this.data.dataInfo.state,
+        is_get_goods: this.data.dataInfo.status != 2 ? this.data.dataInfo.state : 2,
         multiple_file: this.data.file_name
       }).then(res => {
         wx.hideLoading()
