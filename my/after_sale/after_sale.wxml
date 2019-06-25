@@ -7,7 +7,7 @@
       <image class='item-shop-next' src='{{util.HTTP}}mobile/small/image/xq-gd.png'></image>
     </view>
   </view>
-  <view class='order-item-good' hover-class='hover-class' hover-stay-time='400' bindtap='onRefundDetail' data-id='{{item.order_goods_id}}'>
+  <view class='order-item-good' hover-class='hover-class' hover-stay-time='400' bindtap='onRefundDetail' data-item='{{item}}'>
     <image src='{{item.file}}'></image>
     <view>
       <view class='order-item-good-info'>
@@ -41,7 +41,7 @@
     <view wx:elif="{{item.status == 5.7}}">退货退款 退款失败</view>
   </view>
   <view class='order-item-operation'>
-    <view class='border-cur' hover-class='hover-class' hover-stay-time='400' bindtap='onRefundDetail' data-id='{{item.order_goods_id}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>查看详情</view>
+    <view class='border-cur' hover-class='hover-class' hover-stay-time='400' bindtap='onRefundDetail' data-item='{{item}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>查看详情</view>
   </view>
 </view>
 

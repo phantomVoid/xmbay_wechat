@@ -26,14 +26,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    this.getOrderList()
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getOrderList()
   },
 
   /**
@@ -86,8 +86,10 @@ Page({
    * 查看详情
    */
   onRefundDetail(e) {
+    console.log(e)
+    let item = e.currentTarget.dataset.item
     wx.navigateTo({
-      url: '/pages/return_detail/return_detail?id=' + e.currentTarget.dataset.id,
+      url: `/pages/return_detail/return_detail?id=${item.order_goods_id}&status=${item.status}`,
     })
   }
 })
