@@ -117,6 +117,7 @@ Page({
             encryptedData: info_res.encryptedData,
             iv: info_res.iv,
             member_id: '',
+            sup_id: sup_id,
             dev_type: 3
           }).then(res => {
             wx.hideLoading()
