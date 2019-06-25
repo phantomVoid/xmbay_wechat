@@ -233,8 +233,8 @@ Page({
   calcTotal() {
     if (this.data.info.good_type == 1) {
       //普通商品
-      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.shop_price) > 0 ? parseFloat(this.data.info.num * this.data.info.shop_price).toFixed(2) : 0.10
-      this.data.info['total'] = parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num)
+      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.shop_price)
+      this.data.info['total'] = parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num) > 0 ? parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num):0.10
     } else if (this.data.info.good_type == 2) {
       //团购
       this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.group_price) > 0 ? parseFloat(this.data.info.num * this.data.info.group_price).toFixed(2) : 0.10

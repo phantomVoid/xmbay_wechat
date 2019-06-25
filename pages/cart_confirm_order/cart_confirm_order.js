@@ -109,7 +109,7 @@ Page({
       for (let i = 0, len = res.result.length; i < len; i++) {
         if (res.result[i].freight != null) {
           //配送方式
-          if (res.result[i].freight.express_freight_sup == 1) {// && res.result[i].freight.default_express_type == 1
+          if (res.result[i].freight.express_freight_sup == 1) { // && res.result[i].freight.default_express_type == 1
             res.result[i]['delivery_method'] = 'is_express'
             res.result[i]['distribution_type'] = '3'
             res.result[i]['way'] = 1
@@ -430,6 +430,9 @@ Page({
       }
     }
     total = total - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet_price) - parseFloat(discount_price)
+    if (total <= 0) {
+      total = 0.1
+    }
     if (parseFloat(total) + parseFloat(freight) > 0) {
       total += parseFloat(freight)
     } else {
@@ -451,7 +454,7 @@ Page({
       this.selectComponent("#modal").showModal()
       return
     }
-    
+
     let member_platform_coupon_id = ''
     for (let i = 0, len = this.data.list.length; i < len; i++) {
       this.data.list[i]['coupon_id'] = ''
@@ -573,7 +576,7 @@ Page({
       }
       http.post(app.globalData.applet_my_saveFormId, {
         micro_form_id: this.data.formId
-      }).then(res => { })
+      }).then(res => {})
       wx.redirectTo({
         url: '../cashier_desk/cashier_desk?order_info=' + JSON.stringify(order_info),
       })
