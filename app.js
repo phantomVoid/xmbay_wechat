@@ -2,10 +2,11 @@
 var HTTP = 'https://ishop.zihaiwangluo.com/'
 
 // 测试域名
-// var HTTP = 'https://ishoptest.zihaiwangluo.com/'
-// var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
-// var HTTP = 'http://testwb.zihaiwangluo.com/'
+var HTTP = 'https://ishoptest.zihaiwangluo.com/'
+var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
+// var HTTP = 'http://ishop-pre.z4.cc/'
 // var HTTP = 'https://ddmb.zihaiwangluo.com/'
+// var HTTP = 'http://ishop-switch.zihaiwangluo.com/'
 
 App({
   onLaunch(data) {
@@ -466,7 +467,7 @@ App({
       title: e,
       icon: 'none',
       mask: true,
-      duration: 2000,
+      duration: 1500,
       success: () => {
         if (success) {
           setTimeout(() => {
@@ -480,7 +481,7 @@ App({
     wx.showToast({
       title: e,
       mask: true,
-      duration: 2000,
+      duration: 1500,
       success: () => {
         if (success) {
           setTimeout(() => {
@@ -1037,7 +1038,11 @@ App({
     invoice_change_status: HTTP + 'v2.0/invoice/change_status',
     //---------------------------------------------------------------------------------
     //获取FormId
-    applet_my_saveFormId: HTTP + 'v2.0/applet_my/saveFormId'
+    applet_my_saveFormId: HTTP + 'v2.0/applet_my/saveFormId',
+    //商品标签
+    goods_tagClickLog: HTTP + 'v2.0/goods/tagClickLog',
+    //抽奖订单详情
+    lottery_activity_order_info: HTTP + 'v2.0/lottery_activity/order_info',
     //---------------------------------------------------------------------------------
   }
 })
