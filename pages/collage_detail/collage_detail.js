@@ -18,7 +18,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     app.app_DIY(() => {
       this.blendent()
     }, this)
@@ -30,14 +30,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     event.on('refreshCollageDetail', this, () => {
       this.getData()
     })
@@ -50,29 +50,29 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     event.remove('refreshCollageDetail', this)
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(res) {
-    if (res.from === 'button') {} else {}
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') { } else { }
     return {
       title: this.data.info.goods_name,
       path: '/pages/collage_detail/collage_detail?id=' + this.data.id,
@@ -93,7 +93,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
@@ -189,7 +189,7 @@ Page({
           micro_form_id: this.data.formId
         }).then(res => { })
         let obj = {
-          order_type:2
+          order_type: 2
         }
         this.selectComponent("#buy_board").show(obj)
       })

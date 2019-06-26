@@ -348,7 +348,6 @@ let clearLoginState = () => {
   return
 };
 
-
 module.exports = {
   get,
   post,
