@@ -4,8 +4,7 @@ Component({
   /**
    * 组件的属性列表
    */
-  properties: {
-  },
+  properties: {},
   /**
    * 组件的初始数据
    */
@@ -78,138 +77,95 @@ Component({
             src: app.globalData.HTTP + 'mobile/small/image/hb-bj.png',
             success: res => {
               this.ctx.drawImage(res.path, 15, 35, 345, 590)
-              wx.getImageInfo({
-                src: wx.getStorageSync('member_info').avatar,
-                success: res => {
-                  this.ctx.save()
-                  this.ctx.beginPath()
-                  this.ctx.arc(45, 70, 15, 0, 2 * Math.PI)
-                  this.ctx.clip()
-                  this.ctx.drawImage(res.path, 30, 55, 30, 30)
-                  this.ctx.restore()
-                  if (poster.distribution_gain != undefined) {
-                    let title_name = {
-                      x: 68,
-                      y: 60,
-                      width: 50,
-                      height: 18,
-                      line: 1,
-                      color: '#0433FF',
-                      size: 14,
-                      align: 'left',
-                      baseline: 'top',
-                      text: wx.getStorageSync('member_info').nickname,
-                      bold: false
+              if (app.globalData.member_id != '' && app.globalData.phone != '') {
+                wx.getImageInfo({
+                  src: wx.getStorageSync('member_info').avatar,
+                  success: res => {
+                    this.ctx.save()
+                    this.ctx.beginPath()
+                    this.ctx.arc(45, 65, 15, 0, 2 * Math.PI)
+                    this.ctx.clip()
+                    this.ctx.drawImage(res.path, 30, 50, 30, 30)
+                    this.ctx.restore()
+                    if (poster.distribution_gain != undefined) {
+                      let title_name = {
+                        x: 68,
+                        y: 60,
+                        width: 50,
+                        height: 18,
+                        line: 1,
+                        color: '#0433FF',
+                        size: 14,
+                        align: 'left',
+                        baseline: 'top',
+                        text: wx.getStorageSync('member_info').nickname,
+                        bold: false
+                      }
+                      this.textWrap(title_name)
+                      let metrics = this.ctx.measureText(wx.getStorageSync('member_info').nickname)
+                      let title_tip = {
+                        x: metrics.width > 50 ? 118 : 74 + metrics.width,
+                        y: 60,
+                        width: 200,
+                        height: 18,
+                        line: 2,
+                        color: '#666c72',
+                        size: 14,
+                        align: 'left',
+                        baseline: 'top',
+                        text: '(诚挚邀请您成为代言人)',
+                        // text: poster.distribution_gain != undefined ? '(诚挚邀请您成为代言人)' : '发现一个好物,推荐给你呀',
+                        bold: false
+                      }
+                      this.textWrap(title_tip)
+                    } else {
+                      let title_name = {
+                        x: 68,
+                        y: 60,
+                        width: 50,
+                        height: 18,
+                        line: 1,
+                        color: '#0433FF',
+                        size: 14,
+                        align: 'left',
+                        baseline: 'top',
+                        text: wx.getStorageSync('member_info').nickname,
+                        bold: false
+                      }
+                      this.textWrap(title_name)
+                      let metrics = this.ctx.measureText(wx.getStorageSync('member_info').nickname)
+                      let title_tip = {
+                        x: metrics.width > 50 ? 118 : 74 + metrics.width,
+                        y: 60,
+                        width: 200,
+                        height: 18,
+                        line: 2,
+                        color: '#666c72',
+                        size: 14,
+                        align: 'left',
+                        baseline: 'top',
+                        text: '发现一个好物,推荐给你呀',
+                        // text: poster.distribution_gain != undefined ? '(诚挚邀请您成为代言人)' : '发现一个好物,推荐给你呀',
+                        bold: false
+                      }
+                      this.textWrap(title_tip)
+                      // let title_item = {
+                      //   x: 68,
+                      //   y: 60,
+                      //   width: 200,
+                      //   height: 18,
+                      //   line: 1,
+                      //   color: '#666c72',
+                      //   size: 14,
+                      //   align: 'left',
+                      //   baseline: 'top',
+                      //   text: wx.getStorageSync('member_info').nickname,
+                      //   bold: false
+                      // }
+                      // this.textWrap(title_item)
                     }
-                    this.textWrap(title_name)
-                    let metrics = this.ctx.measureText(wx.getStorageSync('member_info').nickname)
-                    let title_tip = {
-                      x: metrics.width > 50 ? 118 : 74 + metrics.width,
-                      y: 60,
-                      width: 200,
-                      height: 18,
-                      line: 2,
-                      color: '#666c72',
-                      size: 14,
-                      align: 'left',
-                      baseline: 'top',
-                      text: '(诚挚邀请您成为代言人)',
-                      // text: poster.distribution_gain != undefined ? '(诚挚邀请您成为代言人)' : '发现一个好物,推荐给你呀',
-                      bold: false
-                    }
-                    this.textWrap(title_tip)
-                  } else {
-                    let title_name = {
-                      x: 68,
-                      y: 60,
-                      width: 50,
-                      height: 18,
-                      line: 1,
-                      color: '#0433FF',
-                      size: 14,
-                      align: 'left',
-                      baseline: 'top',
-                      text: wx.getStorageSync('member_info').nickname,
-                      bold: false
-                    }
-                    this.textWrap(title_name)
-                    let metrics = this.ctx.measureText(wx.getStorageSync('member_info').nickname)
-                    let title_tip = {
-                      x: metrics.width > 50 ? 118 : 74 + metrics.width,
-                      y: 60,
-                      width: 200,
-                      height: 18,
-                      line: 2,
-                      color: '#666c72',
-                      size: 14,
-                      align: 'left',
-                      baseline: 'top',
-                      text: '发现一个好物,推荐给你呀',
-                      // text: poster.distribution_gain != undefined ? '(诚挚邀请您成为代言人)' : '发现一个好物,推荐给你呀',
-                      bold: false
-                    }
-                    this.textWrap(title_tip)
-                    // let title_item = {
-                    //   x: 68,
-                    //   y: 60,
-                    //   width: 200,
-                    //   height: 18,
-                    //   line: 1,
-                    //   color: '#666c72',
-                    //   size: 14,
-                    //   align: 'left',
-                    //   baseline: 'top',
-                    //   text: wx.getStorageSync('member_info').nickname,
-                    //   bold: false
-                    // }
-                    // this.textWrap(title_item)
-                  }
-                  // let title_text = {
-                  //   x: 38,
-                  //   y: 90,
-                  //   width: 200,
-                  //   height: 18,
-                  //   line: 2,
-                  //   color: 'black',
-                  //   size: 15,
-                  //   align: 'left',
-                  //   baseline: 'top',
-                  //   text: poster.distribution_gain != undefined ? '成为代言人,推广最高收益可达' : '发现一个好物,推荐给你呀',
-                  //   bold: false
-                  // }
-                  let title_text = {
-                    x: 38,
-                    y: 90,
-                    width: 200,
-                    height: 18,
-                    line: 2,
-                    color: 'black',
-                    size: 15,
-                    align: 'left',
-                    baseline: 'top',
-                    text: '',
-                    bold: false
-                  }
-                  this.textWrap(title_text)
-                  let metrics = this.ctx.measureText(title_text.text)
-                  if (poster.distribution_gain != undefined) {
-                    // let distribution_text = {
-                    //   x: 38 + metrics.width + 4,
-                    //   y: 90,
-                    //   width: 200,
-                    //   height: 18,
-                    //   line: 2,
-                    //   color: '#f20230',
-                    //   size: 15,
-                    //   align: 'left',
-                    //   baseline: 'top',
-                    //   text: `${poster.distribution_gain}`,
-                    //   bold: false
-                    // }
-                    // this.textWrap(distribution_text)
-                    // let member = this.ctx.measureText(distribution_text.text)
-                    // var distribution_member = {
-                    //   x: 38 + metrics.width + 6 + member.width,
+                    // let title_text = {
+                    //   x: 38,
                     //   y: 90,
                     //   width: 200,
                     //   height: 18,
@@ -218,150 +174,424 @@ Component({
                     //   size: 15,
                     //   align: 'left',
                     //   baseline: 'top',
-                    //   text: `元`,
+                    //   text: poster.distribution_gain != undefined ? '成为代言人,推广最高收益可达' : '发现一个好物,推荐给你呀',
                     //   bold: false
                     // }
-                    // this.textWrap(distribution_member)
-                  }
-                  this.ctx.drawImage(this.data.file, 32, 120, 310, 310)
-                  this.ctx.setFillStyle('rgba(255,255,255,0.8)')
-                  this.ctx.fillRect(32, 400, 310, 30)
-                  this.ctx.font = 'normal 15px sans-serif';
-                  this.ctx.setFillStyle('black')
-                  if (this.ctx.measureText(poster.name).width < 330) {
-                    this.ctx.fillText(poster.name, 38, 420)
-                  } else {
-                    let text = {
+                    let title_text = {
                       x: 38,
-                      y: 402,
-                      width: 330,
-                      height: 20,
-                      line: 1,
+                      y: 90,
+                      width: 200,
+                      height: 18,
+                      line: 2,
                       color: 'black',
                       size: 15,
                       align: 'left',
                       baseline: 'top',
-                      text: poster.name,
+                      text: '',
                       bold: false
                     }
-                    this.textWrap(text)
-                  }
-                  this.ctx.font = 'normal normal 14px sans-serif';
-                  let sale = '',
-                    kj_width = 0
-                  if (poster.is_limit == 1) {
-                    wx.getImageInfo({
-                      src: app.globalData.HTTP + 'mobile/small/image/hb-xsqqg-tb.png',
-                      success: res => {
-                        this.ctx.drawImage(res.path, 30, 452, 42, 14)
+                    this.textWrap(title_text)
+                    let metrics = this.ctx.measureText(title_text.text)
+                    if (poster.distribution_gain != undefined) {
+                      // let distribution_text = {
+                      //   x: 38 + metrics.width + 4,
+                      //   y: 90,
+                      //   width: 200,
+                      //   height: 18,
+                      //   line: 2,
+                      //   color: '#f20230',
+                      //   size: 15,
+                      //   align: 'left',
+                      //   baseline: 'top',
+                      //   text: `${poster.distribution_gain}`,
+                      //   bold: false
+                      // }
+                      // this.textWrap(distribution_text)
+                      // let member = this.ctx.measureText(distribution_text.text)
+                      // var distribution_member = {
+                      //   x: 38 + metrics.width + 6 + member.width,
+                      //   y: 90,
+                      //   width: 200,
+                      //   height: 18,
+                      //   line: 2,
+                      //   color: 'black',
+                      //   size: 15,
+                      //   align: 'left',
+                      //   baseline: 'top',
+                      //   text: `元`,
+                      //   bold: false
+                      // }
+                      // this.textWrap(distribution_member)
+                    }
+                    this.ctx.drawImage(this.data.file, 32, 90, 310, 310)
+                    this.ctx.setFillStyle('rgba(255,255,255,0.8)')
+                    this.ctx.fillRect(32, 400, 310, 30)
+                    this.ctx.font = 'normal 15px sans-serif';
+                    this.ctx.setFillStyle('black')
+                    if (this.ctx.measureText(poster.name).width < 330) {
+                      this.ctx.fillText(poster.name, 38, 420)
+                    } else {
+                      let text = {
+                        x: 38,
+                        y: 402,
+                        width: 330,
+                        height: 20,
+                        line: 1,
+                        color: 'black',
+                        size: 15,
+                        align: 'left',
+                        baseline: 'top',
+                        text: poster.name,
+                        bold: false
                       }
-                    })
-                    sale = '已抢' + poster.limit_number + '件'
-                    kj_width = 48
-                  } else if (poster.is_group == 1) {
-                    sale = '已拼' + poster.limit_number + '件'
-                    this.ctx.font = 'normal 10px sans-serif';
-                    this.ctx.setFillStyle('#f20230')
-                    wx.getImageInfo({
-                      src: app.globalData.HTTP + 'mobile/small/image/hb-pt-tb.png',
-                      success: res => {
-                        this.ctx.drawImage(res.path, 30, 452, 42, 14)
-                      }
-                    })
-                    this.ctx.fillText(poster.group_num + '人拼', 43, 462.4)
-                    kj_width = 48
-                  } else if (poster.is_bargain == 1) {
-                    wx.getImageInfo({
-                      src: app.globalData.HTTP + 'mobile/small/image/hb-kj-tb.png',
-                      success: res => {
-                        this.ctx.drawImage(res.path, 30, 452, 42, 14)
-                      }
-                    })
-                    sale = '已售' + poster.sales_volume + '件'
-                    kj_width = 48
-                  } else {
-                    sale = '已售' + poster.sales_volume + '件'
-                  }
-                  this.ctx.font = 'normal 19px sans-serif';
-                  this.ctx.setFillStyle('#f20230')
-                  this.ctx.fillText('￥', 30 + kj_width, 466)
-                  let unit_width = this.ctx.measureText('￥').width
-                  this.ctx.font = 'normal bold 26px sans-serif';
-                  this.ctx.fillText(price.split('.')[0] + '.', 30 + unit_width + kj_width, 466)
-                  let integer = this.ctx.measureText(price.split('.')[0] + '.').width
-                  let left = parseFloat(30 + unit_width + integer + kj_width)
-                  this.ctx.font = 'normal normal 19px sans-serif';
-                  this.ctx.fillText(price.split('.')[1], left, 466)
-                  let sale_width = this.ctx.measureText(sale).width
-                  let goods_text = {
-                    x: 336 - sale_width,
-                    y: 450,
-                    width: 530,
-                    height: 18,
-                    line: 2,
-                    color: '#acacac',
-                    size: 14,
-                    align: 'left',
-                    baseline: 'top',
-                    text: sale,
-                    bold: false
-                  }
-                  this.textWrap(goods_text)
-                  this.ctx.drawImage(this.data.qr_code, 38, 500, 106, 106)
-                  this.ctx.save()
-                  this.ctx.beginPath()
-                  this.ctx.arc(91, 553, 26.5, 0, 2 * Math.PI)
-                  this.ctx.clip()
-                  this.ctx.drawImage(this.data.shop_logo, 64.5, 526.5, 53, 53)
-                  this.ctx.restore()
-                  let code_text = {
-                    x: 170,
-                    y: 520,
-                    width: 530,
-                    height: 18,
-                    line: 2,
-                    color: 'black',
-                    size: 18,
-                    align: 'left',
-                    baseline: 'top',
-                    text: '长按识别二维码',
-                    bold: true
-                  }
-                  this.textWrap(code_text)
-                  let code_tip = {
-                    x: 170,
-                    y: 550,
-                    width: 530,
-                    height: 18,
-                    line: 2,
-                    color: '#9a9a9a',
-                    size: 14,
-                    align: 'left',
-                    baseline: 'top',
-                    text: '超值好货一起购',
-                    bold: false
-                  }
-                  this.textWrap(code_tip)
-                  this.ctx.draw(false, () => {
-                    setTimeout(() => {
-                      wx.canvasToTempFilePath({
-                        canvasId: 'poster',
+                      this.textWrap(text)
+                    }
+                    this.ctx.font = 'normal normal 14px sans-serif';
+                    let sale = '',
+                      kj_width = 0
+                    if (poster.is_limit == 1) {
+                      wx.getImageInfo({
+                        src: app.globalData.HTTP + 'mobile/small/image/hb-xsqqg-tb.png',
                         success: res => {
-                          this.setData({
-                            poster: res.tempFilePath
-                          })
-                          this.show()
-                          wx.hideLoading()
-                        },
-                        fail(e) {
-                          app.showToast('生成失败')
-                          wx.hideLoading()
+                          this.ctx.drawImage(res.path, 30, 452, 42, 14)
                         }
-                      }, this)
-                    }, 1000)
-                  })
+                      })
+                      sale = '已抢' + poster.limit_number + '件'
+                      kj_width = 48
+                    } else if (poster.is_group == 1) {
+                      sale = '已拼' + poster.limit_number + '件'
+                      this.ctx.font = 'normal 10px sans-serif';
+                      this.ctx.setFillStyle('#f20230')
+                      wx.getImageInfo({
+                        src: app.globalData.HTTP + 'mobile/small/image/hb-pt-tb.png',
+                        success: res => {
+                          this.ctx.drawImage(res.path, 30, 452, 42, 14)
+                        }
+                      })
+                      this.ctx.fillText(poster.group_num + '人拼', 43, 462.4)
+                      kj_width = 48
+                    } else if (poster.is_bargain == 1) {
+                      wx.getImageInfo({
+                        src: app.globalData.HTTP + 'mobile/small/image/hb-kj-tb.png',
+                        success: res => {
+                          this.ctx.drawImage(res.path, 30, 452, 42, 14)
+                        }
+                      })
+                      sale = '已售' + poster.sales_volume + '件'
+                      kj_width = 48
+                    } else {
+                      sale = '已售' + poster.sales_volume + '件'
+                    }
+                    this.ctx.font = 'normal 19px sans-serif';
+                    this.ctx.setFillStyle('#f20230')
+                    this.ctx.fillText('￥', 30 + kj_width, 466)
+                    let unit_width = this.ctx.measureText('￥').width
+                    this.ctx.font = 'normal bold 26px sans-serif';
+                    this.ctx.fillText(price.split('.')[0] + '.', 30 + unit_width + kj_width, 466)
+                    let integer = this.ctx.measureText(price.split('.')[0] + '.').width
+                    let left = parseFloat(30 + unit_width + integer + kj_width)
+                    this.ctx.font = 'normal normal 19px sans-serif';
+                    this.ctx.fillText(price.split('.')[1], left, 466)
+                    let sale_width = this.ctx.measureText(sale).width
+                    let goods_text = {
+                      x: 336 - sale_width,
+                      y: 450,
+                      width: 530,
+                      height: 18,
+                      line: 2,
+                      color: '#acacac',
+                      size: 14,
+                      align: 'left',
+                      baseline: 'top',
+                      text: sale,
+                      bold: false
+                    }
+                    this.textWrap(goods_text)
+                    this.ctx.drawImage(this.data.qr_code, 38, 500, 106, 106)
+                    this.ctx.save()
+                    this.ctx.beginPath()
+                    this.ctx.arc(91, 553, 26.5, 0, 2 * Math.PI)
+                    this.ctx.clip()
+                    this.ctx.drawImage(this.data.shop_logo, 64.5, 526.5, 53, 53)
+                    this.ctx.restore()
+                    let code_text = {
+                      x: 170,
+                      y: 520,
+                      width: 530,
+                      height: 18,
+                      line: 2,
+                      color: 'black',
+                      size: 18,
+                      align: 'left',
+                      baseline: 'top',
+                      text: '长按识别二维码',
+                      bold: true
+                    }
+                    this.textWrap(code_text)
+                    let code_tip = {
+                      x: 170,
+                      y: 550,
+                      width: 530,
+                      height: 18,
+                      line: 2,
+                      color: '#9a9a9a',
+                      size: 14,
+                      align: 'left',
+                      baseline: 'top',
+                      text: '超值好货一起购',
+                      bold: false
+                    }
+                    this.textWrap(code_tip)
+                    this.ctx.draw(false, () => {
+                      setTimeout(() => {
+                        wx.canvasToTempFilePath({
+                          canvasId: 'poster',
+                          success: res => {
+                            this.setData({
+                              poster: res.tempFilePath
+                            })
+                            this.show()
+                            wx.hideLoading()
+                          },
+                          fail(e) {
+                            app.showToast('生成失败')
+                            wx.hideLoading()
+                          }
+                        }, this)
+                      }, 1000)
+                    })
+                  },
+                  fail() { }
+                })
+              } else {
+                let title_tip = {
+                  x: 40,
+                  y: 60,
+                  width: 200,
+                  height: 18,
+                  line: 2,
+                  color: '#666c72',
+                  size: 14,
+                  align: 'left',
+                  baseline: 'top',
+                  text: '发现一个好物,推荐给你呀',
+                  // text: poster.distribution_gain != undefined ? '(诚挚邀请您成为代言人)' : '发现一个好物,推荐给你呀',
+                  bold: false
                 }
-              })
+                this.textWrap(title_tip)
+                // let title_item = {
+                //   x: 68,
+                //   y: 60,
+                //   width: 200,
+                //   height: 18,
+                //   line: 1,
+                //   color: '#666c72',
+                //   size: 14,
+                //   align: 'left',
+                //   baseline: 'top',
+                //   text: wx.getStorageSync('member_info').nickname,
+                //   bold: false
+                // }
+                // this.textWrap(title_item)
+
+                // let title_text = {
+                //   x: 38,
+                //   y: 90,
+                //   width: 200,
+                //   height: 18,
+                //   line: 2,
+                //   color: 'black',
+                //   size: 15,
+                //   align: 'left',
+                //   baseline: 'top',
+                //   text: poster.distribution_gain != undefined ? '成为代言人,推广最高收益可达' : '发现一个好物,推荐给你呀',
+                //   bold: false
+                // }
+                let title_text = {
+                  x: 38,
+                  y: 90,
+                  width: 200,
+                  height: 18,
+                  line: 2,
+                  color: 'black',
+                  size: 15,
+                  align: 'left',
+                  baseline: 'top',
+                  text: '',
+                  bold: false
+                }
+                this.textWrap(title_text)
+                let metrics = this.ctx.measureText(title_text.text)
+                if (poster.distribution_gain != undefined) {
+                  // let distribution_text = {
+                  //   x: 38 + metrics.width + 4,
+                  //   y: 90,
+                  //   width: 200,
+                  //   height: 18,
+                  //   line: 2,
+                  //   color: '#f20230',
+                  //   size: 15,
+                  //   align: 'left',
+                  //   baseline: 'top',
+                  //   text: `${poster.distribution_gain}`,
+                  //   bold: false
+                  // }
+                  // this.textWrap(distribution_text)
+                  // let member = this.ctx.measureText(distribution_text.text)
+                  // var distribution_member = {
+                  //   x: 38 + metrics.width + 6 + member.width,
+                  //   y: 90,
+                  //   width: 200,
+                  //   height: 18,
+                  //   line: 2,
+                  //   color: 'black',
+                  //   size: 15,
+                  //   align: 'left',
+                  //   baseline: 'top',
+                  //   text: `元`,
+                  //   bold: false
+                  // }
+                  // this.textWrap(distribution_member)
+                }
+                this.ctx.drawImage(this.data.file, 32, 90, 310, 310)
+                this.ctx.setFillStyle('rgba(255,255,255,0.8)')
+                this.ctx.fillRect(32, 400, 310, 30)
+                this.ctx.font = 'normal 15px sans-serif';
+                this.ctx.setFillStyle('black')
+                if (this.ctx.measureText(poster.name).width < 330) {
+                  this.ctx.fillText(poster.name, 38, 420)
+                } else {
+                  let text = {
+                    x: 38,
+                    y: 402,
+                    width: 330,
+                    height: 20,
+                    line: 1,
+                    color: 'black',
+                    size: 15,
+                    align: 'left',
+                    baseline: 'top',
+                    text: poster.name,
+                    bold: false
+                  }
+                  this.textWrap(text)
+                }
+                this.ctx.font = 'normal normal 14px sans-serif';
+                let sale = '',
+                  kj_width = 0
+                if (poster.is_limit == 1) {
+                  wx.getImageInfo({
+                    src: app.globalData.HTTP + 'mobile/small/image/hb-xsqqg-tb.png',
+                    success: res => {
+                      this.ctx.drawImage(res.path, 30, 452, 42, 14)
+                    }
+                  })
+                  sale = '已抢' + poster.limit_number + '件'
+                  kj_width = 48
+                } else if (poster.is_group == 1) {
+                  sale = '已拼' + poster.limit_number + '件'
+                  this.ctx.font = 'normal 10px sans-serif';
+                  this.ctx.setFillStyle('#f20230')
+                  wx.getImageInfo({
+                    src: app.globalData.HTTP + 'mobile/small/image/hb-pt-tb.png',
+                    success: res => {
+                      this.ctx.drawImage(res.path, 30, 452, 42, 14)
+                    }
+                  })
+                  this.ctx.fillText(poster.group_num + '人拼', 43, 462.4)
+                  kj_width = 48
+                } else if (poster.is_bargain == 1) {
+                  wx.getImageInfo({
+                    src: app.globalData.HTTP + 'mobile/small/image/hb-kj-tb.png',
+                    success: res => {
+                      this.ctx.drawImage(res.path, 30, 452, 42, 14)
+                    }
+                  })
+                  sale = '已售' + poster.sales_volume + '件'
+                  kj_width = 48
+                } else {
+                  sale = '已售' + poster.sales_volume + '件'
+                }
+                this.ctx.font = 'normal 19px sans-serif';
+                this.ctx.setFillStyle('#f20230')
+                this.ctx.fillText('￥', 30 + kj_width, 466)
+                let unit_width = this.ctx.measureText('￥').width
+                this.ctx.font = 'normal bold 26px sans-serif';
+                this.ctx.fillText(price.split('.')[0] + '.', 30 + unit_width + kj_width, 466)
+                let integer = this.ctx.measureText(price.split('.')[0] + '.').width
+                let left = parseFloat(30 + unit_width + integer + kj_width)
+                this.ctx.font = 'normal normal 19px sans-serif';
+                this.ctx.fillText(price.split('.')[1], left, 466)
+                let sale_width = this.ctx.measureText(sale).width
+                let goods_text = {
+                  x: 336 - sale_width,
+                  y: 450,
+                  width: 530,
+                  height: 18,
+                  line: 2,
+                  color: '#acacac',
+                  size: 14,
+                  align: 'left',
+                  baseline: 'top',
+                  text: sale,
+                  bold: false
+                }
+                this.textWrap(goods_text)
+                this.ctx.drawImage(this.data.qr_code, 38, 500, 106, 106)
+                this.ctx.save()
+                this.ctx.beginPath()
+                this.ctx.arc(91, 553, 26.5, 0, 2 * Math.PI)
+                this.ctx.clip()
+                this.ctx.drawImage(this.data.shop_logo, 64.5, 526.5, 53, 53)
+                this.ctx.restore()
+                let code_text = {
+                  x: 170,
+                  y: 520,
+                  width: 530,
+                  height: 18,
+                  line: 2,
+                  color: 'black',
+                  size: 18,
+                  align: 'left',
+                  baseline: 'top',
+                  text: '长按识别二维码',
+                  bold: true
+                }
+                this.textWrap(code_text)
+                let code_tip = {
+                  x: 170,
+                  y: 550,
+                  width: 530,
+                  height: 18,
+                  line: 2,
+                  color: '#9a9a9a',
+                  size: 14,
+                  align: 'left',
+                  baseline: 'top',
+                  text: '超值好货一起购',
+                  bold: false
+                }
+                this.textWrap(code_tip)
+                this.ctx.draw(false, () => {
+                  setTimeout(() => {
+                    wx.canvasToTempFilePath({
+                      canvasId: 'poster',
+                      success: res => {
+                        this.setData({
+                          poster: res.tempFilePath
+                        })
+                        this.show()
+                        wx.hideLoading()
+                      },
+                      fail(e) {
+                        app.showToast('生成失败')
+                        wx.hideLoading()
+                      }
+                    }, this)
+                  }, 1000)
+                })
+
+              }
             }
           })
         }

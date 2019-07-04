@@ -167,6 +167,11 @@ Page({
               loading: false,
               disabled: false
             })
+          }).catch(() => {
+            this.setData({
+              loading: false,
+              disabled: false
+            })
           })
         } else {
           wx.showToast({

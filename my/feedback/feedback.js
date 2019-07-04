@@ -117,6 +117,9 @@ Page({
    */
   contactInput(e) {
     let value = e.detail.value
+    this.setData({
+      contact: value
+    })
     // this.setData({
     //   contact: value.replace(/[^u4E00-u9FA5][^.]/g, '')
     // })
