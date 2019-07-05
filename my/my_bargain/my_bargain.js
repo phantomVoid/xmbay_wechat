@@ -126,10 +126,10 @@ Page({
         if (second == 0) {
           this.data.list[i].status = 3
         } else {
-          this.data.list[i]['day'] = parseInt((second) / (24 * 3600))
-          this.data.list[i]['hour'] = Math.floor((second) % (24 * 3600) / 3600) < 10 ? '0' + Math.floor((second) % (24 * 3600) / 3600 / 3600) : Math.floor((second) % (24 * 3600) / 3600)
-          this.data.list[i]['min'] = Math.floor(second / 60 % 60) < 10 ? '0' + Math.floor(second / 60 % 60) : Math.floor(second / 60 % 60)
-          this.data.list[i]['sec'] = Math.floor(second % 60) < 10 ? '0' + Math.floor(second % 60) : Math.floor(second % 60)
+          this.data.list[i]['day'] = Math.floor(second / 86400);
+          this.data.list[i]['hour'] = Math.floor(second % 86400 / 3600) < 10 ? '0' + Math.floor(second % 86400 / 3600) : Math.floor(second % 86400 / 3600);
+          this.data.list[i]['min'] = Math.floor(second % 86400 % 3600 / 60) < 10 ? '0' + Math.floor(second % 86400 % 3600 / 60) : Math.floor(second % 86400 % 3600 / 60);
+          this.data.list[i]['sec'] = Math.floor(second % 60) < 10 ? '0' + Math.floor(second % 60) : Math.floor(second % 60);
           this.data.list[i].expiration_time--;
         }
       }

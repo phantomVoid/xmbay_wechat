@@ -197,9 +197,9 @@ Page({
         })
         break;
       case "10": //抽奖-订单详情
-        // wx.navigateTo({
-        //   url: ``,
-        // })
+        wx.navigateTo({
+          url: `/my/games_order/games_order?id=${item.attach_id}`,
+        })
         break;
       case "11": //积分-订单详情
         wx.navigateTo({

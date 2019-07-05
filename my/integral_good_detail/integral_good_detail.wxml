@@ -24,6 +24,9 @@
     </view>
 
   </view>
-  <view class='exchange' hover-class='hover-class' hover-stay-time='400' bindtap='exchange' style='{{util.diy_color("",diy_color.z_color,"")}}'>兑换</view>
+  <form report-submit='true' bindsubmit='formId'>
+    <button class='exchange' hover-class='hover-class' hover-stay-time='400' formType="submit" bindtap='exchange' style='{{util.diy_color("",diy_color.z_color,"")}}'>兑换</button>
+  </form>
+  <!-- <view class='exchange' hover-class='hover-class' hover-stay-time='400' bindtap='exchange' style='{{util.diy_color("",diy_color.z_color,"")}}'>兑换</view> -->
 </view>
 <modal title="提示" content="抱歉您的积分不足以兑换此商品" tip="做任务可以获取更多积分呦!" id="modal" bind:confirm="onTask" />

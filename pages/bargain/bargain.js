@@ -108,10 +108,10 @@ Page({
       if (second == 0) {
         this.getData()
       } else {
-        this.data.info['day'] = parseInt((second) / (24 * 3600))
-        this.data.info['hour'] = Math.floor((second) % (24 * 3600) / 3600) < 10 ? '0' + Math.floor((second) % (24 * 3600) / 3600 / 3600) : Math.floor((second) % (24 * 3600) / 3600)
-        this.data.info['min'] = Math.floor(second / 60 % 60) < 10 ? '0' + Math.floor(second / 60 % 60) : Math.floor(second / 60 % 60)
-        this.data.info['sec'] = Math.floor(second % 60) < 10 ? '0' + Math.floor(second % 60) : Math.floor(second % 60)
+        this.data.info['day'] = Math.floor(second / 86400);
+        this.data.info['hour'] = Math.floor(second % 86400 / 3600) < 10 ? '0' + Math.floor(second % 86400 / 3600) : Math.floor(second % 86400 / 3600);
+        this.data.info['min'] = Math.floor(second % 86400 % 3600 / 60) < 10 ? '0' + Math.floor(second % 86400 % 3600 / 60) : Math.floor(second % 86400 % 3600 / 60);
+        this.data.info['sec'] = Math.floor(second % 60) < 10 ? '0' + Math.floor(second % 60) : Math.floor(second % 60);
         this.data.info.expiration_time--;
       }
     }

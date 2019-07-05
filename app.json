@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/home1/home",
-    "pages/home5/home",
-    "pages/home3/home",
     "pages/home4/home",
+    "pages/home5/home",
+    "pages/home1/home",
+    "pages/home3/home",
     "pages/bind_phone/bind_phone",
     "pages/my/my",
     "pages/collage_detail/collage_detail",
@@ -97,6 +97,7 @@
         "merchant_region/merchant_region",
         "integral_task/integral_task",
         "integral_order/integral_order",
+        "games_order/games_order",
         "after_sale/after_sale",
         "search_order/search_order",
         "search_order_result/search_order_result",

@@ -13,15 +13,19 @@ Component({
       type: Object,
       observer: function() {
         if (this.data.info.attr) {
+          console.log('asdfasdfadf')
           this.data.attrs = new Array(this.data.info.attr.length)
           this.setData({
             good_image: this.data.info.file,
             good_file_image: this.data.info.cart_file
           })
+          if (this.data.attr_array.length != 0) {
+            this._getGoodPrice()
+          }
         }
       }
     },
-    diy_color:Object,
+    diy_color: Object,
     // order_type: null,
     type: String,
     isShow: {
@@ -184,6 +188,7 @@ Component({
         //购买尺寸id
         products_id: ''
       })
+      console.log(this.data.attr_array)
     },
 
     /**
@@ -214,8 +219,6 @@ Component({
       if (this.data.attr.split(',').length == this.data.info.attr.length) {
         this._getGoodPrice()
       }
-      console.log(this.data.attr_array)
-      console.log(this.data.attr)
     },
 
     /**
@@ -226,7 +229,6 @@ Component({
         title: '加载中',
         mask: true
       })
-      console.log(this.data.order_type)
       http.post(app.globalData.attr_find, {
         type: this.data.order_type,
         goods_attr: this.data.info.attr.length != 0 ? this.data.attr : '',
@@ -294,7 +296,7 @@ Component({
        * limit_purchase_used: 已购买数量
        */
       if (this.data.info.is_limit == 1 && this.data.info.limit_purchase != 0) {
-        if (this.data.num >= ((this.data.info.limit_purchase - this.data.info.limit_purchase_used) || (this.data.info.limit_purchase - this.data.info.limit_purchase_used>0))|| this.data.num >= this.data.info.limit_number || this.data.num >= this.data.info.limit_number) {
+        if (this.data.num >= ((this.data.info.limit_purchase - this.data.info.limit_purchase_used) || (this.data.info.limit_purchase - this.data.info.limit_purchase_used > 0)) || this.data.num >= this.data.info.limit_number || this.data.num >= this.data.info.limit_number) {
           app.showToast('抢购已达到上限')
           return
         }
@@ -418,7 +420,7 @@ Component({
           })
           http.post(app.globalData.applet_my_saveFormId, {
             micro_form_id: this.data.formId
-          }).then(res => { })
+          }).then(res => {})
           //跳转确认订单页
           wx.navigateTo({
             url: '/pages/confirm_order/confirm_order?info=' + JSON.stringify(obj) + '&good_image=' + encodeURIComponent(this.data.good_image),
@@ -499,7 +501,7 @@ Component({
         })
       })
     },
-    formId(e){
+    formId(e) {
       this.data.formId = e.detail.formId
     }
   }

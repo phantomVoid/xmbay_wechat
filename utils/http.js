@@ -75,7 +75,7 @@ let get = (url, data = {}, hidden) => {
       },
       fail: res => {
         wx.showToast({
-          title: '网路繁忙',
+          title: '网络繁忙',
           icon: 'none'
         })
       },
@@ -137,7 +137,7 @@ let postList = (url, data = {}) => {
       fail: res => {
         // app.showToast(res.data.message)
         wx.showToast({
-          title: '网路繁忙',
+          title: '网络繁忙',
           icon: 'none'
         })
       },
@@ -209,7 +209,7 @@ let post = (url, data = {}, hidden) => {
       },
       fail: res => {
         wx.showToast({
-          title: '网路繁忙',
+          title: '网络繁忙',
           icon: 'none'
         })
         // app.showToast(res.data.message)

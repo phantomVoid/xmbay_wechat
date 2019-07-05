@@ -40,7 +40,7 @@ Page({
         this.getData()
       })
     })
-    this.getData()
+    
   },
 
   /**
@@ -54,7 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getData()
   },
 
   /**
@@ -183,6 +183,12 @@ Page({
     })
     wx.navigateTo({
       url: '/my/address/address?choose=true',
+    })
+  },
+  onOrder(e){
+    console.log(e)
+    wx.navigateTo({
+      url: `/my/games_order/games_order?id=${e.currentTarget.dataset.item.order_id}&index=${e.currentTarget.dataset.index}`,
     })
   }
 })

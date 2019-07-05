@@ -20,7 +20,7 @@ Page({
     address: '',
     create: false,
     phone: '',
-    formId:[]
+    formId: []
   },
 
   /**
@@ -207,6 +207,9 @@ Page({
       })
       return
     }
+    http.post(app.globalData.applet_my_saveFormId, {
+      micro_form_id: this.data.formId.join()
+    }).then(res => {})
     if (this.data.create) {
       http.post(app.globalData.create_store, {
         store_name: this.data.name,
@@ -219,16 +222,13 @@ Page({
         shop: '1'
       }).then(res => {
         // app.globalData.in_state = 1
-        http.post(app.globalData.applet_my_saveFormId, {
-          micro_form_id: this.data.formId.join()
-        }).then(res => { })
         app.showSuccessToast(res.message, () => {
           wx.navigateBack()
         })
       })
     }
   },
-  saveFormId1(e){
+  saveFormId1(e) {
     this.data.formId.push(e.detail.formId)
   },
 

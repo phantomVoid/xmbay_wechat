@@ -114,7 +114,7 @@ Component({
         goods_number: 1,
         province: app.globalData.address.province,
         city: app.globalData.address.city,
-        area: app.globalData.address.district,
+        area: app.globalData.address.area,
         lat: app.globalData.lat,
         lng: app.globalData.lng
       }).then(res => {

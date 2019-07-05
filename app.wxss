@@ -665,9 +665,9 @@ button::after {
 }
 
 .order-item-good-name {
-  font-size: 28rpx;
-  height: 72rpx;
   width: 370rpx;
+  height: 80rpx;
+  font-size: 28rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
