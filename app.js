@@ -3,7 +3,7 @@ var HTTP = 'https://ishop.zihaiwangluo.com/'
 
 // 测试域名
 var HTTP = 'https://ishoptest.zihaiwangluo.com/'
-var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
+// var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
 // var HTTP = 'http://ishop-pre.z4.cc/'
 // var HTTP = 'https://ddmb.zihaiwangluo.com/'
 // var HTTP = 'http://ishop-switch.zihaiwangluo.com/'
@@ -537,6 +537,7 @@ App({
   app_socketHeartTime: null,
   app_socketAgainTime: null,
   app_leave: false, //离开程序
+  PAST_LOGIN: false,
   globalData: {
     isShops: 0, //多店，单店开关 多店：0，单店：1
     member_id: '',

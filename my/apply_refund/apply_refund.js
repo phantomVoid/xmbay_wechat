@@ -192,7 +192,7 @@ Page({
         type: this.data.dataInfo.type,
         refund_amount: this.data.price,
         reason: this.data.reason,
-        is_get_goods: this.data.dataInfo.status != 2 ? this.data.dataInfo.state : 2,
+        is_get_goods: this.data.dataInfo.status != 2 || this.data.dataInfo.type==1 ? this.data.dataInfo.state : 2,
         multiple_file: this.data.file_name
       }).then(res => {
         wx.hideLoading()
@@ -208,6 +208,8 @@ Page({
               })
               return
               break;
+            }else{
+              wx.navigateBack()
             }
           }
         })

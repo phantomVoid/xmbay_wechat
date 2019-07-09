@@ -16,7 +16,7 @@ Page({
     this.data.dataInfo = JSON.parse(options.dataInfo)
     this.data.dataInfo.info['file'] = decodeURIComponent(this.data.dataInfo.info.file)
     let state = 1
-    if (this.data.dataInfo.status == 3) {
+    if (this.data.dataInfo.status == 3 || this.data.dataInfo.status == 4) {
       //同城或者快递 已收货
       state = 2
     } else {
