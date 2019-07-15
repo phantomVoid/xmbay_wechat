@@ -131,8 +131,21 @@ Page({
     if (this.data.content != '获取验证码') {
       return
     }
+    let type
+    switch (this.data.status) {
+      case '0':
+        type = 2
+        break;
+      case '1':
+        type = 1
+        break;
+      case '2':
+        type = 2
+        break;
+    }
+    console.log(type)
     http.encPost(app.globalData.message_send, {
-      type: this.data.status == 2 ? '1' : '2',
+      type: type,
       phone: this.data.phone
     }).then(res => {
       this.countDown()

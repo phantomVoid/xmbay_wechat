@@ -11,7 +11,7 @@ Page({
     phone: '',
     encrypt_phone: '',
     time: 60,
-    content: '',
+    content: '点击获取',
     count_down: '',
     //是否下一步
     able: false,
@@ -46,10 +46,19 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    this.countDown()
-    this.data.count_down = setInterval(() => {
+    http.encPost(app.globalData.message_send, {
+      type: '2',
+      phone: this.data.phone
+    }).then(res => {
       this.countDown()
-    }, 1000)
+      this.data.count_down = setInterval(() => {
+        this.countDown()
+      }, 1000)
+    })
+    // this.countDown()
+    // this.data.count_down = setInterval(() => {
+    //   this.countDown()
+    // }, 1000)
   },
 
   /**
@@ -110,10 +119,19 @@ Page({
    */
   getCode() {
     if (this.data.content == '点击获取') {
-      this.countDown()
-      this.data.count_down = setInterval(() => {
+      http.encPost(app.globalData.message_send, {
+        type: '2',
+        phone: this.data.phone
+      }).then(res => {
         this.countDown()
-      }, 1000)
+        this.data.count_down = setInterval(() => {
+          this.countDown()
+        }, 1000)
+      })
+      // this.countDown()
+      // this.data.count_down = setInterval(() => {
+      //   this.countDown()
+      // }, 1000)
     }
   },
 
