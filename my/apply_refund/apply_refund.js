@@ -202,14 +202,13 @@ Page({
           const page = getCurrentPages()
           for (let i = 0, len = page.length; i < len; i++) {
             if (page[i].route == 'my/order_detail/order_detail') {
-              console.log(i)
               wx.navigateBack({
                 delta: page.length - i - 1
               })
-              return
               break;
-            }else{
-              wx.navigateBack()
+              return
+            } else if (page[i].route != 'my/order_detail/order_detail' && i == page.length - 1) {
+              wx.navigateBack({})
             }
           }
         })
