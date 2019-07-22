@@ -414,6 +414,7 @@ Page({
       discount_price = 0;
     for (let i = 0; i < this.data.list.length; i++) {
       for (var j = 0; j < this.data.list[i].list.length; j++) {
+        this.data.list[i].total_price = parseFloat(this.data.list[i].list[j].price) * parseFloat(this.data.list[i].list[j].number)
         discount_price += parseFloat(this.data.list[i].list[j].discount_price) * parseFloat(this.data.list[i].list[j].number)
       }
       total += Number(this.data.list[i].total_price)
@@ -441,7 +442,8 @@ Page({
     this.setData({
       total: total > 0 ? total : '0.00',
       origin_total: origin_total,
-      freight: freight.toFixed(2)
+      freight: freight.toFixed(2),
+      list:this.data.list
     })
   },
 
