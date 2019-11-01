@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -28,6 +28,9 @@ Page({
     obj.diy_color = app.globalData.diy_color
     if (options.choose) {
       obj.status = true
+    }
+    if (options.oType) {
+      obj.oType = options.oType
     }
     this.setData(obj)
   },
@@ -176,10 +179,25 @@ Page({
       let address = e.currentTarget.dataset.item;
       let pages = getCurrentPages()
       let prevPage = pages[pages.length - 2];
-      prevPage.setData({
-        address: address
-      })
-      event.emit('changeAddress', address)
+      switch (this.data.oType) {
+        case '2':
+          console.log(address)
+          prevPage.setData({
+            'info.address': address,
+            member_address_id: address.member_address_id
+          })
+          break;
+        case '3':
+          prevPage.changeAddress(address)
+          break;
+        default:
+          prevPage.setData({
+            address: address,
+            member_address_id: address.member_address_id
+          })
+          prevPage.getData()
+      }
+      // event.emit('changeAddress', address)
       wx.navigateBack()
     }
   }

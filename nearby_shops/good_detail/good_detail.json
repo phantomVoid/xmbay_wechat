@@ -2,6 +2,7 @@
   "usingComponents": {
     "Parser": "/components/Parser/index",
     "good_parameter": "/components/good_parameter/good_parameter",
+    "brand_label": "/components/brand_label/brand_label",
     "delivery_info": "/components/delivery_info/delivery_info",
     "sale_promotion": "/components/sale_promotion/sale_promotion",
     "buy": "/components/buy/buy",

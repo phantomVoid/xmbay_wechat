@@ -1,5 +1,5 @@
 // pages/service_type/service_type.js
-const app = getApp()
+const app = getApp();
 Page({
 
   /**

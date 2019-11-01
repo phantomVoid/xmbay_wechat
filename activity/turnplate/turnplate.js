@@ -1,7 +1,7 @@
 // activity/turnplate.js
-const app = getApp()
-const event = require('../../utils/event.js')
-const http = require('../../utils/http.js')
+const app = getApp();
+const event = require('../../utils/event.js');
+const http = require('../../utils/http.js');
 Page({
 
   /**
@@ -396,7 +396,7 @@ Page({
    */
   address() {
     wx.navigateTo({
-      url: '/my/address/address?choose=true',
+      url: '/my/address/address?choose=true&oType=2',
     })
   },
   /**

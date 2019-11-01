@@ -628,14 +628,32 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
-
+.good-recommend-list .item .goods-con .tip{
+  display: flex;
+  align-items: center;
+  height: 60rpx;
+}
 .good-recommend-list .item .goods-con .tip .tip-zy {
+  flex-shrink: 0;
   padding: 2rpx 12rpx;
   font-size: 20rpx;
   border: 1px solid transparent;
+  margin-right: 10rpx;
   border-radius: 50px 50px;
 }
-
+.good-recommend-list .item .goods-con .tip .label{
+  flex: 1;
+  height: 60rpx;
+  overflow: hidden;
+}
+.good-recommend-list .item .goods-con .tip .label view{
+  display: inline-block;
+  font-size: 20rpx;
+  padding: 2rpx 12rpx;
+  margin-right: 10rpx;
+  border: 1px solid transparent;
+  border-radius: 50px 50px;
+}
 .good-recommend-list .item .goods-price {
   display: flex;
   align-items: center;

@@ -60,14 +60,14 @@
     </view>
 
     <view class='operation'>
-      <button open-type='contact' class='operation-do' hover-class='none'>
+      <button class='operation-do' hover-class='hover-class' hover-stay-time='400' open-type="{{configSwitch.version_info.one_more==1?'':'contact'}}" bindcontact="handleContact" bindtap="{{configSwitch.version_info.one_more==1?'callPhone':''}}">
         <image src='{{util.HTTP}}mobile/small/image/ddxq-lxmj.png'></image>
         <view>联系卖家</view>
       </button>
-      <view hover-class='hover-class' hover-stay-time='400' bindtap='callPhone'>
+      <button hover-class='hover-class' hover-stay-time='400' bindtap='callPtPhone'>
         <image src='{{util.HTTP}}mobile/small/image/ddxq-bdd.png'></image>
-        <view>拨打电话</view>
-      </view>
+        <view>平台电话</view>
+      </button>
     </view>
   </view>
 

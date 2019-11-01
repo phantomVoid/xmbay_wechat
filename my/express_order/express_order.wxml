@@ -25,12 +25,12 @@
 <scroll-view scroll-with-animation scroll-y class='order-list' scroll-top="{{scroll_top}}" bindscroll='scroll' bindscrolltolower="loadMore" hidden='{{list.length == 0 && !loading}}'>
   <view class='order-item' wx:for="{{list}}" wx:key='{{index}}'>
     <view class='order-item-shop'>
-      <view hover-class='hover-class' hover-stay-time='400' bindtap='onShopDetail' data-id='{{item.store_id}}' wx:if='{{util.isShops==0}}'>
+      <view hover-class='hover-class' hover-stay-time='400' bindtap='onShopDetail' data-id='{{item.store_id}}' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}'>
         <image class='item-shop-icon' src='{{util.HTTP}}mobile/small/image/xq-dp.png'></image>
         <view class='item-shop-name'>{{item.store_list.store_name}}</view>
         <image class='item-shop-next' src='{{util.HTTP}}mobile/small/image/xq-gd.png'></image>
       </view>
-      <view wx:elif='{{util.isShops==1}}'>
+      <view wx:else>
         <!-- <image class='item-shop-icon' src='{{util.HTTP}}mobile/small/image/xq-dp.png'></image> -->
         <view class='item-shop-name'>下单时间：{{item.create_time}}</view>
         <!-- <image class='item-shop-next' src='{{util.HTTP}}mobile/small/image/xq-gd.png'></image> -->

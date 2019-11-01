@@ -956,3 +956,16 @@ page {
   margin-top: 10rpx;
   color: #8d8d8d;
 }
+.goods-tip .label{
+  flex: 1;
+  height: 60rpx;
+  overflow: hidden;
+}
+.goods-tip .label view{
+  display: inline-block;
+  font-size: 18rpx;
+  padding: 4rpx 12rpx;
+  margin-right: 10rpx;
+  border: 1px solid transparent;
+  border-radius: 50px 50px;
+}

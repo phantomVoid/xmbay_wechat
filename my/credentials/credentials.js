@@ -1,6 +1,6 @@
 // my/credentials/credentials.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**
@@ -88,6 +88,9 @@ Page({
     let list = this.data.list.map((val) => {
       return val = val.path
     })
+    if (list.length == 1 && list[0] == '') {
+      return
+    }
     wx.previewImage({
       current: e.currentTarget.dataset.path,
       urls: list

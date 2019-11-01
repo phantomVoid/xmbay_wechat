@@ -1,13 +1,14 @@
 // pages/home/home.js
-const app = getApp()
-const event = require('../../utils/event.js')
-const http = require('../../utils/http.js')
-const encryption = require('../../utils/encryption/public.js')
-const navBar = require('../../components/navBar/navBar.js')
-const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+const app = getApp();
+const event = require('../../utils/event.js');
+const http = require('../../utils/http.js');
+const navBar = require('../../components/navBar/navBar.js');
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 let qqmapsdk = new QQMapWX({
   key: app.globalData.MapKey
 });
+const request = require('../../utils/rsa/wx/request.js');
+const response = require('../../utils/rsa/wx/response.js');
 Page({
 
   /**
@@ -73,6 +74,7 @@ Page({
         isRefresh: true
       })
     })
+    // this.dome()
   },
 
   /**
@@ -150,7 +152,6 @@ Page({
   onShareAppMessage: function() {
 
   },
-
   /**
    * 获取数据
    * pattern 0老多首页 1新多店首页
@@ -605,5 +606,29 @@ Page({
     this.setData({
       'dataInfo.set.popup_adv_status': 0
     })
-  }
+  },
+  onLabel(e) {
+    console.log(e.currentTarget.dataset)
+    wx.navigateTo({
+      url: `/nearby_shops/good_detail/good_detail?goods_id=${e.currentTarget.dataset.goods_id}&label=${e.currentTarget.dataset.id}`,
+    })
+  },
+  route(e) {
+    if (e.currentTarget.dataset.item.id == 1) {
+      wx.stopPullDownRefresh()
+      wx.startPullDownRefresh()
+    }
+  },
+  dome(){
+    const privateKey_pkcs1 = '-----BEGIN PRIVATE KEY-----MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBALgQq1AZujJ4aE65i8 / A0YcRsN8 + DJD6Z0tspAd2yyhq24pjz7FRnqPUdW8jJVSQpNTEkTRRackPrd8hAhJGXef9BclnhBrz0cg0eQDvSRMQmlXx / 6jyEOxl2rKkV9DsVrHm5+ gvkrBT8d1IgdP1zTEwKC1wl2 / rin / NAypfpprzAgMBAAECgYB7V1A04MiQwXbEKjmyAbdmF0i6j83D6MgHFsnj5orEjraGydOHMvZnOhtnWdnODQ8nNIFI2bVVchhFCM1miZiqk0YC3R6kxapZBndPoxjMuJj6Tnp+ Vy / H5hnFdEY76EH3uqU9kaHX6pcx2BM4ppGzEBbbN3Ni3BemYRQwJpGKYQJBAPQudLCGtyUpy7vgJeIVSbKQQjRTzmFUuyHVsUOimqTZcI8ibjtRC1PQWvMXwN8O4sTMWwAgSnBN74 / Zm5sNIU8CQQDA + VabywlzfaxNOZ2kqyYLlGbA4mlNwXG0Hn5klJEb1Ba3Ih1SQGxKWtf7bUnB4NRjyu7Hljb + 5Pgu1KEOUZsdAkA4CH0QkSlv5sJwz4QB + H6b8kyu81hVr3rtzbrK2YKBN8CDqBQBmpxt1E86n4XL6f + Rx49OXRqX4NqLeRUjJIUzAkA3XBBll0S51hbE / L9lyxeaANPNh + ZvwQwOgST / U8OhOSHfHbFNtF + coR0O6xZawVYM3t3LciOK0kMEpEkj43NdAkAGzYtIw2bEGuS1NIv9ggQV47hLtZPHFI + cXFcHbzJiXfer8uH6 / 9Qvuxy1CcvVhd1Sr1Di4ORhMp0nQYnFC3 + I-----END PRIVATE KEY-----'
+    const publicKey_pkcs1 = '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDP42epiVnB/jin6LeGa7JLe5eFXR61PhJy7TnjZwThsUNq5pH75yU0sOWRLIkLk1OFe93Dr2pY/PZhF9aaht9MQTUXrPCILPRw3R5yXL61mG9BjmaKgGP0xrPmwapBVClU2SAKnYvgpf9Pi01l1FKPYUGAyuhLNLf6lcUK+nm7+QIDAQAB-----END PUBLIC KEY-----'
+    let json = { a: "hello wordffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffhello wordffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffhello wordffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" };
+    let encode = request.encode(json, publicKey_pkcs1);
+    console.log(encode)
+    http.post('https://xunjiandd.com/v2.0/rsa',{
+      data: encode
+    }).then(res=>{
+      console.log(res)
+    })
+  },
 })

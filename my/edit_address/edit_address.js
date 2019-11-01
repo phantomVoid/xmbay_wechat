@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -46,6 +46,8 @@ Page({
         title: '新增收货地址',
       })
     }
+    this.data.pages = getCurrentPages()
+    console.log(this.data.pages)
   },
 
   /**
@@ -241,9 +243,41 @@ Page({
       lng: this.data.longitude
     }).then(res => {
       event.emit('refresh_address')
-      app.showSuccessToast(res.message, () => {
-        wx.navigateBack()
-      })
+      for (let i = 0, len = this.data.pages.length; i < len; i++) {
+        if (this.data.pages[i].route == 'pages/confirm_order/confirm_order' && i != this.data.pages.length) {
+          if (this.data.id != '') {
+            this.data.pages[i].data.member_address_id = this.data.id
+          } else {
+            this.data.pages[i].data.member_address_id = res.data.address_id
+          }
+          console.log(this.data.pages[i])
+
+          this.data.pages[i].getData()
+          wx.navigateBack({
+            delta: this.data.pages.length -1 - i
+          })
+          break;
+        } else if (this.data.pages[i].route == 'pages/cart_confirm_order/cart_confirm_order' && i != this.data.pages.length) {
+          if (this.data.id != '') {
+            this.data.pages[i].data.member_address_id = this.data.id
+          } else {
+            this.data.pages[i].data.member_address_id = res.data.address_id
+          }
+
+          this.data.pages[i].getData()
+          wx.navigateBack({
+            delta: i + 1
+          })
+          break;
+        } else if (i == this.data.pages.length - 1) {
+          console.log('asdfasdfdf')
+          wx.navigateBack()
+        }
+      }
+      // return
+      // app.showSuccessToast(res.message, () => {
+      //   wx.navigateBack()
+      // })
     })
   }
 })

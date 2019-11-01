@@ -1,6 +1,6 @@
 // pages/forget_psw_two/forget_psw_two.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**

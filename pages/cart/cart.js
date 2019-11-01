@@ -1,7 +1,7 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
-const navBar = require('../../components/navBar/navBar.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
+const navBar = require('../../components/navBar/navBar.js');
 Page({
 
   /**
@@ -267,9 +267,15 @@ Page({
   onCoupon(e) {
     let item = e.currentTarget.dataset.item
     let goods_classify_id_arr = item.list.map((val) => val = val.goods_classify_id).filter((item, idx, val) => val.indexOf(item) === idx)
-    this.selectComponent("#receive_coupon").getCouponList(e.currentTarget.dataset.item.store_id, goods_classify_id_arr.join(','))
+    let goods_id_arr = item.list.map((val) => val = val.goods_id).filter((item, idx, val) => val.indexOf(item) === idx)
+    let obj = {
+      store_id: item.store_id,
+      goods_classify_id: goods_classify_id_arr.join(','),
+      goods_id: goods_id_arr.join(',')
+    }
+    this.selectComponent("#receive_coupon").getCouponList(item.store_id, goods_classify_id_arr.join(','))
+    // this.selectComponent("#receive_coupon").getCouponList(obj)
   },
-
   /**
    * 编辑商品
    */
@@ -488,4 +494,10 @@ Page({
     }
     this.selectComponent("#buy_board").show(obj)
   },
+  route(e) {
+    if (e.currentTarget.dataset.item.id == 4) {
+      wx.stopPullDownRefresh()
+      wx.startPullDownRefresh()
+    }
+  }
 })

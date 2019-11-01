@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -198,10 +198,10 @@ Page({
           event.emit('refreshCart')
           event.emit('refreshHome')
         })
-        wx.nextTick(() => {
-          //客服
-          app.service()
-        })
+        // wx.nextTick(() => {
+        //   //客服
+        //   app.service()
+        // })
 
       })
     }).catch(res => {

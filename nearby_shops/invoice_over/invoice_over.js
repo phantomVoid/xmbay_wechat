@@ -1,6 +1,6 @@
 // nearby_shops/invoice_over/invoice_over.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**

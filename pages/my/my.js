@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const navBar = require('../../components/navBar/navBar.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const navBar = require('../../components/navBar/navBar.js');
 Page({
 
   /**
@@ -368,5 +368,10 @@ Page({
       } catch (e) {}
     })
   },
-
+  route(e) {
+    if (e.currentTarget.dataset.item.id == 5) {
+      wx.stopPullDownRefresh()
+      wx.startPullDownRefresh()
+    }
+  }
 })

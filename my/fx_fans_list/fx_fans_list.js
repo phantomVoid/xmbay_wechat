@@ -1,6 +1,6 @@
 // my/fx_fans_list/fx_fans_list.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**

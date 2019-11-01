@@ -1,7 +1,7 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
-const navBar = require('../../components/navBar/navBar.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
+const navBar = require('../../components/navBar/navBar.js');
 Page({
 
   /**
@@ -393,5 +393,11 @@ Page({
         })
       }
     })
+  },
+  route(e) {
+    if (e.currentTarget.dataset.item.id == 3) {
+      wx.stopPullDownRefresh()
+      wx.startPullDownRefresh()
+    }
   }
 })

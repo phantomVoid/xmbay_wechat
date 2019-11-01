@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -31,7 +31,23 @@ Page({
     pay_way: '在线支付',
     invoice: {
       is_invoice: 0
-    }
+    },
+    delivery_method: [{
+        isSupport: 0,
+        title: '快递邮寄',
+        text: 'is_express'
+      },
+      {
+        isSupport: 0,
+        title: '同城配送',
+        text: 'is_city'
+      }, {
+        isSupport: 0,
+        title: '预约自提',
+        text: 'is_shop'
+      }
+    ],
+    delivery_method_type: 0
   },
 
   /**
@@ -108,21 +124,63 @@ Page({
       let ways = []
       for (let i = 0, len = res.result.length; i < len; i++) {
         if (res.result[i].freight != null) {
-          //配送方式
-          if (res.result[i].freight.express_freight_sup == 1) { // && res.result[i].freight.default_express_type == 1
-            res.result[i]['delivery_method'] = 'is_express'
+          res.result[i]['delivery_method'] = []
+          //显示配送方式
+          if (res.result[i].freight.express_freight_sup == 1) {
+            res.result[i]['delivery_method'].push({
+              title: '快递邮寄',
+              text: 'is_express',
+              type: 0
+            })
+          }
+          if (res.result[i].freight.city_freight_sup == 1) {
+            res.result[i]['delivery_method'].push({
+              title: '同城配送',
+              text: 'is_city',
+              type: 1
+            })
+          }
+          if (res.result[i].freight.take_freight_sup == 1) {
+            res.result[i]['delivery_method'].push({
+              title: '预约自提',
+              text: 'is_shop',
+              type: 2
+            })
+          }
+
+          let delivery_method_every = res.result[i]['delivery_method'].some((item) => {
+            return item.type + 1 == res.result[i].freight.default_express_type
+          })
+          if (!delivery_method_every && res.result[i]['delivery_method'].length != 0) {
+            //如果默认配送方式不支持
+            switch (res.result[i]['delivery_method'][0].type) {
+              case 0:
+                res.result[i].freight.default_express_type = 1
+                break;
+              case 1:
+                res.result[i].freight.default_express_type = 2
+                break;
+              case 2:
+                res.result[i].freight.default_express_type = 3
+                break;
+            }
+          }
+
+          //默认配送方式
+          if (res.result[i].freight.default_express_type == 1) {
+            res.result[i]['delivery_method_type'] = 0
             res.result[i]['distribution_type'] = '3'
             res.result[i]['way'] = 1
             //运费
             freight += parseFloat(res.result[i].freight.express_freight_price)
-          } else if (res.result[i].freight.city_freight_sup == 1) {
-            res.result[i]['delivery_method'] = 'is_city'
+          } else if (res.result[i].freight.default_express_type == 2) {
+            res.result[i]['delivery_method_type'] = 1
             res.result[i]['distribution_type'] = '1'
             res.result[i]['way'] = 1
             //运费
             freight += parseFloat(res.result[i].freight.city_freight_price)
-          } else if (res.result[i].freight.take_freight_sup == 1) {
-            res.result[i]['delivery_method'] = 'is_shop'
+          } else if (res.result[i].freight.default_express_type == 3) {
+            res.result[i]['delivery_method_type'] = 2
             res.result[i]['distribution_type'] = '2'
             res.result[i]['way'] = 1
             //运费
@@ -232,11 +290,12 @@ Page({
       ways[i] = e.detail[i].way
       if (e.detail[i].way == 1) {
         this.data.list[i].distribution_type = '3'
-        this.data.list[i].delivery_method = 'is_express'
+        this.data.list[i].delivery_method_type = 1
+        // this.data.list[i].delivery_method = 'is_express'
       }
       if (e.detail[i].way == 2) {
         this.data.list[i].distribution_type = '1'
-        this.data.list[i].delivery_method = 'is_city'
+        this.data.list[i].delivery_method_type = 1
       }
     }
     if (ways.indexOf(1) > -1 && ways.indexOf(2) > -1) {
@@ -262,15 +321,17 @@ Page({
       return
     }
     let index = e.currentTarget.dataset.index
+    let idx = e.currentTarget.dataset.idx
+    let item = e.currentTarget.dataset.item
+    this.data.list[index].delivery_method_type = item.type
     if (this.data.list[index].way == 2) {
       return
     }
-    this.data.list[index].delivery_method = e.currentTarget.dataset.method
 
-    //预约自提
-    if (e.currentTarget.dataset.method == 'is_shop') {
+    //判断配送方式
+    if (item.type == 2) {
+      //预约自提
       this.data.list[index].distribution_type = '2'
-
       if (this.data.list[index].way == 2) {
         this.data.list[index].way = 1
       }
@@ -289,17 +350,59 @@ Page({
       this.setData({
         pay_way: this.data.pay_way
       })
-    } else if (e.currentTarget.dataset.method == 'is_city') {
+    } else if (item.type == 1) {
       //同城速递
       this.data.list[index].distribution_type = '1'
-    } else if (e.currentTarget.dataset.method == 'is_express') {
+    } else if (item.type == 0) {
       //快递邮寄
       this.data.list[index].distribution_type = '3'
     }
+
     this.calculate()
     this.setData({
       list: this.data.list
     })
+    // ---------------------------------------
+    // return
+    // let index = e.currentTarget.dataset.index
+    // if (this.data.list[index].way == 2) {
+    //   return
+    // }
+    // this.data.list[index].delivery_method = e.currentTarget.dataset.method
+
+    // //预约自提
+    // if (e.currentTarget.dataset.method == 'is_shop') {
+    //   this.data.list[index].distribution_type = '2'
+
+    //   if (this.data.list[index].way == 2) {
+    //     this.data.list[index].way = 1
+    //   }
+    //   //更改支付方式
+    //   let ways = []
+    //   for (let i = 0, len = this.data.list.length; i < len; i++) {
+    //     ways[i] = this.data.list[i].way
+    //   }
+    //   if (ways.indexOf(1) > -1 && ways.indexOf(2) > -1) {
+    //     this.data.pay_way = "在线支付 + 货到付款"
+    //   } else if (ways.indexOf(1) > -1) {
+    //     this.data.pay_way = "在线支付"
+    //   } else if (ways.indexOf(2) > -1) {
+    //     this.data.pay_way = "货到付款"
+    //   }
+    //   this.setData({
+    //     pay_way: this.data.pay_way
+    //   })
+    // } else if (e.currentTarget.dataset.method == 'is_city') {
+    //   //同城速递
+    //   this.data.list[index].distribution_type = '1'
+    // } else if (e.currentTarget.dataset.method == 'is_express') {
+    //   //快递邮寄
+    //   this.data.list[index].distribution_type = '3'
+    // }
+    // this.calculate()
+    // this.setData({
+    //   list: this.data.list
+    // })
 
   },
 
@@ -413,12 +516,15 @@ Page({
       freight = 0,
       discount_price = 0;
     for (let i = 0; i < this.data.list.length; i++) {
-      for (var j = 0; j < this.data.list[i].list.length; j++) {
-        this.data.list[i].total_price = parseFloat(this.data.list[i].list[j].price) * parseFloat(this.data.list[i].list[j].number)
+      this.data.list[i].total_price = 0
+      for (let j = 0; j < this.data.list[i].list.length; j++) {
+        this.data.list[i].total_price += parseFloat(this.data.list[i].list[j].price) * parseFloat(this.data.list[i].list[j].number)
         discount_price += parseFloat(this.data.list[i].list[j].discount_price) * parseFloat(this.data.list[i].list[j].number)
+        total += parseFloat(this.data.list[i].list[j].price) * parseFloat(this.data.list[i].list[j].number)
+        origin_total += parseFloat(this.data.list[i].list[j].price) * parseFloat(this.data.list[i].list[j].number)
       }
-      total += Number(this.data.list[i].total_price)
-      origin_total += Number(this.data.list[i].total_price)
+      // total += parseFloat(this.data.list[i].total_price)
+      // origin_total += parseFloat(this.data.list[i].total_price)
       if (this.data.list[i].distribution_type == 1) {
         //同城
         freight += parseFloat(this.data.list[i].freight.city_freight_price)
@@ -430,6 +536,7 @@ Page({
         freight += parseFloat(this.data.list[i].freight.express_freight_price)
       }
     }
+
     total = total - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet_price) - parseFloat(discount_price)
     if (total <= 0) {
       total = 0.1
@@ -443,7 +550,7 @@ Page({
       total: total > 0 ? total : '0.00',
       origin_total: origin_total,
       freight: freight.toFixed(2),
-      list:this.data.list
+      list: this.data.list
     })
   },
 
@@ -461,8 +568,9 @@ Page({
     for (let i = 0, len = this.data.list.length; i < len; i++) {
       this.data.list[i]['coupon_id'] = ''
       //配送是否为空
-      if (this.data.list[i].freight.city_freight_msg != '') {
+      if (this.data.list[i].freight.city_freight_msg != '' && this.data.list[i].distribution_type == 1) {
         app.showToast(this.data.list[i].freight.city_freight_msg)
+        break
         return
       }
     }
@@ -540,7 +648,7 @@ Page({
       origin_type: 2
     }).then(res => {
       event.emit('refreshCart')
-      // event.emit('clearCart')
+      event.emit('clearCart')
       if (this.data.total_order == 0) {
         let item = {
           total_price: res.result.total_price,
@@ -552,6 +660,7 @@ Page({
         wx.redirectTo({
           url: '/nearby_shops/pay_result/pay_result?item=' + JSON.stringify(item),
         })
+        return
       }
       if (this.data.total == '0.00') {
         app.showSuccessToast('提交成功', () => {

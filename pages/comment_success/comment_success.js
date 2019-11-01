@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -11,7 +11,8 @@ Page({
     list: [],
     total: -1,
     //当前评价的
-    index: ''
+    index: '',
+    write: 0
   },
 
   /**
@@ -24,6 +25,9 @@ Page({
     if (options.write) {
       wx.setNavigationBarTitle({
         title: '写评价',
+      })
+      this.setData({
+        write: options.write
       })
     }
   },
@@ -39,14 +43,14 @@ Page({
       //   list: that.data.list
       // })
     })
-    this.getList()
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getList()
   },
 
   /**
@@ -99,11 +103,16 @@ Page({
 
   comment(e) {
     let index = this.data.index = e.currentTarget.dataset.index
+    let item = e.currentTarget.dataset.item
+    if (item.has_refund == 1) {
+      app.showToast('退款退货商品不能去评价~', () => {})
+      return
+    }
     for (let i = 0, len = this.data.list[index].order_goods_evaluate.length; i < len; i++) {
       this.data.list[index].order_goods_evaluate[i].file = encodeURIComponent(this.data.list[index].order_goods_evaluate[i].file)
     }
     wx.navigateTo({
-      url: '/pages/comment/comment?info=' + JSON.stringify(this.data.list[index].order_goods_evaluate),
+      url: '/pages/comment/comment?info=' + JSON.stringify(this.data.list[index].order_goods_evaluate) + '&write=' + this.data.write,
     })
   },
 

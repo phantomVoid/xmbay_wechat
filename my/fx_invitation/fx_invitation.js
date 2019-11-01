@@ -1,6 +1,6 @@
 // my/fx_invitation/fx_invitation.js
-const http = require('../../utils/http.js')
-const app = getApp()
+const http = require('../../utils/http.js');
+const app = getApp();
 Page({
 
   /**

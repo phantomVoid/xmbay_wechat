@@ -1,7 +1,7 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
-const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 let qqmapsdk = new QQMapWX({
   key: app.globalData.MapKey
 });
@@ -65,7 +65,8 @@ Page({
       title: '图片',
       id: 1
     }],
-    bannerType: 1
+    bannerType: 1,
+    tag_bind_goods_id: '' //标签id
   },
 
   /**
@@ -82,6 +83,11 @@ Page({
       if (app.globalData.member_id != '') {
         this.distribution_bindDistribution(options.sup_id)
       }
+    }
+    if (options.label) {
+      this.setData({
+        tag_bind_goods_id: options.label
+      })
     }
     if (options.scene) {
       let obj = http.scene(options.scene)
@@ -206,7 +212,8 @@ Page({
    */
   getData() {
     http.post(app.globalData.goods_view, {
-      goods_id: this.data.goods_id
+      goods_id: this.data.goods_id,
+      tag_bind_goods_id: this.data.tag_bind_goods_id
     }).then(res => {
       this.data.info = res.result
       if (res.result.video != null && res.result.video != '') {
@@ -610,6 +617,16 @@ Page({
   /**
    * 优惠券
    */
+  // onCoupon() {
+  //   if (app.login()) {
+  //     let obj = {
+  //       store_id: this.data.info.store_id,
+  //       goods_classify_id: this.data.info.goods_classify_id,
+  //       goods_id:this.data.goods_id
+  //     }
+  //     this.selectComponent("#receive_coupon").getCouponList(obj)
+  //   }
+  // },
   onCoupon() {
     if (app.login()) {
       this.selectComponent("#receive_coupon").getCouponList(this.data.info.store_id, this.data.info.goods_classify_id)
@@ -630,6 +647,12 @@ Page({
    */
   onDelivery() {
     this.selectComponent("#delivery_info").showAnimation()
+  },
+  /**
+   * 配送说明
+   */
+  onServe() {
+    this.selectComponent("#brand_label").showAnimation()
   },
 
   /**
@@ -1099,6 +1122,14 @@ Page({
     })
   },
   /**
+   * 拨打电话
+   */
+  callPhone() {
+    wx.makePhoneCall({
+      phoneNumber: this.data.info.store_phone,
+    })
+  },
+  /**
    * 播放视频
    */
   videoPlay() {
@@ -1107,6 +1138,11 @@ Page({
     })
     wx.createVideoContext('video').requestFullScreen()
     wx.createVideoContext('video').play()
+  },
+  onLabel(e) {
+    http.post(app.globalData.goods_tagClickLog, {
+      tag_bind_goods_id: e.currentTarget.dataset.id
+    }).then(res => {})
   }
 
 })

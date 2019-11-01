@@ -1,5 +1,5 @@
 // my/my_card/my_card.js
-const app = getApp()
+const app = getApp();
 Page({
 
   /**

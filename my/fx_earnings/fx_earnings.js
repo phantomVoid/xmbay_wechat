@@ -1,8 +1,8 @@
 // pages/forget_psw_two/forget_psw_two.js
-import F2 from './f2-canvas/lib/f2'
-const app = getApp()
-const http = require('../../utils/http.js')
-let aData
+import F2 from './f2-canvas/lib/f2';
+const app = getApp();
+const http = require('../../utils/http.js');
+let aData;
 
 function initChart(canvas, width, height) {
   const chart = new F2.Chart({

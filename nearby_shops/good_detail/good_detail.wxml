@@ -12,7 +12,7 @@
       </cover-view> -->
     </video>
     <view class='video-con' wx:if='{{(video_file.content!=""||video_file.content!=undefined)}}' style='{{isVideoPlay!=1&&bannerType==0?"display:flex;":"display:none;"}}'>
-      <image class='video-snapshot' mode='widthFix' src='{{video_file.video_snapshot}}' catchtap='videoPlay'></image>
+      <image class='video-snapshot' mode='aspectFit' src='{{video_file.video_snapshot}}' catchtap='videoPlay'></image>
       <image class='v-play' src='{{util.HTTP}}mobile/small/image/pj-bf.png' catchtap='videoPlay'></image>
     </view>
     <swiper class='banner-swiper' bindchange="bannerChange" current='{{current}}'>
@@ -179,7 +179,19 @@
 <template name='wrap-footer'>
   <view class='wrap-footer'>
     <view class='f-left-con'>
-      <view class='item' hover-class='hover-class' hover-stay-time='400' bindtap='onHome'>
+      <button class='item' hover-class='hover-class' hover-stay-time='400' bindtap='onHome'>
+        <image src='{{util.HTTP}}mobile/small/image/xq-dp-2.png'></image>
+        <view class='item-btn'>首页</view>
+      </button>
+      <button class='item' hover-class='hover-class' hover-stay-time='400' open-type="{{configSwitch.version_info.one_more==1?'':'contact'}}" bindcontact="{{configSwitch.version_info.one_more==1?'':'handleContact'}}" bindtap="{{configSwitch.version_info.one_more==1?'callPhone':''}}">
+        <image src='{{util.HTTP}}mobile/small/image/xq-kf.png'></image>
+        <view class='item-btn'>客服</view>
+      </button>
+      <button class='item' hover-class='hover-class' hover-stay-time='400' bindtap='onCollect'>
+        <view class='font_family star {{info.collect!=null?"icon-dp-dtxqsc1":"icon-dp-dtxqsc-"}}' style='{{info.collect!=null?util.diy_color(diy_color.z_color,"",""):"color:#58595b"}}'></view>
+        <view class='item-btn'>收藏</view>
+      </button>
+      <!-- <view class='item' hover-class='hover-class' hover-stay-time='400' bindtap='onHome'>
         <image src='{{util.HTTP}}mobile/small/image/xq-dp-2.png'></image>
         <view class='item-btn'>首页</view>
       </view>
@@ -189,8 +201,8 @@
       </view>
       <view class='item' hover-class='hover-class' hover-stay-time='400' bindtap='onCollect'>
         <view class='font_family star {{info.collect!=null?"icon-dp-dtxqsc1":"icon-dp-dtxqsc-"}}' style='{{info.collect!=null?util.diy_color(diy_color.z_color,"",""):"color:#58595b"}}'></view>
-        <view class='item-btn'>收藏</view>
-      </view>
+        <view class='item-btn'>收藏</view> -->
+      <!-- </view> -->
     </view>
     <view class='f-right-con'>
       <!-- 拼团商品 -->
@@ -333,6 +345,16 @@
             </view>
             <image src='{{util.HTTP}}mobile/small/image/xq-gd.png'></image>
           </view>
+          <!-- <view class='label-con' hover-class='hover-class' hover-stay-time='400' bindtap='onServe' style='{{info.relevaTagList.length<=3?"align-items:center;height:90rpx;":""}}' wx:if='{{info.relevaTagList.length!=0}}'>
+            <view class='title'>服务</view>
+            <view class='post-list'>
+              <view wx:for='{{info.relevaTagList}}' wx:if='{{index<6}}' wx:key='{{index}}' data-id='{{item.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' bindtap='onLabel' style='{{info.relevaTagList.length<=3?"margin-bottom:0":""}}'>
+                <view class='font_family icon-xq-gx' style='{{util.diy_color(diy_color.z_color,"","")}}'></view>
+                <text>{{item.name}}</text>
+              </view>
+            </view>
+            <image src='{{util.HTTP}}mobile/small/image/xq-gd.png' style='{{info.relevaTagList.length<=3?"margin-top:0":""}}'></image>
+          </view> -->
         </view>
 
         <!--选择属性  -->
@@ -521,7 +543,7 @@
             <image class='placeholder' wx:if='{{info.ranking.length==0}}' src='{{util.HTTP}}mobile/small/image/zwspp_1.jpg'></image>
           </view>
         </view>
-        <view class='recommend-more' wx:if='{{util.isShops==0&&shop_tab==1}}' hover-class='hover-class' hover-stay-time='400' bindtap='{{shop_tab==1?"goShop":"goRanking"}}'>查看更多推荐</view>
+        <view class='recommend-more' wx:if='{{shop_tab==1&&configSwitch.version_info.one_more==1}}' hover-class='hover-class' hover-stay-time='400' bindtap='{{shop_tab==1?"goShop":"goRanking"}}'>查看更多推荐</view>
         <view class='recommend-more' wx:if='{{util.isShops==0&&shop_tab==2&&configSwitch.show_switch.is_ranking==1}}' hover-class='hover-class' hover-stay-time='400' bindtap='{{shop_tab==1?"goShop":"goRanking"}}'>查看完整优品推荐榜单</view>
 
         <!-- 单店铺推荐 -->
@@ -577,7 +599,7 @@
     </swiper-item>
   </swiper>
 
-  <template is='wrap-footer' data='{{diy_color,info,order_type}}'></template>
+  <template is='wrap-footer' data='{{diy_color,info,order_type,configSwitch}}'></template>
 
   <!--返回顶部  -->
   <image class='back-top' hover-class='hover-class' hover-stay-time='400' bindtap='onBackTop' src='{{util.HTTP}}mobile/small/image/xq-fhdb.png' animation="{{animation_top}}"></image>
@@ -598,6 +620,8 @@
 
   <!-- 配送方式 -->
   <delivery_info id="delivery_info" info="{{info}}" store_id="{{info.store_id}}" />
+  <!-- 配送方式 -->
+  <brand_label id="brand_label" info="{{info.relevaTagList}}" />
 
   <!-- 商品参数 -->
   <good_parameter isShow="{{parameter_board}}" parameter="{{info.parameter}}" />

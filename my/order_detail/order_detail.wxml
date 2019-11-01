@@ -34,7 +34,10 @@
       <!-- 预约自提 -->
       <block wx:if='{{info.distribution_type == 2}}'>
         <view wx:if="{{info.status == 0}}">
-          <view>待付款</view>
+          <view>
+            <view>等待买家付款</view>
+            <view style='font-size:28rpx;'>剩余: {{info.min}}分钟{{info.sec}}秒</view>
+          </view>
           <image src='{{util.HTTP}}mobile/small/image/ddxq-dfk.png'></image>
         </view>
         <view wx:elif="{{info.status == 2}}">
@@ -46,7 +49,10 @@
       <!-- 同城速递 -->
       <block wx:if='{{info.distribution_type == 1}}'>
         <view wx:if="{{info.status == 0}}">
-          <view>待付款</view>
+          <view>
+            <view>等待买家付款</view>
+            <view style='font-size:28rpx;'>剩余: {{info.min}}分钟{{info.sec}}秒</view>
+          </view>
           <image src='{{util.HTTP}}mobile/small/image/ddxq-dfk.png'></image>
         </view>
         <view wx:elif="{{info.status == 1}}">
@@ -169,7 +175,7 @@
     </view>
 
     <view class='good-wrap'>
-      <view class='shop-info' hover-class='hover-class' hover-stay-time='400' bindtap='goShop' wx:if='{{util.isShops==0}}'>
+      <view class='shop-info' hover-class='hover-class' hover-stay-time='400' bindtap='goShop' wx:if='{{util.isShops==0&&configSwitch.version_info.one_more==1}}'>
         <image class='shop-logo' src='{{info.store_list.logo}}'></image>
         <view>{{info.store_list.store_name}}</view>
         <image class='shop-next' src='{{util.HTTP}}mobile/small/image/ddxq-gd.png'></image>
@@ -234,14 +240,14 @@
       </view>
 
       <view class='operation'>
-        <view class='operation-do' hover-class='hover-class' hover-stay-time='400' bindtap='service'>
+        <button class='operation-do' hover-class='hover-class' hover-stay-time='400' open-type="{{configSwitch.version_info.one_more==1?'':'contact'}}" bindcontact="handleContact" bindtap="{{configSwitch.version_info.one_more==1?'callPhone':''}}">
           <image src='{{util.HTTP}}mobile/small/image/ddxq-lxmj.png'></image>
           <view>联系卖家</view>
-        </view>
-        <view hover-class='hover-class' hover-stay-time='400' bindtap='callPhone' class='operation-do'>
+        </button>
+        <button hover-class='hover-class' hover-stay-time='400' bindtap='callPtPhone' class='operation-do'>
           <image src='{{util.HTTP}}mobile/small/image/ddxq-bdd.png'></image>
           <view>拨打电话</view>
-        </view>
+        </button>
       </view>
     </view>
 

@@ -1,5 +1,5 @@
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**
@@ -171,6 +171,12 @@ Page({
    */
   goUse(e) {
     let item = e.currentTarget.dataset.item
+    if (this.data.configSwitch.version_info.one_more == 0) {
+      wx.navigateTo({
+        url: '/pages/search_goods/search_goods',
+      })
+      return
+    }
     if (item.type == 0) {
       wx.navigateTo({
         url: '/nearby_shops/shop_detail/shop_detail?store_id=' + item.classify_str,

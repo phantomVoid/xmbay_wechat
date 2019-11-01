@@ -2,11 +2,11 @@
 var HTTP = 'https://ishop.zihaiwangluo.com/'
 
 // 测试域名
-var HTTP = 'https://ishoptest.zihaiwangluo.com/'
+// var HTTP = 'https://ishoptest.zihaiwangluo.com/'
 // var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
 // var HTTP = 'http://ishop-pre.z4.cc/'
 // var HTTP = 'https://ddmb.zihaiwangluo.com/'
-// var HTTP = 'http://ishop-switch.zihaiwangluo.com/'
+// var HTTP = 'http://kuaixiao.zihaiwangluo.com/'
 
 App({
   onLaunch(data) {
@@ -37,16 +37,16 @@ App({
     this.app_leave = false
     this.app_DIY(() => {})
     this.updateManager() // 系统更新
-    if (this.globalData.member_id != '' && !this.app_socketType) {
-      this.service() //客服
-      this.socketOnMessage('open') //监听客服消息
-    }
+    // if (this.globalData.member_id != '' && !this.app_socketType) {
+    //   this.service() //客服
+    //   this.socketOnMessage('open') //监听客服消息
+    // }
   },
   onHide() {
-    wx.closeSocket()
-    clearTimeout(this.app_socketHeartTime)
-    this.app_leave = true
-    this.app_socketType = true
+    // wx.closeSocket()
+    // clearTimeout(this.app_socketHeartTime)
+    // this.app_leave = true
+    // this.app_socketType = true
   },
 
   /**
@@ -451,6 +451,15 @@ App({
       return false
     }
     return true
+  },
+  // 判断是否为手机号
+  isPhone(pone) {
+    var myreg = /^[1][3-9][0-9]{8}$/;
+    if (!myreg.test(pone)) {
+      return false;
+    } else {
+      return true;
+    }
   },
 
   // 判断是否为手机号
@@ -1044,6 +1053,16 @@ App({
     goods_tagClickLog: HTTP + 'v2.0/goods/tagClickLog',
     //抽奖订单详情
     lottery_activity_order_info: HTTP + 'v2.0/lottery_activity/order_info',
+    //银行卡列表
+    card_index: HTTP + 'v2.0/card/index',
+    //添加银行卡
+    card_create: HTTP + 'v2.0/card/create',
+    //删除银行卡
+    card_destroy: HTTP + 'v2.0/card/destroy',
+    //银行卡详情
+    card_details: HTTP + 'v2.0/card/details',
+    //退款金额
+    order_refundMoney: HTTP + 'v2.0/order/refundMoney'
     //---------------------------------------------------------------------------------
   }
 })

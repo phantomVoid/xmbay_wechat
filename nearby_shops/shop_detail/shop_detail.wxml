@@ -199,6 +199,12 @@
             <view class='good-detail'>
               <view class='good-name'>{{item.goods_name}}</view>
               <!-- <text class='self border-cur' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>自营</text> -->
+              <view class='goods-tip'>
+                <view class='label'>
+                  <view wx:for='{{item.relevaTagList}}' wx:for-item='label' wx:key='{{index}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' data-id='{{label.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' data-goods_id='{{item.goods_id}}'
+                    catchtap='onLabel'>{{label.name}}</view>
+                </view>
+              </view>
               <view class='price' wx:if="{{item.is_group == 1}}" style='{{util.diy_color(diy_color.z_color,"","")}}'>
                 <text class='unit'>￥</text>
                 <text class='integer'>{{util.integer(item.group_price)}}</text>
@@ -278,7 +284,8 @@
       <view wx:for="{{article_list}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='onArticleDetail' data-id='{{item.article_id}}'>
         <view class='dynamic-date'>{{item.date_time}}</view>
         <view class='dynamic-label'>#{{item.title}}#</view>
-        <image class='dynamic-pic' src='{{item.file}}' wx:if="{{item.multiple_file.length == 0||item.multiple_file.length == 1}}"></image>
+        <image class='dynamic-pic' src='{{item.file}}' wx:if="{{item.multiple_file.length == 0}}"></image>
+        <image class='dynamic-pic' src='{{item.multiple_file[0]}}' wx:elif="{{item.multiple_file.length == 1}}"></image>
         <view class='dynamic-pic-list' wx:else>
           <image wx:for="{{item.multiple_file}}" wx:key='{{index}}' src='{{item}}'></image>
         </view>

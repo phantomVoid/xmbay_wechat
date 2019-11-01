@@ -28,5 +28,5 @@
     <view class='warp_title'>微信号：</view>
     <input type='text' placeholder='请输入微信号' maxlength='50' placeholder-style='color:#959ba3;' bindinput='wx_code'></input>
   </view>
-  <view class='submit' hover-class='hover-class' hover-stay-time='400' bindtap='submit' style='{{isSubmit?util.diy_color("",diy_color.z_color,""):""}}'>申请</view>
+  <view class='submit' hover-class='hover-class' hover-stay-time='400' bindtap='subtap' style='{{isSubmit?util.diy_color("",diy_color.z_color,""):""}}'>申请</view>
 </view>

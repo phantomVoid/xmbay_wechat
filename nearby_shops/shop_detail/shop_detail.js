@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -139,7 +139,7 @@ Page({
         cartNum: 0,
         all_list: this.data.all_list
       })
-      app.showToast('删除成功', () => {})
+      // app.showToast('删除成功', () => {})
     })
   },
 
@@ -971,13 +971,22 @@ Page({
    * 客服
    */
   service() {
-    let service_info = {
-      store_title: this.data.store_head.store_name,
-      TARGET_ID: this.data.store_id,
-      DIVERSION_ID: '1002'
-    }
+    wx.makePhoneCall({
+      phoneNumber: this.data.store_head.store_phone,
+    })
+    // let service_info = {
+    //   store_title: this.data.store_head.store_name,
+    //   TARGET_ID: this.data.store_id,
+    //   DIVERSION_ID: '1002'
+    // }
+    // wx.navigateTo({
+    //   url: '/my/service/service?service_info=' + JSON.stringify(service_info),
+    // })
+  },
+  onLabel(e) {
+    console.log(e.currentTarget.dataset)
     wx.navigateTo({
-      url: '/my/service/service?service_info=' + JSON.stringify(service_info),
+      url: `/nearby_shops/good_detail/good_detail?goods_id=${e.currentTarget.dataset.goods_id}&label=${e.currentTarget.dataset.id}`,
     })
   }
 

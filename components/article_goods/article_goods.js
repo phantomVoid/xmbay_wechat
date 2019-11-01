@@ -1,5 +1,5 @@
 // components/article_goods/article_goods.js
-const app = getApp()
+const app = getApp();
 Component({
   /**
    * 组件的属性列表

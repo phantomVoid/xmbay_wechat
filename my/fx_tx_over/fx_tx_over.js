@@ -1,6 +1,6 @@
 // my/fx_tx_over/fx_tx_over.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**

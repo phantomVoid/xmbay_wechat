@@ -27,8 +27,8 @@
 </view>
 
 <view class='tip'>
-  <text>最多￥{{dataInfo.info.subtotal_price}}</text>
-  <text wx:if='{{dataInfo.status != 2 && dataInfo.status != 3&&dataInfo.status != 4&&dataInfo.status != 5.2}}'>,含运费{{dataInfo.info.sub_freight_price}}元</text>
+  <text>最多￥{{max_total}}</text>
+  <text wx:if='{{dataInfo.status != 2 && dataInfo.status != 3&&dataInfo.status != 4&&dataInfo.status != 5.2}}'>,含运费{{sub_freight_price}}元</text>
 </view>
 
 <view class='upload-wrap'>

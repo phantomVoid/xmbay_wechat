@@ -1,4 +1,4 @@
-const html2nodes = require('./Parser.js')
+const html2nodes = require('./Parser.js');
 var imgList = [];
 Component({
   properties: {

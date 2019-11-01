@@ -172,7 +172,7 @@
   background: white;
 }
 
-.footer > view {
+.footer > button {
   flex: 1;
   display: flex;
   align-items: center;
@@ -180,12 +180,12 @@
   height: 100rpx;
 }
 
-.footer > view image {
+.footer > button image {
   width: 40rpx;
   height: 40rpx;
 }
 
-.footer > view view {
+.footer > button view {
   font-size: 28rpx;
   margin-left: 10rpx;
 }

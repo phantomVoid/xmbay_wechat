@@ -7,6 +7,7 @@ page{
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 30rpx;
 }
 
 .container .withdrawal_num {
@@ -115,4 +116,23 @@ page{
   border-radius: 10rpx;
   margin-top: 80rpx;
   color: #fff;
+}
+.bankcard{
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  padding: 30rpx 0;
+  border-bottom: 1px solid #f6f6f6;
+  color: #333;
+}
+.bankcard .info{
+  margin-right: auto;
+}
+.bankcard text{
+  color: #666;
+}
+.next{
+  width: 20rpx;
+  height: 27rpx;
+  flex-shrink: 0;
 }

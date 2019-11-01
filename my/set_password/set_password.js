@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -73,7 +73,7 @@ Page({
   },
 
   login() {
-    let re = /^[0-9a-zA-Z]{6,20}$/
+    let re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/
     if (!re.test(this.data.password)) {
       app.showToast('请输入6位-20位字母、数组密码')
       return

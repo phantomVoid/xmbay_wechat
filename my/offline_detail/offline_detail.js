@@ -1,5 +1,5 @@
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**
@@ -89,6 +89,14 @@ Page({
   callPhone() {
     wx.makePhoneCall({
       phoneNumber: this.data.info.store_list.phone,
+    })
+  },
+  /**
+   * 拨打平台电话
+   */
+  callPtPhone() {
+    wx.makePhoneCall({
+      phoneNumber: this.data.configSwitch.app_info.contact,
     })
   },
 

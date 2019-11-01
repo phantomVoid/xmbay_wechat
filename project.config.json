@@ -24,9 +24,9 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.6",
+	"libVersion": "2.9.0",
 	"appid": "wxc023db5012d5bb0b",
-	"projectname": "ishop2.0",
+	"projectname": "ishop2.0%E5%BC%80%E5%8F%91%E7%89%88",
 	"isGameTourist": false,
 	"scripts": {
 		"beforeCompile": "",

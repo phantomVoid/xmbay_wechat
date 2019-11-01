@@ -1,3 +1,16 @@
+.order-item .order-item-good .file {
+  width: 150rpx;
+  height: 150rpx;
+  float: left;
+}
+
+.order-item .order-item-good .file image {
+  width: 150rpx;
+  height: 150rpx;
+}
+.order-item .order-item-good > view {
+  width: 490rpx;
+}
 .no-order {
   height: 100vh;
   display: flex;

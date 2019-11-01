@@ -182,6 +182,9 @@
           <view class='goods-name'>{{item.goods_name}}</view>
           <view class='tip'>
             <text class='tip-zy' wx:if='{{item.shop==0}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>自营</text>
+            <view class='label'>
+              <view wx:for='{{item.relevaTagList}}' wx:for-item='label' wx:key='{{index}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' data-id='{{label.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' data-goods_id='{{item.goods_id}}' catchtap='onLabel'>{{label.name}}</view>
+            </view>
           </view>
           <view class='goods-price'>
             <block wx:if='{{item.is_bargain==1}}'>

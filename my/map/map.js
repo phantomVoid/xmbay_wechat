@@ -1,7 +1,7 @@
-const app = getApp()
-const event = require('../../utils/event.js')
+const app = getApp();
+const event = require('../../utils/event.js');
 let mapContext;
-const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 let qqmapsdk = new QQMapWX({
   key: app.globalData.MapKey
 });
@@ -107,7 +107,7 @@ Page({
   },
 
   map_search(location) {
-    qqmapsdk.search({
+    qqmapsdk.getSuggestion({
       keyword: this.data.search_key,
       location: location ? location : undefined,
       success: (res, data) => {

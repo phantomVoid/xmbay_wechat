@@ -1,5 +1,5 @@
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**
@@ -23,7 +23,8 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      diy_color: app.globalData.diy_color
+      diy_color: app.globalData.diy_color,
+      configSwitch: app.globalData.configSwitch
     })
   },
 
@@ -68,7 +69,7 @@ Page({
   onReachBottom: function() {
     if (this.data.total > this.data.list.length) {
       this.data.page++
-      this.getConponList()
+        this.getConponList()
     }
   },
 
@@ -85,7 +86,7 @@ Page({
    * 获取一级列表
    */
   getClassify() {
-    http.post(app.globalData.classify_parent).then(res=> {
+    http.post(app.globalData.classify_parent).then(res => {
       this.setData({
         classify: this.data.tab_list.concat(res.result)
       })
@@ -142,7 +143,7 @@ Page({
     http.post(app.globalData.coupon_center, {
       category: this.data.current_tab,
       page: this.data.page
-    }).then(res=> {
+    }).then(res => {
       if (this.data.page == 1) {
         this.setData({
           list: res.result.data,
@@ -150,12 +151,12 @@ Page({
         })
       } else {
         this.setData({
-          list: [...this.data.list,...res.result.data]
+          list: [...this.data.list, ...res.result.data]
         })
       }
       this.countDown()
       clearInterval(this.data.count_down)
-      this.data.count_down = setInterval(()=> {
+      this.data.count_down = setInterval(() => {
         this.countDown()
       }, 1000)
     })
@@ -187,12 +188,12 @@ Page({
       return
     }
     let item = e.currentTarget.dataset.item,
-        index = e.currentTarget.dataset.index
+      index = e.currentTarget.dataset.index
     http.post(app.globalData.get_coupon, {
       coupon_id: item.coupon_id,
       goods_classify_id: item.type == 1 ? item.classify_str : '',
       store_id: item.type == 0 ? item.classify_str : '',
-    }).then(res=> {
+    }).then(res => {
       this.data.list[index].member_state = 1
       this.setData({
         list: this.data.list
@@ -203,11 +204,17 @@ Page({
 
   goUse(e) {
     let item = e.currentTarget.dataset.item
-    if (item.type == 0){
+    if (this.data.configSwitch.version_info.one_more == 0) {
+      wx.navigateTo({
+        url: '/pages/search_goods/search_goods',
+      })
+      return
+    }
+    if (item.type == 0) {
       wx.navigateTo({
         url: '/nearby_shops/shop_detail/shop_detail?store_id=' + item.classify_str,
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: '/pages/search_goods/search_goods?goods_classify_id=' + item.classify_str,
       })

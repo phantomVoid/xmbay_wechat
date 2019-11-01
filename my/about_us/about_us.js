@@ -1,6 +1,6 @@
 // pages/about_us/about_us.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**

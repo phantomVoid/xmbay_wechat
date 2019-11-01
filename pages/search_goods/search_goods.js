@@ -1,5 +1,5 @@
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**
@@ -66,7 +66,9 @@ Page({
     }
     if (options.type =='new') {
       this.onNew()
-    } else {
+    } else if (options.type == 'evaluate'){
+      this.onComment()
+    }else {
       this.getData()
     }
     this.blendent()

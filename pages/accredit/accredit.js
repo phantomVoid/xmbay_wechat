@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -159,10 +159,10 @@ Page({
                 })
               }
             })
-            wx.nextTick(() => {
-              //客服
-              app.service()
-            })
+            // wx.nextTick(() => {
+            //   //客服
+            //   app.service()
+            // })
             this.setData({
               loading: false,
               disabled: false

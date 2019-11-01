@@ -37,15 +37,15 @@
 }
 
 .wrap-footer .f-left-con .item {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex: 1;
   align-items: center;
   height: 100%;
   font-size: 22rpx;
+  line-height: normal;
 }
-
 .f-left-con .item .item-btn {
   margin-top: 6rpx;
 }
@@ -558,12 +558,15 @@
 }
 
 .shop-favor > view .title {
-  font-size: 30rpx;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 24rpx;
   margin-right: 30rpx;
   color: #909090;
 }
 
 .shop-favor > view > image {
+  flex-shrink: 0;
   /* position: absolute;
   right: 4%;
   top: 50%; */
@@ -572,7 +575,16 @@
   margin-left: auto;
   /* margin-top: -11rpx; */
 }
-
+.shop-favor .label-con{
+  align-items: unset;
+  height: auto;
+}
+.shop-favor .label-con .post-list>view{
+  margin-bottom: 10rpx;
+}
+.shop-favor .label-con image{
+  margin-top: 10rpx;
+}
 .shop-favor .promotion {
   display: flex;
   align-content: center;
@@ -592,26 +604,29 @@
 }
 
 .shop-favor .post-list {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   overflow: hidden;
 }
 
 .shop-favor .post-list > view {
   display: flex;
   align-items: center;
-  margin-right: 24rpx;
+  margin-right: 20rpx;
 }
 
 .shop-favor .post-list > view view {
   height: 38rpx;
   line-height: 38rpx;
-  font-size: 26rpx;
+  font-size: 24rpx;
   margin-right: 14rpx;
 }
 
 .shop-favor .post-list > view text {
-  font-size: 28rpx;
+  display: block;
+  /* width:  */
+  font-size: 24rpx;
 }
 
 .attribute {
@@ -632,7 +647,7 @@
 }
 
 .attribute > view > view {
-  font-size: 30rpx;
+  font-size: 24rpx;
   line-height: 90rpx;
   color: #909090;
 }

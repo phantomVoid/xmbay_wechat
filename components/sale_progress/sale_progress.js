@@ -1,5 +1,5 @@
 // components/sale_progress/sale_progress.js
-const app =getApp()
+const app =getApp();
 Component({
   /**
    * 组件的属性列表

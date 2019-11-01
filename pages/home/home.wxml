@@ -372,7 +372,7 @@
         </view>
       </scroll-view>
     </view>
-    <view class='popularity-class-con' wx:if="{{dataInfo.class_list.length!=0}}">
+    <view class='popularity-class-con' wx:if="{{dataInfo.class_list.length!=0&&configSwitch.show_switch.is_goods_recommend==1}}">
       <view class='class-item' wx:for='{{dataInfo.class_list}}' wx:key='{{index}}' bindtap='onClassify' data-item='{{item}}' hover-class='hover-class' hover-stay-time='300' wx:if='{{item.goods_list.length!=0}}'>
         <view class='adv'>
           <image src='{{item.adv.file}}'></image>
@@ -434,6 +434,9 @@
             <text class='zy' wx:if='{{item.shop==0}}' style='{{util.diy_color("",diy_color.z_color,"")}}'>自营</text>
             <text class='pt' wx:if='{{item.is_group==1}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>{{item.group_num}}人拼</text>
             <text class='kj' wx:if='{{item.is_bargain==1}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>砍价</text>
+            <view class='label'>
+              <view wx:for='{{item.relevaTagList}}' wx:for-item='label' wx:key='{{index}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' data-id='{{label.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' data-goods_id='{{item.goods_id}}' catchtap='onLabel'>{{label.name}}</view>
+            </view>
           </view>
           <block wx:if='{{item.is_limit}}'>
             <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
@@ -485,3 +488,4 @@
   <image class='exclusive-cancel' src='{{util.HTTP}}mobile/small/image/sy-xrlb-gb.png' hover-class='hover-class' hover-stay-time='400' bindtap='closeExclusive'></image>
 </view>
 <buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>
+

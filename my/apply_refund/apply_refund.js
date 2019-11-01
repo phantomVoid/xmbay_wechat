@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -13,7 +13,8 @@ Page({
     reason: '',
     //退款金额
     price: '',
-    dataInfo: null
+    dataInfo: null,
+    isSubmit: true
   },
 
   /**
@@ -22,14 +23,11 @@ Page({
   onLoad: function(options) {
     this.data.dataInfo = JSON.parse(options.dataInfo)
     this.data.dataInfo.info.file = decodeURIComponent(this.data.dataInfo.info.file)
-    if (this.data.dataInfo.status == 2 || this.data.dataInfo.status == 3 || this.data.dataInfo.status == 4 || this.data.dataInfo.status == 5.2) {
-      this.data.dataInfo.info.subtotal_price = parseFloat(this.data.dataInfo.info.subtotal_price - this.data.dataInfo.info.sub_freight_price).toFixed(2)
-    } else {
-      this.data.dataInfo.info.subtotal_price = parseFloat(this.data.dataInfo.info.subtotal_price).toFixed(2)
-    }
     this.setData({
       diy_color: app.globalData.diy_color,
       dataInfo: this.data.dataInfo
+    }, () => {
+      this.getData()
     })
   },
 
@@ -135,24 +133,53 @@ Page({
     })
   },
 
+  getData() {
+    http.post(app.globalData.order_refundMoney, {
+      order_goods_id: this.data.dataInfo.info.order_goods_id
+    }).then(res => {
+      this.setData({
+        max_total: res.result.max_total,
+        sub_freight_price: res.result.sub_freight_price
+      })
+    })
+  },
+
   /**
    * 提交
    */
   submit() {
+    if (!this.data.isSubmit) {
+      return
+    }
+    this.setData({
+      isSubmit: false
+    })
     if (this.data.reason == '') {
       app.showToast('请输入退款原因')
+      this.setData({
+        isSubmit: true
+      })
       return
     }
     if (this.data.price == '') {
       app.showToast('请输入退款金额')
+      this.setData({
+        isSubmit: true
+      })
       return
     }
     if (parseFloat(this.data.price) <= 0) {
       app.showToast('请输入正确退款金额')
+      this.setData({
+        isSubmit: true
+      })
       return
     }
-    if (parseFloat(this.data.price).toFixed(2) > parseFloat(this.data.dataInfo.info.subtotal_price)) {
-      app.showToast(`最多可退款金额为${this.data.dataInfo.info.subtotal_price}元`)
+    if (parseFloat(this.data.price).toFixed(2) > parseFloat(this.data.max_total)) {
+      app.showToast(`最多可退款金额为${this.data.max_total}元`)
+      this.setData({
+        isSubmit: true
+      })
       return
     }
 
@@ -184,6 +211,11 @@ Page({
             this.data.file_name += ','
           }
           this.uploadImage(i + 1)
+        },
+        fail: () => {
+          this.setData({
+            isSubmit: true
+          })
         }
       })
     } else {
@@ -192,7 +224,7 @@ Page({
         type: this.data.dataInfo.type,
         refund_amount: this.data.price,
         reason: this.data.reason,
-        is_get_goods: this.data.dataInfo.status != 2 || this.data.dataInfo.type==1 ? this.data.dataInfo.state : 2,
+        is_get_goods: (this.data.dataInfo.status != 2 && this.data.dataInfo.distribution_type != 2 && this.data.dataInfo.type == 1) || this.data.dataInfo.type == 1 ? this.data.dataInfo.state : 2,
         multiple_file: this.data.file_name
       }).then(res => {
         wx.hideLoading()
@@ -211,6 +243,10 @@ Page({
               wx.navigateBack({})
             }
           }
+        })
+      }).catch(() => {
+        this.setData({
+          isSubmit: true
         })
       })
     }

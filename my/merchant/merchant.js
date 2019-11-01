@@ -1,10 +1,11 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 let qqmapsdk = new QQMapWX({
   key: app.globalData.MapKey
 });
-let reg = /^[A-Za-z0-9\u4e00-\u9fa5]+$/
+let reg = /^[A-Za-z0-9\u4e00-\u9fa5]+$/;
+let re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
 Page({
 
   /**
@@ -20,7 +21,9 @@ Page({
     address: '',
     create: false,
     phone: '',
-    formId: []
+    formId: [],
+    pswInput: '',
+    isSubmit: true
   },
 
   /**
@@ -39,6 +42,7 @@ Page({
    */
   onReady: function() {
     this.location()
+    this.getData()
   },
 
   /**
@@ -132,6 +136,14 @@ Page({
       url: this.data.area.length == 0 ? '../merchant_region/merchant_region' : '../merchant_region/merchant_region?data=' + JSON.stringify(obj),
     })
   },
+  /**
+   * 店铺密码
+   */
+  pswInput(e) {
+    this.setData({
+      pswInput: e.detail.value
+    })
+  },
 
   /**
    * 检验是否可以创建
@@ -152,6 +164,17 @@ Page({
    * 创建店铺
    */
   createShop(e) {
+    if (!this.data.isSubmit) {
+      return
+    }
+    this.setData({
+      isSubmit: false
+    })
+    setTimeout(() => {
+      this.setData({
+        isSubmit: true
+      })
+    }, 5000)
     this.data.formId.push(e.detail.formId)
     if (this.data.name == '') {
       wx.showToast({
@@ -207,6 +230,24 @@ Page({
       })
       return
     }
+    if (this.data.pswInput != '' && !re.test(this.data.pswInput)) {
+      wx.showToast({
+        title: '请输入6位-20位字母数字组合密码',
+        icon: 'none',
+        mask: true,
+        duration: 2000
+      })
+      return
+    }
+    if (this.data.pswInput == '' && this.data.info.password_state == 0) {
+      wx.showToast({
+        title: '请输入店铺密码',
+        icon: 'none',
+        mask: true,
+        duration: 2000
+      })
+      return
+    }
     http.post(app.globalData.applet_my_saveFormId, {
       micro_form_id: this.data.formId.join()
     }).then(res => {})
@@ -219,7 +260,8 @@ Page({
         area: this.data.area.area_name,
         address: this.data.address,
         phone: this.data.phone,
-        shop: '1'
+        shop: '1',
+        password: this.data.pswInput
       }).then(res => {
         // app.globalData.in_state = 1
         app.showSuccessToast(res.message, () => {
@@ -274,6 +316,16 @@ Page({
   callPhone() {
     wx.makePhoneCall({
       phoneNumber: this.data.configSwitch.app_info.contact,
+    })
+  },
+  /**
+   * 获取数据
+   */
+  getData() {
+    http.post(app.globalData.safety, {}).then(res => {
+      this.setData({
+        info: res.result
+      })
     })
   },
 })

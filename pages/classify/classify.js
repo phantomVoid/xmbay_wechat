@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const navBar = require('../../components/navBar/navBar.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const navBar = require('../../components/navBar/navBar.js');
 Page({
   /**
    * 页面的初始数据
@@ -63,7 +63,12 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {},
+  onPullDownRefresh: function() {
+    this.getFirstClassify()
+    wx.nextTick(() => {
+      this.getMsg()
+    })
+  },
 
   /**
    * 页面上拉触底事件的处理函数
@@ -186,10 +191,10 @@ Page({
       case 1:
         wx.navigateTo({
           url: '/nearby_shops/good_detail/good_detail?goods_id=' + this.data.adv_info.content,
-          success:res=>{
+          success: res => {
             http.post(app.globalData.index_adBrowseInc, {
               adv_id: this.data.adv_info.adv_id
-            }).then(res => { })
+            }).then(res => {})
           }
         })
         break;
@@ -200,7 +205,7 @@ Page({
           success: res => {
             http.post(app.globalData.index_adBrowseInc, {
               adv_id: this.data.adv_info.adv_id
-            }).then(res => { })
+            }).then(res => {})
           }
         })
         break;
@@ -235,4 +240,10 @@ Page({
       }
     })
   },
+  route(e) {
+    if (e.currentTarget.dataset.item.id == 2) {
+      wx.stopPullDownRefresh()
+      wx.startPullDownRefresh()
+    }
+  }
 })

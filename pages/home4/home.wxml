@@ -167,7 +167,7 @@
         </swiper>
       </view>
     </view>
-    <view class='limit-con' wx:if='{{dataInfo.limit.list.length!=0}}'>
+    <view class='limit-con'>
       <view class='limit-con-tit' style='{{util.diy_color("",diy_color.z_color,"")}}' hover-class='hover-class' hover-stay-time='300' bindtap='onLimit'>
         <image class='limit-tit-icon' src='{{util.HTTP}}mobile/small/image/shop_common/23.png'></image>
         <view class='limit-newTime'>
@@ -185,18 +185,26 @@
         <image class='limit-bg' src='{{util.HTTP}}mobile/small/image/shop_common/22.png'></image>
       </view>
       <view class='limit-goods'>
-        <view class='goods-con'>
-          <view class='item' wx:for='{{dataInfo.limit.list}}' wx:key='{{index}}' bindtap='onGood' data-id='{{item.goods_id}}' hover-class='hover-class' hover-stay-time='300'>
-            <view class='goods-name'>{{item.goods_name}}</view>
-            <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
-              <text>￥</text>
-              <text class='price'>{{item.time_limit_price}}</text>
-            </view>
-            <view class='goods-img'>
-              <image src='{{item.file}}'></image>
+        <block wx:if='{{dataInfo.limit.list.length>0}}'>
+          <view class='goods-con'>
+            <view class='item' wx:for='{{dataInfo.limit.list}}' wx:key='{{index}}' bindtap='onGood' data-id='{{item.goods_id}}' hover-class='hover-class' hover-stay-time='300'>
+              <view class='goods-name'>{{item.goods_name}}</view>
+              <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+                <text>￥</text>
+                <text class='price'>{{item.time_limit_price}}</text>
+              </view>
+              <view class='goods-img'>
+                <image src='{{item.file}}'></image>
+              </view>
             </view>
           </view>
-        </view>
+        </block>
+        <block wx:else>
+          <view class='limit-goods-list'>
+            <image class='p-img' src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg01.png'></image>
+            <view class='p-text'>暂无商品</view>
+          </view>
+        </block>
 
       </view>
     </view>
@@ -233,7 +241,7 @@
       </view>
     </view>
 
-    <view class='popularity-class-con'>
+    <view class='popularity-class-con' wx:if='{{dataInfo.class_list.length>0}}'>
       <view class='section-title'>
         <view class='tit'>专辑 · 推荐</view>
         <view class='tip'>RECOMMENDED ALBUM</view>
@@ -264,7 +272,7 @@
                     </view>
                   </block>
                   <block wx:elif='{{goodsItem.is_group==1}}'>
-                    <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}' style='{{util.diy_color(diy_color.z_color,"","")}}'>
+                    <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
                       <text>￥</text>
                       <text class='price'>{{goodsItem.group_price}}</text>
                     </view>
@@ -296,6 +304,12 @@
             <image src='{{item.file}}'></image>
           </view>
           <view class='goods-name'>{{item.goods_name}}</view>
+          <view class='goods-tip'>
+            <view class='label'>
+              <view wx:for='{{item.relevaTagList}}' wx:for-item='label' wx:key='{{index}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' data-id='{{label.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' data-goods_id='{{item.goods_id}}'
+                catchtap='onLabel'>{{label.name}}</view>
+            </view>
+          </view>
           <block wx:if='{{item.is_limit}}'>
             <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
               <text>￥</text>
@@ -340,10 +354,10 @@
 <!--返回顶部  -->
 <go_top id="go_top" hover-class='hover-class' hover-stay-time='400' bindtap='onBackTop' />
 <!-- 购物车 -->
-<cart id="cart" diy_color='{{diy_color}}'/>
+<cart id="cart" diy_color='{{diy_color}}' />
 <!--新人专享  -->
 <view class='exclusive' catchtouchmove='none' wx:if='{{dataInfo.set.popup_adv_status == 1&&configSwitch.show_switch.is_coupon==1}}'>
   <image class='exclusive-logo' src='{{util.HTTP}}mobile/small/image/sy-xrlb-lb.png' hover-class='hover-class' hover-stay-time='400' bindtap='onNewGift'></image>
   <image class='exclusive-cancel' src='{{util.HTTP}}mobile/small/image/sy-xrlb-gb.png' hover-class='hover-class' hover-stay-time='400' bindtap='closeExclusive'></image>
 </view>
-<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}' />

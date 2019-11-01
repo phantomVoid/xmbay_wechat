@@ -78,7 +78,7 @@
 
 .content > view {
   padding: 20rpx 22rpx;
-  background: #fafafa;
+  /* background: #fafafa; */
   float: left;
   min-height: 130rpx;
 }
@@ -91,7 +91,7 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  /* -webkit-line-clamp: 4; */
 }
 
 .content .number {

@@ -1,6 +1,6 @@
 // components/bargainModal/bargainModal.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Component({
   /**
    * 组件的属性列表

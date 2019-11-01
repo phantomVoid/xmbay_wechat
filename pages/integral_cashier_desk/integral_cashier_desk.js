@@ -1,6 +1,6 @@
 // pages/cashier_desk/cashier_desk.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**

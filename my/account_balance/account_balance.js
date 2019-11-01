@@ -1,5 +1,5 @@
 // pages/account_balance/account_balance.js
-const app = getApp()
+const app = getApp();
 Page({
 
   /**

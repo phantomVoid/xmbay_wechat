@@ -15,9 +15,12 @@
     </view>
     <view class='good-detail'>
       <view class='good-name'>{{item.goods_name}}</view>
-      <view wx:if='{{item.is_group == 1}}'>
-        <view class='good-tips-list'>
+      <view class='goods-info' wx:if='{{item.is_group == 1}}'>
+        <view class='good-tips-con'>
           <text class='good-tips cur' wx:if='{{item.shop==0&&util.isShops==0}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>自营</text>
+          <view class='label'>
+            <view wx:for='{{item.relevaTagList}}' wx:for-item='label' wx:key='{{index}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' data-id='{{label.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' data-goods_id='{{item.goods_id}}' catchtap='onLabel'>{{label.name}}</view>
+          </view>
         </view>
         <view class='good-tips-list'>
           <view class='good-group-info'>
@@ -34,9 +37,13 @@
         </view>
       </view>
 
-      <view wx:elif='{{item.is_bargain == 1}}'>
-        <view class='good-tips-list'>
+      <view class='goods-info' wx:elif='{{item.is_bargain == 1}}'>
+        <view class='good-tips-con'>
           <text class='good-tips cur' wx:if='{{item.shop==0&&util.isShops==0}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>自营</text>
+          <!-- <text class='tag' wx:for='{{item.relevaTagList}}' wx:for-item="tag">{{tag.name}}</text> -->
+          <view class='label'>
+            <view wx:for='{{item.relevaTagList}}' wx:for-item='label' wx:key='{{index}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' data-id='{{label.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' data-goods_id='{{item.goods_id}}' catchtap='onLabel'>{{label.name}}</view>
+          </view>
         </view>
         <view class='good-tips-list'>
           <view class='cur base-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
@@ -51,9 +58,12 @@
         </view>
       </view>
 
-      <view wx:elif="{{item.is_limit == 1}}">
-        <view class='good-tips-list'>
+      <view class='goods-info' wx:elif="{{item.is_limit == 1}}">
+        <view class='good-tips-con'>
           <text class='good-tips' wx:if='{{item.shop==0&&util.isShops==0}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>自营</text>
+          <view class='label'>
+            <view wx:for='{{item.relevaTagList}}' wx:for-item='label' wx:key='{{index}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' data-id='{{label.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' data-goods_id='{{item.goods_id}}' catchtap='onLabel'>{{label.name}}</view>
+          </view>
         </view>
         <view class='price' style='{{util.diy_color(diy_color.z_color,"","")}}{{!item.store_name?"top:190rpx;":""}}margin-top:0;'>
           <text class='unit'>￥</text>
@@ -66,9 +76,13 @@
           </view>
         </view>
       </view>
-      <view wx:else>
-        <view class='good-tips-list'>
+      <view class='goods-info' wx:else>
+        <view class='good-tips-con'>
           <text class='good-tips' wx:if='{{item.shop==0&&util.isShops==0}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}'>自营</text>
+          <!-- <text class='tag' wx:for='{{item.relevaTagList}}' wx:for-item="tag">{{tag.name}}</text> -->
+          <view class='label'>
+            <view wx:for='{{item.relevaTagList}}' wx:for-item='label' wx:key='{{index}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' data-id='{{label.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' data-goods_id='{{item.goods_id}}' catchtap='onLabel'>{{label.name}}</view>
+          </view>
         </view>
         <view class='price' style="{{!item.store_name?'top:190rpx':''}}" style='{{util.diy_color(diy_color.z_color,"","")}}'>
           <text class='unit'>￥</text>

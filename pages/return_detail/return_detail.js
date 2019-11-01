@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -181,6 +181,14 @@ Page({
   callPhone() {
     wx.makePhoneCall({
       phoneNumber: this.data.info.phone,
+    })
+  },
+  /**
+   * 拨打平台电话
+   */
+  callPtPhone() {
+    wx.makePhoneCall({
+      phoneNumber: this.data.configSwitch.app_info.contact,
     })
   },
   /**

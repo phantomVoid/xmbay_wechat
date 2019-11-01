@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Component({
   options: {
     multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -13,7 +13,6 @@ Component({
       type: Object,
       observer: function() {
         if (this.data.info.attr) {
-          console.log('asdfasdfadf')
           this.data.attrs = new Array(this.data.info.attr.length)
           this.setData({
             good_image: this.data.info.file,
@@ -202,14 +201,12 @@ Component({
         id: item.goods_attr_id
       }
       this.data.attr = ''
-      for (let i = 0, len = this.data.attr_array.length; i < len; i++) {
-        if (this.data.attr_array[i].value) {
-          this.data.attr += this.data.attr_array[i].value + ','
-        }
-      }
       let attr_detail = ''
       for (let i = 0, len = this.data.attr_array.length; i < len; i++) {
-        attr_detail += this.data.info.attr[i].attr_name + ':' + this.data.attr_array[i].value + ' '
+        if (this.data.attr_array[i]) {
+          this.data.attr += this.data.attr_array[i].value + ','
+          attr_detail += this.data.info.attr[i].attr_name + ':' + this.data.attr_array[i].value + ' '
+        }
       }
       this.setData({
         attr_array: this.data.attr_array,
@@ -219,6 +216,7 @@ Component({
       if (this.data.attr.split(',').length == this.data.info.attr.length) {
         this._getGoodPrice()
       }
+      
     },
 
     /**
@@ -251,6 +249,8 @@ Component({
         this.data.products_id = res.result.products_id
         if (this.data.num > res.result.attr_goods_number) {
           this.data.num = res.result.attr_goods_number
+        } else if (this.data.num < res.result.attr_goods_number) {
+          this.data.num = 1
         }
         this.setData({
           info: this.data.info,
@@ -356,7 +356,14 @@ Component({
             return
           }
         }
-        if (this.data.attr_array.length != this.data.info.attr.length) {
+        let is_attr_array = true
+        for (let i of this.data.attr_array) {
+          if (!i) {
+            is_attr_array = false
+          }
+        }
+        console.log(is_attr_array)
+        if (this.data.attr_array.length != this.data.info.attr.length || !is_attr_array) {
           app.showToast('请选择商品属性')
           return
         }
@@ -433,6 +440,16 @@ Component({
      * 立即砍价
      */
     bargain() {
+      let is_attr_array = true
+      for (let i of this.data.attr_array) {
+        if (!i) {
+          is_attr_array = false
+        }
+      }
+      if (this.data.attr_array.length != this.data.info.attr.length || !is_attr_array) {
+        app.showToast('请选择商品属性')
+        return
+      }
       wx.nextTick(() => {
         if (this.data.info.is_own_shop == 1) {
           app.showToast('您的商品，留给别人购买')
@@ -464,11 +481,17 @@ Component({
      */
     _addCart() {
       wx.nextTick(() => {
+        let is_attr_array = true
+        for (let i of this.data.attr_array) {
+          if (!i) {
+            is_attr_array = false
+          }
+        }
         if (this.data.info.is_own_shop == 1) {
           app.showToast('您的商品，留给别人购买')
           return
         }
-        if (this.data.attr_array.length != this.data.info.attr.length) {
+        if (this.data.attr_array.length != this.data.info.attr.length || !is_attr_array) {
           app.showToast('请选择商品属性')
           return
         }

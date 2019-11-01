@@ -1,6 +1,6 @@
 // my/take_out/take_out.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**

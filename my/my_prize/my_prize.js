@@ -1,7 +1,7 @@
 // my/my_prize/my_prize.js
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -182,13 +182,25 @@ Page({
       order_id: e.currentTarget.dataset.item.order_id
     })
     wx.navigateTo({
-      url: '/my/address/address?choose=true',
+      url: '/my/address/address?choose=true&oType=3',
     })
   },
   onOrder(e){
     console.log(e)
+    return
     wx.navigateTo({
       url: `/my/games_order/games_order?id=${e.currentTarget.dataset.item.order_id}&index=${e.currentTarget.dataset.index}`,
+    })
+  },
+  changeAddress(res) {
+    this.setData({
+      member_address_id: res.member_address_id,
+    })
+    http.post(app.globalData.set_addres, {
+      activity_order_id: this.data.order_id,
+      member_address_id: res.member_address_id
+    }).then(res => {
+      this.getData()
     })
   }
 })

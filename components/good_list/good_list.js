@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Component({
   /**
    * 组件的属性列表
@@ -94,6 +94,12 @@ Component({
       } else {
         this.triggerEvent("addCart", item)
       }
+    },
+    onLabel(e) {
+      console.log(e.currentTarget.dataset)
+      wx.navigateTo({
+        url: `/nearby_shops/good_detail/good_detail?goods_id=${e.currentTarget.dataset.goods_id}&label=${e.currentTarget.dataset.id}`,
+      })
     }
   }
 })

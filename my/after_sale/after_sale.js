@@ -1,5 +1,5 @@
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**
@@ -89,7 +89,7 @@ Page({
     console.log(e)
     let item = e.currentTarget.dataset.item
     wx.navigateTo({
-      url: `/pages/return_detail/return_detail?id=${item.order_goods_id}&status=${item.status}`,
+      url: `/pages/return_detail/return_detail?id=${item.order_goods_id}&status=${item.order_attach_status}`,
     })
   }
 })

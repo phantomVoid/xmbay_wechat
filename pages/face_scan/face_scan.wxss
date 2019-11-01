@@ -9,7 +9,7 @@
   height: 290rpx;
   display: block;
   position: absolute;
-  bottom: 182rpx;
+  bottom: 16%;
   left: 50%;
   margin-left: -145rpx;
 }

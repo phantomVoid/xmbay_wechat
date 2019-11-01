@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Component({
   /**
    * 组件的属性列表
@@ -166,6 +166,7 @@ Component({
       }
     },
     changeSelect(e) {
+      return
       let index = e.currentTarget.dataset.index
       this.data.list[index].select = !this.data.list[index].select
       this.setData({

@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -41,7 +41,9 @@ Page({
     coupon: [],
     invoice: {
       is_invoice: 0 //是否开发票
-    }
+    },
+    delivery_method: [],
+    delivery_method_type: 0
   },
 
   /**
@@ -64,10 +66,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    event.on('changeAddress', this, () => {
-      this.data.member_address_id = this.data.address.member_address_id
-      this.getData()
-    })
     this.getData()
   },
 
@@ -93,7 +91,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-    event.remove('changeAddress', this)
+
   },
 
   /**
@@ -122,10 +120,7 @@ Page({
       number: this.data.info.num,
       products_id: this.data.info.products_id
     }).then(res => {
-      app.globalData.addressSelect.member_address_id = res.address.member_address_id ? res.address.member_address_id : null
-      if (res.address == null || res.address.name == undefined) {
-        this.selectComponent("#modal").showModal()
-      }
+
       for (let i = 0; i < res.coupon.length; i++) {
         res.coupon[i].select = true
       }
@@ -133,26 +128,74 @@ Page({
         res.packet[0].select = true
       }
       if (res.freight.length != 0) {
-        if (res.freight[0].express_freight_sup == 1) { // && res.freight[0].default_express_type == 1
-          //快递
-          this.data.info.delivery_method = 3
-          this.data.pay_way = 1
-          this.data.freight_price = res.freight[0].express_freight_price
-        } else if (res.freight[0].city_freight_sup == 1) {
-          //同城
-          this.data.info.delivery_method = 1
-          this.data.freight_price = res.freight[0].city_freight_price
-          this.data.pay_way = 1
-        } else if (res.freight[0].take_freight_sup == 1) {
-          //预约
-          this.data.info.delivery_method = 2
-          this.data.freight_price = 0
-          this.data.pay_way = 1
+        this.setData({
+          delivery_method: []
+        })
+        //显示配送方式
+        if (res.freight[0].express_freight_sup == 1) {
+          this.data.delivery_method.push({
+            title: '快递邮寄',
+            text: 'is_express',
+            type: 0
+          })
+        }
+        if (res.freight[0].city_freight_sup == 1) {
+          this.data.delivery_method.push({
+            title: '同城配送',
+            text: 'is_city',
+            type: 1
+          })
+        }
+        if (res.freight[0].take_freight_sup == 1) {
+          this.data.delivery_method.push({
+            title: '预约自提',
+            text: 'is_shop',
+            type: 2
+          })
         }
         if (res.freight[0].take_freight_sup == 1) {
           this.data.take_id = res.freight[0].take_freight_list[0].take_id
           this.data.take_item = res.freight[0].take_freight_list[0]
-          // this.data.pay_way = 2
+        }
+
+        let delivery_method_every = this.data.delivery_method.some((item) => {
+          return item.type + 1 == res.freight[0].default_express_type
+        })
+        if (!delivery_method_every && this.data.delivery_method.length != 0) {
+          //如果默认配送方式不支持
+          switch (this.data.delivery_method[0].type) {
+            case 0:
+              res.freight[0].default_express_type = 1
+              break;
+            case 1:
+              res.freight[0].default_express_type = 2
+              break;
+            case 2:
+              res.freight[0].default_express_type = 3
+              break;
+          }
+        }
+        //默认配送方式
+        if (res.freight[0].default_express_type == 1) {
+          this.data.info.delivery_method = 3
+          this.data.delivery_method_type = 0
+          this.data.pay_way = 1
+          this.data.freight_price = res.freight[0].express_freight_price
+        } else if (res.freight[0].default_express_type == 2) {
+          this.data.info.delivery_method = 1
+          this.data.delivery_method_type = 1
+          this.data.freight_price = res.freight[0].city_freight_price
+          this.data.pay_way = 1
+        } else if (res.freight[0].default_express_type == 3) {
+          this.data.info.delivery_method = 2
+          this.data.delivery_method_type = 2
+          this.data.freight_price = 0
+          this.data.pay_way = 1
+        }
+
+        app.globalData.addressSelect.member_address_id = res.address.member_address_id ? res.address.member_address_id : null
+        if ((res.address == null || res.address.name == undefined) && this.data.delivery_method_type != 2) {
+          this.selectComponent("#modal").showModal()
         }
       }
 
@@ -172,7 +215,9 @@ Page({
         redpacket: res.packet,
         pay_way: this.data.pay_way,
         discount_price: res.discount_price,
-        'invoice.is_added_value_tax': res.result.is_added_value_tax
+        'invoice.is_added_value_tax': res.result.is_added_value_tax,
+        delivery_method: this.data.delivery_method,
+        delivery_method_type: this.data.delivery_method_type
       })
       this.calcTotal()
     })
@@ -234,7 +279,7 @@ Page({
     if (this.data.info.good_type == 1) {
       //普通商品
       this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.shop_price)
-      this.data.info['total'] = parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num) > 0 ? parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num):0.10
+      this.data.info['total'] = parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num) > 0 ? parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num) : 0.10
     } else if (this.data.info.good_type == 2) {
       //团购
       this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.group_price) > 0 ? parseFloat(this.data.info.num * this.data.info.group_price).toFixed(2) : 0.10
@@ -280,8 +325,51 @@ Page({
     this.setData({
       info: this.data.info,
       pay_way: e.detail[0].way,
+      delivery_method_type: 1,
       freight_price: e.detail[0].way == 2 ? this.data.freight.city_freight_price : this.data.freight.express_freight_price
     })
+    this.calcTotal()
+  },
+
+  /**
+   * 配送方式
+   */
+  onDeliveryWay(e) {
+    let item = e.currentTarget.dataset.item
+    if (this.data.address == null) {
+      app.showToast('请选择收货地址')
+      return
+    }
+
+    if (this.data.pay_way == 2) {
+      return
+    }
+    this.setData({
+      delivery_method_type: item.type
+    })
+    //判断配送方式
+    if (item.type == 2) {
+      this.data.info.delivery_method = 2
+      this.setData({
+        info: this.data.info,
+        freight_price: 0.00,
+      })
+    } else if (item.type == 1) {
+      //同城速递
+      this.data.info.delivery_method = 1
+      this.setData({
+        info: this.data.info,
+        freight_price: this.data.freight.city_freight_price
+      })
+    } else if (item.type == 0) {
+      //快递邮寄
+      this.data.info.delivery_method = 3
+      this.setData({
+        info: this.data.info,
+        freight_price: this.data.freight.express_freight_price
+      })
+    }
+
     this.calcTotal()
   },
 
@@ -374,7 +462,7 @@ Page({
     let store_set = [],
       member_shop_coupon_id = '';
     //如果没有地址弹出
-    if (this.data.address == null && this.data.info.delivery_method != 2 || this.data.address.name == undefined) {
+    if ((this.data.address == null || this.data.address.name == undefined) && this.data.info.delivery_method != 2) {
       this.selectComponent("#modal").showModal()
       return
     }
@@ -583,6 +671,9 @@ Page({
   },
   formId(e) {
     this.data.formId = e.detail.formId
+  },
+  changeAddress(e) {
+    this.data.member_address_id = this.data.address.member_address_id
+    this.getData()
   }
-
 })

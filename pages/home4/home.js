@@ -1,10 +1,9 @@
 // pages/home/home.js
-const app = getApp()
-const event = require('../../utils/event.js')
-const http = require('../../utils/http.js')
-const encryption = require('../../utils/encryption/public.js')
-const navBar = require('../../components/navBar/navBar.js')
-const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+const app = getApp();
+const event = require('../../utils/event.js');
+const http = require('../../utils/http.js');
+const navBar = require('../../components/navBar/navBar.js');
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 let qqmapsdk = new QQMapWX({
   key: app.globalData.MapKey
 });
@@ -572,16 +571,41 @@ Page({
    */
   onClassify(e) {
     let item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: '/pages/search_goods/search_goods?goods_classify_id=' + item.goods_classify_id,
-      success: () => {
-        if (e.currentTarget.dataset.adv == 1) {
-          http.post(app.globalData.index_adBrowseInc, {
-            adv_id: item.adv_id
-          }).then(res => {})
+    switch (item.adv.type) {
+      case 1: //商品
+        wx.navigateTo({
+          url: '/nearby_shops/good_detail/good_detail?goods_id=' + item.adv.content,
+          success: () => {
+            http.post(app.globalData.index_adBrowseInc, {
+              adv_id: item.adv_id
+            }).then(res => {})
+          }
+        })
+        break;
+      case 2: //店铺
+        if (this.data.configSwitch.version_info.one_more == 1) {
+          wx.navigateTo({
+            url: '/nearby_shops/shop_detail/shop_detail?store_id=' + item.adv.content,
+            success: () => {
+              http.post(app.globalData.index_adBrowseInc, {
+                adv_id: item.adv_id
+              }).then(res => {})
+            }
+          })
+        } else {
+          wx.navigateTo({
+            url: '/pages/search_goods/search_goods?goods_classify_id=' + item.goods_classify_id,
+            success: () => {
+              if (e.currentTarget.dataset.adv == 1) {
+                http.post(app.globalData.index_adBrowseInc, {
+                  adv_id: item.adv_id
+                }).then(res => {})
+              }
+            }
+          })
         }
-      }
-    })
+        break;
+    }
   },
   /**
    * 加入购物车
@@ -637,14 +661,20 @@ Page({
       'dataInfo.set.popup_adv_status': 0
     })
   },
-  nav(){
+  nav() {
     const query = wx.createSelectorQuery()
-    query.selectViewport().scrollOffset((res)=> {
+    query.selectViewport().scrollOffset((res) => {
       this.setData({
         scrollTop: res.scrollTop
       })
     })
     query.exec()
+  },
+  onLabel(e) {
+    console.log(e.currentTarget.dataset)
+    wx.navigateTo({
+      url: `/nearby_shops/good_detail/good_detail?goods_id=${e.currentTarget.dataset.goods_id}&label=${e.currentTarget.dataset.id}`,
+    })
   }
 
 })

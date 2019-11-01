@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 const wxbarcode = require('../../utils/codeUtil.js');
 Page({
 
@@ -104,7 +104,7 @@ Page({
         discounts: (parseFloat(res.result.subtotal_coupon_price) + parseFloat(res.result.total_packet_price)).toFixed(2)
       })
       if (res.result.distribution_type == 2) {
-        wxbarcode.barcode('barcode', res.result.take_code, 584, 126);
+        wxbarcode.barcode('barcode', res.result.take_code, 500, 136);
         wxbarcode.qrcode('qrcode', res.result.take_code, 286, 286);
       }
       clearInterval(this.data.count_down)
@@ -151,6 +151,14 @@ Page({
   callPhone() {
     wx.makePhoneCall({
       phoneNumber: this.data.info.store_list.phone,
+    })
+  },
+  /**
+   * 拨打平台电话
+   */
+  callPtPhone() {
+    wx.makePhoneCall({
+      phoneNumber: this.data.configSwitch.app_info.contact,
     })
   },
 

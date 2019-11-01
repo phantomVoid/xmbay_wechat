@@ -1,10 +1,9 @@
 // pages/home/home.js
-const app = getApp()
-const event = require('../../utils/event.js')
-const http = require('../../utils/http.js')
-const encryption = require('../../utils/encryption/public.js')
-const navBar = require('../../components/navBar/navBar.js')
-const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+const app = getApp();
+const event = require('../../utils/event.js');
+const http = require('../../utils/http.js');
+const navBar = require('../../components/navBar/navBar.js');
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 let qqmapsdk = new QQMapWX({
   key: app.globalData.MapKey
 });
@@ -627,11 +626,15 @@ Page({
     }).then(res => {
       console.log(res)
     }).catch(res => {
-      let aes = encryption.Decrypt(res.data)
       console.log(aes)
       // console.log(res.data)
     })
   },
-
+  onLabel(e) {
+    console.log(e.currentTarget.dataset)
+    wx.navigateTo({
+      url: `/nearby_shops/good_detail/good_detail?goods_id=${e.currentTarget.dataset.goods_id}&label=${e.currentTarget.dataset.id}`,
+    })
+  }
 
 })

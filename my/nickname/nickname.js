@@ -1,6 +1,6 @@
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
-const app = getApp()
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
+const app = getApp();
 Page({
 
   /**

@@ -1,6 +1,6 @@
 // my/fx_apply_sh/fx_apply_sh.js
-const http = require('../../utils/http.js')
-const app = getApp()
+const http = require('../../utils/http.js');
+const app = getApp();
 Page({
 
   /**

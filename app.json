@@ -132,7 +132,9 @@
         "service/popups/popups",
         "my_wallet/my_wallet",
         "set_pay_psw/set_pay_psw",
-        "set_login_psw/set_login_psw"
+        "add_bank/add_bank",
+        "bank_list/bank_list",
+        "bank_details/bank_details"
       ]
     },
     {
@@ -152,7 +154,8 @@
         "shop_credential/shop_credential",
         "invoice_detail/invoice_detail",
         "invoice_info/invoice_info",
-        "invoice_over/invoice_over"
+        "invoice_over/invoice_over",
+        "shop_audit/shop_audit"
       ]
     },
     {
@@ -175,31 +178,31 @@
         "iconPath": "image/sy1.png",
         "selectedIconPath": "image/sy2.png",
         "pagePath": "pages/home/home",
-        "text": "首页"
+        "text": ""
       },
       {
         "iconPath": "image/fl1.png",
         "selectedIconPath": "image/fl2.png",
         "pagePath": "pages/classify/classify",
-        "text": "分类"
+        "text": ""
       },
       {
         "iconPath": "image/fj1.png",
         "selectedIconPath": "image/fj2.png",
         "pagePath": "pages/nearby_shops/nearby_shops",
-        "text": "附近门店"
+        "text": ""
       },
       {
         "iconPath": "image/gwc1.png",
         "selectedIconPath": "image/gwc2.png",
         "pagePath": "pages/cart/cart",
-        "text": "购物车"
+        "text": ""
       },
       {
         "iconPath": "image/wd1.png",
         "selectedIconPath": "image/wd2.png",
         "pagePath": "pages/my/my",
-        "text": "我的"
+        "text": ""
       }
     ]
   },

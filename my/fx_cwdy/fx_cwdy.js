@@ -1,6 +1,6 @@
 // my/fx_cwdy/fx_cwdy.js
-const http = require('../../utils/http.js')
-const app = getApp()
+const http = require('../../utils/http.js');
+const app = getApp();
 Page({
 
   /**

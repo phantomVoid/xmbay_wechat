@@ -1,9 +1,9 @@
 // pages/home/home.js
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
-const navBar = require('../../components/navBar/navBar.js')
-const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
+const navBar = require('../../components/navBar/navBar.js');
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 let qqmapsdk = new QQMapWX({
   key: app.globalData.MapKey
 });
@@ -675,4 +675,10 @@ Page({
       this.selectComponent("#good_list").blendent(obj)
     }
   },
+  onLabel(e) {
+    console.log(e.currentTarget.dataset)
+    wx.navigateTo({
+      url: `/nearby_shops/good_detail/good_detail?goods_id=${e.currentTarget.dataset.goods_id}&label=${e.currentTarget.dataset.id}`,
+    })
+  }
 })

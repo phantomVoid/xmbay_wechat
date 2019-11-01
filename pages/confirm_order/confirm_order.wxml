@@ -1,23 +1,24 @@
 <wxs module="util" src="../../utils/util.wxs" />
 <scroll-view scroll-y class='scroll' hidden='{{!finish}}'>
   <view class='wrap'>
-    <view class='address' hover-class='hover-class' hover-stay-time='400' bindtap='chooseAddress' wx:if="{{address != null&&address.name!=undefined}}">
-      <view>
-        <view class='address-head'>
-          <view class='address-receiver'>收货人:{{address.name}}</view>
-          <view class='address-phone'>{{address.phone}}</view>
+    <block wx:if="{{delivery_method_type!=2}}">
+      <view class='address' hover-class='hover-class' hover-stay-time='400' bindtap='chooseAddress' wx:if="{{address != null&&address.name!=undefined}}">
+        <view>
+          <view class='address-head'>
+            <view class='address-receiver'>收货人:{{address.name}}</view>
+            <view class='address-phone'>{{address.phone}}</view>
+          </view>
+          <view class='address-detail'>收货地址:{{address.province}}{{address.city}}{{address.area}}{{address.street}}{{address.address}}</view>
+          <image class='next' src='{{util.HTTP}}mobile/small/image/xq-gd.png'></image>
         </view>
-        <view class='address-detail'>收货地址:{{address.province}}{{address.city}}{{address.area}}{{address.street}}{{address.address}}</view>
-        <image class='next' src='{{util.HTTP}}mobile/small/image/xq-gd.png'></image>
       </view>
-    </view>
-    <view class='no-address' hover-class='hover-class' hover-stay-time='400' bindtap='chooseAddress' wx:else>
-      <image src='{{util.HTTP}}mobile/small/image/shdz-tjshdz.png'></image>
-      <view>添加收货地址</view>
-    </view>
+      <view class='no-address' hover-class='hover-class' hover-stay-time='400' bindtap='chooseAddress' wx:else>
+        <image src='{{util.HTTP}}mobile/small/image/shdz-tjshdz.png'></image>
+        <view>添加收货地址</view>
+      </view>
 
-    <image class='bottom' src='{{util.HTTP}}mobile/small/image/qrsd-xf.png'></image>
-
+      <image class='bottom' src='{{util.HTTP}}mobile/small/image/qrsd-xf.png'></image>
+    </block>
     <view class='pay-way' hover-class='hover-class' hover-stay-time='400' bindtap='onPayWay'>
       <view>支付方式</view>
       <view wx:if="{{pay_way == 1}}">在线支付</view>
@@ -84,9 +85,11 @@
           <view class='no-bottom'>
             <view class='left'>配送方式</view>
             <view class='method'>
-              <view wx:if='{{freight.express_freight_sup == 1}}' hover-class='hover-class' hover-stay-time='400' bindtap='onExpress' style='{{info.delivery_method == 3?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}{{pay_way!=1&&info.delivery_method == 1?util.diy_color("","#ccc",""):""}}'>快递邮寄</view>
+              <view class="item" wx:for="{{delivery_method}}" wx:key="{{index}}" wx:for-item="delivery_item" wx:for-index="idx" style="{{delivery_method_type==delivery_item.type?util.diy_color(diy_color.z_color,'',diy_color.z_color):''}}{{pay_way!=1&&delivery_method_type == 1&&delivery_item.type!=1?util.diy_color('','#ccc',''):''}}"
+                data-index='{{index}}' data-idx='{{idx}}' data-item="{{delivery_item}}" hover-class='hover-class' hover-stay-time='400' bindtap='onDeliveryWay'>{{delivery_item.title}}</view>
+              <!-- <view wx:if='{{freight.express_freight_sup == 1}}' hover-class='hover-class' hover-stay-time='400' bindtap='onExpress' style='{{info.delivery_method == 3?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}{{pay_way!=1&&info.delivery_method == 1?util.diy_color("","#ccc",""):""}}'>快递邮寄</view>
               <view wx:if='{{freight.city_freight_sup == 1}}' hover-class='hover-class' hover-stay-time='400' bindtap='onCityWide' style='{{info.delivery_method == 1?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}'>同城配送</view>
-              <view wx:if='{{freight.take_freight_sup == 1}}' hover-class='hover-class' hover-stay-time='400' bindtap='onPickup' style='{{info.delivery_method == 2?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}{{pay_way!=1&&info.delivery_method == 1?util.diy_color("","#ccc",""):""}}'>预约自提</view>
+              <view wx:if='{{freight.take_freight_sup == 1}}' hover-class='hover-class' hover-stay-time='400' bindtap='onPickup' style='{{info.delivery_method == 2?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}{{pay_way!=1&&info.delivery_method == 1?util.diy_color("","#ccc",""):""}}'>预约自提</view> -->
 
             </view>
           </view>
@@ -127,7 +130,7 @@
           <view class='right'>
             <text class='total-num'>共{{info.num}}件商品</text>
             <text>小计:</text>
-            <text style='{{util.diy_color(diy_color.z_color,"","")}}'>￥{{info.subtotal}}</text>
+            <text style='{{util.diy_color(diy_color.z_color,"","")}}'>￥{{util.toFixed(info.subtotal)}}</text>
           </view>
         </view>
 
@@ -159,7 +162,7 @@
       <view class='operation promotion'>
         <view class='left'>商品总额</view>
         <view class='right'>
-          <text>￥{{info.subtotal}}</text>
+          <text>￥{{util.toFixed(info.subtotal)}}</text>
         </view>
       </view>
       <view class='operation'>

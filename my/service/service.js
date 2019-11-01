@@ -1,11 +1,11 @@
 // my/service/service.js
-const app = getApp()
-const http = require('../../utils/http.js')
-const service = require('../../utils/service.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const service = require('../../utils/service.js');
 let s_socket, s_socketType = false,
   s_socketHeartTime, s_socketAgainTime;
-const recorderManager = wx.getRecorderManager()
-const innerAudioContext = wx.createInnerAudioContext()
+const recorderManager = wx.getRecorderManager();
+const innerAudioContext = wx.createInnerAudioContext();
 
 let recorderManager_obj = {
   duration: 60000,

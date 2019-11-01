@@ -29,6 +29,10 @@
     <view>联系人电话</view>
     <input value='{{phone}}' disabled></input>
   </view>
+  <view wx:if="{{info.password_state==0}}">
+    <view>店铺密码</view>
+    <input placeholder='请输入6-20位店铺密码' bindinput='pswInput' maxlength='20'></input>
+  </view>
 </view>
 
 <!-- <view class='tips'>

@@ -3,7 +3,7 @@
   <view>
     <view class='left'>收货人:</view>
     <view class='right'>
-      <input type='text' bindinput='nameInput' value='{{name}}' placeholder='请输入联系人' placeholder-class='input-class' />
+      <input type='text' bindinput='nameInput' value='{{name}}' maxlength="10" placeholder='请输入联系人' placeholder-class='input-class' />
     </view>
   </view>
 </view>
@@ -41,7 +41,7 @@
   <view>
     <view>详细地址:</view>
     <view class='right'>
-      <input type='text' value='{{detail}}' placeholder='详细地址,例如: 16号楼5层301室' bindinput='detailInput' placeholder-class='input-class' />
+      <input type='text' value='{{detail}}' maxlength="40" placeholder='详细地址,例如: 16号楼5层301室' bindinput='detailInput' placeholder-class='input-class' />
     </view>
   </view>
 </view>
@@ -54,7 +54,7 @@
   </view>
 </view>
 
-<view class='save' hover-class='hover-class' hover-stay-time='400' bindtap='save' style='{{util.diy_color("",diy_color.z_color,"")}}' >保存并退出</view>
+<view class='save' hover-class='hover-class' hover-stay-time='400' bindtap='save' style='{{util.diy_color("",diy_color.z_color,"")}}' >保存并使用</view>
 
 
 <choose_address isShow="{{address_board}}" address="{{address}}" bind:confirmAddress="confirmAddress" />

@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -32,7 +32,8 @@ Page({
     info['express_content'] = ''
     this.setData({
       info: info,
-      diy_color: app.globalData.diy_color
+      diy_color: app.globalData.diy_color,
+      write: options.write
     })
   },
 
@@ -306,10 +307,14 @@ Page({
     }).then(res => {
       app.showSuccessToast('评价成功', () => {
         event.emit('evaluateOrder')
-        event.emit('commentSuccess')
-        wx.redirectTo({
-          url: '/pages/comment_success/comment_success',
-        })
+        // event.emit('commentSuccess')
+        if (this.data.write == 1) {
+          wx.navigateBack({})
+        } else {
+          wx.redirectTo({
+            url: '/pages/comment_success/comment_success',
+          })
+        }
       })
     })
   }

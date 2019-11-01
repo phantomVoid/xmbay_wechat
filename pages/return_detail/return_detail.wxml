@@ -98,14 +98,14 @@
   </view>
 </view>
 <view class='footer'>
-  <view hover-class='hover-class' hover-stay-time='400' bindtap='service'>
+  <button hover-class='hover-class' hover-stay-time='400' open-type="{{configSwitch.version_info.one_more==1?'':'contact'}}" bindcontact="handleContact" bindtap="{{configSwitch.version_info.one_more==1?'callPhone':''}}">
     <image src='{{util.HTTP}}mobile/small/image/ddxq-lxmj.png'></image>
     <view>联系卖家</view>
-  </view>
-  <view hover-class='hover-class' hover-stay-time='400' bindtap='callPhone'>
+  </button>
+  <button hover-class='hover-class' hover-stay-time='400' bindtap='callPtPhone'>
     <image src='{{util.HTTP}}mobile/small/image/ddxq-bdd.png'></image>
-    <view>拨打电话</view>
-  </view>
+    <view>平台电话</view>
+  </button>
   <!-- <view hover-class='hover-class' hover-stay-time='400' bindtap='service_pt'>
     <image src='{{util.HTTP}}mobile/small/image/wd-pj-zxkf.png'></image>
     <view>咨询平台</view>

@@ -1,6 +1,6 @@
 // nearby_shops/pay_result/pay_result.js
-const app = getApp()
-const http = require('../../utils/http.js')
+const app = getApp();
+const http = require('../../utils/http.js');
 Page({
 
   /**

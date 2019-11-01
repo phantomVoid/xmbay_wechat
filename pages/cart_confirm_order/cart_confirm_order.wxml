@@ -54,15 +54,16 @@
               <view class='no-bottom'>
                 <view class='left'>配送方式</view>
                 <view class='method'>
-                  <view class="{{item.delivery_method == 'is_express'? 'border-cur':''}}" hover-class='hover-class' hover-stay-time='400' bindtap='onDeliveryWay' data-method='is_express' data-index='{{index}}' wx:if="{{item.freight.express_freight_sup == 1}}" style='{{item.delivery_method == "is_express"?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}{{item.way!=1&&item.delivery_method == "is_city"?util.diy_color("","#ccc",""):""}}'>快递邮寄</view>
+                  <view class="item" wx:for="{{item.delivery_method}}" wx:key="{{index}}" wx:for-item="delivery_item" wx:for-index="idx" style="{{item.delivery_method_type==delivery_item.type?util.diy_color(diy_color.z_color,'',diy_color.z_color):''}}{{item.way!=1&&item.delivery_method_type == 1&&delivery_item.type!=1?util.diy_color('','#ccc',''):''}}" data-index='{{index}}' data-idx='{{idx}}' data-item="{{delivery_item}}" hover-class='hover-class' hover-stay-time='400' bindtap='onDeliveryWay'>{{delivery_item.title}}</view>
+                  <!-- <view class="{{item.delivery_method == 'is_express'? 'border-cur':''}}" hover-class='hover-class' hover-stay-time='400' bindtap='onDeliveryWay' data-method='is_express' data-index='{{index}}' wx:if="{{item.freight.express_freight_sup == 1}}" style='{{item.delivery_method == "is_express"?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}{{item.way!=1&&item.delivery_method == "is_city"?util.diy_color("","#ccc",""):""}}'>快递邮寄</view>
                   <view class="{{item.delivery_method == 'is_city'? 'border-cur':''}}" hover-class='hover-class' hover-stay-time='400' bindtap='onDeliveryWay' data-method='is_city' data-index='{{index}}' wx:if="{{item.freight.city_freight_sup == 1}}" style='{{item.delivery_method == "is_city"?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}'>同城配送</view>
-                  <view class="{{item.delivery_method == 'is_shop'? 'border-cur':''}}" hover-class='hover-class' hover-stay-time='400' bindtap='onDeliveryWay' data-method='is_shop' data-index='{{index}}' wx:if="{{item.freight.take_freight_sup == 1}}" style='{{item.delivery_method == "is_shop"?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}{{item.way!=1&&item.delivery_method == "is_city"?util.diy_color("","#ccc",""):""}}'>预约自提</view>
+                  <view class="{{item.delivery_method == 'is_shop'? 'border-cur':''}}" hover-class='hover-class' hover-stay-time='400' bindtap='onDeliveryWay' data-method='is_shop' data-index='{{index}}' wx:if="{{item.freight.take_freight_sup == 1}}" style='{{item.delivery_method == "is_shop"?util.diy_color(diy_color.z_color,"",diy_color.z_color):""}}{{item.way!=1&&item.delivery_method == "is_city"?util.diy_color("","#ccc",""):""}}'>预约自提</view> -->
                 </view>
               </view>
-              <view class='freight' hidden="{{item.delivery_method != 'is_express'}}">运费￥{{item.freight.express_freight_price}}元</view>
-              <view class='freight' hidden="{{item.delivery_method != 'is_city'}}">运费￥{{item.freight.city_freight_price}}元</view>
+              <view class='freight' hidden="{{item.delivery_method_type != 0}}">运费￥{{item.freight.express_freight_price}}元</view>
+              <view class='freight' hidden="{{item.delivery_method_type != 1}}">运费￥{{item.freight.city_freight_price}}元</view>
             </view>
-            <view class='pick-wrap' hidden="{{item.delivery_method != 'is_shop'}}">
+            <view class='pick-wrap' hidden="{{item.delivery_method_type != 2}}">
               <view class='pick-up'>
                 <view class='point'>自提点:{{item.take_freight.area}}</view>
                 <view class='cur change' hover-class='hover-class' hover-stay-time='400' bindtap='changeTake' data-index='{{index}}' style='{{util.diy_color(diy_color.z_color,"","")}}'>点击修改>></view>
@@ -151,7 +152,6 @@
             var price = 0
             for (var i = 0; i < list.length; i++) {
               for (var j = 0; j < list[i].list.length; j++) {
-                console.log(list[i].list[j].discount_price)
                 price += parseFloat(list[i].list[j].discount_price) * parseFloat(list[i].list[j].number)
               }
             }

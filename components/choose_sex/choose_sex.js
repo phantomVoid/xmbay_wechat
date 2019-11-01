@@ -6,7 +6,7 @@ Component({
   properties: {
     isShow: {
       type: Boolean,
-      observer: function() {
+      observer: function () {
         if (this.data.isShow) {
           this.fadeIn()
         } else {
@@ -33,7 +33,7 @@ Component({
      * 淡入效果
      */
     fadeIn() {
-      let interval = setInterval(()=> {
+      let interval = setInterval(() => {
         if (this.data.opacity >= 0.3) {
           clearInterval(interval)
         }
@@ -47,7 +47,7 @@ Component({
      * 淡出效果
      */
     fadeOut() {
-      let interval = setInterval(()=> {
+      let interval = setInterval(() => {
         if (this.data.opacity <= 0) {
           clearInterval(interval)
         }

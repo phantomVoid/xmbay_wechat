@@ -249,7 +249,7 @@
   </view>
 
   <!--为你推荐  -->
-  <view style='{{model.phone=="iPhone X"||model.phone=="iPhone"?"padding-bottom:50rpx;":""}}'>
+  <view class='recommend-con' style='{{model.phone=="iPhone X"||model.phone=="iPhone"?"padding-bottom:50rpx;":""}}'>
     <view class='recommend-for'>
       <view class='recommend-title' style='{{util.diy_color(diy_color.z_color,"","")}}padding-left:20rpx;'>猜你喜欢</view>
       <text class='recommend-tip'>为你挑选好物</text>
@@ -266,6 +266,12 @@
         </view>
         <view class='goods-name'>{{item.goods_name}}</view>
         <view class='goods-tip'>
+          <view class='label'>
+            <view wx:for='{{item.relevaTagList}}' wx:for-item='label' wx:key='{{index}}' style='{{util.diy_color(diy_color.z_color,"",diy_color.z_color)}}' data-id='{{label.tag_bind_goods_id}}' hover-class='hover-class' hover-stay-time='400' data-goods_id='{{item.goods_id}}'
+              catchtap='onLabel'>{{label.name}}</view>
+          </view>
+        </view>
+        <view class='goods-tip'>
           <!-- <text class='zy' wx:if='{{item.shop==0}}' style='{{util.diy_color("",diy_color.z_color,"")}}'>自营</text> -->
           <text class='pt' wx:if='{{item.is_group==1}}' style='{{util.diy_color("#fff",diy_color.z_color,diy_color.z_color)}}'>{{item.group_num}}人拼</text>
           <block wx:if='{{item.is_group==1}}'>
@@ -277,7 +283,7 @@
           </block>
           <block wx:elif='{{item.is_bargain==1}}'>
             <view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
-              <text class='unit'>低价￥</text>
+              <text class='unit'>底价￥</text>
               <text class='integer price'>{{util.integer(item.cut_price)}}</text>
               <text class='decimals'>.{{util.decimals(item.cut_price)}}</text>
             </view>
@@ -331,7 +337,7 @@
   <!--返回顶部  -->
 
   <go_top id="go_top" bindtap='onBackTop' />
-  <cart id="cart" diy_color='{{diy_color}}'/>
+  <cart id="cart" diy_color='{{diy_color}}' />
 
   <!--新人专享  -->
   <view class='exclusive' catchtouchmove='none' wx:if='{{popup_adv_status == 1&&configSwitch.show_switch.is_coupon==1}}'>
@@ -340,7 +346,7 @@
   </view>
 </view>
 
-<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}' />
 <!-- <buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" info="{{info}}" discount="{{discount}}" group_buy="{{false}}" /> -->
 <!-- <template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color}}" /> -->
 <template is="tabBar" data="{{tabBar:bindData.tabBar,diy_color:diy_color,model:model}}" />

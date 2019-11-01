@@ -1,6 +1,6 @@
-const app = getApp()
-const http = require('../../utils/http.js')
-const event = require('../../utils/event.js')
+const app = getApp();
+const http = require('../../utils/http.js');
+const event = require('../../utils/event.js');
 Page({
 
   /**
@@ -17,9 +17,10 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
       keyword: options.keyword,
+      configSwitch: app.globalData.configSwitch,
       distribution_type: options.distribution_type
     })
   },
@@ -27,7 +28,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     //取消订单
     event.on('closeSearchOrder', this, () => {
       this.data.list[this.data.index].status = -1
@@ -62,14 +63,14 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
     event.remove('closeSearchOrder', this)
     event.remove('paySearchOrder', this)
     event.remove('confirmSearchReceipt', this)
@@ -79,14 +80,14 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     this.data.page = 1
     this.getOrderList()
   },
@@ -94,7 +95,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     if (this.data.total > this.data.list.length) {
       this.data.page++;
       this.getOrderList()
@@ -108,6 +109,14 @@ Page({
     this.data.index = e.currentTarget.dataset.index
     wx.navigateTo({
       url: '../order_detail/order_detail?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  /**
+   * 线下详情
+   */
+  onDetail(e) {
+    wx.navigateTo({
+      url: '/my/offline_detail/offline_detail?id=' + e.currentTarget.dataset.id,
     })
   },
 

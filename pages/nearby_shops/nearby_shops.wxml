@@ -1,7 +1,7 @@
 <wxs module="util" src="../../utils/util.wxs" />
 <import src="../../components/navBar/navBar.wxml" />
 <view class='warp-con' catchtouchmove="{{filtrate_board?true:''}}">
-  <view id='top' class='topbanner'>
+  <view id='top' class='topbanner' style="{{banner.length == 0?'height:auto':''}}">
     <view class='shops-search' wx:if="{{banner.length == 0}}" style="{{banner.length == 0?'background-color:#fff':''}}">
       <view class='search-con' hover-class='hover-class' hover-stay-time='400' bindtap='onSearch' style="{{banner.length == 0?'background-color:rgba(188, 188, 188, 0.3);color:#bbb':''}}">
         <view class='font_family icon-ssk-ss'></view>
