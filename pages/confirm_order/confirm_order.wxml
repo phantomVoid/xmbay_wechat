@@ -81,7 +81,7 @@
             <text class='cur' style='{{util.diy_color(diy_color.z_color,"","")}}'>￥{{info.price_spread}}</text>
           </view>
         </view> -->
-        <view class='delivery-method' wx:if='{{freight != null&&info.delivery_method!=undefined}}'>
+        <view class='delivery-method' wx:if='{{freight != null&&delivery_method.length!=0}}'>
           <view class='no-bottom'>
             <view class='left'>配送方式</view>
             <view class='method'>
@@ -93,10 +93,10 @@
 
             </view>
           </view>
-          <view class='freight' wx:if='{{info.delivery_method == 3}}'>运费￥{{freight.express_freight_price}}元</view>
-          <view class='freight' wx:if='{{info.delivery_method == 1}}'>运费￥{{freight.city_freight_price}}元</view>
+          <view class='freight' wx:if='{{delivery_method_type == 0}}'>运费￥{{freight.express_freight_price}}元</view>
+          <view class='freight' wx:if='{{delivery_method_type == 1}}'>运费￥{{freight.city_freight_price}}元</view>
         </view>
-        <view class='pick-wrap' wx:if='{{info.delivery_method == 2}}'>
+        <view class='pick-wrap' wx:if='{{delivery_method_type == 2}}'>
           <view class='pick-up'>
             <view class='point'>自提点:{{take_item.take_name}}</view>
             <view class='cur change' hover-class='hover-class' hover-stay-time='400' bindtap='changeTake' style='{{util.diy_color(diy_color.z_color,"","")}}'>点击修改>></view>

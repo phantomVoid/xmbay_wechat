@@ -16,7 +16,7 @@
         <image src='{{util.HTTP}}mobile/small/image/wd-tkxq-shdz.png'></image>
         <view>
           <view class='consignee'>
-            <view>收货人: {{configSwitch.version_info.one_more==1?info.store_name:configSwitch.app_info.title}}</view>
+            <view>收货人: {{info.store_name}}</view>
             <view>{{info.phone}}</view>
           </view>
           <view class='address-detail'>{{info.address}}</view>

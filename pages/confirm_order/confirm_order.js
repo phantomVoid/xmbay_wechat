@@ -321,12 +321,19 @@ Page({
    * 确定支付方式
    */
   confirmWay(e) {
-    this.data.info.delivery_method = e.detail[0].delivery_method
+    let delivery_method
+    if (e.detail[0].delivery_method == 3 && this.data.delivery_method_type != 1) {
+      delivery_method = 0
+    } else if (e.detail[0].delivery_method == 2 && this.data.delivery_method_type == 1) {
+      delivery_method = 2
+    } else if (e.detail[0].delivery_method == 1 && this.data.delivery_method_type != 1) {
+      delivery_method = 1
+    }
     this.setData({
-      info: this.data.info,
+      'info.delivery_method': e.detail[0].delivery_method,
       pay_way: e.detail[0].way,
-      delivery_method_type: 1,
-      freight_price: e.detail[0].way == 2 ? this.data.freight.city_freight_price : this.data.freight.express_freight_price
+      delivery_method_type: delivery_method,
+      freight_price: e.detail[0].way == 2 || this.data.info.delivery_method == 1 ? this.data.freight.city_freight_price : this.data.freight.express_freight_price
     })
     this.calcTotal()
   },
