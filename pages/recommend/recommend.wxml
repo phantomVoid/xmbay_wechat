@@ -123,8 +123,9 @@
         <!-- <view class='shop' style="{{item.is_group == 1 || item.is_bargain == 1?'display:none':''}}">{{item.store_name}}
           <text class='go-shop'>进店></text>
         </view> -->
-        <image class='add-cart' catchtap='addCart' src='{{util.HTTP}}mobile/small/image/dp-gwc.png'></image>
+        <image class='add-cart' data-item='{{item}}' catchtap='addCart' src='{{util.HTTP}}mobile/small/image/dp-gwc.png'></image>
       </view>
     </view>
   </view>
 </scroll-view>
+<buy catchtap="none" id="buy_board" bind:closeBuy="closeBuy" type="3" nav='{{true}}' info="{{info}}" discount="{{discount}}" group_buy="{{false}}" diy_color='{{diy_color}}'/>

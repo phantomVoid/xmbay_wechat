@@ -52,7 +52,7 @@ Page({
    */
   onShareAppMessage: function() {
     return {
-      path: '/pages/invitation_web/invitation_web?token=' + this.data.token
+      path: '/pages/invitation_web/invitation_web?mid=' + app.globalData.member_id
     }
   },
 

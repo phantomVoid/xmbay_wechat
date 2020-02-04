@@ -172,6 +172,42 @@ Page({
     wx.navigateTo({
       url: '/nearby_shops/good_detail/good_detail?goods_id=' + e.currentTarget.dataset.id,
     })
-  }
+  },
+  /**
+   * 加入购物车
+   */
+  addCart(e) {
+    if (!app.login()) {
+      return
+    }
+    let item = e.currentTarget.dataset.item
+    item.add_cart_type = 2
+    item['attr'] = item.attribute_list
+    if (item.goods_number == 0) {
+      app.showToast('该商品已经卖光了')
+      return
+    }
+    if (item['attr'].length == 0) {
+      http.encPost(app.globalData.cart_create, {
+        store_id: item.store_id,
+        goods_id: item.goods_id,
+        goods_name: item.goods_name,
+        file: item.cart_file,
+        number: 1,
+        products_id: '',
+        attr: '',
+        goods_attr: '',
+      }).then(res => {
+        event.emit('refreshCart')
+        event.emit('refreshCartNumber')
+        app.showSuccessToast('添加购物车成功')
+      })
+    } else {
+      this.setData({
+        info: item
+      })
+      this.selectComponent("#buy_board").show()
+    }
+  },
 
 })

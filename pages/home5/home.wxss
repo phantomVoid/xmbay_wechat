@@ -733,7 +733,7 @@
 
 .section-con .popularity-con .p-con .item {
   width: 220rpx;
-  height: 307rpx;
+  height: 310rpx;
   border-radius: 8rpx;
   float: left;
   overflow: hidden;
@@ -1000,8 +1000,7 @@
 }
 
 .recommend-con .goods-list .goods-item .goods-name {
-  max-height: 50rpx;
-  padding: 20rpx 0;
+  margin: 20rpx 0;
   font-size: 26rpx;
   text-overflow: ellipsis;
   display: -webkit-box;

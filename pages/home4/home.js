@@ -28,8 +28,7 @@ Page({
   onLoad: function(options) {
     app.globalData.nav_type = 'only_1'
     this.getSystemInfo()
-    let obj = null
-    wx.hideTabBar()
+    let obj = null;
     //代言id
     if (options.sup_id) {
       wx.setStorage({

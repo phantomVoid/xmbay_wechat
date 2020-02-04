@@ -173,6 +173,7 @@
   "tabBar": {
     "selectedColor": "#f23030",
     "backgroundColor": "#ffffff",
+    "custom": true,
     "list": [
       {
         "iconPath": "image/sy1.png",

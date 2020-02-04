@@ -63,10 +63,10 @@
           </block>
 
           <!-- 收票人信息 -->
-          <block wx:if='{{invoice_type==1}}'>
+          <!-- <block wx:if='{{invoice_type==1}}'> -->
             <view class='row'>
               <view class='title'>收票人信息</view>
-            <view class='tip'>增值税发票单独寄出，不与商品一起寄出</view>
+            <!-- <view class='tip'>增值税发票单独寄出，不与商品一起寄出</view> -->
               <view class='info'>
                 <view class='name'>收票人姓名</view>
                 <input value='{{consignee_name}}' bindinput='consignee_name' maxlength='11' placeholder='请输入收票人姓名' placeholder-style='color:#71767b'></input>
@@ -84,7 +84,7 @@
                 <input value='{{address_details}}' bindinput='address_details' placeholder='请输入详细地址' placeholder-style='color:#71767b'></input>
               </view>
             </view>
-          </block>
+          <!-- </block> -->
 
           <view class='row'>
             <view class='title'>发票内容</view>

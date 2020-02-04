@@ -49,10 +49,10 @@ Component({
       this.setData({
         is_show: false
       })
-      this.triggerEvent("confirm",this.data.data)
       http.post(app.globalData.applet_my_saveFormId, {
         micro_form_id: this.data.formId
       }).then(res => { })
+      this.triggerEvent("confirm", this.data.data)
     },
 
     /**

@@ -116,18 +116,18 @@ Page({
     if (this.data.invoice_info.download_links == '' || this.data.invoice_info.download_links == null || this.data.invoice_info.download_links == undefined) {
       return
     }
-    wx.downloadFile({
-      url: this.data.invoice_info.download_links,
-      success: res => {
-        app.showSuccessToast('下载成功', () => {})
-      }
-    })
-    // wx.setClipboardData({
-    //   data: this.data.invoice_info.download_links,
+    // wx.downloadFile({
+    //   url: this.data.invoice_info.download_links,
     //   success: res => {
-    //     app.showToast('复制成功,请去浏览器打开', res => {})
+    //     app.showSuccessToast('下载成功', () => {})
     //   }
     // })
+    wx.setClipboardData({
+      data: this.data.invoice_info.download_links,
+      success: res => {
+        app.showToast('复制成功,请去浏览器打开', res => {})
+      }
+    })
   },
   /**
    * 

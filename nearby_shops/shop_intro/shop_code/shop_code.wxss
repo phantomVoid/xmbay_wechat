@@ -44,9 +44,10 @@
   height: 100%;
 }
 .warp .warp-con .shop-logo .logo{
-  width: 168rpx;
-  height: 168rpx;
+  width: 180rpx;
+  height: 180rpx;
   border-radius: 50%;
+  background-color: #fff;
   overflow: hidden;
 }
 .warp .warp-con .code{

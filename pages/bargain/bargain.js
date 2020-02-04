@@ -92,7 +92,7 @@ Page({
       }
       this.data.is_first = false
       clearInterval(this.data.count_down)
-      this.countDown()
+      // this.countDown()
       this.data.count_down = setInterval(()=> {
         this.countDown()
       }, 1000)
@@ -186,7 +186,7 @@ Page({
       }
 
       wx.navigateTo({
-        url: '/pages/confirm_order/confirm_order?info=' + JSON.stringify(obj) + '&good_image=' + encodeURIComponent(this.data.info.file),
+        url: '/pages/confirm_order/confirm_order?info=' + encodeURIComponent(JSON.stringify(obj)) + '&good_image=' + encodeURIComponent(this.data.info.file),
       })
     }, 200)
   },

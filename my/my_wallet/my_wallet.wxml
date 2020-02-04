@@ -20,7 +20,7 @@
       <view class='num'>{{info.red_packet}}</view>
       <image class='next' src='{{util.HTTP}}mobile/small/image/my/1-9.png'></image>
     </view>
-    <view class='li' data-item='pay_points' hover-class='hover-class' hover-stay-time='400' bindtap='route' >
+    <view class='li' data-item='pay_points' hover-class='hover-class' hover-stay-time='400' bindtap='route' wx:if='{{configSwitch.show_switch.is_integral_mall==1}}'>
       <image class='img' src='{{util.HTTP}}mobile/small/image/my/1-4.png'></image>
       <view class='title'>积分</view>
       <view class='num'>{{info.pay_points}}</view>

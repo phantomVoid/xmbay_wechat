@@ -118,6 +118,13 @@ Page({
       })
       return
     }
+    if (this.data.withdrawal_price=='') {
+      wx.showToast({
+        title: '请输入提现金额',
+        icon: 'none'
+      })
+      return
+    }
     if (this.data.way_type == 3 && this.card_details == null) {
       this.showModal()
       return

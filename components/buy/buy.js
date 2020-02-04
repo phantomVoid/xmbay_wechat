@@ -430,7 +430,7 @@ Component({
           }).then(res => {})
           //跳转确认订单页
           wx.navigateTo({
-            url: '/pages/confirm_order/confirm_order?info=' + JSON.stringify(obj) + '&good_image=' + encodeURIComponent(this.data.good_image),
+            url: '/pages/confirm_order/confirm_order?info=' + encodeURIComponent(JSON.stringify(obj)) + '&good_image=' + encodeURIComponent(this.data.good_image),
           })
         }
       })

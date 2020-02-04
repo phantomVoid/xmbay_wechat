@@ -44,7 +44,6 @@ Page({
     // this.test()
     console.log(options)
     console.log(options.scene)
-    wx.hideTabBar()
     // 分享按钮上级id
     // if (options.id) {
     //   wx.setStorage({

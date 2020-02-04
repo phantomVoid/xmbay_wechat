@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
@@ -24,7 +24,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.0",
+	"libVersion": "2.9.4",
 	"appid": "wxc023db5012d5bb0b",
 	"projectname": "ishop2.0%E5%BC%80%E5%8F%91%E7%89%88",
 	"isGameTourist": false,
@@ -50,6 +50,10 @@
 		},
 		"game": {
 			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
@@ -206,6 +210,33 @@
 					"name": "购物车",
 					"pathName": "pages/cart/cart",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/invitation_web/invitation_web",
+					"pathName": "pages/invitation_web/invitation_web",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/recommend/recommend",
+					"pathName": "pages/recommend/recommend",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "my/set_pay_psw/set_pay_psw",
+					"pathName": "my/set_pay_psw/set_pay_psw",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/bind_phone/bind_phone",
+					"pathName": "pages/bind_phone/bind_phone",
 					"scene": null
 				}
 			]

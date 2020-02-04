@@ -51,7 +51,7 @@ Component({
     address_area: '',
     address_street: '',
     isHistory: true, //是否隐藏历史
-    adjust_position:false
+    adjust_position: false
   },
   ready() {
     this.setData({
@@ -368,22 +368,39 @@ Component({
         app.showToast('请填写银行账号', res => {})
         return
       }
-      if (this.data.invoice_type == 1 && this.data.rise == 2 && (this.data.consignee_name == '' || this.data.consignee_name == undefined)) {
+      if (this.data.consignee_name == '' || this.data.consignee_name == undefined) {
         app.showToast('请输入收票人姓名', res => {})
         return
       }
-      if (this.data.invoice_type == 1 && this.data.rise == 2 && !app.isPoneAvailable(this.data.consignee_phone)) {
+      if (!app.isPoneAvailable(this.data.consignee_phone)) {
         app.showToast('请输入收票人手机', res => {})
         return
       }
-      if (this.data.invoice_type == 1 && this.data.rise == 2 && (this.data.address_area == '' || this.data.address_area == undefined)) {
+      if (this.data.address_area == '' || this.data.address_area == undefined) {
         app.showToast('请输入所在地区', res => {})
         return
       }
-      if (this.data.invoice_type == 1 && this.data.rise == 2 && (this.data.address_details == '' || this.data.address_details == undefined)) {
+      if (this.data.address_details == '' || this.data.address_details == undefined) {
         app.showToast('请输入详细地址', res => {})
         return
       }
+
+      // if (this.data.invoice_type == 1 && this.data.rise == 2 && (this.data.consignee_name == '' || this.data.consignee_name == undefined)) {
+      //   app.showToast('请输入收票人姓名', res => { })
+      //   return
+      // }
+      // if (this.data.invoice_type == 1 && this.data.rise == 2 && !app.isPoneAvailable(this.data.consignee_phone)) {
+      //   app.showToast('请输入收票人手机', res => { })
+      //   return
+      // }
+      // if (this.data.invoice_type == 1 && this.data.rise == 2 && (this.data.address_area == '' || this.data.address_area == undefined)) {
+      //   app.showToast('请输入所在地区', res => { })
+      //   return
+      // }
+      // if (this.data.invoice_type == 1 && this.data.rise == 2 && (this.data.address_details == '' || this.data.address_details == undefined)) {
+      //   app.showToast('请输入详细地址', res => { })
+      //   return
+      // }
       let data = {
         invoice_type: this.data.invoice_type, //发票类型：0普通发票 1增值税发票
         rise: this.data.rise, //发票抬头：1个人 2公司
@@ -397,13 +414,21 @@ Component({
         account: this.data.rise == 2 ? this.data.account : '', //开户账户
         is_invoice: '1', //是否开发票 0不开 1开
         idx: this.data.idx, //店铺下标
-        consignee_name: this.data.invoice_type == 1 ? this.data.consignee_name : '', //收货人姓名
-        consignee_phone: this.data.invoice_type == 1 ? this.data.consignee_phone : '', //收货人联系方式
-        address_province: this.data.invoice_type == 1 ? this.data.address_province : '', //省
-        address_city: this.data.invoice_type == 1 ? this.data.address_city : '', //市
-        address_area: this.data.invoice_type == 1 ? this.data.address_area : '', //区
-        address_street: this.data.invoice_type == 1 ? this.data.address_street : '', //街道
-        address_details: this.data.invoice_type == 1 ? this.data.address_details : '', //详细地址
+        consignee_name: this.data.consignee_name, //收货人姓名
+        consignee_phone: this.data.consignee_phone, //收货人联系方式
+        address_province: this.data.address_province, //省
+        address_city: this.data.address_city, //市
+        address_area: this.data.address_area, //区
+        address_street: this.data.address_street, //街道
+        address_details: this.data.address_details, //详细地址
+
+        // consignee_name: this.data.invoice_type == 1 ? this.data.consignee_name : '', //收货人姓名
+        // consignee_phone: this.data.invoice_type == 1 ? this.data.consignee_phone : '', //收货人联系方式
+        // address_province: this.data.invoice_type == 1 ? this.data.address_province : '', //省
+        // address_city: this.data.invoice_type == 1 ? this.data.address_city : '', //市
+        // address_area: this.data.invoice_type == 1 ? this.data.address_area : '', //区
+        // address_street: this.data.invoice_type == 1 ? this.data.address_street : '', //街道
+        // address_details: this.data.invoice_type == 1 ? this.data.address_details : '', //详细地址
       }
       this.close()
 
@@ -468,7 +493,7 @@ Component({
     /**
      * 隐藏历史记录
      */
-    historyClose(){
+    historyClose() {
       // setTimeout(()=>{
       //   this.setData({
       //     isHistory: true
@@ -502,7 +527,7 @@ Component({
       } else if (data.type == 'company') { //普通公司发票
         obj = {
           company: data.item.rise_name,
-          taxer_number:data.item.taxer_number
+          taxer_number: data.item.taxer_number
         }
       } else if (data.type == 'tax') { //增值发票
         obj = {

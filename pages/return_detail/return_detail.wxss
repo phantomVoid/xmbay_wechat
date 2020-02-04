@@ -211,6 +211,7 @@
 }
 
 .return-logistics .return-head image {
+  flex-shrink: 0;
   width: 40rpx;
   height: 40rpx;
 }

@@ -1,11 +1,11 @@
 //是否开启加密
-const b = false
+const b = false;
 // const RSA = require('../utils/jsencrypt.min.js')
 // const RSA = require('../utils/rsa/jsencrypt.js')
-const privateKey_pkcs1 = '-----BEGIN PRIVATE KEY-----MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBALgQq1AZujJ4aE65i8 / A0YcRsN8 + DJD6Z0tspAd2yyhq24pjz7FRnqPUdW8jJVSQpNTEkTRRackPrd8hAhJGXef9BclnhBrz0cg0eQDvSRMQmlXx / 6jyEOxl2rKkV9DsVrHm5+ gvkrBT8d1IgdP1zTEwKC1wl2 / rin / NAypfpprzAgMBAAECgYB7V1A04MiQwXbEKjmyAbdmF0i6j83D6MgHFsnj5orEjraGydOHMvZnOhtnWdnODQ8nNIFI2bVVchhFCM1miZiqk0YC3R6kxapZBndPoxjMuJj6Tnp+ Vy / H5hnFdEY76EH3uqU9kaHX6pcx2BM4ppGzEBbbN3Ni3BemYRQwJpGKYQJBAPQudLCGtyUpy7vgJeIVSbKQQjRTzmFUuyHVsUOimqTZcI8ibjtRC1PQWvMXwN8O4sTMWwAgSnBN74 / Zm5sNIU8CQQDA + VabywlzfaxNOZ2kqyYLlGbA4mlNwXG0Hn5klJEb1Ba3Ih1SQGxKWtf7bUnB4NRjyu7Hljb + 5Pgu1KEOUZsdAkA4CH0QkSlv5sJwz4QB + H6b8kyu81hVr3rtzbrK2YKBN8CDqBQBmpxt1E86n4XL6f + Rx49OXRqX4NqLeRUjJIUzAkA3XBBll0S51hbE / L9lyxeaANPNh + ZvwQwOgST / U8OhOSHfHbFNtF + coR0O6xZawVYM3t3LciOK0kMEpEkj43NdAkAGzYtIw2bEGuS1NIv9ggQV47hLtZPHFI + cXFcHbzJiXfer8uH6 / 9Qvuxy1CcvVhd1Sr1Di4ORhMp0nQYnFC3 + I-----END PRIVATE KEY-----'
-const publicKey_pkcs1 = '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDP42epiVnB/jin6LeGa7JLe5eFXR61PhJy7TnjZwThsUNq5pH75yU0sOWRLIkLk1OFe93Dr2pY/PZhF9aaht9MQTUXrPCILPRw3R5yXL61mG9BjmaKgGP0xrPmwapBVClU2SAKnYvgpf9Pi01l1FKPYUGAyuhLNLf6lcUK+nm7+QIDAQAB-----END PUBLIC KEY-----'
+const privateKey_pkcs1 = '-----BEGIN PRIVATE KEY-----MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBALgQq1AZujJ4aE65i8 / A0YcRsN8 + DJD6Z0tspAd2yyhq24pjz7FRnqPUdW8jJVSQpNTEkTRRackPrd8hAhJGXef9BclnhBrz0cg0eQDvSRMQmlXx / 6jyEOxl2rKkV9DsVrHm5+ gvkrBT8d1IgdP1zTEwKC1wl2 / rin / NAypfpprzAgMBAAECgYB7V1A04MiQwXbEKjmyAbdmF0i6j83D6MgHFsnj5orEjraGydOHMvZnOhtnWdnODQ8nNIFI2bVVchhFCM1miZiqk0YC3R6kxapZBndPoxjMuJj6Tnp+ Vy / H5hnFdEY76EH3uqU9kaHX6pcx2BM4ppGzEBbbN3Ni3BemYRQwJpGKYQJBAPQudLCGtyUpy7vgJeIVSbKQQjRTzmFUuyHVsUOimqTZcI8ibjtRC1PQWvMXwN8O4sTMWwAgSnBN74 / Zm5sNIU8CQQDA + VabywlzfaxNOZ2kqyYLlGbA4mlNwXG0Hn5klJEb1Ba3Ih1SQGxKWtf7bUnB4NRjyu7Hljb + 5Pgu1KEOUZsdAkA4CH0QkSlv5sJwz4QB + H6b8kyu81hVr3rtzbrK2YKBN8CDqBQBmpxt1E86n4XL6f + Rx49OXRqX4NqLeRUjJIUzAkA3XBBll0S51hbE / L9lyxeaANPNh + ZvwQwOgST / U8OhOSHfHbFNtF + coR0O6xZawVYM3t3LciOK0kMEpEkj43NdAkAGzYtIw2bEGuS1NIv9ggQV47hLtZPHFI + cXFcHbzJiXfer8uH6 / 9Qvuxy1CcvVhd1Sr1Di4ORhMp0nQYnFC3 + I-----END PRIVATE KEY-----';
+const publicKey_pkcs1 = '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDP42epiVnB/jin6LeGa7JLe5eFXR61PhJy7TnjZwThsUNq5pH75yU0sOWRLIkLk1OFe93Dr2pY/PZhF9aaht9MQTUXrPCILPRw3R5yXL61mG9BjmaKgGP0xrPmwapBVClU2SAKnYvgpf9Pi01l1FKPYUGAyuhLNLf6lcUK+nm7+QIDAQAB-----END PUBLIC KEY-----';
 
-const app = getApp()
+const app = getApp();
 
 let enc = res => {
   if (b) {
@@ -41,22 +41,14 @@ let get = (url, data = {}, hidden) => {
       method: 'GET',
       header: {
         "Content-Type": "json",
-        "token": app.globalData.token
+        "token": app.globalData.token || ''
       },
       success: res => {
         if (res.data.code == 0) {
           if (res.header.token == '500' || res.header.Token == '500') {
             clearLoginState()
           }
-          if (res.header.token != '' && res.header.Token != '') {
-            if (res.header.Token) {
-              wx.setStorageSync('token', res.header.Token)
-              app.globalData.token = res.header.Token
-            } else {
-              wx.setStorageSync('token', res.header.token)
-              app.globalData.token = res.header.token
-            }
-          }
+          getToken(res)
           success(res.data)
           // wx.hideLoading()
           console.log(res.data)
@@ -75,10 +67,6 @@ let get = (url, data = {}, hidden) => {
 
       },
       fail: res => {
-        wx.showToast({
-          title: '网络繁忙',
-          icon: 'none'
-        })
       },
       complete: () => {
 
@@ -106,22 +94,11 @@ let postList = (url, data = {}) => {
       method: 'POST',
       header: {
         "Content-Type": "json",
-        "token": app.globalData.token
+        "token": app.globalData.token || ''
       },
       success: res => {
         if (res.data.code == 0) {
-          if (res.header.token == '500' || res.header.Token == '500') {
-            clearLoginState()
-          }
-          if (res.header.token != '' && res.header.Token != '') {
-            if (res.header.Token) {
-              wx.setStorageSync('token', res.header.Token)
-              app.globalData.token = res.header.Token
-            } else {
-              wx.setStorageSync('token', res.header.token)
-              app.globalData.token = res.header.token
-            }
-          }
+          getToken(res)
           success(res.data)
           console.log(res.data)
         } else if (res.data.code == -200) {
@@ -137,10 +114,6 @@ let postList = (url, data = {}) => {
       },
       fail: res => {
         // app.showToast(res.data.message)
-        wx.showToast({
-          title: '网络繁忙',
-          icon: 'none'
-        })
       },
       complete: () => {
         wx.stopPullDownRefresh()
@@ -175,23 +148,12 @@ let post = (url, data = {}, hidden) => {
       data: data,
       header: {
         "Content-Type": "json",
-        "token": app.globalData.token
+        "token": app.globalData.token || ''
       },
       method: 'POST',
       success: res => {
         if (res.data.code == 0) {
-          if (res.header.token == '500' || res.header.Token == '500') {
-            clearLoginState()
-          }
-          if (res.header.token != '' && res.header.Token != '') {
-            if (res.header.Token) {
-              wx.setStorageSync('token', res.header.Token)
-              app.globalData.token = res.header.Token
-            } else {
-              wx.setStorageSync('token', res.header.token)
-              app.globalData.token = res.header.token
-            }
-          }
+          getToken(res)
           success(res.data)
           // wx.hideLoading()
           console.log(res.data)
@@ -209,10 +171,6 @@ let post = (url, data = {}, hidden) => {
         }
       },
       fail: res => {
-        wx.showToast({
-          title: '网络繁忙',
-          icon: 'none'
-        })
         // app.showToast(res.data.message)
       },
       complete: () => {
@@ -244,23 +202,12 @@ let encPost = (url, data = {}, hidden) => {
       data: enc(data),
       header: {
         "Content-Type": "json",
-        "token": app.globalData.token
+        "token": app.globalData.token || ''
       },
       method: 'POST',
       success: res => {
         if (dec(res.data).code == 0) {
-          if (res.header.token == '500' || res.header.Token == '500') {
-            clearLoginState()
-          }
-          if (res.header.token != '' && res.header.Token != '') {
-            if (res.header.Token) {
-              wx.setStorageSync('token', res.header.Token)
-              app.globalData.token = res.header.Token
-            } else {
-              wx.setStorageSync('token', res.header.token)
-              app.globalData.token = res.header.token
-            }
-          }
+          getToken(res)
           success(dec(res.data))
         } else if (res.data.code == -200) {
           clearLoginState()
@@ -302,7 +249,7 @@ let uploadFile = (url, path, name, data, success) => {
     url: url,
     header: {
       "Content-Type": "json",
-      "token": app.globalData.token
+      "token": app.globalData.token || ''
     },
     filePath: path,
     name: name,
@@ -315,6 +262,20 @@ let uploadFile = (url, path, name, data, success) => {
     }
   })
 };
+
+let getToken = (res) => {
+  if (res.header.token == '500' || res.header.Token == '500') {
+    clearLoginState()
+  }
+  if (res.header.Token && res.header.Token != '') {
+    wx.setStorageSync('token', res.header.Token)
+    app.globalData.token = res.header.Token
+  }
+  if (res.header.token && res.header.token != '') {
+    wx.setStorageSync('token', res.header.token)
+    app.globalData.token = res.header.token
+  }
+}
 let scene = data => {
   let scene = decodeURIComponent(data)
   let sceneArr = scene.split("-")
@@ -328,7 +289,7 @@ let throttle = (_this, callback, t) => {
   if (_this.buttonClicked == 1) {
     return false
   }
-  _this.buttonClicked= 1 
+  _this.buttonClicked = 1
 
   setTimeout(() => {
     _this.buttonClicked = 0

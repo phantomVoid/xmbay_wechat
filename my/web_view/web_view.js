@@ -32,6 +32,12 @@ Page({
         })
         src = app.globalData.bargain_rule_web
         break;
+      case "24":
+        wx.setNavigationBarTitle({
+          title: '充值说明',
+        })
+        src = app.globalData.recharge_web
+        break;
       case "33":
         wx.setNavigationBarTitle({
           title: '门店自提',

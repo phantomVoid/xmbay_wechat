@@ -96,9 +96,12 @@ Page({
    * 充值说明
    */
   onChargeInfo() {
-    this.setData({
-      charge_board: true
+    wx.navigateTo({
+      url: '/my/web_view/web_view?id=24',
     })
+    // this.setData({
+    //   charge_board: true
+    // })
   },
 
   /**

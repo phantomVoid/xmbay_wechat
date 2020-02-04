@@ -22,7 +22,7 @@
 
 .blur-bg {
   position: absolute;
-  bottom: 0;
+  bottom: -1rpx;
   left: 0;
   width: 100%;
   height: 216rpx;
@@ -87,7 +87,7 @@
 }
 
 .wrap-head .location text {
-  font-size: 30rpx;
+  font-size: 24rpx;
   color: white;
   line-height: 64rpx;
   width: 116rpx;

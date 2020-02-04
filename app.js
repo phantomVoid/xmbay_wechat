@@ -1,20 +1,19 @@
 // 正式域名
-var HTTP = 'https://ishop.zihaiwangluo.com/'
+var HTTP = 'https://ishop.zihaiwangluo.com/';
 
 // 测试域名
-// var HTTP = 'https://ishoptest.zihaiwangluo.com/'
-// var HTTP = 'https://ishop-preview.zihaiwangluo.com/'
-// var HTTP = 'http://ishop-pre.z4.cc/'
-// var HTTP = 'https://ddmb.zihaiwangluo.com/'
-// var HTTP = 'http://kuaixiao.zihaiwangluo.com/'
+// var HTTP = 'https://ishoptest.zihaiwangluo.com/';
+// var HTTP = 'https://ishop-preview.zihaiwangluo.com/';
+// var HTTP = 'http://ishop-pre.z4.cc/';
+// var HTTP = 'https://ddmb.zihaiwangluo.com/';
+// var HTTP = 'http://kuaixiao.zihaiwangluo.com/';
 
 App({
   onLaunch(data) {
-    wx.hideTabBar()
     wx.getSystemInfo({
       success: res => {
         console.log(res)
-        if (res.model.search('iPhone X') != -1) {
+        if (res.model.search('iPhone X') != -1 || res.model.search('iPhone XS') != -1 || res.model.search('iPhone XS Max') != -1 || res.model.search('iPhone XR') != -1 || res.model.search('unknown') != -1) {
           this.globalData.model.phone = 'iPhone X'
           this.globalData.model.topHeight = 88 + 4
         } else if (res.model.search('iPhone') != -1) {
@@ -27,13 +26,12 @@ App({
       }
     })
     this.globalData.member_id = wx.getStorageSync('member_id')
-    this.globalData.token = wx.getStorageSync('token')
+    this.globalData.token = wx.getStorageSync('token') || ''
     this.globalData.phone = wx.getStorageSync('phone') == null ? '' : wx.getStorageSync('phone')
     this.globalData.openid = wx.getStorageSync('openid')
     this.globalData.unionId = wx.getStorageSync('unionId')
   },
   onShow() {
-    wx.hideTabBar()
     this.app_leave = false
     this.app_DIY(() => {})
     this.updateManager() // 系统更新
@@ -865,6 +863,8 @@ App({
     collage_rule_web: HTTP + 'v2.0/html/article_view?article_id=20',
     //砍价规则
     bargain_rule_web: HTTP + 'v2.0/html/article_view?article_id=21',
+    //134.充值说明
+    recharge_web: HTTP + 'v2.0/html/article_view?article_id=24',
     //134.购物流程
     process_web: HTTP + 'v2.0/html/article_view?article_id=28',
     //135.优惠券使用

@@ -1,14 +1,14 @@
 <!--nearby_shops/invoice_detail/invoice_detail.wxml-->
 <wxs module="util" src="../../utils/util.wxs" />
 <view class='warp'>
-  <!-- <view class='logistics' wx:if='{{invoice_info.invoice_open_type==0}}'>
+  <view class='logistics' wx:if='{{invoice_info.invoice_open_type==0}}'>
     <view class='info' style='border:none;'>
       <image class='icon' src='{{util.HTTP}}mobile/small/image/invoice_icon2.png'></image>
       <view class='title'>电子发票</view>
       <view class='logistics_pic btn' hover-class='hover-class' hover-stay-time='400' bindtap='copylink' wx:if='{{invoice_info.billing_type!=0}}'>复制链接</view>
     </view>
-  </view> -->
-  <view class='logistics'>
+  </view>
+  <view class='logistics' wx:else>
     <view class='info'>
       <image class='icon' src='{{util.HTTP}}mobile/small/image/invoice_icon2.png'></image>
       <view class='title'>开具发票</view>

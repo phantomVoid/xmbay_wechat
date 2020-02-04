@@ -128,10 +128,14 @@ Page({
    * 查看全部商品
    */
   onChangeCouponList(e) {
-    let item = e.currentTarget.dataset.data
-    if (item.type == 0) {
+    let item = e.currentTarget.dataset.data;
+    if (item.type == 0 && app.globalData.isShops == 0) {
       wx.navigateTo({
         url: '/nearby_shops/shop_detail/shop_detail?store_id=' + item.classify_str,
+      })
+    } else if (app.globalData.isShops == 1) {
+      wx.navigateTo({
+        url: '/pages/search_goods/search_goods',
       })
     } else {
       wx.navigateTo({
