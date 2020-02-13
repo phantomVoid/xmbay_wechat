@@ -13,7 +13,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.setData({
+      show: app.globalData.configSwitch.version_info.one_more == 0 && app.globalData.configSwitch ? false : true
+    })
+    wx.setNavigationBarTitle({
+      title: app.globalData.configSwitch.version_info.one_more == 0 && app.globalData.configSwitch ? '' : '商家入驻',
+    })
   },
 
   /**
