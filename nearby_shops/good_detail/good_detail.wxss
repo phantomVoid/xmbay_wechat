@@ -344,8 +344,9 @@
   color: #909090;
 }
 
-.detail-wrap .good-tips view:last-child {
-  margin-left: 50rpx;
+.detail-wrap .good-tips view:first-child{
+  margin-right: 50rpx;
+  flex-shrink: 0;
 }
 
 .detail-wrap .normal .good-name {
