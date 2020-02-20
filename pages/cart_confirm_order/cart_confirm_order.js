@@ -53,7 +53,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
       diy_color: app.globalData.diy_color,
       configSwitch: app.globalData.configSwitch,
@@ -66,7 +66,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     event.on('changeAddress', this, () => {
       this.data.member_address_id = this.data.address.member_address_id
       this.getData()
@@ -77,7 +77,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     if (!this.data.first && (app.globalData.addressSelect.member_address_id == null || this.data.address.member_address_id != app.globalData.addressSelect.member_address_id)) {
       this.setData({
         address: {}
@@ -88,26 +88,26 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {},
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     event.remove('changeAddress', this)
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
@@ -516,7 +516,7 @@ Page({
       freight = 0,
       discount_price = 0;
     for (let i = 0; i < this.data.list.length; i++) {
-      this.data.list[i].total_price = 0
+      this.data.list[i].total_price = 0;
       for (let j = 0; j < this.data.list[i].list.length; j++) {
         this.data.list[i].total_price += parseFloat(this.data.list[i].list[j].price) * parseFloat(this.data.list[i].list[j].number)
         discount_price += parseFloat(this.data.list[i].list[j].discount_price) * parseFloat(this.data.list[i].list[j].number)
@@ -527,19 +527,19 @@ Page({
       // origin_total += parseFloat(this.data.list[i].total_price)
       if (this.data.list[i].distribution_type == 1) {
         //同城
-        freight += parseFloat(this.data.list[i].freight.city_freight_price)
+        freight += parseFloat(this.data.list[i].freight.city_freight_price);
       } else if (this.data.list[i].distribution_type == 2) {
         //预约自提
-        freight += 0
+        freight += 0;
       } else if (this.data.list[i].distribution_type == 3) {
         //快递邮寄
-        freight += parseFloat(this.data.list[i].freight.express_freight_price)
+        freight += parseFloat(this.data.list[i].freight.express_freight_price);
       }
     }
 
-    total = total - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet_price) - parseFloat(discount_price)
+    total = total - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet_price) - parseFloat(discount_price);
     if (total <= 0) {
-      total = 0.1
+      total = parseFloat(freight) > 0 ? 0 : 0.1;
     }
     if (parseFloat(total) + parseFloat(freight) > 0) {
       total += parseFloat(freight)

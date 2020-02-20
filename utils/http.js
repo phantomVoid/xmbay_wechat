@@ -275,7 +275,7 @@ let getToken = (res) => {
     wx.setStorageSync('token', res.header.token)
     app.globalData.token = res.header.token
   }
-}
+};
 let scene = data => {
   let scene = decodeURIComponent(data)
   let sceneArr = scene.split("-")

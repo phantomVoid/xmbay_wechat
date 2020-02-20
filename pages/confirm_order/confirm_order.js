@@ -49,7 +49,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     let info = JSON.parse(decodeURIComponent(options.info))
     info.goods_name = decodeURIComponent(info.goods_name)
     info.store_name = decodeURIComponent(info.store_name)
@@ -65,14 +65,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     this.getData()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     if (!this.data.first && (app.globalData.addressSelect.member_address_id == null || this.data.address.member_address_id != app.globalData.addressSelect.member_address_id)) {
       this.setData({
         address: {}
@@ -83,28 +83,28 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
@@ -279,17 +279,17 @@ Page({
     if (this.data.info.good_type == 1) {
       //普通商品
       this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.shop_price)
-      this.data.info['total'] = parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num) > 0 ? parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num) : 0.10
+      this.data.info['total'] = parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num) > 0 ? parseFloat(this.data.info.num) * parseFloat(this.data.info.shop_price) - parseFloat(this.data.coupon_price) - parseFloat(this.data.packet) - (this.data.discount_price * this.data.info.num) : parseFloat(this.data.freight_price) > 0 ? 0 : 0.10;
     } else if (this.data.info.good_type == 2) {
       //团购
-      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.group_price) > 0 ? parseFloat(this.data.info.num * this.data.info.group_price).toFixed(2) : 0.10
+      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.group_price) > 0 ? parseFloat(this.data.info.num * this.data.info.group_price).toFixed(2) : parseFloat(this.data.freight_price) > 0 ? 0 : 0.10;
       this.data.info['total'] = parseFloat(this.data.info.subtotal)
     } else if (this.data.info.good_type == 3) {
       //砍价
-      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.cut_price) > 0 ? parseFloat(this.data.info.num * this.data.info.cut_price).toFixed(2) : 0.10
+      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.cut_price) > 0 ? parseFloat(this.data.info.num * this.data.info.cut_price).toFixed(2) : parseFloat(this.data.freight_price) > 0 ? 0 : 0.10;
       this.data.info['total'] = parseFloat(this.data.info.subtotal)
     } else if (this.data.info.good_type == 4) {
-      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.time_limit_price) > 0 ? parseFloat(this.data.info.num * this.data.info.time_limit_price).toFixed(2) : 0.10
+      this.data.info.subtotal = parseFloat(this.data.info.num * this.data.info.time_limit_price) > 0 ? parseFloat(this.data.info.num * this.data.info.time_limit_price).toFixed(2) : parseFloat(this.data.freight_price) > 0 ? 0 : 0.10;
       this.data.info['total'] = parseFloat(this.data.info.subtotal)
     }
 
