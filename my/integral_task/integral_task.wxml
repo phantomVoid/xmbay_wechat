@@ -32,7 +32,7 @@
       <view class='content-left'>
         <view class='content-title'>绑定第三方社交账号</view>
         <view class='content-info'>
-          <text>将本账号与第三方账号管理</text>
+          <text>将本账号与第三方账号关联</text>
           <text class='cur' style='{{util.diy_color(diy_color.z_color,"","")}}'>+{{info.third_party.integral}}</text>积分</view>
       </view>
       <view class='content-right'>已绑定</view>
