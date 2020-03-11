@@ -111,12 +111,11 @@ Page({
               signType: res.result.signType,
               paySign: res.result.paySign,
               success: res => {
-                app.showSuccessToast('充值成功', () => {})
-                setTimeout(() => {
-                  wx.switchTab({
-                    url: '/pages/my/my',
+                app.showSuccessToast(res.message, () => {
+                  wx.redirectTo({
+                    url: '../integral_record/integral_record',
                   })
-                }, 1000)
+                })
               }
             })
           })
