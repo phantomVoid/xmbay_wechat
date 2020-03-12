@@ -641,4 +641,12 @@ Page({
       wx.startPullDownRefresh()
     }
   },
+  /**
+   * 好物推荐
+   */
+  onRecommend() {
+    wx.navigateTo({
+      url: '/pages/recommend/recommend',
+    })
+  },
 })

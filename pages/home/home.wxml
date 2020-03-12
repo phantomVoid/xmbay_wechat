@@ -327,7 +327,7 @@
       </view>
     </view>
     <view class='popularity-con' style='background: url({{util.HTTP}}mobile/small/image/home-dd-01/home-hw-bg-01.png) no-repeat;background-size:100% 100%;' wx:if="{{dataInfo.popularity.length!=0}}">
-      <view class='column-title'>
+      <view class='column-title' bindtap="onRecommend">
         <view class='tit'>好</view>
         <view class='icon' style='{{util.diy_color("",diy_color.z_color,"")}}'></view>
         <view class='tit'>物</view>
