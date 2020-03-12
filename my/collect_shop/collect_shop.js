@@ -156,7 +156,7 @@ Page({
       collect_store_id: this.data.item.collect_store_id + '',
       store_id: this.data.item.store_id + ''
     }).then(res => {
-      this.data.list = this.data.list.shift
+      this.data.list.splice(this.data.index, 1)
       this.setData({
         list: this.data.list
       })
