@@ -246,15 +246,13 @@ Page({
             app.globalData.unionId = res.unionId
             app.globalData.PAST_LOGIN = false
             wx.setStorageSync('member_info', res.member)
-            app.showSuccessToast('', () => {
-              if (app.globalData.phone == '') {
-                this.submit()
-              } else {
-                wx.switchTab({
-                  url: '/pages/home/home',
-                })
-              }
-            })
+            if (app.globalData.phone == '') {
+              this.submit()
+            } else {
+              wx.switchTab({
+                url: '/pages/home/home',
+              })
+            }
             this.setData({
               disabled: false
             })
