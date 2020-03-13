@@ -113,7 +113,7 @@ Page({
               success: res => {
                 app.showSuccessToast(res.message, () => {
                   wx.redirectTo({
-                    url: '../integral_record/integral_record',
+                    url: '/my/integral_record/integral_record',
                   })
                 })
               }
