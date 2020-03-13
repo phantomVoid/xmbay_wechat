@@ -111,7 +111,7 @@ Page({
               signType: res.result.signType,
               paySign: res.result.paySign,
               success: res => {
-                app.showSuccessToast(res.message, () => {
+                app.showSuccessToast('支付成功', () => {
                   wx.redirectTo({
                     url: '/my/integral_record/integral_record',
                   })
