@@ -11,7 +11,7 @@ Component({
   properties: {
     info: {
       type: Object,
-      observer: function() {
+      observer: function () {
         if (this.data.info.attr) {
           this.data.attrs = new Array(this.data.info.attr.length)
           this.setData({
@@ -29,7 +29,7 @@ Component({
     type: String,
     isShow: {
       type: Boolean,
-      observer: function() {
+      observer: function () {
         if (this.data.isShow) {
           this.showAnimation()
         } else {
@@ -216,7 +216,7 @@ Component({
       if (this.data.attr.split(',').length == this.data.info.attr.length) {
         this._getGoodPrice()
       }
-      
+
     },
 
     /**
@@ -362,7 +362,6 @@ Component({
             is_attr_array = false
           }
         }
-        console.log(is_attr_array)
         if (this.data.attr_array.length != this.data.info.attr.length || !is_attr_array) {
           app.showToast('请选择商品属性')
           return
@@ -375,20 +374,14 @@ Component({
         if (this.data.info.is_bargain == 1) {
           this.bargain()
         } else {
-          // console.log('order_type1', this.data.order_type, this.data.group_buy)
-          // if (this.data.order_type == 2 && !this.data.group_buy) {
-          //   this.data.order_type = 1
-          // } else if (this.data.order_type == 2 && this.data.group_buy) {
-          //   this.data.order_type = 2
-          // }
-          console.log('order_type2', this.data.order_type, this.data.group_buy)
-          let fx_type
+          let fx_type;
           if (this.data.info.is_distribution == 1 || this.data.info.is_distributor == 1) {
             fx_type = 1
           }
           let obj = {
             //商品类型 1正常商品 2团购 3砍价 4限时抢购
             good_type: this.data.order_type,
+            is_original: this.data.info.is_original ? '1' : '',
             //商品id
             goods_id: this.data.info.goods_id,
             //砍价id

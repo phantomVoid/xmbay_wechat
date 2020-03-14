@@ -183,7 +183,7 @@
         <image src='{{util.HTTP}}mobile/small/image/xq-dp-2.png'></image>
         <view class='item-btn'>首页</view>
       </button>
-      <button class='item' hover-class='hover-class' hover-stay-time='400' open-type="{{configSwitch.version_info.one_more==1?'':'contact'}}" bindcontact="{{configSwitch.version_info.one_more==1?'':'handleContact'}}" bindtap="{{configSwitch.version_info.one_more==1?'callPhone':''}}">
+      <button class='item' hover-class='hover-class' hover-stay-time='400' open-type="{{configSwitch.version_info.one_more==1?'':'contact'}}" bindcontact="{{configSwitch.version_info.one_more==1?'':'handleContact'}}" bindtap="{{configSwitch.version_info.one_more==1?'service':''}}">
         <image src='{{util.HTTP}}mobile/small/image/xq-kf.png'></image>
         <view class='item-btn'>客服</view>
       </button>
@@ -207,7 +207,7 @@
     <view class='f-right-con'>
       <!-- 拼团商品 -->
       <block wx:if="{{order_type == 2}}">
-        <view class='btn' hover-class='hover-class' hover-stay-time='400' bindtap='{{info.is_putaway == 0?"":"buyNow"}}' style='{{util.diy_color(diy_color.text_color,diy_color.c_color,"")}}'>
+        <view class='btn' hover-class='hover-class' hover-stay-time='400' data-group='0' bindtap='{{info.is_putaway == 0?"":"buyNow"}}' style='{{util.diy_color(diy_color.text_color,diy_color.c_color,"")}}'>
           <view class='price'>
             <text class='unit'>￥</text>
             <text class='integer'>{{util.integer(info.shop_price)}}</text>

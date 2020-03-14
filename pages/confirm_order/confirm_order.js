@@ -118,7 +118,8 @@ Page({
       goods_id: this.data.info.goods_id,
       member_address_id: this.data.member_address_id,
       number: this.data.info.num,
-      products_id: this.data.info.products_id
+      products_id: this.data.info.products_id,
+      is_original: this.data.info.is_original
     }).then(res => {
 
       for (let i = 0; i < res.coupon.length; i++) {

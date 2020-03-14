@@ -72,7 +72,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     //上级代言id
     if (options.sup_id) {
       app.globalData.sup_id = options.sup_id
@@ -117,7 +117,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     setTimeout(() => {
       this.getEvaluateList()
     }, 500)
@@ -126,7 +126,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.getDistributionData()
     this.location()
   },
@@ -134,7 +134,7 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
     clearInterval(this.data.group_interval)
     clearInterval(this.data.collage_interval)
     clearInterval(this.data.bargain_interval)
@@ -144,7 +144,7 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     clearInterval(this.data.group_interval)
     clearInterval(this.data.collage_interval)
     clearInterval(this.data.bargain_interval)
@@ -154,21 +154,21 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function (res) {
     let sup_id = null
     if (this.data.share_type == 'distribution') {
       sup_id = `&sup_id=${app.globalData.distribution.cur.distribution_id}`
@@ -749,10 +749,14 @@ Page({
       app.showToast('您的商品，留给别人购买')
       return
     }
-    console.log(e)
-    if (e.currentTarget.dataset.group) {
+    if (e.currentTarget.dataset.group == 1) {
       this.setData({
-        group_buy: true
+        group_buy: true,
+      })
+    } else if (e.currentTarget.dataset.group == 0) {
+      this.setData({
+        group_buy: false,
+        'info.is_original': 1
       })
     } else {
       this.setData({
