@@ -7,7 +7,7 @@ const publicKey_pkcs1 = '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNA
 
 const app = getApp();
 
-let enc = res => {
+const enc = res => {
   if (b) {
     //加密
     let rsa = new RSA.JSEncrypt()
@@ -18,9 +18,9 @@ let enc = res => {
     }
   }
   return res
-}
+};
 
-let dec = res => {
+const dec = res => {
   if (b) {
     //解密
     let rsa = new RSA.JSEncrypt()
@@ -28,9 +28,9 @@ let dec = res => {
     res = JSON.parse(rsa.decrypt(res))
   }
   return res
-}
+};
 
-let get = (url, data = {}, hidden) => {
+const get = (url, data = {}, hidden) => {
   console.log(data)
   let pages = getCurrentPages();
   let currentPages = pages[pages.length - 1]
@@ -66,8 +66,7 @@ let get = (url, data = {}, hidden) => {
         }
 
       },
-      fail: res => {
-      },
+      fail: res => {},
       complete: () => {
 
       }
@@ -76,7 +75,7 @@ let get = (url, data = {}, hidden) => {
   return promise;
 };
 
-let postList = (url, data = {}) => {
+const postList = (url, data = {}) => {
   // wx.showLoading({
   //   title: '加载中',
   // })
@@ -127,7 +126,7 @@ let postList = (url, data = {}) => {
   return promise;
 };
 
-let post = (url, data = {}, hidden) => {
+const post = (url, data = {}, hidden) => {
   // data = data || {};
   if (!hidden) {
     // wx.showLoading({
@@ -186,7 +185,7 @@ let post = (url, data = {}, hidden) => {
 };
 
 
-let encPost = (url, data = {}, hidden) => {
+const encPost = (url, data = {}, hidden) => {
   // data = data || {};
   if (!hidden) {
     // wx.showLoading({
@@ -241,7 +240,7 @@ let encPost = (url, data = {}, hidden) => {
   return promise;
 };
 
-let uploadFile = (url, path, name, data, success) => {
+const uploadFile = (url, path, name, data, success) => {
   wx.showLoading({
     title: '加载中...',
   })
@@ -263,7 +262,7 @@ let uploadFile = (url, path, name, data, success) => {
   })
 };
 
-let getToken = (res) => {
+const getToken = (res) => {
   if (res.header.token == '500' || res.header.Token == '500') {
     clearLoginState()
   }
@@ -276,7 +275,7 @@ let getToken = (res) => {
     app.globalData.token = res.header.token
   }
 };
-let scene = data => {
+const scene = data => {
   let scene = decodeURIComponent(data)
   let sceneArr = scene.split("-")
   let obj = {}
@@ -285,7 +284,7 @@ let scene = data => {
   }
   return obj
 };
-let throttle = (_this, callback, t) => {
+const throttle = (_this, callback, t) => {
   if (_this.buttonClicked == 1) {
     return false
   }
@@ -299,7 +298,7 @@ let throttle = (_this, callback, t) => {
 /**
  * 清空登录状态
  */
-let clearLoginState = () => {
+const clearLoginState = () => {
   wx.clearStorageSync()
   app.globalData.member_id = ''
   app.globalData.phone = ''
