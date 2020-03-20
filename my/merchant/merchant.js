@@ -35,6 +35,12 @@ Page({
       configSwitch: app.globalData.configSwitch,
       phone: app.globalData.phone
     })
+    this.setData({
+      show: app.globalData.configSwitch.version_info.one_more == 0 && app.globalData.configSwitch ? false : true
+    })
+    wx.setNavigationBarTitle({
+      title: app.globalData.configSwitch.version_info.one_more == 0 && app.globalData.configSwitch ? '' : '创建店铺',
+    })
   },
 
   /**

@@ -1,6 +1,6 @@
 <wxs module="util" src="../../utils/util.wxs" />
 
-<view class='info'>
+<view class='info' wx:if="{{show}}">
   <view>
     <view>店铺名称</view>
     <form bindsubmit="saveFormId1" report-submit="true">
