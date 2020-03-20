@@ -256,7 +256,7 @@ page {
 }
 
 .search .clear {
-  padding-right: 20rpx;
+  padding: 20rpx;
 }
 
 .search .search-title {
