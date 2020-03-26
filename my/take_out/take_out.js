@@ -222,32 +222,5 @@ Page({
         isShow: false
       })
     }, 500)
-  },
-
-  /**
-   * 显示
-   */
-  // show() {
-  //   this.setData({
-  //     isShow: false
-  //   })
-  //   setTimeout(() => {
-  //     this.setData({
-  //       isTop: false
-  //     })
-  //   }, 50)
-  // },
-  /**
-   * 隐藏
-   */
-  // close() {
-  //   this.setData({
-  //     isTop: true
-  //   })
-  //   setTimeout(() => {
-  //     this.setData({
-  //       isShow: true
-  //     })
-  //   }, 300)
-  // }
+  }
 })

@@ -112,7 +112,6 @@ Page({
       password: e.detail.value
     })
     if (this.data.password.length == 6 && this.data.type === 1) {
-      console.log('a')
       if (this.data.f_psw == this.data.password) {
         this.setData({
           focus: false,

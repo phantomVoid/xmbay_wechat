@@ -79,7 +79,7 @@ Page({
     // }).then(res => {
     //   app.showSuccessToast(res.message, ()=> {
         wx.redirectTo({
-          url: '../forget_psw_two/forget_psw_two?phone=' + this.data.phone + '&type=' + this.data.type,
+          url: '/my/forget_psw_two/forget_psw_two?phone=' + this.data.phone + '&type=' + this.data.type,
         })
     //   })
     // })

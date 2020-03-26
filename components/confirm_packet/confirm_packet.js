@@ -122,7 +122,7 @@ Component({
       for (let i = 0, len = this.data.packet.length; i < len; i++) {
         this.data.packet[i].select = false
       }
-      this.data.packet[e.currentTarget.dataset.index].select = !this.data.packet[e.currentTarget.dataset.index].select
+      this.data.packet[e.currentTarget.dataset.index].select = !this.data.packet[e.currentTarget.dataset.index].select;
       this.setData({
         packet: this.data.packet
       })

@@ -3,7 +3,6 @@ const app = getApp();
 const Base64 = require('../../utils/base64.min.js').Base64;
 //初始化数据
 function tabbarinit(bindName = "tabdata", id, that) {
-  wx.hideTabBar({})
   wx.request({
     url: app.globalData.navigation,
     data: {

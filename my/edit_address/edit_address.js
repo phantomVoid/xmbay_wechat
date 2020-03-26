@@ -244,7 +244,7 @@ Page({
     }).then(res => {
       event.emit('refresh_address')
       for (let i = 0, len = this.data.pages.length; i < len; i++) {
-        if (this.data.pages[i].route == 'pages/confirm_order/confirm_order' && i != this.data.pages.length) {
+        if (this.data.pages[i].route == 'nearby_shops/confirm_order/confirm_order' && i != this.data.pages.length) {
           if (this.data.id != '') {
             this.data.pages[i].data.member_address_id = this.data.id
           } else {
@@ -257,7 +257,7 @@ Page({
             delta: this.data.pages.length -1 - i
           })
           break;
-        } else if (this.data.pages[i].route == 'pages/cart_confirm_order/cart_confirm_order' && i != this.data.pages.length) {
+        } else if (this.data.pages[i].route == 'nearby_shops/cart_confirm_order/cart_confirm_order' && i != this.data.pages.length) {
           if (this.data.id != '') {
             this.data.pages[i].data.member_address_id = this.data.id
           } else {

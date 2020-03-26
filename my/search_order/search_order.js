@@ -122,7 +122,7 @@ Page({
     }
     this.setHistroy()
     wx.navigateTo({
-      url: '../search_order_result/search_order_result?keyword=' + this.data.key + '&distribution_type=' + this.data.distribution_type,
+      url: '/my/search_order_result/search_order_result?keyword=' + this.data.key + '&distribution_type=' + this.data.distribution_type,
     })
   },
 

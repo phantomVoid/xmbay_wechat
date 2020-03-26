@@ -87,7 +87,7 @@ Page({
    */
   chooseAddress() {
     wx.navigateTo({
-      url: '../address/address?choose=1',
+      url: '/my/address/address?choose=1',
     })
   },
 
@@ -121,7 +121,7 @@ Page({
           order_number: res.data.order_number
         }
         wx.redirectTo({
-          url: `/pages/integral_cashier_desk/integral_cashier_desk?data=${JSON.stringify(data)}`,
+          url: `/nearby_shops/integral_cashier_desk/integral_cashier_desk?data=${JSON.stringify(data)}`,
         })
       })
     } else {

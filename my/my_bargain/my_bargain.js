@@ -74,7 +74,7 @@ Page({
    */
   onBargainGood() {
     wx.redirectTo({
-      url: '/pages/bargain_list/bargain_list',
+      url: '/nearby_shops/bargain_list/bargain_list',
     })
   },
 
@@ -154,7 +154,7 @@ Page({
    */
   onBargainDetail(e) {
     wx.navigateTo({
-      url: '/pages/bargain/bargain?id=' + e.currentTarget.dataset.id,
+      url: '/nearby_shops/bargain/bargain?id=' + e.currentTarget.dataset.id,
     })
   },
 
@@ -163,7 +163,7 @@ Page({
    */
   onOrderDetail(e) {
     wx.navigateTo({
-      url: '../order_detail/order_detail?id=' + e.currentTarget.dataset.id,
+      url: '/my/order_detail/order_detail?id=' + e.currentTarget.dataset.id,
     })
   },
 
@@ -220,7 +220,7 @@ Page({
         subtotal: parseFloat(item.present_price).toFixed(2)
       }
     wx.navigateTo({
-      url: '/pages/confirm_order/confirm_order?info=' + JSON.stringify(obj) + '&good_image=' + encodeURIComponent(item.file),
+      url: '/nearby_shops/confirm_order/confirm_order?info=' + JSON.stringify(obj) + '&good_image=' + encodeURIComponent(item.file),
     })
   }
 })

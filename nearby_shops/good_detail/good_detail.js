@@ -238,9 +238,6 @@ Page({
       wx.setNavigationBarTitle({
         title: res.result.goods_name,
       })
-      // wx.setNavigationBarTitle({
-      //   title: res.result.goods_name,
-      // })
       clearInterval(this.data.group_interval)
       //团购推荐倒计时
       if (this.data.info.is_group == 1 && this.data.info.group_list.length != 0) {
@@ -341,7 +338,6 @@ Page({
     this.setData({
       bannerType: e.currentTarget.dataset.id
     })
-    console.log(e)
   },
 
   /**
@@ -486,9 +482,6 @@ Page({
         price: price,
         name: this.data.info.goods_name,
         order_type: this.data.order_type,
-        // is_bargain: this.data.info.is_bargain,
-        // is_group: this.data.info.is_group,
-        // is_limit: this.data.info.is_limit,
         shop_logo: app.globalData.isShops == 0 ? encodeURIComponent(this.data.info.logo) : encodeURIComponent(this.data.configSwitch.app_info.logo),
         group_num: this.data.info.group_num,
         sales_volume: this.data.info.sales_volume,
@@ -503,9 +496,6 @@ Page({
         price: price,
         name: this.data.info.goods_name,
         order_type: this.data.order_type,
-        // is_bargain: this.data.info.is_bargain,
-        // is_group: this.data.info.is_group,
-        // is_limit: this.data.info.is_limit,
         shop_logo: app.globalData.isShops == 0 ? encodeURIComponent(this.data.info.logo) : encodeURIComponent(this.data.configSwitch.app_info.logo),
         group_num: this.data.info.group_num,
         sales_volume: this.data.info.sales_volume,
@@ -663,7 +653,7 @@ Page({
       currentIndex: 2
     })
     // wx.navigateTo({
-    //   url: '../evaluate/evaluate?goods_id=' + this.data.goods_id,
+    //   url: '/nearby_shops/evaluate/evaluate?goods_id=' + this.data.goods_id,
     // })
   },
 
@@ -786,7 +776,7 @@ Page({
    */
   goRanking() {
     wx.navigateTo({
-      url: '/pages/rank_good/rank_good?first_goods_classify_id=' + this.data.info.first_goods_classify_id,
+      url: '/nearby_shops/rank_good/rank_good?first_goods_classify_id=' + this.data.info.first_goods_classify_id,
     })
   },
   /**
@@ -812,7 +802,7 @@ Page({
    */
   onCollage(e) {
     wx.navigateTo({
-      url: '/pages/collage_detail/collage_detail?id=' + e.currentTarget.dataset.id,
+      url: '/nearby_shops/collage_detail/collage_detail?id=' + e.currentTarget.dataset.id,
     })
   },
 
@@ -847,7 +837,7 @@ Page({
     let item = e.currentTarget.dataset.item
     if (item.status != 2) {
       wx.navigateTo({
-        url: '/pages/collage_detail/collage_detail?id=' + item.group_activity_id,
+        url: '/nearby_shops/collage_detail/collage_detail?id=' + item.group_activity_id,
       })
     }
   },
@@ -856,7 +846,7 @@ Page({
    * 计算团购列表倒计时
    */
   calGroupCount() {
-    let group_count = this.data.info.group_list
+    let group_count = this.data.info.group_list;
     for (let i = 0, len = group_count.length; i < len; i++) {
       let second = group_count[i].continue_time;
       if (second == 0) {
@@ -918,7 +908,7 @@ Page({
    * 收藏,取消收藏
    */
   onCollect() {
-    let url = ''
+    let url = '';
     if (!app.login()) {
       return
     }
@@ -953,7 +943,7 @@ Page({
    */
   onNotification() {
     if (app.login()) {
-      let price = this.data.info.shop_price
+      let price = this.data.info.shop_price;
       wx.navigateTo({
         url: '/nearby_shops/price_notification/price_notification?goods_id=' + this.data.goods_id + '&price=' + price + '&store_id=' + this.data.info.store_id,
       })
@@ -1002,7 +992,7 @@ Page({
    * 客服
    */
   service() {
-    let price = 0
+    let price = 0;
     if (this.data.info.is_bargain == 1) {
       price = this.data.info.cut_price
     } else if (this.data.info.is_group == 1) {
@@ -1117,7 +1107,6 @@ Page({
   getSystemInfo() {
     wx.getSystemInfo({
       success: res => {
-        console.log(res.system)
         let system = res.system
         this.setData({
           system: system.includes('iOS')

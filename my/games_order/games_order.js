@@ -109,15 +109,6 @@ Page({
         'info.status': 3
       })
     })
-    // http.post(app.globalData.confirm_receipt, {
-    //   integral_order_id: this.data.id,
-    //   status: 2
-    // }).then(res => {
-    //   this.data.info.status = 3
-    //   this.setData({
-    //     info: this.data.info
-    //   })
-    // })
   },
 
   onLogistics() {
@@ -128,7 +119,7 @@ Page({
       type: 'draw'
     }
     wx.navigateTo({
-      url: '../logistics_detail/logistics_detail?info=' + JSON.stringify(info),
+      url: '/my/logistics_detail/logistics_detail?info=' + JSON.stringify(info),
     })
   },
 
@@ -149,7 +140,6 @@ Page({
     })
   },
   showModal(e) {
-    console.log(e.currentTarget.dataset)
     this.setData({
       showModal: e.currentTarget.dataset.confirmtype
     })

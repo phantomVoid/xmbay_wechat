@@ -485,7 +485,6 @@ Page({
   },
 
   addCart(e) {
-    console.log(e)
     this.setData({
       info: e.detail,
     })

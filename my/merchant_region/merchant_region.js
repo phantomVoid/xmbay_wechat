@@ -16,11 +16,6 @@ Page({
    */
   onLoad: function(options) {
     let obj = {}
-    // if (options.data){
-    //   obj.province = JSON.parse(options.data).province
-    //   obj.city = JSON.parse(options.data).city
-    //   obj.area = JSON.parse(options.data).area
-    // }
     if (options.popupIdx){
       this.setData({
         popupIdx: options.popupIdx
@@ -28,12 +23,7 @@ Page({
     }
     obj.diy_color = app.globalData.diy_color
     this.setData(obj)
-    this.getProvince()
-    // if (options.data){
-    //   this.getCity()
-    //   this.getArea()
-    // }
-    
+    this.getProvince()    
   },
 
   /**
@@ -147,7 +137,7 @@ Page({
    * 选择地区
    */
   onArea(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     this.setData({
       area: item,
     })

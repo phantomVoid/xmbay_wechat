@@ -113,7 +113,7 @@ Component({
      * 选择
      */
     chooseCoupon(e) {
-      this.data.coupon[e.currentTarget.dataset.index].select = !this.data.coupon[e.currentTarget.dataset.index].select
+      this.data.coupon[e.currentTarget.dataset.index].select = !this.data.coupon[e.currentTarget.dataset.index].select;
       this.setData({
         coupon: this.data.coupon
       })

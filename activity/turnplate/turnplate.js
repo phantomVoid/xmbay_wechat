@@ -241,10 +241,6 @@ Page({
             title: res.message,
             icon: 'none'
           })
-          // wx.showToast({
-          //   title: res.message,
-          //   icon: 'none'
-          // })
         })
       }
     }

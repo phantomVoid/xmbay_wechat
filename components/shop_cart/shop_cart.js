@@ -148,9 +148,6 @@ Component({
     reduceCart(e) {
       let dataset = e.currentTarget.dataset
       dataset.item.cart_number = dataset.item.number
-      console.log(dataset)
-      // return
-      // let item = e.currentTarget.dataset.item
       if (dataset.item.number > 1) {
         http.post(app.globalData.cart_reduce, {
           cart_id: dataset.item.cart_id,
@@ -217,7 +214,7 @@ Component({
       }
       id = id.substr(0, id.length - 1)
       wx.navigateTo({
-        url: '/pages/cart_confirm_order/cart_confirm_order?cart_id=' + id,
+        url: '/nearby_shops/cart_confirm_order/cart_confirm_order?cart_id=' + id,
       })
     }
   },

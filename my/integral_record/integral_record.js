@@ -102,7 +102,7 @@ Page({
    */
   onDelete(e) {
     let item = e.currentTarget.dataset.item,
-      index = e.currentTarget.dataset.index
+      index = e.currentTarget.dataset.index;
     http.post(app.globalData.conversion_record_delete, {
       integral_order_id: item.integral_order_id
     }).then(res => {
@@ -118,7 +118,7 @@ Page({
    */
   onDetail(e) {
     wx.navigateTo({
-      url: '../integral_order/integral_order?id=' + e.currentTarget.dataset.id + '&index=' + e.currentTarget.dataset.index,
+      url: '/my/integral_order/integral_order?id=' + e.currentTarget.dataset.id + '&index=' + e.currentTarget.dataset.index,
     })
   },
 
@@ -131,28 +131,9 @@ Page({
         type: 'integral'
       }
     wx.navigateTo({
-      url: '../logistics_detail/logistics_detail?info=' + JSON.stringify(info),
+      url: '/my/logistics_detail/logistics_detail?info=' + JSON.stringify(info),
     })
   },
-
-  /**
-   * 确认收货
-   */
-  // confirmReceipt(e) {
-  //   let item = e.currentTarget.dataset.item,
-  //     index = e.currentTarget.dataset.index;
-  //   http.post(app.globalData.confirm_receipt, {
-  //     integral_order_id: item.integral_order_id,
-  //     status: 2
-  //   }).then(res => {
-  //     app.showSuccessToast(res.message, () => {
-  //       this.data.list[index].status = 2
-  //       this.setData({
-  //         list: this.data.list
-  //       })
-  //     })
-  //   })
-  // },
 
   confirmReceipt(e) {
     let item = e.currentTarget.dataset.item,

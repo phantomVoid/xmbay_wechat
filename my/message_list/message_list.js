@@ -153,12 +153,12 @@ Page({
         break;
       case "1": //砍价详情
         wx.navigateTo({
-          url: `/pages/bargain/bargain?id=${item.attach_id}`,
+          url: `/nearby_shops/bargain/bargain?id=${item.attach_id}`,
         })
         break;
       case "2": //拼团详情
         wx.navigateTo({
-          url: `/pages/collage_detail/collage_detail?id=${item.attach_id}`,
+          url: `/nearby_shops/collage_detail/collage_detail?id=${item.attach_id}`,
         })
         break;
       case "3": //分销-我的等级
@@ -173,12 +173,12 @@ Page({
         break;
       case "5": //文章详情
         wx.navigateTo({
-          url: `/pages/info_detail/info_detail?article_id=${item.attach_id}`,
+          url: `/nearby_shops/info_detail/info_detail?article_id=${item.attach_id}`,
         })
         break;
       case "6": //退款详情
         wx.navigateTo({
-          url: `/pages/return_detail/return_detail?id=${item.attach_id}`,
+          url: `/nearby_shops/return_detail/return_detail?id=${item.attach_id}`,
         })
         break;
       case "7": //我的粉丝

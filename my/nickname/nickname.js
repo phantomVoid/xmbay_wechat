@@ -68,21 +68,18 @@ Page({
    * 保存
    */
   save() {
-    let reg = '^[a-zA-Z0-9_\u4e00-\u9fa5]+$'
+    let reg = '^[a-zA-Z0-9_\u4e00-\u9fa5]+$';
     if (this.data.nickname == '') {
       app.showToast('请输入昵称')
       return
     }
-    // if(){
-
-    // }
     http.post(app.globalData.my_other, {
       other: 'nickname',
       nickname: this.data.nickname
     }).then(res => {
       event.emit('refresh_info')
       let member_info = wx.getStorageSync('member_info')
-      member_info.nickname = this.data.nickname
+      member_info.nickname = this.data.nickname;
       wx.setStorageSync('member_info', member_info)
       app.showSuccessToast(res.message, () => {
         wx.navigateBack()

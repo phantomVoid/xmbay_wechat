@@ -109,7 +109,7 @@ Page({
       type: 'integral'
     }
     wx.navigateTo({
-      url: '../logistics_detail/logistics_detail?info=' + JSON.stringify(info),
+      url: '/my/logistics_detail/logistics_detail?info=' + JSON.stringify(info),
     })
   },
 

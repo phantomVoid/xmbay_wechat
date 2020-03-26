@@ -15,13 +15,13 @@ Page({
     see: false,
     cardcode: '',
     barcode: '',
-    pay_number:null
+    pay_number: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     let obj = {}
     if (options.tab) {
       obj.tab = options.tab
@@ -33,7 +33,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     this.getData()
     this.getCode()
   },
@@ -41,7 +41,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     if (this.data.tab == 2) {
       this.getCode()
       this.data.count_down = setInterval(() => {
@@ -53,28 +53,28 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
     clearInterval(this.data.count_down)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     clearInterval(this.data.count_down)
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
@@ -143,7 +143,7 @@ Page({
   },
   getCode() {
     http.postList(app.globalData.payment_code, {}).then(res => {
-      if (this.data.pay_number ==null||this.data.pay_number != res.number) {
+      if (this.data.pay_number == null || this.data.pay_number != res.number) {
         this.setData({
           pay_number: res.number,
           balance: res.usable_money

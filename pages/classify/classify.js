@@ -93,7 +93,7 @@ Page({
    */
   onSearch() {
     wx.navigateTo({
-      url: '../search/search?type=1',
+      url: '/nearby_shops/search/search?type=1',
     })
   },
 
@@ -169,7 +169,7 @@ Page({
    */
   onClassify(e) {
     wx.navigateTo({
-      url: '/pages/search_goods/search_goods?goods_classify_id=' + e.currentTarget.dataset.id,
+      url: '/nearby_shops/search_goods/search_goods?goods_classify_id=' + e.currentTarget.dataset.id,
     })
   },
 
@@ -178,7 +178,7 @@ Page({
    */
   onBandClassify(e) {
     wx.navigateTo({
-      url: '/pages/search_goods/search_goods?brand_id=' + e.currentTarget.dataset.id,
+      url: '/nearby_shops/search_goods/search_goods?brand_id=' + e.currentTarget.dataset.id,
     })
   },
 

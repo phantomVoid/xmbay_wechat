@@ -73,7 +73,7 @@ Page({
    */
   onSearch(e) {
     wx.navigateTo({
-      url: '../search_in_shop/search_in_shop?store_id=' + this.data.store_id + '&classify_id=' + e.currentTarget.dataset.id,
+      url: '/nearby_shops/search_in_shop/search_in_shop?store_id=' + this.data.store_id + '&classify_id=' + e.currentTarget.dataset.id,
     })
   }
 })

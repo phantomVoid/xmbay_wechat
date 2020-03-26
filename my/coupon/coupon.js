@@ -101,12 +101,12 @@ Page({
         })
       } else {
         wx.navigateTo({
-          url: '/pages/search_goods/search_goods'
+          url: '/nearby_shops/search_goods/search_goods'
         })
       }
     } else {
       wx.navigateTo({
-        url: '/pages/search_goods/search_goods?goods_classify_id=' + item.goods_classify_id,
+        url: '/nearby_shops/search_goods/search_goods?goods_classify_id=' + item.goods_classify_id,
       })
     }
   },
@@ -116,7 +116,7 @@ Page({
    */
   onCouponCenter() {
     wx.navigateTo({
-      url: '../coupon_center/coupon_center',
+      url: '/my/coupon_center/coupon_center',
     })
   },
 
@@ -125,7 +125,7 @@ Page({
    */
   onChangeCoupon() {
     wx.navigateTo({
-      url: '../change_coupon/change_coupon',
+      url: '/my/change_coupon/change_coupon',
     })
   },
 

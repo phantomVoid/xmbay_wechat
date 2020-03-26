@@ -110,7 +110,7 @@ Page({
       this.setData({
         content: this.data.time + 's后重新获取'
       })
-      this.data.time--
+      this.data.time--;
     }
   },
 
@@ -160,7 +160,7 @@ Page({
         code: this.data.code
       }).then(res => {
         wx.redirectTo({
-          url: '../forget_psw_three/forget_psw_three?phone=' + this.data.phone + '&type=' + this.data.type,
+          url: '/my/forget_psw_three/forget_psw_three?phone=' + this.data.phone + '&type=' + this.data.type,
         })
       })
     }

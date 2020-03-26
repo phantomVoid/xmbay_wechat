@@ -128,7 +128,7 @@ Page({
 
   onAdv() {
     wx.navigateTo({
-      url: '/pages/hot_spots/hot_spots',
+      url: '/nearby_shops/hot_spots/hot_spots',
     })
   },
   adv() {

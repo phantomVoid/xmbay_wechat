@@ -63,7 +63,7 @@ Page({
   },
 
   onClassify(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     let pages = getCurrentPages()
     let prevPage = pages[pages.length - 2];
     prevPage.setData({

@@ -66,7 +66,7 @@ Page({
    */
   onHelp(){
     wx.navigateTo({
-      url: '../help_center/help_center',
+      url: '/my/help_center/help_center',
     })
   },
   /**

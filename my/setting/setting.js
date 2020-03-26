@@ -83,7 +83,7 @@ Page({
    */
   onAddress() {
     wx.navigateTo({
-      url: '../address/address',
+      url: '/my/address/address',
     })
   },
 
@@ -92,7 +92,7 @@ Page({
    */
   onAccount() {
     wx.navigateTo({
-      url: '../account_safe/account_safe',
+      url: '/my/account_safe/account_safe',
     })
   },
 
@@ -108,7 +108,7 @@ Page({
    */
   onFeedback() {
     wx.navigateTo({
-      url: '../feedback/feedback',
+      url: '/my/feedback/feedback',
     })
   },
 
@@ -117,7 +117,7 @@ Page({
    */
   onUs() {
     wx.navigateTo({
-      url: '../about_us/about_us',
+      url: '/my/about_us/about_us',
     })
   },
   showModal() {

@@ -172,15 +172,6 @@ Page({
         }
       })
     })
-    //播放声音监听
-    // innerAudioContext.onStop(res => {
-    //   console.log(res)
-    //   console.log('播放停止1')
-    //   this.data.msglist[this.data.recorderIndex].voiceplay_type = 0
-    //   this.setData({
-    //     msglist: this.data.msglist
-    //   })
-    // })
     innerAudioContext.onEnded(res => {
       console.log('播放停止2')
       this.data.msglist[this.data.recorderIndex].voiceplay_type = 0
@@ -600,8 +591,8 @@ Page({
    * 发表情
    */
   chat(text) {
-    let reg1 = /\[[\u4e00-\u9fa5]+\]/g
-    let emojiArr, textArr
+    let reg1 = /\[[\u4e00-\u9fa5]+\]/g;
+    let emojiArr, textArr;
     try {
       emojiArr = text.match(reg1)
       textArr = text.split(/\[|\]/)

@@ -21,7 +21,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
       diy_color: app.globalData.diy_color,
       configSwitch: app.globalData.configSwitch
@@ -31,45 +31,45 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     this.getClassify()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     clearInterval(this.data.count_down)
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     if (this.data.total > this.data.list.length) {
-      this.data.page++
-        this.getConponList()
+      this.data.page++;
+      this.getConponList()
     }
   },
 
@@ -78,7 +78,7 @@ Page({
    */
   onChangeCoupon() {
     wx.redirectTo({
-      url: '../change_coupon/change_coupon',
+      url: '/my/change_coupon/change_coupon',
     })
   },
 
@@ -172,7 +172,7 @@ Page({
         this.data.list[i]['hour'] = Math.floor((second) % (24 * 3600) / 3600) < 10 ? '0' + Math.floor((second) % (24 * 3600) / 3600) : Math.floor((second) % (24 * 3600) / 3600)
         this.data.list[i]['min'] = Math.floor(second / 60 % 60) < 10 ? '0' + Math.floor(second / 60 % 60) : Math.floor(second / 60 % 60)
         this.data.list[i]['sec'] = Math.floor(second % 60) < 10 ? '0' + Math.floor(second % 60) : Math.floor(second % 60)
-        this.data.list[i].distance_start_time--
+        this.data.list[i].distance_start_time--;
       }
     }
     this.setData({
@@ -206,7 +206,7 @@ Page({
     let item = e.currentTarget.dataset.item
     if (this.data.configSwitch.version_info.one_more == 0) {
       wx.navigateTo({
-        url: '/pages/search_goods/search_goods',
+        url: '/nearby_shops/search_goods/search_goods',
       })
       return
     }
@@ -216,7 +216,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '/pages/search_goods/search_goods?goods_classify_id=' + item.classify_str,
+        url: '/nearby_shops/search_goods/search_goods?goods_classify_id=' + item.classify_str,
       })
     }
   }

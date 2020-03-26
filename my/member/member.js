@@ -71,12 +71,12 @@ Page({
    */
   onMemberPrice() {
     wx.navigateTo({
-      url: '../member_price/member_price',
+      url: '/my/member_price/member_price',
     })
   },
   onValue() {
     wx.navigateTo({
-      url: '/pages/growth_value/growth_value',
+      url: '/nearby_shops/growth_value/growth_value',
     })
   }
 })

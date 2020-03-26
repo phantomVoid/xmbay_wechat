@@ -164,7 +164,7 @@ Page({
    */
   fx_earnings_list(e) {
     let type = e.currentTarget.dataset.type,
-      title = e.currentTarget.dataset.title
+      title = e.currentTarget.dataset.title;
     if (title == 'total') {
       if (type == 0) {
         wx.navigateTo({

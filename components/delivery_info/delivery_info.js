@@ -134,7 +134,7 @@ Component({
      */
     _onPickup() {
       wx.navigateTo({
-        url: '/pages/nearby_self_point/nearby_self_point?store_id=' + this.data.store_id,
+        url: '/nearby_shops/nearby_self_point/nearby_self_point?store_id=' + this.data.store_id,
       })
     }
   }

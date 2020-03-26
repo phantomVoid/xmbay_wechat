@@ -214,7 +214,7 @@ Page({
    */
   onSearch() {
     wx.navigateTo({
-      url: '/pages/search/search?type=2',
+      url: '/nearby_shops/search/search?type=2',
     })
   },
 
@@ -296,7 +296,7 @@ Page({
     // this.setData({
     //   is_filtrate: true
     // })
-    let filtrate = e.detail
+    let filtrate = e.detail;
     this.data.shop = filtrate.shop
     this.data.is_shop = filtrate.is_shop
     this.data.is_city = filtrate.is_city
@@ -351,7 +351,7 @@ Page({
    * 导航
    */
   onNavigation(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     wx.openLocation({
       latitude: parseFloat(item.lat),
       longitude: parseFloat(item.lng),
@@ -365,8 +365,8 @@ Page({
    * 获取数据
    */
   getNeabyList() {
-    this.data.sales_volume = this.data.sale ? '1' : ''
-    this.data.distance = this.data.sort ? '1' : ''
+    this.data.sales_volume = this.data.sale ? '1' : '';
+    this.data.distance = this.data.sort ? '1' : '';
     http.postList(app.globalData.store_nearby_list, {
       lat: app.globalData.lat,
       lng: app.globalData.lng,

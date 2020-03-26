@@ -225,7 +225,7 @@ Page({
    */
   refundDetail(e) {
     wx.navigateTo({
-      url: `/pages/return_detail/return_detail?id=${e.currentTarget.dataset.id}&status=${this.data.info.status}`,
+      url: `/nearby_shops/return_detail/return_detail?id=${e.currentTarget.dataset.id}&status=${this.data.info.status}`,
     })
   },
 
@@ -251,7 +251,7 @@ Page({
   fillLogistics(e) {
     let item = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/fill_logistics/fill_logistics?id=${item}`,
+      url: `/nearby_shops/fill_logistics/fill_logistics?id=${item}`,
     })
   },
 
@@ -307,7 +307,7 @@ Page({
       }
     }
     wx.navigateTo({
-      url: `/pages/comment/comment?info=${JSON.stringify(list)}`,
+      url: `/nearby_shops/comment/comment?info=${JSON.stringify(list)}`,
     })
     // if (this.data.info.has_refund == 1) {
     //   app.showModal('', '评论会取消您的退款申请,确定继续吗?', () => {
@@ -335,7 +335,7 @@ Page({
       type: 1
     }
     wx.navigateTo({
-      url: `/pages/cashier_desk/cashier_desk?order_info=${JSON.stringify(order_info)}`,
+      url: `/nearby_shops/cashier_desk/cashier_desk?order_info=${JSON.stringify(order_info)}`,
     })
   },
 
@@ -374,7 +374,7 @@ Page({
    */
   onCollageDetail() {
     wx.navigateTo({
-      url: `/pages/collage_detail/collage_detail?id=${this.data.info.group_activity_attach_id}`,
+      url: `/nearby_shops/collage_detail/collage_detail?id=${this.data.info.group_activity_attach_id}`,
     })
   },
 
@@ -383,7 +383,7 @@ Page({
    */
   onBargainDetail() {
     wx.navigateTo({
-      url: `/pages/bargain/bargain?id=${this.data.info.cut_activity_id}`
+      url: `/nearby_shops/bargain/bargain?id=${this.data.info.cut_activity_id}`
     })
   },
 
@@ -418,7 +418,7 @@ Page({
    * 申请重开发票
    */
   invoice_anew(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     wx.navigateTo({
       url: `/nearby_shops/invoice_detail/invoice_detail?order_attach_id=${item.order_attach_id}&status=${item.status}`
     })
@@ -427,14 +427,13 @@ Page({
    * 申请发票
    */
   invoice_apply(e) {
-    let order_attach_id = e.currentTarget.dataset.item
+    let order_attach_id = e.currentTarget.dataset.item;
     wx.navigateTo({
       url: `/nearby_shops/invoice_info/invoice_info?order_attach_id=${order_attach_id}&store_id=${this.data.info.store_id}`
     })
   },
 
   showModal(e) {
-    console.log(e.currentTarget.dataset)
     this.setData({
       showModal: e.currentTarget.dataset.confirmtype
     })

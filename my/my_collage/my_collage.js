@@ -102,7 +102,7 @@ Page({
    */
   loadMore() {
     if (this.data.list.length < this.data.total) {
-      this.data.page++
+      this.data.page++;
       this.getOrderList()
     }
   },
@@ -113,7 +113,7 @@ Page({
    */
   onOrderDetail(e) {
     wx.navigateTo({
-      url: '../order_detail/order_detail?id=' + e.currentTarget.dataset.id,
+      url: '/my/order_detail/order_detail?id=' + e.currentTarget.dataset.id,
     })
   },
 
@@ -122,7 +122,7 @@ Page({
    */
   onCollageDetail(e) {
     wx.navigateTo({
-      url: '/pages/collage_detail/collage_detail?id=' + e.currentTarget.dataset.id,
+      url: '/nearby_shops/collage_detail/collage_detail?id=' + e.currentTarget.dataset.id,
     })
   },
 
@@ -131,7 +131,7 @@ Page({
    */
   onCollage() {
     wx.redirectTo({
-      url: '/pages/collage_buy/collage_buy',
+      url: '/nearby_shops/collage_buy/collage_buy',
     })
   }
 })

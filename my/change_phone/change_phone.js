@@ -143,7 +143,6 @@ Page({
         type = 2
         break;
     }
-    console.log(type)
     http.encPost(app.globalData.message_send, {
       type: type,
       phone: this.data.phone
@@ -169,7 +168,7 @@ Page({
       this.setData({
         content: this.data.time + 's后重新发送'
       })
-      this.data.time--
+      this.data.time--;
     }
   },
 

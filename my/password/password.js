@@ -74,11 +74,11 @@ Page({
   updatePassword() {
     if (this.data.type == 'login') {
       wx.navigateTo({
-        url: '../change_password/change_password?type=login',
+        url: '/my/change_password/change_password?type=login',
       })
     } else {
       wx.navigateTo({
-        url: '../change_password/change_password',
+        url: '/my/change_password/change_password',
       })
     }
   },
@@ -89,11 +89,11 @@ Page({
   forgetPassword() {
     if (this.data.type == 'login') {
       wx.navigateTo({
-        url: '../forget_psw_one/forget_psw_one?type=login',
+        url: '/my/forget_psw_one/forget_psw_one?type=login',
       })
     } else {
       wx.navigateTo({
-        url: '../forget_psw_one/forget_psw_one',
+        url: '/my/forget_psw_one/forget_psw_one',
       })
     }
   }

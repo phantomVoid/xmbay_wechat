@@ -155,12 +155,6 @@ Page({
         })
       }
     }
-
-    // http.post(app.globalData.distribution_jumpSign, {}).then(res => {
-    //   wx.redirectTo({
-    //     url: res.data.path
-    //   })
-    // })
   },
   /**
    * 绑定代言关系

@@ -77,9 +77,7 @@ Page({
     this.setData({
       sup_id: app.globalData.sup_id
     })
-    // if (app.globalData.member_id != '') {
     this.getDistributionData()
-    // }
   },
 
   /**
@@ -170,7 +168,6 @@ Page({
    * 获取数据
    */
   getData() {
-    console.log('get')
     let parameter = '';
     //综合排序    
     if (this.data.current_tab == 1) {
@@ -419,7 +416,7 @@ Page({
    */
   onShop(e) {
     wx.navigateTo({
-      url: '/pages/shop_detail/shop_detail?store_id=' + e.currentTarget.dataset.id,
+      url: '/nearby_shops/shop_detail/shop_detail?store_id=' + e.currentTarget.dataset.id,
     })
   },
 

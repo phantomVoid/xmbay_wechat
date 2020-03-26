@@ -192,8 +192,7 @@ Component({
      * 选择发票类型
      */
     invoiceClick(e) {
-      let type = e.currentTarget.dataset.type
-      console.log(type)
+      let type = e.currentTarget.dataset.type;
       this.setData({
         invoice_type: type
       })
@@ -311,8 +310,7 @@ Component({
      * 收票人手机
      */
     consignee_phone(e) {
-      console.log(e)
-      let val = e.detail.value
+      let val = e.detail.value;
       this.setData({
         consignee_phone: val
       })
@@ -321,8 +319,7 @@ Component({
      * 详细地址
      */
     address_details(e) {
-      console.log(e)
-      let val = e.detail.value
+      let val = e.detail.value;
       this.setData({
         address_details: val
       })
@@ -384,23 +381,6 @@ Component({
         app.showToast('请输入详细地址', res => {})
         return
       }
-
-      // if (this.data.invoice_type == 1 && this.data.rise == 2 && (this.data.consignee_name == '' || this.data.consignee_name == undefined)) {
-      //   app.showToast('请输入收票人姓名', res => { })
-      //   return
-      // }
-      // if (this.data.invoice_type == 1 && this.data.rise == 2 && !app.isPoneAvailable(this.data.consignee_phone)) {
-      //   app.showToast('请输入收票人手机', res => { })
-      //   return
-      // }
-      // if (this.data.invoice_type == 1 && this.data.rise == 2 && (this.data.address_area == '' || this.data.address_area == undefined)) {
-      //   app.showToast('请输入所在地区', res => { })
-      //   return
-      // }
-      // if (this.data.invoice_type == 1 && this.data.rise == 2 && (this.data.address_details == '' || this.data.address_details == undefined)) {
-      //   app.showToast('请输入详细地址', res => { })
-      //   return
-      // }
       let data = {
         invoice_type: this.data.invoice_type, //发票类型：0普通发票 1增值税发票
         rise: this.data.rise, //发票抬头：1个人 2公司

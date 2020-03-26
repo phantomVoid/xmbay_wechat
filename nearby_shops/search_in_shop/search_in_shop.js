@@ -108,7 +108,7 @@ Page({
 
   onClassify() {
     wx.redirectTo({
-      url: '../shop_classify/shop_classify?store_id=' + this.data.store_id,
+      url: '/nearby_shops/shop_classify/shop_classify?store_id=' + this.data.store_id,
     })
   },
 

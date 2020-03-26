@@ -281,7 +281,7 @@ Page({
    */
   onLocation() {
     wx.navigateTo({
-      url: '/pages/city_select/city_select',
+      url: '/nearby_shops/city_select/city_select',
     })
   },
   /**
@@ -289,7 +289,7 @@ Page({
    */
   onSearch() {
     wx.navigateTo({
-      url: '/pages/search/search?type=1',
+      url: '/nearby_shops/search/search?type=1',
     })
   },
   /**
@@ -375,18 +375,18 @@ Page({
         case 'invit': //邀请有礼
           if (app.login()) {
             wx.navigateTo({
-              url: `/pages/invitation/invitation?token=${this.data.dataInfo.parameter}`,
+              url: `/nearby_shops/invitation/invitation?token=${this.data.dataInfo.parameter}`,
             })
           }
           break;
         case 'group': //拼团
           wx.navigateTo({
-            url: '/pages/collage_buy/collage_buy',
+            url: '/nearby_shops/collage_buy/collage_buy',
           })
           break;
         case 'cut': //砍价
           wx.navigateTo({
-            url: '/pages/bargain_list/bargain_list',
+            url: '/nearby_shops/bargain_list/bargain_list',
           })
           break;
         case 'coupon': //领券
@@ -401,12 +401,12 @@ Page({
           break;
         case 'ranking': //排行榜
           wx.navigateTo({
-            url: '/pages/rank_good/rank_good',
+            url: '/nearby_shops/rank_good/rank_good',
           })
           break;
         case 'brand': //品牌甄选
           wx.navigateTo({
-            url: '/pages/brand_select/brand_select',
+            url: '/nearby_shops/brand_select/brand_select',
           })
           break;
         case 'merchant': //商家入驻
@@ -447,7 +447,7 @@ Page({
       }
     } else if (item.type == 2) { //分类
       wx.navigateTo({
-        url: `/pages/search_goods/search_goods?goods_classify_id=${item.name}`
+        url: `/nearby_shops/search_goods/search_goods?goods_classify_id=${item.name}`
       })
     }
   },
@@ -482,7 +482,7 @@ Page({
    */
   onHotSpot() {
     wx.navigateTo({
-      url: '/pages/hot_spots/hot_spots',
+      url: '/nearby_shops/hot_spots/hot_spots',
     })
   },
   /**
@@ -490,7 +490,7 @@ Page({
    */
   onHotSpotContent(e) {
     wx.navigateTo({
-      url: '/pages/info_detail/info_detail?article_id=' + e.currentTarget.dataset.id,
+      url: '/nearby_shops/info_detail/info_detail?article_id=' + e.currentTarget.dataset.id,
     })
   },
   /**
@@ -498,7 +498,7 @@ Page({
    */
   onLimit() {
     wx.navigateTo({
-      url: '/pages/flash_sale/flash_sale',
+      url: '/nearby_shops/flash_sale/flash_sale',
     })
   },
   /**
@@ -537,7 +537,7 @@ Page({
    */
   onRecommend() {
     wx.navigateTo({
-      url: '../recommend/recommend',
+      url: '/nearby_shops/recommend/recommend',
     })
   },
 
@@ -546,7 +546,7 @@ Page({
    */
   onNew() {
     wx.navigateTo({
-      url: '/pages/search_goods/search_goods?key=' + '&type=new',
+      url: '/nearby_shops/search_goods/search_goods?key=' + '&type=new',
     })
   },
   /**
@@ -554,7 +554,7 @@ Page({
    */
   onBrand() {
     wx.navigateTo({
-      url: '/pages/brand_select/brand_select'
+      url: '/nearby_shops/brand_select/brand_select'
     })
   },
   /**
@@ -562,7 +562,7 @@ Page({
    */
   onRank() {
     wx.navigateTo({
-      url: '/pages/rank_good/rank_good',
+      url: '/nearby_shops/rank_good/rank_good',
     })
   },
   /**
@@ -593,7 +593,7 @@ Page({
           })
         } else {
           wx.navigateTo({
-            url: '/pages/search_goods/search_goods?goods_classify_id=' + item.goods_classify_id,
+            url: '/nearby_shops/search_goods/search_goods?goods_classify_id=' + item.goods_classify_id,
             success: () => {
               if (e.currentTarget.dataset.adv == 1) {
                 http.post(app.globalData.index_adBrowseInc, {
@@ -648,7 +648,7 @@ Page({
   onNewGift() {
     this.closeExclusive()
     wx.navigateTo({
-      url: '/pages/new_gift/new_gift'
+      url: '/nearby_shops/new_gift/new_gift'
     })
   },
 

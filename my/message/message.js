@@ -88,7 +88,7 @@ Page({
 
   onMessage(e) {
     wx.navigateTo({
-      url: '../message_list/message_list?tab=' + e.currentTarget.dataset.index,
+      url: '/my/message_list/message_list?tab=' + e.currentTarget.dataset.index,
     })
   },
   /**
@@ -108,9 +108,8 @@ Page({
    * 客服列表
    */
   goService(e) {
-    console.log(e)
-    let data = e.currentTarget.dataset.data
-    let service_info
+    let data = e.currentTarget.dataset.data;
+    let service_info;
     if (data.store_id != '0') {
       service_info = {
         store_title: data.store_name,

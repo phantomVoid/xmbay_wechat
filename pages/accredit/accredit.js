@@ -138,7 +138,7 @@ Page({
             app.showSuccessToast('登录成功', () => {
               if (app.globalData.phone == '') {
                 wx.redirectTo({
-                  url: '../bind_phone/bind_phone',
+                  url: '/pages/bind_phone/bind_phone',
                 })
               } else {
                 let page = getCurrentPages()

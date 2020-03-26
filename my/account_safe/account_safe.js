@@ -94,7 +94,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '../password/password',
+        url: '/my/password/password',
       })
     }
   },
@@ -104,11 +104,11 @@ Page({
   onsetPassword() {
     if (this.data.info.password_state == 0) {
       wx.navigateTo({
-        url: '../set_password/set_password?type=login',
+        url: '/my/set_password/set_password?type=login',
       })
     } else {
       wx.navigateTo({
-        url: '../password/password?type=login',
+        url: '/my/password/password?type=login',
       })
     }
   }

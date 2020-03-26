@@ -122,7 +122,7 @@ Page({
    */
   onCategory() {
     wx.navigateTo({
-      url: '../merchant_category/merchant_category',
+      url: '/my/merchant_category/merchant_category',
     })
   },
 
@@ -139,7 +139,7 @@ Page({
       }
     }
     wx.navigateTo({
-      url: this.data.area.length == 0 ? '../merchant_region/merchant_region' : '../merchant_region/merchant_region?data=' + JSON.stringify(obj),
+      url: this.data.area.length == 0 ? '/my/merchant_region/merchant_region' : '/my/merchant_region/merchant_region?data=' + JSON.stringify(obj),
     })
   },
   /**
@@ -300,8 +300,7 @@ Page({
   location() {
     qqmapsdk.reverseGeocoder({
       success: res => {
-        console.log(res)
-        let data = res.result
+        let data = res.result;
         this.setData({
           province: {
             area_name: data.address_component.province

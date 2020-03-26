@@ -73,7 +73,7 @@ Page({
   },
 
   login() {
-    let re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/
+    let re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
     if (!re.test(this.data.password)) {
       app.showToast('请输入6位-20位字母、数组密码')
       return

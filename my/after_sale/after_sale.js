@@ -89,7 +89,7 @@ Page({
     console.log(e)
     let item = e.currentTarget.dataset.item
     wx.navigateTo({
-      url: `/pages/return_detail/return_detail?id=${item.order_goods_id}&status=${item.order_attach_status}`,
+      url: `/nearby_shops/return_detail/return_detail?id=${item.order_goods_id}&status=${item.order_attach_status}`,
     })
   }
 })

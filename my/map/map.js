@@ -101,7 +101,6 @@ Page({
         }
       })
     } else {
-      console.log('b')
       this.map_search()
     }
   },
@@ -111,7 +110,6 @@ Page({
       keyword: this.data.search_key,
       location: location ? location : undefined,
       success: (res, data) => {
-        console.log(data)
         if (res.data.length == 0) {
           app.showToast('搜索不到地址', () => {})
           return
@@ -186,7 +184,6 @@ Page({
       get_poi: 1,
       location: sLocation,
       success: res => {
-        console.log(res)
         this.setData({
           bubble: true,
           location: res.result.pois[0],
@@ -214,7 +211,6 @@ Page({
   },
 
   onListAddress(e) {
-    console.log(e)
     let item = e.currentTarget.dataset.item,
       location = {
         location: item.title,

@@ -1,43 +1,12 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/bind_phone/bind_phone",
-    "pages/my/my",
-    "pages/collage_detail/collage_detail",
-    "pages/new_gift/new_gift",
-    "pages/hot_spots/hot_spots",
-    "pages/rank_shop/rank_shop",
-    "pages/brand_select/brand_select",
-    "pages/rank_good/rank_good",
-    "pages/bargain/bargain",
-    "pages/bargain_list/bargain_list",
-    "pages/comment/comment",
-    "pages/cashier_desk/cashier_desk",
-    "pages/cart/cart",
-    "pages/cart_confirm_order/cart_confirm_order",
-    "pages/flash_sale/flash_sale",
-    "pages/search_goods/search_goods",
-    "pages/accredit/accredit",
-    "pages/nearby_self_point/nearby_self_point",
-    "pages/fill_logistics/fill_logistics",
-    "pages/return_detail/return_detail",
-    "pages/search_shops/search_shops",
-    "pages/face_scan/face_scan",
-    "pages/confirm_order/confirm_order",
-    "pages/invoice_confirm_order/invoice_confirm_order",
-    "pages/growth_value/growth_value",
-    "pages/invitation/invitation",
-    "pages/city_select/city_select",
-    "pages/recommend/recommend",
-    "pages/info_detail/info_detail",
-    "pages/search/search",
     "pages/classify/classify",
-    "pages/comment_success/comment_success",
-    "pages/select_logistics/select_logistics",
-    "pages/collage_buy/collage_buy",
     "pages/nearby_shops/nearby_shops",
-    "pages/integral_cashier_desk/integral_cashier_desk",
-    "pages/invitation_web/invitation_web"
+    "pages/cart/cart",
+    "pages/my/my",
+    "pages/bind_phone/bind_phone",
+    "pages/accredit/accredit"
   ],
   "subPackages": [
     {
@@ -151,7 +120,38 @@
         "invoice_detail/invoice_detail",
         "invoice_info/invoice_info",
         "invoice_over/invoice_over",
-        "shop_audit/shop_audit"
+        "shop_audit/shop_audit",
+        "collage_detail/collage_detail",
+        "new_gift/new_gift",
+        "hot_spots/hot_spots",
+        "rank_shop/rank_shop",
+        "brand_select/brand_select",
+        "rank_good/rank_good",
+        "bargain/bargain",
+        "bargain_list/bargain_list",
+        "comment/comment",
+        "cashier_desk/cashier_desk",
+        "cart_confirm_order/cart_confirm_order",
+        "flash_sale/flash_sale",
+        "search_goods/search_goods",
+        "nearby_self_point/nearby_self_point",
+        "fill_logistics/fill_logistics",
+        "return_detail/return_detail",
+        "search_shops/search_shops",
+        "face_scan/face_scan",
+        "confirm_order/confirm_order",
+        "invoice_confirm_order/invoice_confirm_order",
+        "growth_value/growth_value",
+        "invitation/invitation",
+        "city_select/city_select",
+        "recommend/recommend",
+        "info_detail/info_detail",
+        "search/search",
+        "comment_success/comment_success",
+        "select_logistics/select_logistics",
+        "collage_buy/collage_buy",
+        "integral_cashier_desk/integral_cashier_desk",
+        "invitation_web/invitation_web"
       ]
     },
     {
@@ -207,6 +207,9 @@
     "scope.userLocation": {
       "desc": "小程序需要获取您的地理位置"
     }
+  },
+  "usingComponents": {
+    "image-loader": "/components/image-loader/image-loader"
   },
   "sitemapLocation": "sitemap.json"
 }

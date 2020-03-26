@@ -96,7 +96,7 @@ Page({
    * 关注店铺
    */
   collectStore() {
-    let url = ''
+    let url = '';
     if (this.data.info.result.shop.state == 0) {
       url = app.globalData.collect_store
     } else {

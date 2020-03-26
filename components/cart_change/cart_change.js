@@ -203,10 +203,10 @@ Component({
      */
     _increaseNum() {
       if (this.data.num < this.data.info.inventory) {
-        this.data.num++
-          this.setData({
-            num: this.data.num
-          })
+        this.data.num++;
+        this.setData({
+          num: this.data.num
+        })
       } else {
         app.showToast('已达到最大数量')
       }
@@ -227,13 +227,12 @@ Component({
         app.showToast('购买数量不可为0')
         return
       }
-      let attr_detail = ''
+      let attr_detail = '';
       if (this.data.info.attrs.length != 0) {
         for (let i = 0, len = this.data.attr_array.length; i < len; i++) {
-          attr_detail += this.data.info.attrs[i].attr_name + ':' + this.data.attr_array[i] + ' '
+          attr_detail += this.data.info.attrs[i].attr_name + ':' + this.data.attr_array[i] + ' ';
         }
       }
-      console.log(this.data.info)
       http.encPost(app.globalData.cart_update, {
         goods_id: this.data.info.goods_id,
         goods_name: this.data.info.goods_name,

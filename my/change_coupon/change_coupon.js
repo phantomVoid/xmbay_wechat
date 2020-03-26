@@ -135,11 +135,11 @@ Page({
       })
     } else if (app.globalData.isShops == 1) {
       wx.navigateTo({
-        url: '/pages/search_goods/search_goods',
+        url: '/nearby_shops/search_goods/search_goods',
       })
     } else {
       wx.navigateTo({
-        url: '/pages/search_goods/search_goods?goods_classify_id=' + item.classify_str,
+        url: '/nearby_shops/search_goods/search_goods?goods_classify_id=' + item.classify_str,
       })
     }
   },
@@ -158,7 +158,7 @@ Page({
    */
   onCouponCenter() {
     wx.redirectTo({
-      url: '../coupon_center/coupon_center',
+      url: '/my/coupon_center/coupon_center',
     })
   },
 
@@ -177,7 +177,7 @@ Page({
     let item = e.currentTarget.dataset.item
     if (this.data.configSwitch.version_info.one_more == 0) {
       wx.navigateTo({
-        url: '/pages/search_goods/search_goods',
+        url: '/nearby_shops/search_goods/search_goods',
       })
       return
     }
@@ -187,7 +187,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '/pages/search_goods/search_goods?goods_classify_id=' + item.classify_str,
+        url: '/nearby_shops/search_goods/search_goods?goods_classify_id=' + item.classify_str,
       })
     }
   }

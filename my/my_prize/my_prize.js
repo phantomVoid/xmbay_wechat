@@ -83,8 +83,8 @@ Page({
    */
   onReachBottom: function() {
     if (this.data.total > this.data.list.length) {
-      this.data.page++
-        this.getData()
+      this.data.page++;
+      this.getData()
     }
   },
 
@@ -150,7 +150,7 @@ Page({
    */
   confirm_take(e) {
     let id = e.detail.id,
-      index = e.detail.index
+      index = e.detail.index;
     http.post(app.globalData.confirm_take, {
       order_id: id
     }).then(res => {

@@ -341,7 +341,7 @@ Page({
     } else if (this.data.is_anew == 1 && this.data.invoice_type != 1) { // 重开发票（普通纸质发票/增值税纸质发票）
       http.post(app.globalData.invoice_anew, data).then(res => {
         wx.redirectTo({
-          url: `/pages/invoice_confirm_order/invoice_confirm_order?info=${JSON.stringify(obj)}`,
+          url: `/nearby_shops/invoice_confirm_order/invoice_confirm_order?info=${JSON.stringify(obj)}`,
         })
       })
     } else if (this.data.is_anew != 1 && this.data.invoice_type == 1) { // 补开发票（电子发票）
@@ -357,7 +357,7 @@ Page({
     } else if (this.data.is_anew != 1 && this.data.invoice_type != 1) { // 补开发票（普通纸质发票/增值税纸质发票）
       http.post(app.globalData.invoice_supplement, data).then(res => {
         wx.redirectTo({
-          url: `/pages/invoice_confirm_order/invoice_confirm_order?info=${JSON.stringify(obj)}`,
+          url: `/nearby_shops/invoice_confirm_order/invoice_confirm_order?info=${JSON.stringify(obj)}`,
         })
       })
     }

@@ -69,9 +69,9 @@ Component({
       if (!app.login()) {
         return
       }
-      let item = e.currentTarget.dataset.item
-      item.add_cart_type = 2
-      item['attr'] = item.attribute_list
+      let item = e.currentTarget.dataset.item;
+      item.add_cart_type = 2;
+      item['attr'] = item.attribute_list;
       if (item.goods_number == 0) {
         app.showToast('该商品已经卖光了')
         return
@@ -96,7 +96,6 @@ Component({
       }
     },
     onLabel(e) {
-      console.log(e.currentTarget.dataset)
       wx.navigateTo({
         url: `/nearby_shops/good_detail/good_detail?goods_id=${e.currentTarget.dataset.goods_id}&label=${e.currentTarget.dataset.id}`,
       })

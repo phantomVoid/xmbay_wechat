@@ -95,7 +95,7 @@ Page({
   onDetail(e) {
     if (!this.data.is_long) {
       wx.navigateTo({
-        url: '/pages/info_detail/info_detail?article_id=' + e.currentTarget.dataset.id,
+        url: '/nearby_shops/info_detail/info_detail?article_id=' + e.currentTarget.dataset.id,
       })
     }
     this.data.is_long = false

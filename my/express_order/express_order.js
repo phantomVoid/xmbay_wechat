@@ -192,11 +192,10 @@ Page({
    * 选择选项卡
    */
   onTab(e) {
-    console.log(e)
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     this.setData({
-      current_status: e.currentTarget.dataset.item.status,
-      distribution_type: e.currentTarget.dataset.item.distribution_type,
+      current_status: item.status,
+      distribution_type: item.distribution_type,
       page: 1,
       list: []
     })
@@ -262,7 +261,7 @@ Page({
    */
   onSaleAfter() {
     wx.navigateTo({
-      url: '../after_sale/after_sale?distribution_type=' + this.data.distribution_type,
+      url: '/my/after_sale/after_sale?distribution_type=' + this.data.distribution_type,
     })
   },
 
@@ -279,9 +278,9 @@ Page({
    * 订单详情
    */
   onOrderDetail(e) {
-    this.data.index = e.currentTarget.dataset.index
+    this.data.index = e.currentTarget.dataset.index;
     wx.navigateTo({
-      url: '../order_detail/order_detail?id=' + e.currentTarget.dataset.id,
+      url: '/my/order_detail/order_detail?id=' + e.currentTarget.dataset.id,
     })
   },
 
@@ -299,7 +298,7 @@ Page({
    */
   onSearch() {
     wx.navigateTo({
-      url: '../search_order/search_order?distribution_type=' + this.data.distribution_type,
+      url: '/my/search_order/search_order?distribution_type=' + this.data.distribution_type,
     })
   },
 
@@ -307,7 +306,7 @@ Page({
    * 物流详情
    */
   onLogistics(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     //如果是同城
     if (item.distribution_type == 1) {
       wx.navigateTo({
@@ -322,7 +321,7 @@ Page({
       type: 'order'
     }
     wx.navigateTo({
-      url: '../logistics_detail/logistics_detail?info=' + JSON.stringify(info),
+      url: '/my/logistics_detail/logistics_detail?info=' + JSON.stringify(info),
     })
   },
 
@@ -330,7 +329,7 @@ Page({
    * 取消订单
    */
   cancelOrder(e) {
-    let index = e.currentTarget.dataset.index
+    let index = e.currentTarget.dataset.index;
     http.post(app.globalData.cancel_order, {
       order_attach_id: e.currentTarget.dataset.id,
     }).then(res => {
@@ -350,8 +349,8 @@ Page({
    * 删除订单
    */
   deleteOrder(e) {
-    let index = e.currentTarget.dataset.index
-    let id = e.currentTarget.dataset.id
+    let index = e.currentTarget.dataset.index;
+    let id = e.currentTarget.dataset.id;
     if (this.data.list[index].has_refund == 1) {
       app.showModal('', '删除订单会取消您的退款申请,确定继续吗?', () => {
         this.confirmDelete(id, index)
@@ -380,7 +379,7 @@ Page({
    * 付款
    */
   payOrder(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     let order_info = {
       total_price: item.subtotal_price,
       order_number: '',
@@ -390,18 +389,17 @@ Page({
       type: 2
     }
     wx.navigateTo({
-      url: '/pages/cashier_desk/cashier_desk?order_info=' + JSON.stringify(order_info),
+      url: '/nearby_shops/cashier_desk/cashier_desk?order_info=' + JSON.stringify(order_info),
     })
-    this.data.index = e.currentTarget.dataset.index
+    this.data.index = e.currentTarget.dataset.index;
   },
 
   /**
    * 确提货
    */
   confirmReceipt(e) {
-    console.log(e)
-    let order_obj = e.detail
-    let group_take = order_obj.group_take == undefined ? '' : order_obj.group_take
+    let order_obj = e.detail;
+    let group_take = order_obj.group_take == undefined ? '' : order_obj.group_take;
     if (group_take == 1) {
       app.showToast('该订单团购尚未成功,暂不能提货')
     }
@@ -419,7 +417,6 @@ Page({
   },
 
   showModal(e) {
-    console.log(e.currentTarget.dataset)
     this.setData({
       showModal: e.currentTarget.dataset.confirmtype
     })
@@ -430,8 +427,7 @@ Page({
    * 确认收货
    */
   confirmCollect(e) {
-    let order_obj = e.detail
-    console.log(e.detail)
+    let order_obj = e.detail;
     http.post(app.globalData.confirm_collect, {
       order_attach_id: order_obj.id
     }).then(res => {
@@ -452,7 +448,7 @@ Page({
    */
   onComment(e) {
     let item = e.currentTarget.dataset.item,
-      list = []
+      list = [];
     this.data.index = e.currentTarget.dataset.index
     for (var i = 0; i < item.order_goods_list.length; i++) {
       item.order_goods_list[i].file = encodeURIComponent(item.order_goods_list[i].file)
@@ -461,7 +457,7 @@ Page({
       }
     }
     wx.navigateTo({
-      url: '/pages/comment/comment?info=' + JSON.stringify(list),
+      url: '/nearby_shops/comment/comment?info=' + JSON.stringify(list),
     })
     // if (this.data.list[this.data.index].has_refund == 1) {
     //   app.showModal('', '评价会取消您的退款申请,确定继续吗?', () => {

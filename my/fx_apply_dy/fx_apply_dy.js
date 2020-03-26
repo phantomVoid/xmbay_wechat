@@ -23,7 +23,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('asdfadsf')
     this.setData({
       diy_color: app.globalData.diy_color
     })
@@ -203,7 +202,6 @@ Page({
       this.setData({
         info: res.data
       })
-      console.log(this.data.info)
     })
   },
 

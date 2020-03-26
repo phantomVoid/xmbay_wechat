@@ -116,7 +116,7 @@ Page({
    * 联系方式
    */
   contactInput(e) {
-    let value = e.detail.value
+    let value = e.detail.value;
     this.setData({
       contact: value
     })

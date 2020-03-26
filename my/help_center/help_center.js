@@ -67,7 +67,7 @@ Page({
   },
 
   onItem(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     wx.navigateTo({
       url: '/my/help_web/help_web?item=' + JSON.stringify(item),
     })

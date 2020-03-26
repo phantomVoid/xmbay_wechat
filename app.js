@@ -1,11 +1,11 @@
 // 正式域名
-var HTTP = 'https://ishop.zihaiwangluo.com/';
+// var HTTP = 'https://ishop.zihaiwangluo.com/';
 
 // 测试域名
 // var HTTP = 'https://ishoptest.zihaiwangluo.com/';
 // var HTTP = 'https://ishop-preview.zihaiwangluo.com/';
 // var HTTP = 'http://ishop-pre.z4.cc/';
-// var HTTP = 'https://ddmb.zihaiwangluo.com/';
+var HTTP = 'https://ddmb.zihaiwangluo.com/';
 // var HTTP = 'http://kuaixiao.zihaiwangluo.com/';
 
 App({

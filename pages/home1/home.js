@@ -223,7 +223,7 @@ Page({
    */
   onLocation() {
     wx.navigateTo({
-      url: '../city_select/city_select',
+      url: '/nearby_shops/city_select/city_select',
     })
   },
 
@@ -274,7 +274,7 @@ Page({
     this.closeExclusive()
     wx.nextTick(() => {
       wx.navigateTo({
-        url: '/pages/new_gift/new_gift'
+        url: '/nearby_shops/new_gift/new_gift'
       })
     })
   },
@@ -294,7 +294,7 @@ Page({
    */
   onSearch() {
     wx.navigateTo({
-      url: '../search/search?type=1',
+      url: '/nearby_shops/search/search?type=1',
     })
   },
 
@@ -302,7 +302,7 @@ Page({
    * 导航条
    */
   onNavigation(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     if (item.type == 1) {
       switch (item.name) {
         case 'sign_in': //签到
@@ -313,18 +313,18 @@ Page({
         case 'invit': //邀请有礼
           if (app.login()) {
             wx.navigateTo({
-              url: `/pages/invitation/invitation?token=${this.data.encrypt}`,
+              url: `/nearby_shops/invitation/invitation?token=${this.data.encrypt}`,
             })
           }
           break;
         case 'group': //拼团
           wx.navigateTo({
-            url: '/pages/collage_buy/collage_buy',
+            url: '/nearby_shops/collage_buy/collage_buy',
           })
           break;
         case 'cut': //砍价
           wx.navigateTo({
-            url: '/pages/bargain_list/bargain_list',
+            url: '/nearby_shops/bargain_list/bargain_list',
           })
           break;
         case 'coupon': //领券
@@ -339,12 +339,12 @@ Page({
           break;
         case 'ranking': //排行榜
           wx.navigateTo({
-            url: '/pages/rank_good/rank_good',
+            url: '/nearby_shops/rank_good/rank_good',
           })
           break;
         case 'brand': //品牌甄选
           wx.navigateTo({
-            url: '/pages/brand_select/brand_select',
+            url: '/nearby_shops/brand_select/brand_select',
           })
           break;
         case 'merchant': //商家入驻
@@ -386,7 +386,7 @@ Page({
       }
     } else if (item.type == 2) { //分类
       wx.navigateTo({
-        url: `/pages/search_goods/search_goods?goods_classify_id=${item.name}`
+        url: `/nearby_shops/search_goods/search_goods?goods_classify_id=${item.name}`
       })
     }
   },
@@ -462,7 +462,7 @@ Page({
    */
   onHotSpot() {
     wx.navigateTo({
-      url: '../hot_spots/hot_spots',
+      url: '/nearby_shops/hot_spots/hot_spots',
     })
   },
 
@@ -471,7 +471,7 @@ Page({
    */
   onFlashSale() {
     wx.navigateTo({
-      url: '../flash_sale/flash_sale',
+      url: '/nearby_shops/flash_sale/flash_sale',
     })
   },
 
@@ -480,7 +480,7 @@ Page({
    */
   onRecommend() {
     wx.navigateTo({
-      url: '../recommend/recommend',
+      url: '/nearby_shops/recommend/recommend',
     })
   },
 
@@ -488,7 +488,7 @@ Page({
    * 广告点击
    */
   onAdv(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     switch (item.type) {
       case 1: //商品
         wx.navigateTo({
@@ -518,7 +518,7 @@ Page({
    */
   onContent(e) {
     wx.navigateTo({
-      url: '/pages/info_detail/info_detail?article_id=' + e.currentTarget.dataset.id,
+      url: '/nearby_shops/info_detail/info_detail?article_id=' + e.currentTarget.dataset.id,
     })
   },
 
@@ -535,10 +535,9 @@ Page({
    * 分类
    */
   onClassify(e) {
-    console.log(e)
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     wx.navigateTo({
-      url: '/pages/search_goods/search_goods?goods_classify_id=' + item.goods_classify_id,
+      url: '/nearby_shops/search_goods/search_goods?goods_classify_id=' + item.goods_classify_id,
       success: () => {
         if (e.currentTarget.dataset.adv == 1) {
           http.post(app.globalData.index_adBrowseInc, {
@@ -617,20 +616,7 @@ Page({
       })
     })
   },
-
-  test() {
-    http.post(app.globalData.integral_detail, {
-      type: '',
-      page: 1
-    }).then(res => {
-      console.log(res)
-    }).catch(res => {
-      console.log(aes)
-      // console.log(res.data)
-    })
-  },
   onLabel(e) {
-    console.log(e.currentTarget.dataset)
     wx.navigateTo({
       url: `/nearby_shops/good_detail/good_detail?goods_id=${e.currentTarget.dataset.goods_id}&label=${e.currentTarget.dataset.id}`,
     })

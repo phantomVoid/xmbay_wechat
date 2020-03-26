@@ -148,13 +148,13 @@ Page({
    */
   onDetail() {
     wx.navigateTo({
-      url: '../integral_detail/integral_detail',
+      url: '/my/integral_detail/integral_detail',
     })
   },
 
   onHelp() {
     wx.navigateTo({
-      url: '../web_view/web_view?src=' + app.globalData.integral_help,
+      url: '/my/web_view/web_view?src=' + app.globalData.integral_help,
     })
   },
 
@@ -164,7 +164,7 @@ Page({
   onTask() {
     if (app.login()) {
       wx.navigateTo({
-        url: '../integral_task/integral_task',
+        url: '/my/integral_task/integral_task',
       })
     }
   },
@@ -174,7 +174,7 @@ Page({
    */
   onChangeCoupon() {
     wx.navigateTo({
-      url: '../change_coupon/change_coupon',
+      url: '/my/change_coupon/change_coupon',
     })
   },
 
@@ -184,7 +184,7 @@ Page({
   onRecord() {
     if (app.login()) {
       wx.navigateTo({
-        url: '../integral_record/integral_record',
+        url: '/my/integral_record/integral_record',
       })
     }
   },

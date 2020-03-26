@@ -202,7 +202,7 @@ Component({
           break;
         case 2:
           wx.redirectTo({
-            url: '/pages/collage_detail/collage_detail?id=' + res.group_activity_attach_id,
+            url: '/nearby_shops/collage_detail/collage_detail?id=' + res.group_activity_attach_id,
           })
           break;
         case 3:

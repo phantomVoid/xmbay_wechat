@@ -108,7 +108,7 @@ Page({
   onOrderDetail(e) {
     this.data.index = e.currentTarget.dataset.index
     wx.navigateTo({
-      url: '../order_detail/order_detail?id=' + e.currentTarget.dataset.id,
+      url: '/my/order_detail/order_detail?id=' + e.currentTarget.dataset.id,
     })
   },
   /**
@@ -163,7 +163,7 @@ Page({
       type: 'order'
     }
     wx.navigateTo({
-      url: '../logistics_detail/logistics_detail?info=' + JSON.stringify(info),
+      url: '/my/logistics_detail/logistics_detail?info=' + JSON.stringify(info),
     })
   },
 
@@ -207,7 +207,7 @@ Page({
     this.data.index = e.currentTarget.dataset.index
     let item = e.currentTarget.dataset.item
     wx.navigateTo({
-      url: '/pages/cashier_desk/cashier_desk?total_price=' + item.subtotal_price + '&order_number=' + item.order_attach_number + '&order_id=',
+      url: '/nearby_shops/cashier_desk/cashier_desk?total_price=' + item.subtotal_price + '&order_number=' + item.order_attach_number + '&order_id=',
     })
   },
 
@@ -231,12 +231,12 @@ Page({
    * 评价
    */
   onComment(e) {
-    let item = e.currentTarget.dataset.item
+    let item = e.currentTarget.dataset.item;
     for (let i = 0, len = item.order_goods_list.length; i < len; i++) {
       item.order_goods_list[i].file = encodeURIComponent(item.order_goods_list[i].file)
     }
     wx.navigateTo({
-      url: '/pages/comment/comment?info=' + JSON.stringify(item.order_goods_list),
+      url: '/nearby_shops/comment/comment?info=' + JSON.stringify(item.order_goods_list),
     })
   }
 })

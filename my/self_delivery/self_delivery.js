@@ -129,7 +129,7 @@ Page({
    */
   onSaleAfter() {
     wx.navigateTo({
-      url: '../after_sale/after_sale',
+      url: '/my/after_sale/after_sale',
     })
   },
 
@@ -138,7 +138,7 @@ Page({
    */
   onOrderDetail() {
     wx.navigateTo({
-      url: '../order_detail/order_detail',
+      url: '/my/order_detail/order_detail',
     })
   },
 
@@ -147,7 +147,7 @@ Page({
   */
   onSearch() {
     wx.navigateTo({
-      url: '../search_order/search_order',
+      url: '/my/search_order/search_order',
     })
   }
 })

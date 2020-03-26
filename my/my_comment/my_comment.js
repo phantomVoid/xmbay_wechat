@@ -98,7 +98,7 @@ Page({
   onPreview(e) {
     let index = e.currentTarget.dataset.index,
       idx = parseInt(e.currentTarget.dataset.idx),
-      current = 0
+      current = 0;
     if (idx == -1 && this.data.list[index].video != '') {
       current = 0
     } else if (this.data.list[index].video != '') {
@@ -106,7 +106,7 @@ Page({
     } else {
       current = idx
     }
-    let multiple_file = []
+    let multiple_file = [];
     for (let i = 0, len = this.data.list[index].multiple_file.length; i < len; i++) {
       multiple_file.push(encodeURIComponent(this.data.list[index].multiple_file[i]))
     }
@@ -122,7 +122,7 @@ Page({
 
   goComment() {
     wx.redirectTo({
-      url: '/pages/comment_success/comment_success?write=1',
+      url: '/nearby_shops/comment_success/comment_success?write=1',
     })
   },
   onGoods(e) {

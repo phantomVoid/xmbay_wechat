@@ -187,7 +187,6 @@ Component({
         //购买尺寸id
         products_id: ''
       })
-      console.log(this.data.attr_array)
     },
 
     /**
@@ -356,7 +355,7 @@ Component({
             return
           }
         }
-        let is_attr_array = true
+        let is_attr_array = true;
         for (let i of this.data.attr_array) {
           if (!i) {
             is_attr_array = false
@@ -423,7 +422,7 @@ Component({
           }).then(res => {})
           //跳转确认订单页
           wx.navigateTo({
-            url: '/pages/confirm_order/confirm_order?info=' + encodeURIComponent(JSON.stringify(obj)) + '&good_image=' + encodeURIComponent(this.data.good_image),
+            url: '/nearby_shops/confirm_order/confirm_order?info=' + encodeURIComponent(JSON.stringify(obj)) + '&good_image=' + encodeURIComponent(this.data.good_image),
           })
         }
       })
@@ -463,7 +462,7 @@ Component({
             micro_form_id: this.data.formId
           }).then(res => {})
           wx.navigateTo({
-            url: '/pages/bargain/bargain?id=' + res.cut_activity_id + '&first=1'
+            url: '/nearby_shops/bargain/bargain?id=' + res.cut_activity_id + '&first=1'
           })
         })
       })

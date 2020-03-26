@@ -158,7 +158,7 @@ Page({
    */
   increaseAddress() {
     wx.navigateTo({
-      url: '../edit_address/edit_address',
+      url: '/my/edit_address/edit_address',
     })
   },
 
@@ -167,7 +167,7 @@ Page({
    */
   changeAddress(e) {
     wx.navigateTo({
-      url: '../edit_address/edit_address?id=' + e.currentTarget.dataset.id,
+      url: '/my/edit_address/edit_address?id=' + e.currentTarget.dataset.id,
     })
   },
 

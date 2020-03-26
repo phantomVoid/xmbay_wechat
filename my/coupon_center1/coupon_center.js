@@ -77,7 +77,7 @@ Page({
    */
   onChangeCoupon() {
     wx.redirectTo({
-      url: '../change_coupon/change_coupon',
+      url: '/my/change_coupon/change_coupon',
     })
   },
 
@@ -171,7 +171,7 @@ Page({
         this.data.list[i]['hour'] = Math.floor((second) % (24 * 3600) / 3600) < 10 ? '0' + Math.floor((second) % (24 * 3600) / 3600) : Math.floor((second) % (24 * 3600) / 3600)
         this.data.list[i]['min'] = Math.floor(second / 60 % 60) < 10 ? '0' + Math.floor(second / 60 % 60) : Math.floor(second / 60 % 60)
         this.data.list[i]['sec'] = Math.floor(second % 60) < 10 ? '0' + Math.floor(second % 60) : Math.floor(second % 60)
-        this.data.list[i].distance_start_time--
+        this.data.list[i].distance_start_time--;
       }
     }
     this.setData({
@@ -187,7 +187,7 @@ Page({
       return
     }
     let item = e.currentTarget.dataset.item,
-        index = e.currentTarget.dataset.index
+        index = e.currentTarget.dataset.index;
     http.post(app.globalData.get_coupon, {
       coupon_id: item.coupon_id,
       goods_classify_id: item.type == 1 ? item.classify_str : '',
@@ -209,7 +209,7 @@ Page({
       })
     }else{
       wx.navigateTo({
-        url: '/pages/search_goods/search_goods?goods_classify_id=' + item.classify_str,
+        url: '/nearby_shops/search_goods/search_goods?goods_classify_id=' + item.classify_str,
       })
     }
   }

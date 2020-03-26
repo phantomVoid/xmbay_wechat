@@ -66,7 +66,7 @@ Page({
    */
   chargeNow() {
     wx.navigateTo({
-      url: '../account_recharge/account_recharge',
+      url: '/my/account_recharge/account_recharge',
     })
   },
 
@@ -75,7 +75,7 @@ Page({
    */
   onRecord() {
     wx.navigateTo({
-      url: '../balance_record/balance_record',
+      url: '/my/balance_record/balance_record',
     })
   }
 })
