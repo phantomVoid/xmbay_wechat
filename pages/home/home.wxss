@@ -7,7 +7,7 @@
 .wrap .header {
   position: relative;
   width: 100%;
-  height: 400rpx;
+  height: 494rpx;
   background-color: #fff;
 }
 
@@ -84,32 +84,33 @@
 .wrap .header .banner-con {
   position: relative;
   width: 100%;
-  height: 400rpx;
+  height: 494rpx;
 }
 
 .wrap .header .banner-con .banner {
   position: absolute;
   left: 0;
-  bottom: -20rpx;
+  bottom: 40rpx;
   z-index: 2;
   width: 100%;
-  height: 310rpx;
+  height: 356rpx;
 }
 
 .banner-con .banner-swiper {
-  height: 310rpx;
+  height: 356rpx;
 }
 
 .banner-con .banner-swiper .file {
-  height: 290rpx;
+  width: 640rpx;
+  height: 356rpx;
+  transform: scaleX(0.95) scaleY(0.8);
+  transition: all 0.3s ease;
   border-radius: 20rpx;
-  transform: scaleX(0.92);
   overflow: hidden;
 }
 
-.banner-con .banner-swiper .file image {
-  width: 100%;
-  height: 290rpx;
+.banner-con .banner-swiper .scale {
+  transform: scaleX(0.98) scaleY(0.9);
 }
 
 .banner-con .banner-indicator-con {
@@ -125,28 +126,19 @@
 .banner-con .indicator-con {
   display: inline-flex;
 }
-.banner-con .indicator-con view{
-  width: 25rpx;
-  height: 12rpx;
+
+.banner-con .indicator-con view {
+  width: 52rpx;
+  height: 8rpx;
   border-radius: 50px;
   margin: 0 10rpx;
   background-color: #fff;
-  border: 1rpx solid transparent;
   box-shadow: 0 0 10rpx 0 rgba(155, 155, 155, 0.1);
   overflow: hidden;
 }
 
-.banner-con .banner-bg {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 1;
-  width: 100%;
-  height: 345rpx;
-}
-
 .section-con {
-  padding: 20rpx 24rpx;
+  background-color: #fff;
 }
 
 .section-con .theme-con {
@@ -212,15 +204,15 @@
 }
 
 .section-con .nav-con .nav-indicator .nav-indicator-con {
-  width: 90rpx;
-  height: 10rpx;
+  width: 130rpx;
+  height: 6rpx;
   border-radius: 5px 5px;
   overflow: hidden;
   background-color: #ddd;
 }
 
 .section-con .nav-con .nav-indicator .nav-indicator-con .nav-indicator-active {
-  width: 45rpx;
+  width: 65rpx;
   height: 100%;
   border-radius: 6rpx 6rpx;
   overflow: hidden;
@@ -233,23 +225,20 @@
   width: 100%;
   height: 81rpx;
   padding: 0 24rpx;
-  margin-bottom: 20rpx;
   border-radius: 15rpx;
   box-sizing: border-box;
   background-color: #fff;
 }
 
 .section-con .headline-con .headline-img {
-  width: 114rpx;
-  height: 72rpx;
+  width: 136rpx;
+  height: 30rpx;
   padding-right: 19rpx;
-  transform: translate(-40rpx, 10rpx);
 }
 
 .section-con .headline-con .headline-wrap {
   flex: 1;
   height: 100%;
-  transform: translate(-60rpx, 0);
 }
 
 .section-con .headline-con .headline-wrap .headline-swiper {
@@ -288,6 +277,26 @@
   overflow: hidden;
 }
 
+.activity_module {
+  padding: 17rpx 24rpx;
+}
+
+.activity_module .top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.activity_module .bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.activity_module .file {
+  width: 341rpx;
+  height: 200rpx;
+}
+
 .section-con .limit-con {
   position: relative;
   margin-bottom: 20rpx;
@@ -299,44 +308,155 @@
   display: flex;
   align-items: center;
   height: 80rpx;
-  padding: 0 20rpx;
+  padding: 0 24rpx;
   box-sizing: border-box;
 }
 
 .section-con .limit-con .limit-con-tit .limit-tit-icon {
-  width: 164rpx;
-  height: 42rpx;
+  width: 137rpx;
+  height: 32rpx;
   margin-right: 15rpx;
 }
 
-.section-con .limit-newTime {
+.limit-con-wrap {
   display: flex;
-  align-items: center;
-  height: 32rpx;
+  width: 702rpx;
+  height: 318rpx;
+  margin: 0 24rpx;
 }
 
-.section-con .limit-newTime text {
-  font-size: 20rpx;
+.limit-con-wrap .limit-l {
+  width: 152rpx;
+  margin-left: 20rpx;
+  padding-top: 55rpx;
+}
+
+.limit-con-wrap .limit-l .limit-site {
+  font-size: 35rpx;
   font-weight: bold;
   color: #fff;
 }
 
-.section-con .limit-newTime .t {
-  width: 34rpx;
-  height: 34rpx;
+.limit-con-wrap .limit-l .limit-text {
+  font-size: 24rpx;
+  margin: 16rpx 0;
+  color: #fff;
+}
+
+.limit-con-wrap .limit-l .limit-newTime {
+  display: flex;
+  align-items: center;
   font-size: 20rpx;
-  margin: 0 6rpx;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 34rpx;
+  color: #fff;
+}
+
+.limit-con-wrap .limit-l .limit-newTime .t {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  border-radius: 8rpx;
+  color: #64bb85;
   background-color: #fff;
+}
+
+.limit-con-wrap .limit-l .limit-newTime .i {
+  margin: 0 8rpx;
+}
+
+.limit-con-wrap .limit-l .icon {
+  display: block;
+  width: 42rpx;
+  height: 20rpx;
+  margin-top: 18rpx;
+}
+
+.limit-con-wrap .limit-r {
+  width: calc(100% - 172rpx);
+  padding: 18rpx 18rpx 18rpx 0;
+  box-sizing: border-box;
+}
+
+.limit-con-wrap .limit-r .list-scroll {
+  width: 100%;
+  height: 100%;
+  padding: 20rpx;
+  border-radius: 15rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.limit-con-wrap .limit-r .list-scroll .list-con {
+  display: flex;
+}
+
+.limit-r .list-scroll .list-con .item {
+  flex-shrink: 0;
+  width: 144rpx;
+  margin-right: 20rpx;
+}
+
+.limit-r .list-scroll .list-con .item .file {
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 15rpx;
   overflow: hidden;
 }
 
-.section-con .limit-site {
-  font-size: 25rpx;
-  margin-left: 10rpx;
+.list-scroll .list-con .item .progress-bar-con {
+  position: relative;
+  width: 106rpx;
+  height: 22rpx;
+  margin-top: 10rpx;
+}
+
+.list-scroll .list-con .item .progress-bar-con .text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 106rpx;
+  height: 22rpx;
+  line-height: 22rpx;
+  font-size: 19rpx;
   color: #fff;
+}
+
+.list-scroll .list-con .item .progress-bar-con .progress-bar {
+  position: relative;
+  width: 106rpx;
+  height: 22rpx;
+  border-radius: 50px;
+}
+
+.list-scroll .list-con .item .progress-bar-con .progress-bar .progress {
+  width: 60%;
+  height: 100%;
+  border-radius: 50px;
+}
+
+.list-scroll .list-con .item .goods-name {
+  font-size: 22rpx;
+  line-height: 38rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 2rpx;
+}
+
+.list-scroll .list-con .item .goods-price {
+  font-size: 20rpx;
+  line-height: 24rpx;
+}
+
+.list-scroll .list-con .item .goods-price .price {
+  font-size: 24rpx;
+  font-weight: bold;
 }
 
 .section-con .limit-con .limit-con-tit .more-con {
@@ -348,13 +468,13 @@
 .section-con .limit-con .limit-con-tit .more-con text {
   font-size: 23rpx;
   margin-right: 8rpx;
-  color: #fff;
+  color: #b7b7b7;
 }
 
-.section-con .limit-con .limit-con-tit .more-con .more {
-  width: 10rpx;
-  height: 20rpx;
+.section-con .limit-con .limit-con-tit .more-con .icon-next {
+  color: #b7b7b7;
 }
+
 .section-con .limit-con .p-img {
   width: 591rpx;
   height: 405rpx;
@@ -366,119 +486,17 @@
   color: #c3c3c3;
 }
 
-.section-con .limit-con .limit-goods {
-  padding: 16rpx 16rpx 20rpx;
-  box-sizing: border-box;
-  background-color: #fff;
-}
-.section-con .limit-con .limit-goods .limit-goods-list{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.section-con .limit-con .limit-goods .goods-con {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.section-con .limit-bg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 364rpx;
-  height: 80rpx;
-}
-
-.section-con .limit-con .limit-goods .item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  width: 330rpx;
-  height: 250rpx;
-  padding: 10rpx;
-  box-sizing: border-box;
-  background-color: #e1e1e1;
-  overflow: hidden;
-}
-
-.section-con .limit-con .limit-goods .item:nth-child(1) {
-  border-radius: 15rpx 0 0 0;
-  background-color: #fdf9f8;
-}
-
-.section-con .limit-con .limit-goods .item:nth-child(2) {
-  border-radius: 0 15rpx 0 0;
-  background-color: #f8fdfa;
-}
-
-.section-con .limit-con .limit-goods .item:nth-child(3) {
-  margin-top: 10rpx;
-  border-radius: 0 0 15rpx 0;
-  background-color: #f8f8fd;
-}
-
-.section-con .limit-con .limit-goods .item:nth-child(4) {
-  margin-top: 10rpx;
-  border-radius: 0 0 0 15rpx;
-  background-color: #fdfcf8;
-}
-
-.section-con .limit-con .limit-goods .item .goods-name {
-  width: 60%;
-  font-size: 30rpx;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  color: #666;
-}
-
-.section-con .limit-con .limit-goods .item .goods-price {
-  display: flex;
-  align-items: baseline;
-  padding: 6rpx 0;
-}
-
-.section-con .limit-con .limit-goods .item .goods-price text {
-  font-size: 22rpx;
-  font-weight: 600;
-}
-
-.section-con .limit-con .limit-goods .item .goods-price .price {
-  font-size: 30rpx;
-  font-weight: 600;
-}
-
-.section-con .limit-con .limit-goods .item .goods-img {
-  width: 128rpx;
-  height: 128rpx;
-}
-
-.section-con .limit-con .limit-goods .item .goods-img image {
-  width: 100%;
-  height: 100%;
-}
-
 .section-con .section-title {
   display: flex;
   align-items: center;
-  margin-bottom: 20rpx;
+  justify-content: center;
+  height: 94rpx;
 }
 
-.section-con .section-title .tit {
-  font-size: 34rpx;
-  font-weight: 600;
-  color: #333;
-}
-
-.section-con .section-title .tip {
-  font-size: 20rpx;
-  font-weight: 600;
-  margin-left: 16rpx;
-  color: #e1e1e1;
+.section-con .section-title .title {
+  display: block;
+  width: 196rpx;
+  height: 33rpx;
 }
 
 .recommend-con {
@@ -486,6 +504,7 @@
 }
 
 .section-con .popularity-con {
+  padding: 0 24rpx;
   margin-bottom: 20rpx;
 }
 
@@ -495,15 +514,8 @@
   align-items: center;
 }
 
-.section-con .popularity-con .p-con .adv-img {
-  width: 680rpx;
-  height: 247rpx;
-}
-
 .section-con .popularity-con .p-goods {
   width: 702rpx;
-  height: 322rpx;
-  padding: 33rpx 13rpx 0;
   box-sizing: border-box;
 }
 
@@ -520,11 +532,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 218rpx;
+  width: 223rpx;
   height: 275rpx;
-  margin-right: 13rpx;
+  margin-right: 17rpx;
   padding: 14rpx;
-  border-radius: 15rpx;
+  border-radius: 18rpx;
   box-sizing: border-box;
   background-color: #fff;
   overflow: hidden;
@@ -534,21 +546,15 @@
   margin-right: 0;
 }
 
-.section-con .popularity-con .item .goods-img {
+.section-con .popularity-con .item .file {
   width: 162rpx;
   height: 162rpx;
-}
-
-.section-con .popularity-con .item .goods-img image {
-  width: 100%;
-  height: 100%;
 }
 
 .section-con .popularity-con .item .goods-name {
   width: 100%;
   font-size: 24rpx;
   line-height: 45rpx;
-  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -556,35 +562,52 @@
 }
 
 .section-con .popularity-con .item .goods-price {
-  font-size: 24rpx;
+  display: flex;
   color: #fff;
+}
+
+.section-con .popularity-con .item .price-con {
+  width: 100%;
 }
 
 .section-con .popularity-con .item .goods-price text {
   display: block;
-  width: 184rpx;
   height: 40rpx;
   line-height: 40rpx;
-  text-align: center;
-  border-radius: 40px 40px;
+  font-size: 20rpx;
   overflow: hidden;
-  background-color: #fc9999;
 }
 
-.section-con .popularity-con .item:first-child .goods-price text {
-  background-color: #fc9999;
+.section-con .popularity-con .item .goods-price .pic {
+  font-size: 26rpx;
+  font-weight: bold;
 }
 
-.section-con .popularity-con .item:nth-child(4n) .goods-price text {
-  background-color: #fc9999;
+.section-con .popularity-con .item:nth-child(3n+1) .goods-price {
+  color: #ff7c7c;
 }
 
-.section-con .popularity-con .item:nth-child(2n) .goods-price text {
-  background-color: #f7b595;
+.section-con .popularity-con .item:nth-child(3n+2) .goods-price {
+  color: #7bc6fd;
 }
 
-.section-con .popularity-con .item:nth-child(3n) .goods-price text {
-  background-color: #f47ab6;
+.section-con .popularity-con .item:nth-child(3n+3) .goods-price {
+  color: #ffab61;
+}
+
+.section-con .popularity-con .item:nth-child(3n+1) {
+  background-color: #ffe3e3;
+  color: #ff7c7c;
+}
+
+.section-con .popularity-con .item:nth-child(3n+2) {
+  background-color: #e7f4fc;
+  color: #7bc6fd;
+}
+
+.section-con .popularity-con .item:nth-child(3n+3) {
+  background-color: #ffefe1;
+  color: #ffab61;
 }
 
 .section-con .popularity-class-con {
@@ -601,12 +624,12 @@
 .section-con .popularity-class-con .class-item {
   display: flex;
   flex-direction: column;
-  padding: 20rpx 14rpx;
+  padding: 0 24rpx;
 }
 
 .section-con .popularity-class-con .class-item .adv {
   width: 100%;
-  height: 230rpx;
+  height: 250rpx;
   border-radius: 15rpx;
   overflow: hidden;
 }
@@ -626,15 +649,10 @@
   padding-top: 20rpx;
 }
 
-.popularity-class-con .class-item .goods-item .goods-img {
+.popularity-class-con .class-item .goods-item .file {
   flex-shrink: 0;
   width: 185rpx;
   height: 185rpx;
-}
-
-.popularity-class-con .class-item .goods-item .goods-img image {
-  width: 100%;
-  height: 100%;
 }
 
 .popularity-class-con .class-item .goods-item .goods-info {
@@ -683,6 +701,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   box-sizing: border-box;
+  padding: 20rpx 24rpx;
+  background-color: #f6f6f6;
 }
 
 .section-con .recommend-con .goods-list .goods-item {
@@ -698,14 +718,9 @@
   overflow: hidden;
 }
 
-.recommend-con .goods-list .goods-item .goods-img {
+.recommend-con .goods-list .goods-item .file {
   width: 310rpx;
   height: 310rpx;
-}
-
-.recommend-con .goods-list .goods-item .goods-img image {
-  width: 100%;
-  height: 100%;
 }
 
 .recommend-con .goods-list .goods-item .add-cart {
@@ -724,12 +739,12 @@
 }
 
 .recommend-con .goods-list .goods-item .goods-name {
-  height: 60rpx;
-  line-height: 60rpx;
-  padding: 20rpx 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  height: 80rpx;
   font-size: 25rpx;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 40rpx;
   color: #333;
   overflow: hidden;
 }
@@ -752,6 +767,7 @@
 .recommend-con .goods-list .goods-item .goods-price {
   display: flex;
   align-items: baseline;
+  margin-top: 20rpx;
 }
 
 .recommend-con .goods-list .goods-item .goods-price text {
@@ -801,12 +817,14 @@
   width: 54rpx;
   height: 54rpx;
 }
-.recommend-con .goods-list .goods-item .goods-tip .label{
+
+.recommend-con .goods-list .goods-item .goods-tip .label {
   flex: 1;
   height: 60rpx;
   overflow: hidden;
 }
-.recommend-con .goods-list .goods-item .goods-tip .label view{
+
+.recommend-con .goods-list .goods-item .goods-tip .label view {
   display: inline-block;
   font-size: 18rpx;
   padding: 4rpx 12rpx;

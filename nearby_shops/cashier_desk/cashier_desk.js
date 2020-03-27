@@ -153,7 +153,7 @@ Page({
           out_trade_no: this.data.order_info.order_number == '' ? this.data.order_info.order_attach_number : this.data.order_info.order_number
         }).then(res => {
           wx.redirectTo({
-            url: '/pages/collage_detail/collage_detail?id=' + res.data.group_activity_attach_id,
+            url: '/nearby_shops/collage_detail/collage_detail?id=' + res.data.group_activity_attach_id,
           })
         })
         break;

@@ -25,7 +25,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     app.globalData.nav_type = 'only_1'
     this.getSystemInfo()
     let obj = null;
@@ -65,7 +65,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     event.on('refreshHome', this, () => {
       this.setData({
         isRefresh: true
@@ -76,7 +76,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.setData({
       isBannerAutoplay: true,
       isHotAutoplay: true,
@@ -93,7 +93,7 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
     this.setData({
       isBannerAutoplay: false,
       isApplication: false,
@@ -106,7 +106,7 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     this.setData({
       isBannerAutoplay: false,
       isHotAutoplay: false,
@@ -119,7 +119,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     this.location()
   },
   /**
@@ -138,14 +138,14 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
   /**
@@ -463,9 +463,11 @@ Page({
       }
     })
     wx.createSelectorQuery().selectAll('.nav-indicator-con').boundingClientRect(rect => {
-      this.setData({
-        'navAttr.indicatorWidth': rect[0].width
-      })
+      if (rect.length != 0) {
+        this.setData({
+          'navAttr.indicatorWidth': rect[0].width
+        })
+      }
     }).exec()
   },
   /**

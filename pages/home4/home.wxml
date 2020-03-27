@@ -57,8 +57,10 @@
    * 
    */
   var limitTimeName = function(value) {
-    var array = value.split(":")
-    return array[0]
+    if(value){
+			var array = value.split(":")
+			return array[0]
+		}
   }
   /**
    * 头部滚动动画

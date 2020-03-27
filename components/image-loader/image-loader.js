@@ -17,7 +17,7 @@ Component({
    */
   data: {
     default_mode:'',
-    loading: false
+    loading: null
   },
 
   /**
@@ -27,6 +27,11 @@ Component({
     loader() {
       this.setData({
         loading: true
+      })
+    },
+    binderror(){
+      this.setData({
+        loading: false
       })
     }
   }

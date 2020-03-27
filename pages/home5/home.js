@@ -473,9 +473,11 @@ Page({
       }
     })
     wx.createSelectorQuery().selectAll('.nav-indicator-con').boundingClientRect(rect => {
-      this.setData({
-        'navAttr.indicatorWidth': rect[0].width
-      })
+      if (rect.length != 0) {
+        this.setData({
+          'navAttr.indicatorWidth': rect[0].width
+        })
+      }
     }).exec()
   },
   /**

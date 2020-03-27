@@ -1,5 +1,6 @@
 @import "/components/navBar/navBar.wxss";
 @import "/utils/iconfont.wxss";
+@import "/utils/border.wxss";
 
 page {
   background: #f6f6f6;
