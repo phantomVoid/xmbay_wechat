@@ -183,7 +183,7 @@
         <image src='{{util.HTTP}}mobile/small/image/xq-dp-2.png'></image>
         <view class='item-btn'>首页</view>
       </button>
-      <button class='item' hover-class='hover-class' hover-stay-time='400' open-type="{{configSwitch.version_info.one_more==1?'':'contact'}}" bindcontact="{{configSwitch.version_info.one_more==1?'':'handleContact'}}" bindtap="{{configSwitch.version_info.one_more==1?'service':''}}">
+      <button class='item' hover-class='hover-class' hover-stay-time='400' open-type="{{configSwitch.version_info.one_more==1?'':'contact'}}" bindcontact="{{configSwitch.version_info.one_more==1?'':'handleContact'}}" bindtap="{{configSwitch.version_info.one_more==1?'callPhone':''}}">
         <image src='{{util.HTTP}}mobile/small/image/xq-kf.png'></image>
         <view class='item-btn'>客服</view>
       </button>
