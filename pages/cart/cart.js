@@ -458,7 +458,7 @@ Page({
       return
     }
     wx.navigateTo({
-      url: '/pages/cart_confirm_order/cart_confirm_order?cart_id=' + cart_id.join(),
+      url: '/nearby_shops/cart_confirm_order/cart_confirm_order?cart_id=' + cart_id.join(),
     })
   },
 

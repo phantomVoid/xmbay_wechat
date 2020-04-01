@@ -162,7 +162,7 @@ Page({
    */
   getData() {
     http.post(app.globalData.index, {
-      pattern: 1
+      pattern: 3
     }).then(res => {
       this.setData({
         dataInfo: res.data,
@@ -257,7 +257,7 @@ Page({
    */
   countDown() {
     clearInterval(this.data.count_down)
-    this.data.limitTime = this.data.dataInfo.limit.time.count_down
+    this.data.limitTime = this.data.dataInfo.limit[0].count_down;
     this.count_callback()
     this.data.count_down = setInterval(() => {
       this.data.limitTime--;
@@ -517,11 +517,11 @@ Page({
    */
   index_curLimitList() {
     http.post(app.globalData.index_curLimitList, {
-      type: 2
+      type: 1
     }).then(res => {
       this.setData({
         'dataInfo.limit': res.result, //限时抢购
-        limitTime: res.result.time.count_down //倒计时时间
+        limitTime: res.result[0].count_down //倒计时时间
       })
     })
   },

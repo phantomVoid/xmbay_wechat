@@ -2,7 +2,7 @@
 <wxs module="util" src="../../utils/util.wxs" />
 <import src="../../components/navBar/navBar.wxml" />
 <wxs module="wxs_common">
-  /**
+	/**
    * 计算限时抢购百分比
    * available_sale可销售数量
    * exchange_num剩余数量
@@ -143,9 +143,9 @@
 					</view>
 				</scroll-view>
 			</block>
-			<block wx:if='{{dataInfo.nav.length>8}}'>
+			<block >
 				<view class='nav-indicator'>
-					<view class='nav-indicator-con'>
+					<view class='nav-indicator-con' wx:if='{{dataInfo.nav.length>8}}'>
 						<view class='nav-indicator-active' style='{{util.diy_color("",diy_color.z_color,"")}}transform: translateX({{wxs_common.navScroll(navScroll,navAttr)}}%)'></view>
 					</view>
 				</view>
@@ -166,60 +166,104 @@
 		</view>
 		<view class="activity_module">
 			<view class="top">
-				<view class="file">
+				<view class="file" bindtap="onNew">
 					<image-loader default='' mode='' original='{{util.HTTP}}mobile/small/image/index_spjs/13.png' width="100%" height="100%" />
 				</view>
 			</view>
 			<view class="bottom">
-				<view class="file">
+				<view class="file" bindtap="onRecommend">
 					<image-loader default='' mode='' original='{{util.HTTP}}mobile/small/image/index_spjs/15.png' width="100%" height="100%" />
 				</view>
-				<view class="file">
+				<view class="file" bindtap="onRank">
 					<image-loader default='' mode='' original='{{util.HTTP}}mobile/small/image/index_spjs/17.png' width="100%" height="100%" />
 				</view>
 			</view>
 		</view>
-		<view class='limit-con'>
-			<view class='limit-con-tit' style='{{util.diy_color("",diy_color.z_color,"")}}' hover-class='hover-class' hover-stay-time='300' bindtap='onLimit'>
-				<image class='limit-tit-icon' src='{{util.HTTP}}mobile/small/image/shop_common/23.png'></image>
-				<view class='limit-newTime'>
-					<view class='t' style='{{util.diy_color(diy_color.z_color,"","")}}'>{{wxs_common.limitTime(limitTime,'h')}}</view>
-					<text>:</text>
-					<view class='t' style='{{util.diy_color(diy_color.z_color,"","")}}'>{{wxs_common.limitTime(limitTime,'m')}}</view>
-					<text>:</text>
-					<view class='t' style='{{util.diy_color(diy_color.z_color,"","")}}'>{{wxs_common.limitTime(limitTime,'s')}}</view>
-				</view>
-				<view class='limit-site'>{{wxs_common.limitTimeName(dataInfo.limit.time.interval_name)}}点场</view>
-				<view class='more-con' bindtap='onLimit' hover-class='hover-class' hover-stay-time='300'>
-					<text>更多</text>
-					<image class='more' src='{{util.HTTP}}mobile/small/image/shop_common/25.png'></image>
-				</view>
-				<image class='limit-bg' src='{{util.HTTP}}mobile/small/image/shop_common/22.png'></image>
-			</view>
-			<view class='limit-goods'>
-				<block wx:if='{{dataInfo.limit.list.length>0}}'>
-					<view class='goods-con'>
-						<view class='item' wx:for='{{dataInfo.limit.list}}' wx:key='{{index}}' bindtap='onGood' data-id='{{item.goods_id}}' hover-class='hover-class' hover-stay-time='300'>
-							<view class='goods-name'>{{item.goods_name}}</view>
-							<view class='goods-price' style='{{util.diy_color(diy_color.z_color,"","")}}'>
-								<text>￥</text>
-								<text class='price'>{{item.time_limit_price}}</text>
-							</view>
+		<view class='limit-con' wx:if='{{dataInfo.limit.length!=0}}'>
+      <view class='limit-tit-con'>
+        <image class='limit-tit-icon' src='{{util.HTTP}}mobile/small/image/index_spjs/19.png'></image>
+        <view class='limit-time'>
+          <view class='limit-text'></view>
+          <view class='limit-newTime'>
+            <view class='t'>{{wxs_common.limitTime(limitTime,'h')}}</view>
+            <text>:</text>
+            <view class='t'>{{wxs_common.limitTime(limitTime,'m')}}</view>
+            <text>:</text>
+            <view class='t'>{{wxs_common.limitTime(limitTime,'s')}}</view>
+          </view>
+        </view>
+        <view class='more-con' bindtap='onLimit' hover-class='hover-class' hover-stay-time='300'>
+          <text>更多</text>
+          <image class='more' src='{{util.HTTP}}mobile/small/image/home-dd-01/home-more-01.png'></image>
+        </view>
+      </view>
+      <view class='limit-time-list'>
+        <view class='item' wx:for='{{dataInfo.limit}}' wx:key='{{index}}' bindtap='limitTap' data-idx='{{index}}' style='{{limit_index==index?util.diy_color("","#ffa626",""):""}}'>
+          <view class='time' style='{{limit_index==index?util.diy_color("#fff","",""):""}}'>{{item.interval_name}}</view>
+          <view class='text' style='{{limit_index==index?util.diy_color("#fff","",""):""}}'>{{index==0?'正在抢购':'预热中'}}</view>
+        </view>
+      </view>
+      <view class='limit-goods-list'>
+        <block wx:if='{{dataInfo.limit[limit_index].list.length!=0}}'>
+          <view class='goods-item' wx:for='{{dataInfo.limit[limit_index].list}}' wx:key='{{index}}' data-state='{{limit_index}}' data-id='{{item.goods_id}}' bindtap='onLimitGood'>
+						<view class="item">
 							<view class='goods-img'>
-								<image src='{{item.file}}'></image>
+								<view class='file'>
+									<image-loader default='{{util.HTTP}}mobile/small/image/placeholder/180x180.png' mode='' original='{{item.file}}' width="100%" height="100%" />
+								</view>
+								<view class='out'>
+									<image src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqw.png' wx:if='{{wxs_common.limitPercent(item.available_sale,item.exchange_num)==100}}'></image>
+								</view>
+							</view>
+							<view class='goods-info'>
+								<view class='goods-name'>{{item.goods_name}}</view>
+								<view class="good-info">
+									<view class='goods-price'>
+										<text style='{{util.diy_color("#ffa626","","")}}'>￥</text>
+										<text class='goods-price' style='{{util.diy_color("#ffa626","","")}}'>{{item.time_limit_price}}</text>
+										<!-- <text class='shop_price'>￥{{item.shop_price}}</text> -->
+									</view>
+									<block wx:if='{{limit_index==0}}'>
+										<view class='goods-status'>
+											<!-- <view class='progress-con'>
+												<view class='progress'>
+													<view class='progress-active' style='{{util.diy_color("",diy_color.z_color,"")}}width:{{wxs_common.limitPercent(item.available_sale,item.exchange_num)}}%'></view>
+												</view>
+												<view class='progress-num'>已抢
+													<text style='{{util.diy_color(diy_color.z_color,"","")}}'>{{wxs_common.limitPercent(item.available_sale,item.exchange_num)}}%</text>
+												</view>
+											</view> -->
+											<block wx:if='{{wxs_common.limitPercent(item.available_sale,item.exchange_num)!=100}}'>
+												<view class='limit-btn'>
+													<view class="btn">
+														<text>立即抢购</text>
+														<text class="font_family icon-next"></text>
+													</view>
+												</view>
+											</block>
+											<block wx:else>
+												<view class='limit-btn'>
+													<text style='{{util.diy_color("#fff","","")}}'>已抢完</text>
+												</view>
+											</block>
+										</view>
+									</block>
+									<block wx:else>
+										<view class='goods-status'>
+											<text class='await'>预热中</text>
+										</view>
+									</block>
+								</view>
 							</view>
 						</view>
-					</view>
-				</block>
-				<block wx:else>
-					<view class='limit-goods-list'>
-						<image class='p-img' src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg01.png'></image>
-						<view class='p-text'>暂无商品</view>
-					</view>
-				</block>
-
-			</view>
-		</view>
+          </view>
+        </block>
+        <block wx:else>
+          <image class='p-img' src='{{util.HTTP}}mobile/small/image/home-dd-01/xsqg01.png'></image>
+          <view class='p-text'>暂无商品</view>
+        </block>
+      </view>
+    </view>
 		<view class='popularity-con' wx:if='{{dataInfo.popularity.length!=0}}'>
 			<view class='section-title'>
 				<image class="title" src='{{util.HTTP}}mobile/small/image/index_spjs/31.png'></image>

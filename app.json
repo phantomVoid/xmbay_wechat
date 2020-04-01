@@ -8,6 +8,12 @@
     "pages/bind_phone/bind_phone",
     "pages/accredit/accredit"
   ],
+  "plugins": {
+    "live-player-plugin": {
+      "version": "1.0.3",
+      "provider": "wx2b03c6e691cd7370"
+    }
+  },
   "subPackages": [
     {
       "root": "my",
@@ -211,5 +217,11 @@
   "usingComponents": {
     "image-loader": "/components/image-loader/image-loader"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "live-player-plugin": {
+      "version": "1.0.3",
+      "provider": "wx2b03c6e691cd7370"
+    }
+  }
 }
