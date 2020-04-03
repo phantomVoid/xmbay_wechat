@@ -4,7 +4,7 @@
 <view class='board' hover-class='hover-class' hover-stay-time='400' bindtap='_close' animation="{{animation}}" catchtouchmove='none'>
 	<view class='buy-bg' id='buy_bg' catchtap='none'>
 		<view class='good-pic' style='background:url({{util.HTTP}}mobile/small/image/placeholder_goods_img_0.png) no-repeat center;background-size:70% 70%;'>
-			<image id='good_pic' src='{{good_image}}'></image>
+			<image id='good_pic' class="good_pic" src='{{good_image}}'></image>
 		</view>
 		<image src='{{util.HTTP}}mobile/small/image/xq-gb.png' class='close-bg' hover-class='hover-class' hover-stay-time='400' bindtap='_close'></image>
 		<!-- 团购价 -->
@@ -50,11 +50,11 @@
 		<view class='good-size inventory'>(库存{{info.goods_number}})</view>
 		<view class='good-size' wx:if='{{info.attr.length != 0}}'>{{attr}}</view>
 		<scroll-view scroll-y class='good-property'>
-			<view>
-				<view wx:for="{{info.attr}}" wx:key='{{idx}}' wx:for-index="idx" class='property-list'>
+			<view class="property-con">
+				<view wx:for="{{info.attr}}" wx:key='idx' wx:for-index="idx" class='property-list'>
 					<view class='property-title'>{{item.attr_name}}</view>
 					<view class='property-option'>
-						<view wx:for="{{item.goods_attr}}" wx:key='{{index}}' hover-class='hover-class' hover-stay-time='400' bindtap='_onAttr' data-idx='{{idx}}' data-item='{{item}}' style='{{attr_array[idx].id == item.goods_attr_id?util.diy_color("#fff",diy_color.z_color,""):""}}'>{{item.attr_value}}</view>
+						<view class="item" wx:for="{{item.goods_attr}}" wx:key='index' hover-class='hover-class' hover-stay-time='400' bindtap='_onAttr' data-idx='{{idx}}' data-item='{{item}}' style='{{attr_array[idx].id == item.goods_attr_id?util.diy_color("#fff",diy_color.z_color,""):""}}'>{{item.attr_value}}</view>
 					</view>
 				</view>
 			</view>
@@ -63,9 +63,9 @@
 			<!-- <view class='buy-num' hidden='{{info.is_bargain == 1 || info.is_limit == 1 || type==3}}'> -->
 			<view class='left'>购买数量</view>
 			<view class='right'>
-				<image hover-class='hover-class' hover-stay-time='400' bindtap='_reduceNum' src='{{util.HTTP}}{{"mobile/small/image/xq-zj.png"}}'></image>
+				<image class="image" hover-class='hover-class' hover-stay-time='400' bindtap='_reduceNum' src='{{util.HTTP}}{{"mobile/small/image/xq-zj.png"}}'></image>
 				<text class='num'>{{num}}</text>
-				<image hover-class='hover-class' hover-stay-time='400' bindtap='_increaseNum' src='{{util.HTTP}}{{"mobile/small/image/xq-js.png"}}'></image>
+				<image class="image" hover-class='hover-class' hover-stay-time='400' bindtap='_increaseNum' src='{{util.HTTP}}{{"mobile/small/image/xq-js.png"}}'></image>
 			</view>
 		</view>
 		<view class='operation'>

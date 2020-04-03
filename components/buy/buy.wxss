@@ -1,7 +1,4 @@
 @import "/utils/iconfont.wxss";
-button{
-  border-radius: unset;
-}
 .trans {
   position: fixed;
   left: 0;
@@ -39,7 +36,7 @@ button{
   height: 188rpx;
   border: 4rpx solid white;
 }
-.good-pic image{
+.good-pic .good_pic{
   width: 188rpx;
   height: 188rpx;
   background-color: #fff;
@@ -117,7 +114,7 @@ button{
   margin: 50rpx auto 0;
 }
 
-.good-property > view {
+.good-property .property-con {
   border-bottom: 2rpx solid #f5f5f5;
 }
 
@@ -134,7 +131,7 @@ button{
   margin-top: 30rpx;
 }
 
-.good-property .property-option > view {
+.good-property .property-option .item {
   float: left;
   text-align: center;
   padding: 10rpx 28rpx;
@@ -164,7 +161,7 @@ button{
   overflow: hidden;
 }
 
-.buy-num .right > image {
+.buy-num .right .image {
   width: 88rpx;
   height: 70rpx;
 }
